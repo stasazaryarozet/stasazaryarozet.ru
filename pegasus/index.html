@@ -547,7 +547,8 @@
             align-items: center;
             justify-content: center;
             margin: 2.5rem 0;
-            opacity: 0.6;
+            opacity: 1;
+            /* Pure, strict red */
         }
 
         .vignette::before,
@@ -555,8 +556,9 @@
             content: "";
             flex: 1;
             height: 2.5px;
-            background: linear-gradient(to right, transparent, var(--accent-red), transparent);
+            background: linear-gradient(to right, transparent 0%, var(--accent-red) 50%, transparent 100%);
         }
+
 
         .vignette.no-lines::before,
         .vignette.no-lines::after {
