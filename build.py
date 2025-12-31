@@ -17,12 +17,14 @@ def parse_content(md_path: Path) -> dict:
     current_key = None
     current_value = []
     
-    rose_vignette = (
-        '<div class="vignette">'
+    rose_svg = (
         '<svg class="rose-icon" viewBox="0 0 24 24" fill="currentColor">'
         '<path d="M12 2c-1.5 0-2.5 1-2.5 2.5s1 2.5 2.5 3c1.5-.5 2.5-1.5 2.5-3S13.5 2 12 2zM9.5 8c-2 0-3.5 1.5-3.5 4s1.5 4.5 3.5 4.5c1 0 2-.5 2.5-1.5.5 1 1.5 1.5 2.5 1.5 2 0 3.5-1.5 3.5-4s-1.5-4-3.5-4c-1 0-2 .5-2.5 1.5C11.5 8.5 10.5 8 9.5 8zM12 17v5M12 19l-3 2M12 20l3 1"/>'
-        '</svg></div>'
+        '</svg>'
     )
+    
+    rose_vignette = f'<div class="vignette">{rose_svg}</div>'
+    rose_clean = f'<div class="vignette no-lines">{rose_svg}</div>'
 
     def process_val(lines):
         val = '\n'.join(lines).strip('\n') # Strip only trailing/leading newlines, not spaces
@@ -32,8 +34,9 @@ def parse_content(md_path: Path) -> dict:
         val = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', val)
         # 3. Handle Red Text ++text++
         val = re.sub(r'\+\+([^+]+)\+\+', r'<span style="color: #ff0000;">\1</span>', val)
-        # 4. Handle Vignette Dividers --- (Remove surrounding newlines to prevent double spacing)
+        # 4. Handle Vignettes
         val = re.sub(r'\n?---\n?', rose_vignette, val)
+        val = re.sub(r'\n?@@@\n?', rose_clean, val)
         # 5. Replace ALL newlines with <br> for HTML rendering
         return val.replace('\n', '<br>')
 
