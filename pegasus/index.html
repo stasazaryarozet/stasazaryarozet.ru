@@ -117,40 +117,35 @@
         /* 1. OUTER WOODEN FRAME - Complex Profile + Wood Grain */
         .outer-frame {
             padding: 40px;
-            background-color: #e6d2b5;
-            /* Lighter blonde wood/gold */
+            background-color: #deb887;
+            /* Yellower/Warmer wood (Burlywood) */
 
-            /*
+            /* 
                Layering:
-               1. Wood Texture (Real grain)
+               1. Wood Texture (Real grain) - Hard Light for stronger texture
                2. Miter Joints
                3. Lighting/Volume profile
             */
             background-image:
-                /* Wood Texture */
+                /* Wood Texture - Increased visibility */
                 url('tex_frame.jpg'),
 
                 /* Miter Joints */
-                linear-gradient(45deg, transparent 49%, rgba(0, 0, 0, 0.4) 50%, transparent 51%),
-                linear-gradient(-45deg, transparent 49%, rgba(0, 0, 0, 0.4) 50%, transparent 51%),
+                linear-gradient(45deg, transparent 49%, rgba(0, 0, 0, 0.5) 50%, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, rgba(0, 0, 0, 0.5) 50%, transparent 51%),
 
                 /* LIGHTING OVERLAY */
-                linear-gradient(to right bottom, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 30%),
-                radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.2) 100%);
+                linear-gradient(to right bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 25%),
+                radial-gradient(ellipse at center, transparent 65%, rgba(0, 0, 0, 0.15) 100%);
 
             background-size: 80px auto, auto, auto, auto, auto;
-            background-blend-mode: multiply, normal, normal, normal, normal;
+            background-blend-mode: hard-light, normal, normal, normal, normal;
 
             position: relative;
 
             box-shadow:
-                /* Deep Drop Shadow on Wall */
                 0 20px 50px rgba(0, 0, 0, 0.5),
-
-                /* Outer Edge Highlight (Rim) */
-                inset 1px 1px 0 rgba(255, 255, 255, 0.6),
-
-                /* Inner Edge Shadow (Depth) */
+                inset 1px 1px 0 rgba(255, 255, 255, 0.5),
                 inset -2px -2px 6px rgba(0, 0, 0, 0.2);
 
             border: 1px solid #bda88e;
