@@ -492,13 +492,36 @@
 
         .price-note {
             font-size: 1.3rem;
-            font-weight: 500;
-            color: #3a3530;
-            font-style: normal;
+            font-weight: 400;
+            /* Lighter weight for Outfit */
+            color: var(--text-ink);
             line-height: 1.6;
-            background: #f5f0e6;
-            padding: 20px 28px;
             margin-top: 1.5rem;
+        }
+
+        /* Delicate Pink Rose Vignette */
+        .vignette {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2.5rem 0;
+            opacity: 0.6;
+        }
+
+        .vignette::before,
+        .vignette::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-red), transparent);
+        }
+
+        .rose-icon {
+            width: 24px;
+            height: 24px;
+            margin: 0 1.5rem;
+            fill: var(--accent-red);
+            filter: drop-shadow(0 0 2px rgba(255, 138, 128, 0.4));
         }
 
         .context-statement {
