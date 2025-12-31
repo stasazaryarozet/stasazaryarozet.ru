@@ -32,7 +32,7 @@ def parse_content(md_path: Path) -> dict:
         # 2. Handle Markdown Bold **text**
         val = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', val)
         # 3. Handle Red Text ++text++
-        val = re.sub(r'\+\+([^+]+)\+\+', r'<span style="color: #ff8a80;">\1</span>', val)
+        val = re.sub(r'\+\+([^+]+)\+\+', r'<span style="color: #ff0000;">\1</span>', val)
         # 4. Handle Vignette Dividers --- (Remove surrounding newlines to prevent double spacing)
         val = re.sub(r'\n?---\n?', rose_vignette, val)
         # 5. Replace ALL newlines with <br> for HTML rendering
