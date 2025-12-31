@@ -116,7 +116,7 @@
 
         /* 1. OUTER WOODEN FRAME */
         .outer-frame {
-            padding: 55px;
+            padding: 40px;
             background-color: #c89a5f;
             position: relative;
         }
@@ -140,7 +140,16 @@
             display: none;
         }
 
+        /* Light slip between frame and mat */
+        .slip {
+            padding: 8px;
+            background: #e8e2d0;
+        }
 
+        .frame-system.is-paper .slip {
+            padding: 0;
+            background: transparent;
+        }
 
         /* 2. THE WIDE DARK MAT */
         .outer-paper-mat {
@@ -428,10 +437,12 @@
         <section class="artwork-section">
             <div class="frame-system">
                 <div class="outer-frame">
-                    <div class="outer-paper-mat">
-                        <div class="inner-dark-mat">
-                            <img id="main-artwork" src="artwork_canvas_clean.jpg"
-                                alt="Последний шанс Пегаса — Ольга Розет">
+                    <div class="slip">
+                        <div class="outer-paper-mat">
+                            <div class="inner-dark-mat">
+                                <img id="main-artwork" src="artwork_canvas_clean.jpg"
+                                    alt="Последний шанс Пегаса — Ольга Розет">
+                            </div>
                         </div>
                     </div>
                 </div>
