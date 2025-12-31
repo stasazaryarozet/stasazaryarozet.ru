@@ -20,14 +20,17 @@ def parse_content(md_path: Path) -> dict:
     for line in content.split('\n'):
         if line.startswith('## '):
             if current_key:
-                data[current_key] = '\n'.join(current_value).strip()
+                val = '\n'.join(current_value).strip()
+                # Replace internal newlines with <br> for HTML
+                data[current_key] = val.replace('\n', '<br>')
             current_key = line[3:].strip()
             current_value = []
         elif current_key:
             current_value.append(line)
     
     if current_key:
-        data[current_key] = '\n'.join(current_value).strip()
+        val = '\n'.join(current_value).strip()
+        data[current_key] = val.replace('\n', '<br>')
     
     return data
 
