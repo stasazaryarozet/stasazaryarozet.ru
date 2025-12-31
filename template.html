@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+<!-- TEMPLATE v2.2 - Paper Mode Fix -->
 <html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Пегас — Ольга Розет</title>
+    <title>{{ title }} — {{ author }}</title>
     <meta name="description"
         content="«Последний шанс» — это не метафора мифа. Это повторяющийся сценарий, за который каждый раз платится предельная цена.">
 
@@ -56,12 +57,10 @@
         }
 
         body.is-paper-mode {
-            background-color: #000;
-            background-image: url('artwork_canvas_clean.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+            background-color: #1a1a1a;
+            /* Removed fixed backround image to allow scrolling */
+            overflow: auto;
+            /* Allow scrolling */
         }
 
         body.is-paper-mode::before {
@@ -83,6 +82,8 @@
 
         body.is-paper-mode .container {
             grid-template-columns: 1fr;
+            display: block;
+            /* Stack for scrolling */
         }
 
         /* ARTWORK SECTION */
@@ -97,8 +98,14 @@
         }
 
         body.is-paper-mode .artwork-section {
-            padding: 0;
+            padding: 2rem 0;
+            /* Add some padding */
             cursor: zoom-out;
+            display: block;
+            /* Remove flex centering to allow full scroll */
+            text-align: center;
+            height: auto;
+            min-height: auto;
         }
 
         body.is-paper-mode .info-panel {
@@ -114,14 +121,93 @@
             cursor: zoom-in;
         }
 
-        /* 1. OUTER WOODEN FRAME */
+        /* 1. OUTER WOODEN FRAME - REALISTIC MITER JOINTS */
         .outer-frame {
-            padding: 55px;
-            background-color: #c89a5f;
             position: relative;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            /* This is now just a container */
+            padding: 40px;
+            background: #deb887;
+            /* Fallbox color underneath */
         }
 
+        /* Frame Side Base - CSS Procedural Wood */
+        .frame-side {
+            position: absolute;
+            background-color: #dcb382;
+            z-index: 1;
+        }
+
+        /* Wood Grain Pattern Helper */
+        /* Using repeating gradients to simulate grain */
+
+        /* Top Side */
+        .frame-side.top {
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 40px 100%);
+            background-image:
+                repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(160, 82, 45, 0.05) 3px, transparent 6px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+        }
+
+        /* Bottom Side */
+        .frame-side.bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            clip-path: polygon(40px 0, calc(100% - 40px) 0, 100% 100%, 0 100%);
+            background-image:
+                repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(160, 82, 45, 0.05) 3px, transparent 6px),
+                linear-gradient(to top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.2) 100%);
+        }
+
+        /* Left Side */
+        .frame-side.left {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            clip-path: polygon(0 0, 100% 40px, 100% calc(100% - 40px), 0 100%);
+            /* 90deg grain */
+            background-image:
+                repeating-linear-gradient(90deg, transparent 0px, transparent 2px, rgba(160, 82, 45, 0.05) 3px, transparent 6px),
+                linear-gradient(to right, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+        }
+
+        /* Right Side */
+        .frame-side.right {
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 calc(100% - 40px));
+            /* 90deg grain */
+            background-image:
+                repeating-linear-gradient(90deg, transparent 0px, transparent 2px, rgba(160, 82, 45, 0.05) 3px, transparent 6px),
+                linear-gradient(to left, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.2) 100%);
+        }
+
+        /* Proper Frame Overlay: Volume Only */
+        .outer-frame::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+
+            /* Inner bevel shadow/highlight for depth */
+            box-shadow:
+                inset 1px 1px 0 rgba(255, 255, 255, 0.3),
+                inset -2px -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        /* Museum nameplate */
         /* Museum nameplate */
         .nameplate {
             position: absolute;
@@ -129,28 +215,61 @@
             left: 50%;
             transform: translateX(-50%);
             background: #c89a5f;
-            color: #2a1f14;
+            color: #15448c;
+            /* Vivid Pegasus Blue */
             font-size: 0.7rem;
-            font-weight: 500;
+            font-weight: 700;
             letter-spacing: 0.15em;
             padding: 4px 16px;
             border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .nameplate a,
+        .nameplate a:visited,
+        .nameplate a:hover,
+        .nameplate a:active {
+            color: #15448c !important;
+            /* Vivid Pegasus Blue - ALL STATES */
+            text-decoration: none;
+            font-weight: 700;
         }
 
         .frame-system.is-paper .nameplate {
             display: none;
         }
 
+        /* Light slip between frame and mat */
+        /* 2. INNER SLIP (NARROW MAT) */
+        .slip {
+            padding: 8px;
+            /* Narrow width */
+            background-color: #e6e0d3;
+            /* Darker, warmer paper color */
 
+            /* Paper Texture Simulation */
+            background-image:
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.05) 100%),
+                repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 3px);
 
-        /* 2. THE WIDE DARK MAT - Simulating the physical depth */
+            box-shadow:
+                inset 1px 1px 2px rgba(255, 255, 255, 0.5),
+                inset -1px -1px 2px rgba(0, 0, 0, 0.15),
+                0 0 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .frame-system.is-paper .slip {
+            padding: 0;
+            background: transparent;
+        }
+
+        /* 2. THE WIDE DARK MAT */
         .outer-paper-mat {
             padding: 60px;
             background: #554957;
-            /* Dark warm brown/grey from photo */
             position: relative;
             z-index: 2;
-            box-shadow: 0 0 0 2px #e8e2d0;
         }
 
         .inner-dark-mat {
@@ -191,10 +310,22 @@
         }
 
         .frame-system.is-paper img {
-            max-height: 92vh;
-            max-width: 92vw;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
+            max-height: none;
+            /* Changed from 98vh to none for scrolling */
+            max-width: none;
+            width: 100%;
+            /* Fill available width (or max-width of container)*/
+            /* OR use auto if we want natural size? Let's use 100% of container which is full width */
+            width: 100%;
+            /* Actually if body is 100% width, this limits it to screen width */
+            /* Let's try width: auto, max-width: 95vw initially? No, user wants details. */
+            width: auto;
+            min-width: 100vw;
+            /* At least screen width */
+            height: auto;
+
             cursor: zoom-out;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
         }
 
         body.is-paper-mode .view-controls {
@@ -213,11 +344,11 @@
         .view-controls {
             margin-top: 3.5rem;
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
-            letter-spacing: 0.3em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            opacity: 0.7;
+            opacity: 0.8;
             transition: opacity 0.3s;
         }
 
@@ -268,19 +399,20 @@
         .meta {
             display: inline-block;
             font-size: 1.1rem;
-            font-weight: 500;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.2em;
             line-height: 1.5;
-            color: #1a1510;
+            color: #15448c;
+            /* Vivid Pegasus Blue */
             background: #c9b896;
             padding: 16px 32px;
             margin-bottom: 4rem;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .author-link {
-            color: inherit;
+            color: #15448c !important;
+            /* Vivid Pegasus Blue - Forced */
             text-decoration: none;
         }
 
@@ -314,8 +446,6 @@
             background: #f5f0e6;
             padding: 20px 28px;
             margin-top: 1.5rem;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8), 0 -1px 1px rgba(0, 0, 0, 0.1);
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
         }
 
         .context-statement {
@@ -435,25 +565,39 @@
         <section class="artwork-section">
             <div class="frame-system">
                 <div class="outer-frame">
-                    <div class="outer-paper-mat">
-                        <div class="inner-dark-mat">
-                            <img id="main-artwork" src="artwork_canvas_clean.jpg"
-                                alt="Последний шанс Пегаса — Ольга Розет">
+                    <div class="frame-side top"></div>
+                    <div class="frame-side bottom"></div>
+                    <div class="frame-side left"></div>
+                    <div class="frame-side right"></div>
+                    <div class="slip">
+                        <div class="outer-paper-mat">
+                            <div class="inner-dark-mat">
+                                <img id="main-artwork" src="artwork_canvas_clean.jpg" alt="{{ title }} — {{ author }}"
+                                    onclick="switchView('paper')"
+                                    style="cursor: zoom-in; box-shadow: 0 3px 8px rgba(0,0,0,0.25);">
+                            </div>
                         </div>
+                    </div>
+                    <!-- Restoring Museum Nameplate -->
+                    <div class="nameplate" style="white-space: nowrap;">
+                        <span style="color: #15448c; font-weight: 700;">{{ author }}, {{ year }}.</span>
                     </div>
                 </div>
             </div>
 
             <div class="view-controls">
-                <button class="view-btn active" onclick="switchView('framed')">В раме</button>
+                <button class="view-btn active" onclick="switchView('framed')">В РАМЕ</button>
                 <span style="opacity:0.3">/</span>
-                <button class="view-btn" onclick="switchView('paper')">Бумага</button>
+                <button class="view-btn" onclick="switchView('paper')">БУМАГА</button>
             </div>
         </section>
 
         <section class="info-panel">
             <h1 class="title">{{ title }}</h1>
-            <p class="meta"><a href="{{ author_url }}" class="author-link">{{ author }}</a>,<br>{{ year }}.</p>
+            <p class="meta" style="color: #15448c !important; font-weight:700;">
+                <a href="{{ author_url }}" class="author-link"
+                    style="color: #15448c !important; text-decoration: none;">{{ author }}</a>,<br>{{ year }}.
+            </p>
 
             <div class="module">
                 <span class="price-display">{{ price }}</span>
@@ -504,6 +648,9 @@
         }
     </script>
     <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <div
+        style="position:fixed; bottom:10px; left:10px; opacity:0.6; font-family:monospace; font-size:12px; z-index:9999; color:red; background:white; padding:2px;">
+        v.AUTO-DEPLOYED</div>
 </body>
 
 </html>
