@@ -25,29 +25,30 @@ def parse_content(md_path: Path) -> dict:
         '</svg></div>'
     )
 
+    def process_val(lines):
+        val = '\n'.join(lines).strip('\n') # Strip only trailing/leading newlines, not spaces
+        # 1. Handle Markdown Links [text](url)
+        val = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" style="color: inherit; text-decoration: underline;">\1</a>', val)
+        # 2. Handle Markdown Bold **text**
+        val = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', val)
+        # 3. Handle Red Text ++text++
+        val = re.sub(r'\+\+([^+]+)\+\+', r'<span style="color: #ff8a80;">\1</span>', val)
+        # 4. Handle Vignette Dividers --- (Remove surrounding newlines to prevent double spacing)
+        val = re.sub(r'\n?---\n?', rose_vignette, val)
+        # 5. Replace ALL newlines with <br> for HTML rendering
+        return val.replace('\n', '<br>')
+
     for line in content.split('\n'):
         if line.startswith('## '):
             if current_key:
-                val = '\n'.join(current_value).strip()
-                # 1. Handle Markdown Links [text](url)
-                val = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" style="color: inherit; text-decoration: underline;">\1</a>', val)
-                # 2. Handle Markdown Bold **text**
-                val = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', val)
-                # 3. Handle Vignette Dividers ---
-                val = val.replace('---', rose_vignette)
-                # 4. Replace internal newlines with <br> for HTML
-                data[current_key] = val.replace('\n', '<br>')
+                data[current_key] = process_val(current_value)
             current_key = line[3:].strip()
             current_value = []
         elif current_key:
             current_value.append(line)
     
     if current_key:
-        val = '\n'.join(current_value).strip()
-        val = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" style="color: inherit; text-decoration: underline;">\1</a>', val)
-        val = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', val)
-        val = val.replace('---', rose_vignette)
-        data[current_key] = val.replace('\n', '<br>')
+        data[current_key] = process_val(current_value)
     
     return data
 
