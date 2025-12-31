@@ -114,41 +114,85 @@
             cursor: zoom-in;
         }
 
-        /* 1. OUTER WOODEN FRAME - Complex Profile + Wood Grain */
+        /* 1. OUTER WOODEN FRAME - REALISTIC MITER JOINTS */
         .outer-frame {
-            padding: 40px;
-            background-color: #deb887;
-            /* Yellower/Warmer wood (Burlywood) */
-
-            /* 
-               Layering:
-               1. Wood Texture (Real grain) - Hard Light for stronger texture
-               2. Miter Joints
-               3. Lighting/Volume profile
-            */
-            background-image:
-                /* Wood Texture - Increased visibility */
-                url('tex_frame.jpg'),
-
-                /* Miter Joints */
-                linear-gradient(45deg, transparent 49%, rgba(0, 0, 0, 0.5) 50%, transparent 51%),
-                linear-gradient(-45deg, transparent 49%, rgba(0, 0, 0, 0.5) 50%, transparent 51%),
-
-                /* LIGHTING OVERLAY */
-                linear-gradient(to right bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 25%),
-                radial-gradient(ellipse at center, transparent 65%, rgba(0, 0, 0, 0.15) 100%);
-
-            background-size: 80px auto, auto, auto, auto, auto;
-            background-blend-mode: hard-light, normal, normal, normal, normal;
-
             position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            /* This is now just a container */
+            padding: 40px;
+            background: #deb887;
+            /* Fallbox color underneath */
+        }
 
-            box-shadow:
-                0 20px 50px rgba(0, 0, 0, 0.5),
-                inset 1px 1px 0 rgba(255, 255, 255, 0.5),
-                inset -2px -2px 6px rgba(0, 0, 0, 0.2);
+        .frame-side {
+            position: absolute;
+            background-color: #deb887;
+            background-image: url('tex_frame.jpg');
+            background-size: 80px auto;
+            background-blend-mode: hard-light;
+            z-index: 1;
+        }
 
+        /* Top Side */
+        .frame-side.top {
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            /* Trapazoid shape */
+            clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 40px 100%);
+            /* Horizontal grain */
+            background-image: url('tex_frame.jpg'), linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.1) 100%);
+        }
+
+        /* Bottom Side */
+        .frame-side.bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            clip-path: polygon(40px 0, calc(100% - 40px) 0, 100% 100%, 0 100%);
+            /* Horizontal grain */
+            background-image: url('tex_frame.jpg'), linear-gradient(to top, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.3) 100%);
+        }
+
+        /* Left Side */
+        .frame-side.left {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            clip-path: polygon(0 0, 100% 40px, 100% calc(100% - 40px), 0 100%);
+            /* Vertical grain - rotate image 90deg via CSS or use rotated texture? using texture rotation hack */
+            background-image: url('tex_frame.jpg'), linear-gradient(to right, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+            /* For vertical sides we need rotated texture or accept horizontal grain? 
+                Ideally we'd have a rotated texture. Assuming frame texture is wood grain along Y axis? 
+                Let's assume texture is vertical grain (height > width).
+             */
+        }
+
+        /* Right Side */
+        .frame-side.right {
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 calc(100% - 40px));
+            background-image: url('tex_frame.jpg'), linear-gradient(to left, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.3) 100%);
+        }
+
+        /* Miter Joint Lines (Overlay) */
+        .outer-frame::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            background-image:
+                linear-gradient(45deg, transparent 49.5%, rgba(0, 0, 0, 0.6) 50%, transparent 50.5%),
+                linear-gradient(-45deg, transparent 49.5%, rgba(0, 0, 0, 0.6) 50%, transparent 50.5%);
             border: 1px solid #bda88e;
+            box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.4), inset -2px -2px 6px rgba(0, 0, 0, 0.2);
         }
 
         /* Museum nameplate */
@@ -469,6 +513,10 @@
         <section class="artwork-section">
             <div class="frame-system">
                 <div class="outer-frame">
+                    <div class="frame-side top"></div>
+                    <div class="frame-side bottom"></div>
+                    <div class="frame-side left"></div>
+                    <div class="frame-side right"></div>
                     <div class="slip">
                         <div class="outer-paper-mat">
                             <div class="inner-dark-mat">
