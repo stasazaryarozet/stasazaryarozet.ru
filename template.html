@@ -406,39 +406,37 @@
         }
 
         .view-controls {
-            margin-top: 3.5rem;
+            margin-top: 4rem;
             text-align: center;
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            letter-spacing: 0.2em;
+            font-size: 0.95rem;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-
-        .view-controls:hover {
-            opacity: 1;
+            transition: all 0.3s;
         }
 
         .view-btn {
             background: none;
             border: none;
             font-family: inherit;
-            font-weight: 500;
-            font-size: inherit;
-            color: rgba(255, 255, 255, 0.4);
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.3);
+            /* Muted but defined */
             cursor: pointer;
-            padding: 0.5rem 1.5rem;
-            border-bottom: 1px solid transparent;
+            padding: 0.5rem 1rem;
             transition: all 0.3s;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid transparent;
+        }
+
+        .view-btn:hover {
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .view-btn.active {
-            color: var(--text-ink);
+            color: var(--accent-gold);
+            /* Bright Clear Gold */
             border-bottom-color: var(--accent-gold);
-            text-shadow: none;
         }
+
 
         .info-panel {
             background-color: #554957 !important;
