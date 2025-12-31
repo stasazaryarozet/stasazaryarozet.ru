@@ -258,19 +258,30 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle at center, #666 0%, #444 60%, #111 100%);
+            width: 8px;
+            /* Slightly larger for detail */
+            height: 8px;
+            background: radial-gradient(circle at center, #95a5a6 0%, #7f8c8d 60%, #2c3e50 100%);
             border-radius: 50%;
-            box-shadow: 0.5px 0.5px 0.5px rgba(255, 255, 255, 0.2);
+            box-shadow:
+                0.5px 0.5px 1px rgba(255, 255, 255, 0.4),
+                inset -1px -1px 2px rgba(0, 0, 0, 0.3);
+            z-index: 11;
         }
 
+        /* Screw Slot (The '-' line in the screw head) */
         .nameplate::before {
-            left: 6px;
+            left: 10px;
+            background-image:
+                linear-gradient(90deg, transparent 45%, rgba(0, 0, 0, 0.6) 45%, rgba(0, 0, 0, 0.6) 55%, transparent 55%),
+                radial-gradient(circle at center, #bdc3c7 0%, #7f8c8d 100%);
         }
 
         .nameplate::after {
-            right: 6px;
+            right: 10px;
+            background-image:
+                linear-gradient(45deg, transparent 45%, rgba(0, 0, 0, 0.6) 45%, rgba(0, 0, 0, 0.6) 55%, transparent 55%),
+                radial-gradient(circle at center, #bdc3c7 0%, #7f8c8d 100%);
         }
 
         .nameplate a,
@@ -647,7 +658,7 @@
 
             <div class="module">
                 <span class="price-display">€10,000</span>
-                <p class="price-note">Ольге нездоровится.<br><br>Сбор на Жизнь<br>— отдохнуть и порисовать —<br>и возможность продолжать.<br><br>Хочу показать:<br>**<a href="https://olgarozet.ru/art" style="color: inherit; text-decoration: underline;">художественные работы</a><br>Ольги <br>нужны людям**<br><br>точно<br>не меньше ее<br>изматывающих<br>административнойработы<br>и лекций<br>по ~8 часов.<br><br>Картину получает<br>внесший наибольшую<br>или всю сумму</p>
+                <p class="price-note">Ольге нездоровится.<br><br>Сбор на Жизнь<br>— отдохнуть и порисовать —<br>и возможность продолжать.<br><br>Хочу показать:<br><strong><a href="https://olgarozet.ru/art" style="color: inherit; text-decoration: underline;">художественные работы</a><br>Ольги <br>нужны людям</strong><br><br>точно<br>не меньше ее<br>изматывающих<br>административнойработы<br>и лекций<br>по ~8 часов.<br><br>Картину получает<br>внесший наибольшую<br>или всю сумму</p>
             </div>
 
             <div class="module logistics">

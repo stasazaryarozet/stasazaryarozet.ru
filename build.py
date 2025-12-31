@@ -23,7 +23,9 @@ def parse_content(md_path: Path) -> dict:
                 val = '\n'.join(current_value).strip()
                 # 1. Handle Markdown Links [text](url)
                 val = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" style="color: inherit; text-decoration: underline;">\1</a>', val)
-                # 2. Replace internal newlines with <br> for HTML
+                # 2. Handle Markdown Bold **text**
+                val = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', val)
+                # 3. Replace internal newlines with <br> for HTML
                 data[current_key] = val.replace('\n', '<br>')
             current_key = line[3:].strip()
             current_value = []
@@ -33,6 +35,7 @@ def parse_content(md_path: Path) -> dict:
     if current_key:
         val = '\n'.join(current_value).strip()
         val = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" style="color: inherit; text-decoration: underline;">\1</a>', val)
+        val = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', val)
         data[current_key] = val.replace('\n', '<br>')
     
     return data
