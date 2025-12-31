@@ -557,18 +557,20 @@
             content: "";
             flex: 1;
             height: 2.5px;
-            /* Thicker lines */
             background: linear-gradient(to right, transparent, var(--accent-red), transparent);
         }
 
+        .vignette.no-lines::before,
+        .vignette.no-lines::after {
+            display: none;
+        }
+
         .rose-icon {
-            width: 32px;
-            /* Larger icon */
-            height: 32px;
+            width: 38px;
+            height: 38px;
             margin: 0 2rem;
             fill: var(--accent-red);
-            filter: drop-shadow(0 0 3px rgba(255, 0, 0, 0.5));
-            /* Stronger accent glow */
+            filter: drop-shadow(0 0 3px rgba(255, 0, 0, 0.4));
         }
 
         .context-statement {
