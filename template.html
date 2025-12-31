@@ -628,38 +628,37 @@
                     </div>
                 </div>
             </div>
-    </div>
 
-    <div class="view-controls">
-        <button class="view-btn active" onclick="switchView('framed')">В РАМЕ</button>
-        <span style="opacity:0.3">/</span>
-        <button class="view-btn" onclick="switchView('paper')">БУМАГА</button>
-    </div>
-    </section>
+            <div class="view-controls">
+                <button class="view-btn active" onclick="switchView('framed')">В РАМЕ</button>
+                <span style="opacity:0.3">/</span>
+                <button class="view-btn" onclick="switchView('paper')">БУМАГА</button>
+            </div>
+        </section>
 
-    <section class="info-panel">
-        <h1 class="title">{{ title }}</h1>
+        <section class="info-panel">
+            <h1 class="title">{{ title }}</h1>
 
-        <div class="nameplate">
-            <a href="{{ author_url }}" class="author-link">{{ author }}</a>, {{ year }}.
-        </div>
+            <div class="nameplate">
+                <a href="{{ author_url }}" class="author-link">{{ author }}</a>, {{ year }}.
+            </div>
 
-        <div class="module">
-            <span class="price-display">{{ price }}</span>
-            <p class="price-note">{{ price_note }}</p>
-        </div>
+            <div class="module">
+                <span class="price-display">{{ price }}</span>
+                <p class="price-note">{{ price_note }}</p>
+            </div>
 
-        <div class="module logistics">
-            <p><strong>САМОВЫВОЗ:</strong><br>{{ pickup }}</p>
-            <p style="margin-top: 0.75rem;"><strong>ДОСТАВКА:</strong><br>{{ delivery }}</p>
-        </div>
+            <div class="module logistics">
+                <p><strong>САМОВЫВОЗ:</strong><br>{{ pickup }}</p>
+                <p style="margin-top: 0.75rem;"><strong>ДОСТАВКА:</strong><br>{{ delivery }}</p>
+            </div>
 
-        <div class="contact-area">
-            <div class="contact-label">Связь:</div>
-            <a href="mailto:{{ contact_email }}" class="email-link">{{ contact_email }}</a>
-            <p class="organizer">{{ contact_name }}</p>
-        </div>
-    </section>
+            <div class="contact-area">
+                <div class="contact-label">Связь:</div>
+                <a href="mailto:{{ contact_email }}" class="email-link">{{ contact_email }}</a>
+                <p class="organizer">{{ contact_name }}</p>
+            </div>
+        </section>
     </div>
 
     <div id="google_translate_element" style="position:fixed;bottom:1rem;right:1rem;opacity:0.6;"></div>
