@@ -556,16 +556,19 @@
         .vignette::after {
             content: "";
             flex: 1;
-            height: 1px;
+            height: 2.5px;
+            /* Thicker lines */
             background: linear-gradient(to right, transparent, var(--accent-red), transparent);
         }
 
         .rose-icon {
-            width: 24px;
-            height: 24px;
-            margin: 0 1.5rem;
+            width: 32px;
+            /* Larger icon */
+            height: 32px;
+            margin: 0 2rem;
             fill: var(--accent-red);
-            filter: drop-shadow(0 0 2px rgba(255, 138, 128, 0.4));
+            filter: drop-shadow(0 0 3px rgba(255, 0, 0, 0.5));
+            /* Stronger accent glow */
         }
 
         .context-statement {
