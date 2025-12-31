@@ -118,16 +118,23 @@
         .outer-frame {
             padding: 40px;
             background-color: #cf9f68;
-            /* Realism: Miter joints + subtle shading */
+            /* Realism: Miter joints + Wood Profile Highlights */
             background-image:
-                linear-gradient(45deg, transparent 49.8%, rgba(0, 0, 0, 0.15) 50%, transparent 50.2%),
-                linear-gradient(-45deg, transparent 49.8%, rgba(0, 0, 0, 0.15) 50%, transparent 50.2%);
+                linear-gradient(45deg, transparent 48%, rgba(0, 0, 0, 0.2) 50%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(0, 0, 0, 0.2) 50%, transparent 52%),
+                linear-gradient(to right, rgba(255, 255, 255, 0.2) 0%, transparent 15%, rgba(0, 0, 0, 0.1) 85%, rgba(0, 0, 0, 0.3) 100%),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, transparent 15%, rgba(0, 0, 0, 0.1) 85%, rgba(0, 0, 0, 0.3) 100%);
             position: relative;
-            /* Lift from wall + Inner bevel */
+            /* Complex shadow stack for volume:
+               1. Outer drop shadow (wall distance)
+               2. Inner highlight (top/left light)
+               3. Inner bevel shadow (bottom/right)
+            */
             box-shadow:
-                0 10px 25px rgba(0, 0, 0, 0.3),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 0 5px rgba(0, 0, 0, 0.05);
+                0 15px 35px rgba(0, 0, 0, 0.4),
+                inset 1px 1px 2px rgba(255, 255, 255, 0.3),
+                inset -1px -1px 2px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         /* Museum nameplate */
