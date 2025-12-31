@@ -201,6 +201,7 @@
 
 
         /* Museum nameplate */
+        /* Museum nameplate */
         .nameplate {
             position: absolute;
             bottom: 12px;
@@ -210,17 +211,18 @@
             color: #15448c;
             /* Vivid Pegasus Blue */
             font-size: 0.7rem;
-            font-weight: 600;
-            /* Bold for readability */
+            font-weight: 700;
             letter-spacing: 0.15em;
             padding: 4px 16px;
             border: 1px solid rgba(0, 0, 0, 0.2);
-            /* Ensure link inherits this color */
         }
 
-        .nameplate a {
+        .nameplate a,
+        .nameplate a:visited,
+        .nameplate a:hover,
+        .nameplate a:active {
             color: #15448c !important;
-            /* Vivid Pegasus Blue - Forced */
+            /* Vivid Pegasus Blue - ALL STATES */
             text-decoration: none;
             font-weight: 700;
         }
