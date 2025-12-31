@@ -114,27 +114,44 @@
             cursor: zoom-in;
         }
 
-        /* 1. OUTER WOODEN FRAME */
+        /* 1. OUTER WOODEN FRAME - Complex Profile */
         .outer-frame {
             padding: 40px;
             background-color: #cf9f68;
-            /* Realism: Miter joints + Wood Profile Highlights */
-            background-image:
-                linear-gradient(45deg, transparent 48%, rgba(0, 0, 0, 0.2) 50%, transparent 52%),
-                linear-gradient(-45deg, transparent 48%, rgba(0, 0, 0, 0.2) 50%, transparent 52%),
-                linear-gradient(to right, rgba(255, 255, 255, 0.2) 0%, transparent 15%, rgba(0, 0, 0, 0.1) 85%, rgba(0, 0, 0, 0.3) 100%),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, transparent 15%, rgba(0, 0, 0, 0.1) 85%, rgba(0, 0, 0, 0.3) 100%);
-            position: relative;
-            /* Complex shadow stack for volume:
-               1. Outer drop shadow (wall distance)
-               2. Inner highlight (top/left light)
-               3. Inner bevel shadow (bottom/right)
+            /* 
+               Profile construction (Top Lighting):
+               1. Miter joints (diagonals)
+               2. Outer raised bevel (highlight)
+               3. Main flat face (mid-tone)
+               4. Inner cove/scoop (shadow gradient)
+               5. Inner edge (rim highlight)
             */
+            background-image:
+                /* Miter Joints */
+                linear-gradient(45deg, transparent 49%, rgba(0, 0, 0, 0.3) 50%, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, rgba(0, 0, 0, 0.3) 50%, transparent 51%),
+
+                /* LIGHTING OVERLAY (Top/Left source) */
+                /* Outer light bevel */
+                linear-gradient(to right bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 20%),
+
+                /* Inner Shadow (The Cove/Scoop) */
+                radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+
+            position: relative;
+
             box-shadow:
-                0 15px 35px rgba(0, 0, 0, 0.4),
-                inset 1px 1px 2px rgba(255, 255, 255, 0.3),
-                inset -1px -1px 2px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+                /* Deep Drop Shadow on Wall */
+                0 20px 50px rgba(0, 0, 0, 0.5),
+
+                /* Outer Edge Highlight (Rim) */
+                inset 1px 1px 0 rgba(255, 255, 255, 0.4),
+
+                /* Inner Edge Shadow (Depth) */
+                inset -2px -2px 6px rgba(0, 0, 0, 0.3);
+
+            border: 1px solid #8c6a45;
+            /* Darker outline define edges */
         }
 
         /* Museum nameplate */
