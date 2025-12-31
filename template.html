@@ -623,10 +623,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Restoring Museum Nameplate -->
-                    <div class="nameplate" style="white-space: nowrap;">
-                        <span style="color: #15448c; font-weight: 700;">{{ author }}, {{ year }}.</span>
-                    </div>
                 </div>
             </div>
 
@@ -639,10 +635,10 @@
 
         <section class="info-panel">
             <h1 class="title">{{ title }}</h1>
-            <p class="meta" style="color: #15448c !important; font-weight:700;">
-                <a href="{{ author_url }}" class="author-link"
-                    style="color: #15448c !important; text-decoration: none;">{{ author }}</a>,<br>{{ year }}.
-            </p>
+            
+            <div class="nameplate">
+                <a href="{{ author_url }}" class="author-link">{{ author }}</a>, {{ year }}.
+            </div>
 
             <div class="module">
                 <span class="price-display">{{ price }}</span>
