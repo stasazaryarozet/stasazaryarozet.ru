@@ -441,16 +441,15 @@
         }
 
         .info-panel {
-            background-color: #f5f2e9 !important;
-            /* Expensive Watercolor Paper Color */
-            /* Paper Grain Simulation */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23f5f2e9'/%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-            color: #2c2826 !important;
+            background-color: #554957 !important;
+            /* Dark Mat Color */
+            color: #f2f0eb !important;
+            /* Light Ink */
             padding: 4rem 3.5rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            border-left: 1px solid rgba(0, 0, 0, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
             position: relative;
             z-index: 5;
         }
@@ -509,17 +508,25 @@
 
         .price-note {
             font-size: 1.35rem;
-            font-weight: 300;
-            color: #2c2826;
+            font-weight: 400;
+            color: #2c2826 !important;
             line-height: 1.8;
-            padding: 1rem 0;
 
-            /* Relief Letterpress Effect (Debossed) */
+            /* The 'Light Cotton Paper' Block */
+            background-color: #f5f2e9 !important;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23f5f2e9'/%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+
+            padding: 2.5rem 3rem;
+            margin: 2rem 0;
+            border-radius: 2px;
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.4),
+                inset 0 0 10px rgba(0, 0, 0, 0.05);
+
+            /* Relief Letterpress Effect */
             text-shadow:
-                -0.5px -0.5px 0px rgba(0, 0, 0, 0.15),
-                0.5px 0.5px 0px rgba(255, 255, 255, 0.8);
-
-            position: relative;
+                -0.4px -0.4px 0px rgba(0, 0, 0, 0.1),
+                0.4px 0.4px 0px rgba(255, 255, 255, 0.7);
         }
 
         /* Clear the previous podlozka styles */
