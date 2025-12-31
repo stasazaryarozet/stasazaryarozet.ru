@@ -209,10 +209,9 @@
 
         /* Hyper-realistic Museum Nameplate (Brass/Gold) */
         .nameplate {
-            position: absolute;
-            bottom: 14px;
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3.5rem;
 
             /* Metallic Brass Texture */
             background: linear-gradient(135deg,
@@ -635,7 +634,7 @@
 
         <section class="info-panel">
             <h1 class="title">{{ title }}</h1>
-            
+
             <div class="nameplate">
                 <a href="{{ author_url }}" class="author-link">{{ author }}</a>, {{ year }}.
             </div>
