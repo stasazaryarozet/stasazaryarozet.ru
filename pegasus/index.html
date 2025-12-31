@@ -114,29 +114,32 @@
             cursor: zoom-in;
         }
 
-        /* 1. OUTER WOODEN FRAME - Complex Profile */
+        /* 1. OUTER WOODEN FRAME - Complex Profile + Wood Grain */
         .outer-frame {
             padding: 40px;
-            background-color: #cf9f68;
-            /* 
-               Profile construction (Top Lighting):
-               1. Miter joints (diagonals)
-               2. Outer raised bevel (highlight)
-               3. Main flat face (mid-tone)
-               4. Inner cove/scoop (shadow gradient)
-               5. Inner edge (rim highlight)
+            background-color: #e6d2b5;
+            /* Lighter blonde wood/gold */
+
+            /*
+               Layering:
+               1. Wood Texture (Real grain)
+               2. Miter Joints
+               3. Lighting/Volume profile
             */
             background-image:
+                /* Wood Texture */
+                url('tex_frame.jpg'),
+
                 /* Miter Joints */
-                linear-gradient(45deg, transparent 49%, rgba(0, 0, 0, 0.3) 50%, transparent 51%),
-                linear-gradient(-45deg, transparent 49%, rgba(0, 0, 0, 0.3) 50%, transparent 51%),
+                linear-gradient(45deg, transparent 49%, rgba(0, 0, 0, 0.4) 50%, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, rgba(0, 0, 0, 0.4) 50%, transparent 51%),
 
-                /* LIGHTING OVERLAY (Top/Left source) */
-                /* Outer light bevel */
-                linear-gradient(to right bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 20%),
+                /* LIGHTING OVERLAY */
+                linear-gradient(to right bottom, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 30%),
+                radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.2) 100%);
 
-                /* Inner Shadow (The Cove/Scoop) */
-                radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+            background-size: 80px auto, auto, auto, auto, auto;
+            background-blend-mode: multiply, normal, normal, normal, normal;
 
             position: relative;
 
@@ -145,13 +148,12 @@
                 0 20px 50px rgba(0, 0, 0, 0.5),
 
                 /* Outer Edge Highlight (Rim) */
-                inset 1px 1px 0 rgba(255, 255, 255, 0.4),
+                inset 1px 1px 0 rgba(255, 255, 255, 0.6),
 
                 /* Inner Edge Shadow (Depth) */
-                inset -2px -2px 6px rgba(0, 0, 0, 0.3);
+                inset -2px -2px 6px rgba(0, 0, 0, 0.2);
 
-            border: 1px solid #8c6a45;
-            /* Darker outline define edges */
+            border: 1px solid #bda88e;
         }
 
         /* Museum nameplate */
