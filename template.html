@@ -119,6 +119,7 @@
             padding: 55px;
             background-color: #c89a5f;
             position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
         }
 
         /* Museum nameplate */
@@ -142,12 +143,14 @@
 
 
 
-        /* 2. THE WIDE DARK MAT */
+        /* 2. THE WIDE DARK MAT - Simulating the physical depth */
         .outer-paper-mat {
             padding: 60px;
             background: #554957;
+            /* Dark warm brown/grey from photo */
             position: relative;
             z-index: 2;
+            box-shadow: 0 0 0 2px #e8e2d0;
         }
 
         .inner-dark-mat {
@@ -188,8 +191,9 @@
         }
 
         .frame-system.is-paper img {
-            max-height: 98vh;
-            max-width: 98vw;
+            max-height: 92vh;
+            max-width: 92vw;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
             cursor: zoom-out;
         }
 
@@ -209,11 +213,11 @@
         .view-controls {
             margin-top: 3.5rem;
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            letter-spacing: 0.2em;
+            letter-spacing: 0.3em;
             text-transform: uppercase;
-            opacity: 0.8;
+            opacity: 0.7;
             transition: opacity 0.3s;
         }
 
@@ -272,6 +276,7 @@
             background: #c9b896;
             padding: 16px 32px;
             margin-bottom: 4rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .author-link {
@@ -309,6 +314,8 @@
             background: #f5f0e6;
             padding: 20px 28px;
             margin-top: 1.5rem;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8), 0 -1px 1px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
         }
 
         .context-statement {
@@ -445,26 +452,23 @@
         </section>
 
         <section class="info-panel">
-            <h1 class="title">Последний шанс Пегаса</h1>
-            <p class="meta"><a href="https://olgarozet.ru" class="author-link">ОЛЬГА РОЗЕТ</a>,<br>2004.</p>
+            <h1 class="title">{{ title }}</h1>
+            <p class="meta"><a href="{{ author_url }}" class="author-link">{{ author }}</a>,<br>{{ year }}.</p>
 
             <div class="module">
-                <span class="price-display">€10,000</span>
-                <p class="price-note">Сбор на Жизнь и возможность продолжать. Картину получает внесший наибольшую или
-                    всю сумму.
-                </p>
+                <span class="price-display">{{ price }}</span>
+                <p class="price-note">{{ price_note }}</p>
             </div>
 
             <div class="module logistics">
-                <p><strong>САМОВЫВОЗ:</strong><br>Москва</p>
-                <p style="margin-top: 0.75rem;"><strong>ДОСТАВКА:</strong><br>СНГ, Китай, ОАЭ, Турция, Сербия<br>и
-                    некоторые другие страны</p>
+                <p><strong>САМОВЫВОЗ:</strong><br>{{ pickup }}</p>
+                <p style="margin-top: 0.75rem;"><strong>ДОСТАВКА:</strong><br>{{ delivery }}</p>
             </div>
 
             <div class="contact-area">
                 <div class="contact-label">Связь:</div>
-                <a href="mailto:azrozet@gmail.com" class="email-link">azrozet@gmail.com</a>
-                <p class="organizer">Азарья Розет</p>
+                <a href="mailto:{{ contact_email }}" class="email-link">{{ contact_email }}</a>
+                <p class="organizer">{{ contact_name }}</p>
             </div>
         </section>
     </div>
