@@ -19,12 +19,19 @@
         :root {
             /* Palette: High-End Gallery with Physical Accuracy */
             --bg-neutral: #554957;
-            /* Synchronized with mat color */
+            /* Dark mat color */
+            --bg-paper: #f2ebd5;
+            /* Light paper color for panel */
+            --bg-price: #ece5cf;
+            /* Slightly darker for the note box */
             --frame-gold: #b39b7a;
             --outer-mat-color: #f2ebd5;
             --inner-mat-color: #2c2826;
-            --text-ink: #f2f0eb;
-            --text-muted: #aca4ac;
+            --text-ink: #2c2826;
+            /* Dark ink for light paper */
+            --text-ink-light: #f2f0eb;
+            /* Light ink for dark mat */
+            --text-muted: #6b636b;
             --accent-gold: #c4a16b;
             --accent-red: #ff8a80;
         }
@@ -40,7 +47,8 @@
             font-weight: 300;
             /* Thin default */
             background: var(--bg-neutral);
-            color: var(--text-ink);
+            color: var(--text-ink-light);
+            /* Default to light for the mat area */
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
@@ -430,11 +438,13 @@
 
         .info-panel {
             background: var(--bg-paper);
+            color: var(--text-ink);
+            /* Switch to dark ink for paper */
             padding: 4rem 3.5rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .title {
@@ -493,10 +503,13 @@
         .price-note {
             font-size: 1.3rem;
             font-weight: 400;
-            /* Lighter weight for Outfit */
             color: var(--text-ink);
             line-height: 1.6;
+            background: var(--bg-price);
+            padding: 24px 32px;
+            border-radius: 2px;
             margin-top: 1.5rem;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.03);
         }
 
         /* Delicate Pink Rose Vignette */
