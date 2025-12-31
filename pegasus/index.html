@@ -126,10 +126,10 @@
 
         .frame-side {
             position: absolute;
-            background-color: #deb887;
-            background-image: url('tex_frame.jpg');
-            background-size: 80px auto;
-            background-blend-mode: hard-light;
+            background-color: #f0d5a8;
+            /* Lighter base for multiply mode */
+            background-blend-mode: multiply;
+            /* Realistic wood stain effect */
             z-index: 1;
         }
 
@@ -139,10 +139,10 @@
             left: 0;
             right: 0;
             height: 40px;
-            /* Trapazoid shape */
             clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 40px 100%);
             /* Horizontal grain */
-            background-image: url('tex_frame.jpg'), linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.1) 100%);
+            background-image: url('tex_frame_h.jpg'), linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.1) 100%);
+            background-size: auto 80px, auto;
         }
 
         /* Bottom Side */
@@ -153,7 +153,8 @@
             height: 40px;
             clip-path: polygon(40px 0, calc(100% - 40px) 0, 100% 100%, 0 100%);
             /* Horizontal grain */
-            background-image: url('tex_frame.jpg'), linear-gradient(to top, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.3) 100%);
+            background-image: url('tex_frame_h.jpg'), linear-gradient(to top, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0.2) 100%);
+            background-size: auto 80px, auto;
         }
 
         /* Left Side */
@@ -163,12 +164,9 @@
             left: 0;
             width: 40px;
             clip-path: polygon(0 0, 100% 40px, 100% calc(100% - 40px), 0 100%);
-            /* Vertical grain - rotate image 90deg via CSS or use rotated texture? using texture rotation hack */
-            background-image: url('tex_frame.jpg'), linear-gradient(to right, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
-            /* For vertical sides we need rotated texture or accept horizontal grain? 
-                Ideally we'd have a rotated texture. Assuming frame texture is wood grain along Y axis? 
-                Let's assume texture is vertical grain (height > width).
-             */
+            /* Vertical grain */
+            background-image: url('tex_frame.jpg'), linear-gradient(to right, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.2) 100%);
+            background-size: 80px auto, auto;
         }
 
         /* Right Side */
@@ -178,7 +176,9 @@
             right: 0;
             width: 40px;
             clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 calc(100% - 40px));
-            background-image: url('tex_frame.jpg'), linear-gradient(to left, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.3) 100%);
+            /* Vertical grain */
+            background-image: url('tex_frame.jpg'), linear-gradient(to left, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0.2) 100%);
+            background-size: 80px auto, auto;
         }
 
 
