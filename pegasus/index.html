@@ -370,22 +370,14 @@
         }
 
         .frame-system.is-paper img {
-            max-height: none;
-            /* Changed from 98vh to none for scrolling */
-            max-width: none;
-            width: 100%;
-            /* Fill available width (or max-width of container)*/
-            /* OR use auto if we want natural size? Let's use 100% of container which is full width */
-            width: 100%;
-            /* Actually if body is 100% width, this limits it to screen width */
-            /* Let's try width: auto, max-width: 95vw initially? No, user wants details. */
+            max-height: 92vh;
+            /* Reasonable height limit */
+            max-width: 95vw;
+            /* Reasonable width limit */
             width: auto;
-            min-width: 100vw;
-            /* At least screen width */
             height: auto;
-
             cursor: zoom-out;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
         }
 
         body.is-paper-mode .view-controls {
@@ -634,7 +626,7 @@
                         <div class="outer-paper-mat">
                             <div class="inner-dark-mat">
                                 <img id="main-artwork" src="artwork_canvas_clean.jpg" alt="Последний шанс Пегаса — ОЛЬГА РОЗЕТ"
-                                    onclick="switchView('paper')"
+                                    onclick="toggleView()"
                                     style="cursor: zoom-in; box-shadow: 0 3px 8px rgba(0,0,0,0.25);">
                             </div>
                         </div>
@@ -690,17 +682,29 @@
             const system = document.querySelector('.frame-system');
             const btns = document.querySelectorAll('.view-btn');
             const body = document.body;
+            const img = document.getElementById('main-artwork');
 
             if (mode === 'framed') {
                 system.classList.remove('is-paper');
                 body.classList.remove('is-paper-mode');
                 btns[0].classList.add('active');
                 btns[1].classList.remove('active');
+                img.style.cursor = 'zoom-in';
             } else {
                 system.classList.add('is-paper');
                 body.classList.add('is-paper-mode');
                 btns[0].classList.remove('active');
                 btns[1].classList.add('active');
+                img.style.cursor = 'zoom-out';
+            }
+        }
+
+        function toggleView() {
+            const system = document.querySelector('.frame-system');
+            if (system.classList.contains('is-paper')) {
+                switchView('framed');
+            } else {
+                switchView('paper');
             }
         }
     </script>
