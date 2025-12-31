@@ -378,14 +378,17 @@
         }
 
         .frame-system.is-paper img {
-            max-height: 92vh;
-            /* Reasonable height limit */
-            max-width: 95vw;
-            /* Reasonable width limit */
+            max-height: 85vh;
+            /* Very strict height limit */
+            max-width: 85vw;
+            /* Very strict width limit */
             width: auto;
             height: auto;
+            object-fit: contain;
             cursor: zoom-out;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 15px 70px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin: auto;
         }
 
         body.is-paper-mode .view-controls {
@@ -437,14 +440,14 @@
         }
 
         .info-panel {
-            background: var(--bg-paper);
+            background-color: var(--bg-paper);
+            /* Explicit background-color */
             color: var(--text-ink);
-            /* Switch to dark ink for paper */
             padding: 4rem 3.5rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            border-left: 1px solid rgba(0, 0, 0, 0.05);
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .title {
