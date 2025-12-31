@@ -8,7 +8,6 @@
 
 ## author_url
 https://olgarozet.ru
-
 ## year
 2004
 
@@ -25,7 +24,9 @@ https://olgarozet.ru
 ---
 
 Хочу показать:
-**[++художественные работы++](https://olgarozet.ru/art)
+**
+художествеые
+[++работы++](olgarozet.ru/art)
 Ольги 
 нужны людям**
 
