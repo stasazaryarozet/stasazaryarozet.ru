@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пегас — Ольга Розет</title>
+    <meta name="description"
+        content="«Последний шанс» — это не метафора мифа. Это повторяющийся сценарий, за который каждый раз платится предельная цена.">
+
+    <!-- Fonts: Standard of Excellence -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* Palette: High-End Gallery with Physical Accuracy */
+            --bg-neutral: #554957;
+            /* Synchronized with mat color */
+            --frame-gold: #b39b7a;
+            --outer-mat-color: #f2ebd5;
+            --inner-mat-color: #2c2826;
+            --text-ink: #f2f0eb;
+            --text-muted: #aca4ac;
+            --accent-gold: #c4a16b;
+            --accent-red: #ff8a80;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--bg-neutral);
+            color: var(--text-ink);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 1000;
+        }
+
+        body.is-paper-mode {
+            background-color: #000;
+            background-image: url('artwork_canvas_clean.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        body.is-paper-mode::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            /* Darken for focus on the main image */
+            backdrop-filter: blur(20px);
+            z-index: -1;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 480px;
+            min-height: 100vh;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.is-paper-mode .container {
+            grid-template-columns: 1fr;
+        }
+
+        /* ARTWORK SECTION */
+        .artwork-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body.is-paper-mode .artwork-section {
+            padding: 0;
+            cursor: zoom-out;
+        }
+
+        body.is-paper-mode .info-panel {
+            display: none;
+        }
+
+        /* THE TRIPLE-LAYERED FRAME ENGINE */
+        .frame-system {
+            position: relative;
+            display: inline-block;
+            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+            line-height: 0;
+            cursor: zoom-in;
+        }
+
+        /* 1. OUTER WOODEN FRAME */
+        .outer-frame {
+            padding: 55px;
+            background-color: #c89a5f;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Museum nameplate */
+        .nameplate {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #c89a5f;
+            color: #2a1f14;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            padding: 4px 16px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .frame-system.is-paper .nameplate {
+            display: none;
+        }
+
+
+
+        /* 2. THE WIDE DARK MAT - Simulating the physical depth */
+        .outer-paper-mat {
+            padding: 60px;
+            background: #554957;
+            /* Dark warm brown/grey from photo */
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 0 2px #e8e2d0;
+        }
+
+        .inner-dark-mat {
+            position: relative;
+            z-index: 3;
+        }
+
+
+
+        /* The Image */
+        .frame-system img {
+            max-height: 55vh;
+            width: auto;
+            max-width: 100%;
+            display: block;
+            box-shadow: none;
+            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        /* PAPER VIEW STATE (is-paper) */
+        .frame-system.is-paper .outer-frame {
+            padding: 0;
+            background: none;
+            box-shadow: none;
+        }
+
+        .frame-system.is-paper .outer-paper-mat,
+        .frame-system.is-paper .inner-dark-mat {
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
+            border: none;
+        }
+
+        .frame-system.is-paper .outer-frame::after,
+        .frame-system.is-paper .outer-frame::before {
+            display: none;
+        }
+
+        .frame-system.is-paper img {
+            max-height: 92vh;
+            max-width: 92vw;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
+            cursor: zoom-out;
+        }
+
+        body.is-paper-mode .view-controls {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .view-controls {
+            margin-top: 3.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .view-controls:hover {
+            opacity: 1;
+        }
+
+        .view-btn {
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-weight: 500;
+            font-size: inherit;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            padding: 0.5rem 1.5rem;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .view-btn.active {
+            color: var(--text-ink);
+            border-bottom-color: var(--accent-gold);
+            text-shadow: none;
+        }
+
+        .info-panel {
+            background: var(--bg-paper);
+            padding: 4rem 3.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .title {
+            font-size: 4.8rem;
+            font-weight: 300;
+            line-height: 1.05;
+            margin-bottom: 2rem;
+            letter-spacing: -0.015em;
+            font-feature-settings: "kern" 1, "onum" 1;
+            text-wrap: balance;
+            color: var(--text-ink);
+        }
+
+        .meta {
+            display: inline-block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            line-height: 1.6;
+            color: #1a1510;
+            background: linear-gradient(to bottom, #d4c4a8, #b8a88c);
+            padding: 12px 24px;
+            margin-bottom: 4rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+        .author-link {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .author-link:hover {
+            text-decoration: underline;
+        }
+
+        .module {
+            margin-bottom: 3rem;
+        }
+
+        .fact {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-display {
+            font-size: 3.5rem;
+            font-weight: 300;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .price-note {
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            font-style: italic;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .context-statement {
+            margin: 4rem 0;
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .context-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-ink);
+            font-style: italic;
+            position: relative;
+        }
+
+        .object-status {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .object-status::before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(196, 161, 107, 0.3);
+        }
+
+        .logistics {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .logistics strong {
+            color: var(--text-ink);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            margin-right: 0.5rem;
+        }
+
+        .restriction {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--accent-red);
+        }
+
+        .contact-area {
+            margin-top: auto;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .email-link {
+            font-size: 2rem;
+            color: var(--text-ink);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-gold);
+            transition: color 0.3s;
+        }
+
+        .email-link:hover {
+            color: var(--accent-gold);
+        }
+
+        .organizer {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        #google_translate_element {
+            filter: invert(1) hue-rotate(180deg);
+        }
+
+        @media (max-width: 1100px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .artwork-section {
+                min-height: 60vh;
+                padding: 1rem;
+            }
+
+            .info-panel {
+                padding: 3rem 2rem;
+                border: none;
+            }
+
+            .title {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <section class="artwork-section">
+            <div class="frame-system">
+                <div class="outer-frame">
+                    <div class="outer-paper-mat">
+                        <div class="inner-dark-mat">
+                            <img id="main-artwork" src="artwork_canvas_clean.jpg"
+                                alt="Последний шанс Пегаса — Ольга Розет">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-controls">
+                <button class="view-btn active" onclick="switchView('framed')">В раме</button>
+                <span style="opacity:0.3">/</span>
+                <button class="view-btn" onclick="switchView('paper')">Бумага</button>
+            </div>
+        </section>
+
+        <section class="info-panel">
+            <h1 class="title">Последний шанс Пегаса</h1>
+            <p class="meta"><a href="https://olgarozet.ru" class="author-link">ОЛЬГА РОЗЕТ</a>,<br>2004.</p>
+
+            <div class="module">
+                <span class="price-display">€10,000</span>
+                <p class="price-note">Сбор на Жизнь и возможность продолжать. Картину получает внесший наибольшую или
+                    всю сумму.
+                </p>
+            </div>
+
+            <div class="module logistics">
+                <p><strong>САМОВЫВОЗ:</strong><br>Москва</p>
+                <p style="margin-top: 0.75rem;"><strong>ДОСТАВКА:</strong><br>СНГ, Китай, ОАЭ, Турция, Сербия<br>и
+                    некоторые другие страны</p>
+            </div>
+
+            <div class="contact-area">
+                <div class="contact-label">Связь:</div>
+                <a href="mailto:azrozet@gmail.com" class="email-link">azrozet@gmail.com</a>
+                <p class="organizer">Азарья Розет</p>
+            </div>
+        </section>
+    </div>
+
+    <div id="google_translate_element" style="position:fixed;bottom:1rem;right:1rem;opacity:0.6;"></div>
+
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ru',
+                includedLanguages: 'en,de,fr,zh-CN,es,ar,he',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: true
+            }, 'google_translate_element');
+        }
+
+        function switchView(mode) {
+            const system = document.querySelector('.frame-system');
+            const btns = document.querySelectorAll('.view-btn');
+            const body = document.body;
+
+            if (mode === 'framed') {
+                system.classList.remove('is-paper');
+                body.classList.remove('is-paper-mode');
+                btns[0].classList.add('active');
+                btns[1].classList.remove('active');
+            } else {
+                system.classList.add('is-paper');
+                body.classList.add('is-paper-mode');
+                btns[0].classList.remove('active');
+                btns[1].classList.add('active');
+            }
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>
