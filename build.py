@@ -28,7 +28,7 @@ def parse_content(md_path: Path) -> dict:
     def process_val(lines):
         val = '\n'.join(lines).strip('\n') # Strip only trailing/leading newlines, not spaces
         # 1. Handle Markdown Links [text](url)
-        val = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" style="color: inherit; text-decoration: underline;">\1</a>', val)
+        val = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" style="color: inherit; text-decoration: underline; text-decoration-color: #ff0000; text-underline-offset: 5px;">\1</a>', val)
         # 2. Handle Markdown Bold **text**
         val = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', val)
         # 3. Handle Red Text ++text++
