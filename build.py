@@ -35,6 +35,7 @@ def parse_content(md_path: Path) -> dict:
 
     def process_val(lines):
         val = '\n'.join(lines).strip('\n') # Strip only trailing/leading newlines, not spaces
+        print(f"Processing chunk: {val[:30]!r}...")
         # 1. Handle Markdown Links [text](url) - FORCED RED for visual consistency as requested
         val = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" style="color: #ff0000; text-decoration: underline; text-decoration-color: #ff0000; text-underline-offset: 5px;">\1</a>', val)
         # 2. Handle Markdown Bold **text**
@@ -50,13 +51,16 @@ def parse_content(md_path: Path) -> dict:
                 val = val.replace('---', get_rose_html(clean=False), 1)
 
         # 5. Russian Typography: NBSP for better flow
-        # a. NBSP after prepositions/short words (1-3 chars, e.g. "чтобы", "или", "для")
-        # We run it twice to catch adjacent short words
+        # a. NBSP after prepositions/short words (1-5 chars) using Unicode NBSP
+        # Using lookbehind (?<=\s|^) to match words preceded by space or start of line
         for _ in range(2):
-            val = re.sub(r'\b([а-яА-Яa-zA-Z]{1,3}) +', r'\1&nbsp;', val)
+            val = re.sub(r'(?<=[\s^])([а-яА-Яa-zA-Z]{1,5}) +', lambda m: m.group(1) + '\u00A0', val)
 
         # b. NBSP before dash (—) to prevent it from starting a new line
-        val = re.sub(r' +—', r'&nbsp;—', val)
+        val = re.sub(r' +—', '\u00A0—', val)
+
+        if "уставшая" in val:
+            print(f"DEBUG process_val RESULT: {val!r}")
 
         # 6. Replace ALL newlines with <br> for HTML rendering
         return val.replace('\n', '<br>')
