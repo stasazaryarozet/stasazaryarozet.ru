@@ -68,7 +68,7 @@ azrozet@gmail.com
 ДОСТАВКА:
 
 ## label_contact
-Связь:
+СВЯЗЬ:
 
 ## version_tag
 v.AUTO-DEPLOYED
