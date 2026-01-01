@@ -543,196 +543,198 @@
                 -0.5px -1px 0.5px rgba(0, 0, 0, 0.3),
                 0.5px 1px 1px rgba(255, 255, 255, 1);
 
-            /* The Offer Card - A separate pinned note */
-            .offer-card {
-                display: block;
-                margin: -0.5rem auto 3rem auto;
-                /* Closer overlap */
-                width: 90%;
-                max-width: 320px;
+        }
 
-                /* Same Paper as Manifest */
-                background-color: #f7f3eb;
-                background-image:
-                    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.12'/%3E%3C/svg%3E"),
-                    linear-gradient(135deg, rgba(235, 225, 210, 0.4) 0%, transparent 100%);
+        /* The Offer Card - A separate pinned note */
+        .offer-card {
+            display: block;
+            margin: -0.5rem auto 3rem auto;
+            /* Closer overlap */
+            width: 90%;
+            max-width: 320px;
 
-                padding: 2.5rem 2rem;
-                /* Generous padding like main paper */
-                color: #332f2b;
-                /* Deep Charcoal Ink */
+            /* Same Paper as Manifest */
+            background-color: #f7f3eb;
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.12'/%3E%3C/svg%3E"),
+                linear-gradient(135deg, rgba(235, 225, 210, 0.4) 0%, transparent 100%);
 
-                /* Typography */
-                font-size: 1.15rem;
-                font-weight: 400;
-                /* Not bold */
-                text-transform: uppercase;
-                text-align: center;
-                letter-spacing: 0.1em;
-                line-height: 1.6;
+            padding: 2.5rem 2rem;
+            /* Generous padding like main paper */
+            color: #332f2b;
+            /* Deep Charcoal Ink */
 
-                /* Pin shadow / Floating card effect */
-                box-shadow:
-                    0 10px 30px rgba(0, 0, 0, 0.2),
-                    0 1px 2px rgba(0, 0, 0, 0.1);
+            /* Typography */
+            font-size: 1.15rem;
+            font-weight: 400;
+            /* Not bold */
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 0.1em;
+            line-height: 1.6;
 
-                transform: rotate(-0.5deg);
-                /* Subtle organic imperfection */
-                border-radius: 1px;
-                /* Slightly worn edges */
+            /* Pin shadow / Floating card effect */
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.2),
+                0 1px 2px rgba(0, 0, 0, 0.1);
+
+            transform: rotate(-0.5deg);
+            /* Subtle organic imperfection */
+            border-radius: 1px;
+            /* Slightly worn edges */
+        }
+
+        /* Internal composition hierarchy within manifesto */
+        .price-note strong {
+            font-weight: 700;
+            color: #2c2826;
+            display: block;
+            margin: 1.25rem 0 0.75rem 0;
+            line-height: 1.5;
+        }
+
+
+        /* Delicate Pink Rose Vignette */
+        .vignette {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.75rem 0;
+            /* generously spaced, classic typographic breath */
+            opacity: 1;
+        }
+
+        .vignette::before,
+        .vignette::after {
+            content: "";
+            flex: 1;
+            height: 2.5px;
+            background: linear-gradient(to right, transparent 0%, var(--accent-red) 50%, transparent 100%);
+        }
+
+        .vignette.no-lines::before,
+        .vignette.no-lines::after {
+            display: none;
+        }
+
+        .rose-icon {
+            width: 38px;
+            height: 38px;
+            margin: 0 1.25rem;
+            /* Reduced horizontal spacing around rose */
+            fill: var(--accent-red);
+            /* Removed drop-shadow to restore crispness and avoid 'blot' look */
+        }
+
+        .context-statement {
+            margin: 4rem 0;
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .context-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-ink);
+            font-style: italic;
+            position: relative;
+        }
+
+        .object-status {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .object-status::before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(196, 161, 107, 0.3);
+        }
+
+        .logistics {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .logistics strong {
+            color: var(--text-ink);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .restriction {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--accent-red);
+        }
+
+        .contact-area {
+            margin-top: auto;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .email-link {
+            font-size: 2.5rem;
+            color: var(--text-ink);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-gold);
+            transition: color 0.3s;
+        }
+
+        .email-link:hover {
+            color: var(--accent-gold);
+        }
+
+        .organizer {
+            margin-top: 1rem;
+            font-size: 1.4rem;
+            color: #aca4ac;
+        }
+
+        #google_translate_element {
+            filter: invert(1) hue-rotate(180deg);
+        }
+
+        @media (max-width: 1100px) {
+            .container {
+                grid-template-columns: 1fr;
             }
 
-            /* Internal composition hierarchy within manifesto */
-            .price-note strong {
-                font-weight: 700;
-                color: #2c2826;
-                display: block;
-                margin: 1.25rem 0 0.75rem 0;
-                line-height: 1.5;
+            .artwork-section {
+                min-height: 60vh;
+                padding: 1rem;
             }
 
-
-            /* Delicate Pink Rose Vignette */
-            .vignette {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin: 1.75rem 0;
-                /* generously spaced, classic typographic breath */
-                opacity: 1;
+            .info-panel {
+                padding: 3rem 2rem;
+                border: none;
             }
 
-            .vignette::before,
-            .vignette::after {
-                content: "";
-                flex: 1;
-                height: 2.5px;
-                background: linear-gradient(to right, transparent 0%, var(--accent-red) 50%, transparent 100%);
+            .title {
+                font-size: 3rem;
             }
-
-            .vignette.no-lines::before,
-            .vignette.no-lines::after {
-                display: none;
-            }
-
-            .rose-icon {
-                width: 38px;
-                height: 38px;
-                margin: 0 1.25rem;
-                /* Reduced horizontal spacing around rose */
-                fill: var(--accent-red);
-                /* Removed drop-shadow to restore crispness and avoid 'blot' look */
-            }
-
-            .context-statement {
-                margin: 4rem 0;
-                padding: 2.5rem 0;
-                border-top: 1px solid rgba(255, 255, 255, 0.08);
-                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            }
-
-            .context-text {
-                font-size: 1.2rem;
-                line-height: 1.7;
-                color: var(--text-ink);
-                font-style: italic;
-                position: relative;
-            }
-
-            .object-status {
-                margin-top: 1.5rem;
-                font-size: 0.85rem;
-                text-transform: uppercase;
-                letter-spacing: 0.2em;
-                color: var(--accent-gold);
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-            }
-
-            .object-status::before {
-                content: "";
-                flex: 1;
-                height: 1px;
-                background: rgba(196, 161, 107, 0.3);
-            }
-
-            .logistics {
-                font-size: 1.3rem;
-                color: var(--text-muted);
-                line-height: 1.7;
-            }
-
-            .logistics strong {
-                color: var(--text-ink);
-                font-weight: 600;
-                text-transform: uppercase;
-                font-size: 1rem;
-                letter-spacing: 0.1em;
-            }
-
-            .restriction {
-                display: block;
-                margin-top: 0.5rem;
-                font-size: 0.9rem;
-                color: var(--accent-red);
-            }
-
-            .contact-area {
-                margin-top: auto;
-                padding-top: 3rem;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            .contact-label {
-                font-size: 1rem;
-                text-transform: uppercase;
-                letter-spacing: 0.2em;
-                color: var(--text-muted);
-                margin-bottom: 1rem;
-            }
-
-            .email-link {
-                font-size: 2.5rem;
-                color: var(--text-ink);
-                text-decoration: none;
-                border-bottom: 1px solid var(--accent-gold);
-                transition: color 0.3s;
-            }
-
-            .email-link:hover {
-                color: var(--accent-gold);
-            }
-
-            .organizer {
-                margin-top: 1rem;
-                font-size: 1.4rem;
-                color: #aca4ac;
-            }
-
-            #google_translate_element {
-                filter: invert(1) hue-rotate(180deg);
-            }
-
-            @media (max-width: 1100px) {
-                .container {
-                    grid-template-columns: 1fr;
-                }
-
-                .artwork-section {
-                    min-height: 60vh;
-                    padding: 1rem;
-                }
-
-                .info-panel {
-                    padding: 3rem 2rem;
-                    border: none;
-                }
-
-                .title {
-                    font-size: 3rem;
-                }
-            }
+        }
     </style>
 </head>
 
