@@ -35,8 +35,6 @@ olgarozet.ru
 
 На Жизнь.
 
----
-
 ## offer_card
 
 
