@@ -494,11 +494,8 @@ body.is-paper-mode .view-controls {
 
 .price-display {
     position: relative;
-    /* Stack Euro and Number vertically */
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
+    /* Back to single line flow */
 
     font-size: 3.8rem;
     font-weight: 700;

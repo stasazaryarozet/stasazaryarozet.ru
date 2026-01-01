@@ -12,7 +12,7 @@ https://olgarozet.ru
 2004
 
 ## price
-€ 10 000
+<span class="currency-symbol">€</span> 10 000
 
 ## price_note
 Ольге давно не здоровится.
