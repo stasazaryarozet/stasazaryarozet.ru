@@ -458,8 +458,8 @@ body.is-paper-mode .view-controls {
 
 
 .info-panel {
-    background-color: #554957 !important;
-    /* Dark Mat Color */
+    background-color: transparent !important;
+    /* Allow body noise/color to show through */
     color: #f2f0eb !important;
     /* Light Ink */
     padding: 4rem 3.5rem;
