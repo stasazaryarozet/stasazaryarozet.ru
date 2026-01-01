@@ -412,16 +412,24 @@
             border-radius: 2rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            ```
         }
 
         .view-controls {
             margin-top: 3.5rem;
             text-align: center;
-            font-size: 1.8rem;
-            /* Significantly larger for desktop */
+            font-size: 2.5rem;
+            /* Drastically larger for desktop */
             letter-spacing: 0.25em;
             text-transform: uppercase;
             transition: all 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .view-controls {
+                font-size: 1.2rem;
+                /* Smaller for mobile */
+            }
         }
 
         .view-btn {
@@ -752,6 +760,12 @@
 
             .title {
                 font-size: 3rem;
+            }
+
+            .view-controls {
+                font-size: 1.5rem;
+                /* Scaled down for mobile */
+                margin-top: 2rem;
             }
         }
     </style>
