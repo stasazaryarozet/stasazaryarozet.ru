@@ -17,7 +17,6 @@
         rel="stylesheet">
 
     <style>
-        <style>
         :root {
     /* Palette: High-End Gallery with Physical Accuracy */
     --bg-neutral: #554957;
@@ -46,14 +45,17 @@
 
 body {
     font-family: 'Cormorant Garamond', serif;
-    /* Switch to Serif for Congruence */
     font-size: 1.1rem;
-    /* Serif needs slightly larger base */
     font-weight: 400;
-    /* Thin default */
-    background: var(--bg-neutral);
+
+    /* MASTER BACKGROUND: Dark Mat Color + Texture */
+    background-color: #554957;
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+    /* Keep texture static */
+
     color: var(--text-ink-light);
-    /* Default to light for the mat area */
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -505,36 +507,41 @@ body.is-paper-mode .view-controls {
 
     font-size: 3.8rem;
     font-weight: 700;
+    color: #2c2826;
+    /* Deep Dark Ink */
     line-height: 1;
 
-    /* DEEP DEBOSSED / LETTERPRESS on DARK CARD */
-    color: #332f2b;
-    /* Darker than background */
-    text-shadow:
-        1px 1px 0 rgba(255, 255, 255, 0.25),
-        /* Bottom-Right Light (Edge catch) */
-        -1px -1px 1px rgba(0, 0, 0, 0.5);
-    /* Top-Left Shadow (Inner depth) */
-
-    /* Material: Dark Mat Color */
-    background-color: #554957;
+    /* Material: Expensive White Cotton Paper / Thick Cardboard */
+    background-color: #fcfbf9;
+    /* Almost white, warm paper */
     background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E"),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(240, 235, 230, 0.5));
 
     padding: 20px 50px;
     border-radius: 2px;
     white-space: nowrap;
 
-    /* Physical Thickness */
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    border-right: 1px solid rgba(0, 0, 0, 0.3);
-    border-bottom: 3px solid #3a323b;
+    /* Physical Thickness (Cardboard Edges) */
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 3px solid #d1cbbd;
+    /* Shadow of the thickness */
 
-    /* Shadow */
+    /* Lifted shadow */
     box-shadow:
-        0 15px 35px rgba(0, 0, 0, 0.2),
-        0 5px 10px rgba(0, 0, 0, 0.1);
+        0 15px 35px rgba(0, 0, 0, 0.15),
+        0 5px 10px rgba(0, 0, 0, 0.05),
+        inset 0 0 20px rgba(255, 255, 255, 0.8);
+    /* Inner glow to feel rich */
+
+    /* DEEP LETTERPRESS EFFECT (Inked & Pressed) */
+    text-shadow:
+        0 1px 1px rgba(255, 255, 255, 1),
+        /* Bottom Highlight (Edge of depression) */
+        0 -1px 1px rgba(0, 0, 0, 0.1);
+    /* Subtle top inner shadow */
 
     transform: translateY(-0.2rem);
 }
