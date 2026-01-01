@@ -213,10 +213,11 @@ body::after {
     margin-bottom: var(--sp-l);
     text-wrap: balance;
 
-    /* Outline Style */
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--color-ink-light);
-    opacity: 0.8;
+    /* White fill with dark outline for depth and overlap readability */
+    color: #ffffff;
+    -webkit-text-stroke: 1px var(--color-mat-dark);
+    text-shadow: 2px 2px 0px var(--color-mat-dark);
+    opacity: 0.95;
 }
 
 /* Unified Functional Font Override */
@@ -249,6 +250,8 @@ body::after {
 
 /* Original Pargue (Framed Mode) */
 .nameplate {
+    width: 480px;
+    /* Matches Info-Panel width */
     background: linear-gradient(135deg, #c0c5c8, #d8dbdd, #c8ced2, #e1e4e6, #c8ced2, #c0c5c8);
     padding: 24px 60px;
     font-size: 1.4rem;
@@ -318,18 +321,51 @@ body::after {
 .price-display {
     position: relative;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
+    align-items: stretch;
     background-color: #ffffff;
     background-image: var(--tex-noise-fine);
     color: var(--color-ink-dark);
     margin-left: -3.5rem;
     margin-right: -10rem;
-    padding: 30px 10rem 25px 0;
     border-bottom: 3px solid #e0e0e0;
     z-index: 999;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.price-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0 25px 0;
+}
+
+.buy-tab {
+    width: 65px;
+    background-color: var(--color-accent-red);
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.buy-tab:hover {
+    background-color: #d40000;
+}
+
+.buy-tab span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: 0.15em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .price-value {
@@ -337,6 +373,8 @@ body::after {
     font-weight: 700;
     line-height: 1;
     text-shadow: var(--shadow-letterpress-dark);
+    margin-left: 65px;
+    /* Visual centering offset */
 }
 
 .beneficiary-note-on-card {
@@ -346,6 +384,8 @@ body::after {
     letter-spacing: 0.15em;
     margin-top: 1.2rem;
     opacity: 0.5;
+    margin-left: 65px;
+    /* Visual centering offset */
 }
 
 .price-note {
