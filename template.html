@@ -826,23 +826,25 @@
                     <div class="frame-side right"></div>
                     <div class="slip">
                         <div class="outer-paper-mat">
-                            <div class="inner-dark-mat">
-                                <img id="main-artwork" src="artwork_canvas_clean.jpg" alt="{{ title }} — {{ author }}"
-                                    onclick="toggleView()"
-                                    style="cursor: zoom-in; box-shadow: 0 3px 8px rgba(0,0,0,0.25);">
+                            <div class="slip">
+                                <div class="outer-paper-mat">
+                                    <div class="inner-dark-mat">
+                                        <img id="main-artwork" src="artwork_canvas_clean.jpg"
+                                            alt="{{ title }} — {{ author }}" onclick="toggleView()"
+                                            style="cursor: zoom-in; box-shadow: 0 3px 8px rgba(0,0,0,0.25);">
+                                    </div>
+                                </div>
                             </div>
+                            <!-- Price Tag Sticker on Frame -->
+                            <div class="price-display">{{ price }}</div>
                         </div>
+                    </div> <!-- End frame-system -->
+
+                    <div class="view-controls">
+                        <button class="view-btn active" onclick="switchView('framed')">В РАМЕ</button>
+                        <span style="opacity:0.3; margin: 0 0.5rem;">|</span>
+                        <button class="view-btn" onclick="switchView('paper')">БУМАГА</button>
                     </div>
-                </div>
-            </div> <!-- End frame-system -->
-
-            <span class="price-display" style="margin-top: 3rem;">{{ price }}</span>
-
-            <div class="view-controls">
-                <button class="view-btn active" onclick="switchView('framed')">В РАМЕ</button>
-                <span style="opacity:0.3; margin: 0 0.5rem;">|</span>
-                <button class="view-btn" onclick="switchView('paper')">БУМАГА</button>
-            </div>
         </section>
 
         <section class="info-panel">
