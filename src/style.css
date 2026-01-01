@@ -491,41 +491,37 @@ body.is-paper-mode .view-controls {
 
     font-size: 3.8rem;
     font-weight: 700;
-    color: #2c2826;
-    /* Deep Dark Ink */
     line-height: 1;
 
-    /* Material: Expensive White Cotton Paper / Thick Cardboard */
-    background-color: #fcfbf9;
-    /* Almost white, warm paper */
+    /* REQIUREMENT: Volumetric White Print (Raised/Thick Ink) */
+    color: #ffffff;
+    text-shadow:
+        0 2px 3px rgba(0, 0, 0, 0.6),
+        /* Shadow cast by the thick ink on the card */
+        0 0 1px rgba(0, 0, 0, 0.5);
+    /* Crisp edge definition */
+
+    /* REQIUREMENT: Dark Mat Color Cardboard with Max Texture */
+    background-color: #554957;
     background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E"),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(240, 235, 230, 0.5));
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E"),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.1));
 
     padding: 20px 50px;
     border-radius: 2px;
     white-space: nowrap;
 
     /* Physical Thickness (Cardboard Edges) */
-    border-top: 1px solid #fff;
-    border-left: 1px solid #fff;
-    border-right: 1px solid rgba(0, 0, 0, 0.05);
-    border-bottom: 3px solid #d1cbbd;
-    /* Shadow of the thickness */
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.4);
+    border-bottom: 3px solid #2a222b;
+    /* Darker shadow of the cardboard itself */
 
     /* Lifted shadow */
     box-shadow:
-        0 15px 35px rgba(0, 0, 0, 0.15),
-        0 5px 10px rgba(0, 0, 0, 0.05),
-        inset 0 0 20px rgba(255, 255, 255, 0.8);
-    /* Inner glow to feel rich */
-
-    /* DEEP LETTERPRESS EFFECT (Inked & Pressed) */
-    text-shadow:
-        0 1px 1px rgba(255, 255, 255, 1),
-        /* Bottom Highlight (Edge of depression) */
-        0 -1px 1px rgba(0, 0, 0, 0.1);
-    /* Subtle top inner shadow */
+        0 15px 35px rgba(0, 0, 0, 0.3),
+        0 5px 10px rgba(0, 0, 0, 0.1);
 
     transform: translateY(-0.2rem);
 }
