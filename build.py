@@ -7,7 +7,8 @@ from pathlib import Path
 
 BASE = Path(__file__).parent
 CONTENT = BASE / 'content.md'
-TEMPLATE = BASE / 'template.html'
+TEMPLATE = BASE / 'src' / 'template.html'
+STYLES = BASE / 'src' / 'style.css'
 OUTPUT = BASE / 'pegasus' / 'index.html'
 
 def parse_content(md_path: Path) -> dict:
@@ -75,20 +76,29 @@ def parse_content(md_path: Path) -> dict:
 def build():
     if not TEMPLATE.exists():
         print(f"Template not found: {TEMPLATE}")
-        print("Creating from current index.html...")
-        # Use current index.html as base, mark placeholders
         return
     
+    # 1. Parse Content
     data = parse_content(CONTENT)
+    
+    # 2. Load Template
     template = TEMPLATE.read_text(encoding='utf-8')
     
-    # Replace placeholders
+    # 3. Inject Styles (Architectural Assembly)
+    if STYLES.exists():
+        print(f"Injecting styles from {STYLES}...")
+        styles_content = STYLES.read_text(encoding='utf-8')
+        template = template.replace('/* STYLES_INJECTED_HERE */', styles_content)
+    else:
+        print(f"WARNING: Styles not found at {STYLES}")
+
+    # 4. Inject Data
     for key, value in data.items():
         placeholder = f'{{{{ {key} }}}}'
         template = template.replace(placeholder, value)
     
     OUTPUT.write_text(template, encoding='utf-8')
-    print(f"Built: {OUTPUT}")
+    print(f"Built Masterpiece: {OUTPUT}")
 
 if __name__ == '__main__':
     build()
