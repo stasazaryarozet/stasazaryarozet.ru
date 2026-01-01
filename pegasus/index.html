@@ -523,11 +523,28 @@
         }
 
         .price-display {
-            font-size: 4.5rem;
-            font-weight: 100;
-            /* Extra thin price */
-            display: block;
-            margin-bottom: 0.5rem;
+            font-size: 4rem;
+            font-weight: 600;
+            /* Semi-Bold */
+            display: inline-block;
+            /* Wrap background tight */
+            margin-bottom: 2rem;
+
+            /* Cardboard/Mat Backing */
+            background-color: #4a3e4c;
+            /* Slightly darker than main bg for depth, or same */
+            /* Let's try matching the mat color but with a slight shadow to pop */
+            background: #554957;
+            /* Matches mat */
+            padding: 1rem 2rem;
+            border-radius: 2px;
+
+            box-shadow:
+                0 4px 10px rgba(0, 0, 0, 0.3),
+                inset 0 0 20px rgba(0, 0, 0, 0.2);
+            /* Inner depth like thick card */
+
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .price-note {
