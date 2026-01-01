@@ -799,16 +799,17 @@
                         </div>
                     </div>
                 </div>
+            </div> <!-- End frame-system -->
 
-                <div class="nameplate">
-                    <a href="{{ author_url }}" class="author-link">{{ author }}</a><br>{{ year }}
-                </div>
+            <div class="nameplate">
+                <a href="{{ author_url }}" class="author-link">{{ author }}</a><br>{{ year }}
+            </div>
 
-                <div class="view-controls">
-                    <button class="view-btn active" onclick="switchView('framed')">В РАМЕ</button>
-                    <span style="opacity:0.3; margin: 0 0.5rem;">|</span>
-                    <button class="view-btn" onclick="switchView('paper')">БУМАГА</button>
-                </div>
+            <div class="view-controls">
+                <button class="view-btn active" onclick="switchView('framed')">В РАМЕ</button>
+                <span style="opacity:0.3; margin: 0 0.5rem;">|</span>
+                <button class="view-btn" onclick="switchView('paper')">БУМАГА</button>
+            </div>
         </section>
 
         <section class="info-panel">
@@ -818,6 +819,7 @@
                 <span class="price-display">{{ price }}</span>
                 <div class="price-note">{{ price_note }}</div>
                 <div class="offer-card">{{ offer_card }}</div>
+                <div class="beneficiary-note">{{ beneficiary }}</div>
             </div>
 
             <div class="module logistics">
