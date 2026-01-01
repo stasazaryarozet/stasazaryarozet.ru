@@ -638,6 +638,7 @@ body.is-paper-mode .view-controls {
 
 
 /* Delicate Pink Rose Vignette */
+/* Delicate Pink Rose Vignette */
 .vignette {
     display: flex;
     align-items: center;
@@ -645,14 +646,21 @@ body.is-paper-mode .view-controls {
     margin: 1.75rem 0;
     /* generously spaced, classic typographic breath */
     opacity: 1;
+    color: var(--accent-red);
+    /* Ensure currentColor resolves to Red */
 }
 
 .vignette::before,
 .vignette::after {
     content: "";
     flex: 1;
-    height: 2.5px;
+    height: 1px;
+    /* Refined to be thinner/sharper if 'horizontal elements' were too thick or invisible? User said 'lost'. Let's keep it visible. */
     background: linear-gradient(to right, transparent 0%, var(--accent-red) 50%, transparent 100%);
+    opacity: 0.7;
+    /* Slight transparency for elegance */
+    display: block;
+    /* Ensure render */
 }
 
 .vignette.no-lines::before,
@@ -667,6 +675,8 @@ body.is-paper-mode .view-controls {
     /* Reduced horizontal spacing around rose */
     fill: var(--accent-red);
     /* Removed drop-shadow to restore crispness and avoid 'blot' look */
+    display: block;
+    /* Ensure it behaves as a block in flex */
 }
 
 .context-statement {
