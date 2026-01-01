@@ -458,8 +458,13 @@ body.is-paper-mode .view-controls {
 
 
 .info-panel {
-    background-color: transparent !important;
-    /* Allow body noise/color to show through */
+    /* Subtle Blue Tint (Cooler than Mat) */
+    background-color: #504E5E !important;
+
+    /* Different Texture: Finer grain (0.9 frequency vs 0.65 on wall) */
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+
     color: #f2f0eb !important;
     /* Light Ink */
     padding: 4rem 3.5rem;
@@ -467,6 +472,10 @@ body.is-paper-mode .view-controls {
     flex-direction: column;
     justify-content: center;
     border-left: 1px solid rgba(255, 255, 255, 0.05);
+    /* Slight separation remains */
+    position: relative;
+    z-index: 5;
+    /* Ensure above body */
     position: relative;
     z-index: 5;
 }
@@ -523,6 +532,10 @@ body.is-paper-mode .view-controls {
         0 15px 35px rgba(0, 0, 0, 0.3),
         0 5px 10px rgba(0, 0, 0, 0.1);
 
+    /* GEOMETRY BREAK: Hanging off the left edge */
+    margin-left: -4.5rem;
+    /* Pull left past the 3.5rem padding */
+    z-index: 10;
     transform: translateY(-0.2rem);
 }
 
