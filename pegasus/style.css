@@ -409,12 +409,7 @@ body::after {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     overflow: hidden;
 
-    /* Interaction Transition */
-    transition: box-shadow 0.3s ease;
-}
-
-.price-display:hover {
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
 }
 
 .price-content {
