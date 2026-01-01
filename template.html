@@ -100,6 +100,7 @@
         .artwork-section {
             display: flex;
             flex-direction: column;
+            /* Stack Painting, Nameplate, Controls */
             align-items: center;
             justify-content: center;
             padding: 3rem;
@@ -221,7 +222,10 @@
         .nameplate {
             position: relative;
             display: inline-block;
-            margin-bottom: 4rem;
+            margin-top: 2rem;
+            /* Add space above it (below frame) */
+            margin-bottom: 2rem;
+            /* Space before controls */
 
             /* Softer Metallic Texture - Reduced Contrast */
             background: linear-gradient(135deg,
@@ -795,21 +799,20 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="view-controls">
-                <button class="view-btn active" onclick="switchView('framed')">В РАМЕ</button>
-                <span style="opacity:0.3; margin: 0 0.5rem;">|</span>
-                <button class="view-btn" onclick="switchView('paper')">БУМАГА</button>
-            </div>
+                <div class="nameplate">
+                    <a href="{{ author_url }}" class="author-link">{{ author }}</a><br>{{ year }}
+                </div>
+
+                <div class="view-controls">
+                    <button class="view-btn active" onclick="switchView('framed')">В РАМЕ</button>
+                    <span style="opacity:0.3; margin: 0 0.5rem;">|</span>
+                    <button class="view-btn" onclick="switchView('paper')">БУМАГА</button>
+                </div>
         </section>
 
         <section class="info-panel">
             <h1 class="title">{{ title }}</h1>
-
-            <div class="nameplate">
-                <a href="{{ author_url }}" class="author-link">{{ author }}</a><br>{{ year }}
-            </div>
 
             <div class="module">
                 <span class="price-display">{{ price }}</span>
