@@ -528,29 +528,41 @@
 
         .price-display {
             position: absolute;
-            bottom: -10px;
-            /* Hang slightly off the bottom edge */
+            bottom: 25px;
+            /* Higher up, overlapping frame and mat */
             left: 50%;
             transform: translateX(-50%);
             z-index: 20;
 
             font-size: 3.5rem;
-            /* Massive */
             font-weight: 700;
             color: #f2f0eb;
 
-            /* Sticker Style */
-            background: #554957;
-            /* Mat Color */
-            padding: 4px 25px;
+            /* Photo-realistic Expensive Cardboard */
+            background-color: #554957;
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+
+            padding: 4px 30px;
             border-radius: 2px;
             white-space: nowrap;
 
-            box-shadow:
-                0 2px 6px rgba(0, 0, 0, 0.5),
-                inset 0 0 5px rgba(0, 0, 0, 0.2);
+            /* Physical Thickness & Shadow */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid #2a222b;
+            /* Physical edge darkening */
 
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow:
+                0 2px 0 #3a323b,
+                /* Thickness layer 1 */
+                0 4px 0 #3a323b,
+                /* Thickness layer 2 */
+                0 15px 30px rgba(0, 0, 0, 0.6),
+                /* Deep Drop shadow */
+                inset 0 0 30px rgba(0, 0, 0, 0.3);
+            /* Inner thick cardboard vignette */
+
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
         .price-note {
