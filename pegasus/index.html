@@ -102,10 +102,14 @@
             flex-direction: column;
             /* Stack Painting, Nameplate, Controls */
             align-items: center;
-            justify-content: center;
-            padding: 3rem;
-            position: relative;
-            min-height: 100vh;
+            justify-content: flex-start;
+            /* Lift it up, don't center vertically */
+            padding-top: 12vh;
+            /* Hanging height */
+            padding-bottom: 3rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
         }
 
         body.is-paper-mode .artwork-section {
