@@ -51,3 +51,24 @@ azrozet@gmail.com
 
 ## contact_name
 Азарья Розет
+
+## meta_description
+«Последний шанс» — это не метафора мифа. Это повторяющийся сценарий, за который каждый раз платится предельная цена.
+
+## label_framed
+В РАМЕ
+
+## label_paper
+БУМАГА
+
+## label_pickup
+САМОВЫВОЗ:
+
+## label_delivery
+ДОСТАВКА:
+
+## label_contact
+Связь:
+
+## version_tag
+v.AUTO-DEPLOYED

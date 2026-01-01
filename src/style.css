@@ -73,7 +73,8 @@ body.is-paper-mode::before {
 
 .container {
     display: grid;
-    grid-template-columns: 1fr 480px;
+    /* SWAPPED: Pillar Left (480px), Main Right (1fr) */
+    grid-template-columns: 480px 1fr;
     min-height: 100vh;
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -256,33 +257,71 @@ body.is-paper-mode .info-panel {
     z-index: 10;
 }
 
-/* Machined Screws at the corners */
+.nameplate-pale {
+    display: block;
+    width: fit-content;
+    margin: 5rem auto 3rem auto;
+
+    /* Pale Brushed Metal Texture (Steel/Silver) */
+    background: linear-gradient(135deg,
+            #d1d5d8 0%,
+            #e2e5e7 25%,
+            #d1d5d8 45%,
+            #f0f2f3 50%,
+            #d1d5d8 55%,
+            #b8bdc1 100%);
+
+    /* Etched Icon Color (Subtle) */
+    color: rgba(0, 0, 0, 0.2);
+
+    padding: 22px 65px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.35),
+        inset 1px 1px 1px rgba(255, 255, 255, 0.4);
+    position: relative;
+    border-radius: 1px;
+}
+
+/* Machined Screws */
 .nameplate::before,
-.nameplate::after {
+.nameplate::after,
+.nameplate-pale::before,
+.nameplate-pale::after {
     content: "";
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     width: 8px;
     height: 8px;
-    background: radial-gradient(circle at center, #95a5a6 0%, #7f8c8d 60%, #2c3e50 100%);
+    background: radial-gradient(circle at center, #bdc3c7 0%, #7f8c8d 100%);
     border-radius: 50%;
     box-shadow:
-        0.5px 0.5px 1px rgba(255, 255, 255, 0.4),
+        0.5px 0.5px 1px rgba(255, 255, 255, 0.5),
         inset -1px -1px 2px rgba(0, 0, 0, 0.3);
     z-index: 11;
 }
 
-/* Screw Slot (The '-' line in the screw head) */
-.nameplate::before {
-    left: 10px;
-    background-image:
-        linear-gradient(90deg, transparent 45%, rgba(0, 0, 0, 0.6) 45%, rgba(0, 0, 0, 0.6) 55%, transparent 55%),
-        radial-gradient(circle at center, #bdc3c7 0%, #7f8c8d 100%);
+.nameplate::before,
+.nameplate-pale::before {
+    left: 12px;
 }
 
-.nameplate::after {
-    right: 10px;
+.nameplate::after,
+.nameplate-pale::after {
+    right: 12px;
+}
+
+inset -1px -1px 2px rgba(0, 0, 0, 0.3);
+z-index: 11;
+}
+
+/* Screw Slot (The '-' line in the screw head) */
+.nameplate::before,
+.nameplate::after,
+.nameplate-pale::before,
+.nameplate-pale::after {
     background-image:
         linear-gradient(45deg, transparent 45%, rgba(0, 0, 0, 0.6) 45%, rgba(0, 0, 0, 0.6) 55%, transparent 55%),
         radial-gradient(circle at center, #bdc3c7 0%, #7f8c8d 100%);
@@ -433,11 +472,25 @@ body.is-paper-mode .view-controls {
     }
 }
 
+/* UI / Functional Typography - ALL Functional Text in Proza Libre */
+.view-btn,
+.logistics,
+.contact-area,
+.offer-card,
+.price-display,
+.price-note,
+.nameplate,
+.context-text,
+.title,
+.beneficiary-note-on-card {
+    font-family: 'Proza Libre', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
 .view-btn {
     background: none;
     border: none;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 700;
+    font-weight: 500;
+    /* Proza Libre weight */
     color: rgba(255, 255, 255, 0.3);
     /* Muted but defined */
     cursor: pointer;
@@ -471,73 +524,90 @@ body.is-paper-mode .view-controls {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border-left: 1px solid rgba(255, 255, 255, 0.05);
-    /* Light separation line */
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    /* Border on RIGHT */
+    border-left: none;
     position: relative;
     z-index: 5;
+    order: -1;
+    /* First visually -> First Grid Column (480px) */
 }
 
 .title {
-    font-size: 3.5rem;
-    font-weight: 100;
-    line-height: 1.1;
-    margin-bottom: 2.5rem;
-    letter-spacing: -0.02em;
+    font-size: 9.2rem;
+    /* Truly Massive EXPRESSION */
+    font-weight: 800;
+    font-style: italic;
+    line-height: 0.8;
+    margin-bottom: 3.5rem;
+    letter-spacing: -0.07em;
     text-wrap: balance;
     color: #f2f0eb !important;
-    /* Light Title */
     overflow-wrap: break-word;
-    /* Safety */
+    transform: rotate(-3deg);
+    display: block;
 }
 
 /* ... */
 
 .price-display {
     position: relative;
-    display: inline-block;
-    /* Back to single line flow */
-
-    font-size: 3.8rem;
-    font-weight: 700;
-    line-height: 1;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     /* REQIUREMENT: Dark Ink on Light Whitish Cardboard */
     color: #2c2826;
-    /* Deep Letterpress Effect (Dark Text on Light Paper) */
-    text-shadow:
-        0 1px 1px rgba(255, 255, 255, 1),
-        /* Bottom Highlight (Edge of depression) */
-        0 -1px 1px rgba(0, 0, 0, 0.1);
-    /* Subtle top inner shadow */
 
-    /* REQIUREMENT: Whitish Cardboard (Matches Slip #e6e0d3) */
-    background-color: #e6e0d3;
+    /* REQIUREMENT: High-Contrast Gallery White */
+    background-color: #ffffff;
     background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E"),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.05) 100%);
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
 
-    padding: 20px 50px;
-    border-radius: 2px;
-    white-space: nowrap;
+    width: auto;
+    align-self: stretch;
 
-    /* Physical Thickness (Cardboard Edges) - Adjusted for Light Card */
-    border-top: 1px solid rgba(255, 255, 255, 0.8);
-    border-left: 1px solid rgba(255, 255, 255, 0.5);
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 3px solid #bdae93;
-    /* Darker paper shade for thickness */
+    margin-left: -3.5rem;
+    margin-right: -10rem;
+    /* Overlap frame */
 
-    /* Lifted shadow */
-    box-shadow:
-        0 15px 35px rgba(0, 0, 0, 0.2),
-        0 5px 10px rgba(0, 0, 0, 0.1);
-
-    /* GEOMETRY BREAK: Overlapping the Frame */
-    margin-left: -19rem;
-    /* Extreme overlap to hit the frame */
+    padding: 30px 10rem 25px 0;
+    /* padding-right 10rem compensates for margin-right -10rem to center in 480px pillar */
+    box-sizing: border-box;
     z-index: 999;
     position: relative;
-    transform: translateY(-0.2rem);
+    border-bottom: 3px solid #e0e0e0;
+}
+
+.price-value {
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 1;
+    text-shadow: 0 1px 0px rgba(255, 255, 255, 1);
+}
+
+.beneficiary-note-on-card {
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-top: 1.2rem;
+    opacity: 0.5;
+    color: #2c2826;
+}
+
+/* Offsets the -10rem margin to center text in the pillar */
+box-sizing: border-box;
+z-index: 999;
+position: relative;
+transform: translateY(-0.2rem);
+}
+
+.currency-symbol {
+    font-size: 0.8em;
+    /* Reduce size so top aligns with numbers */
+    margin-right: 0.2rem;
 }
 
 .price-note {
