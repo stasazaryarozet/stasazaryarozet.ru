@@ -313,18 +313,15 @@ body.is-paper-mode .info-panel {
 .slip {
     padding: 8px;
     /* Narrow width */
-    background-color: #e6e0d3;
-    /* Darker, warmer paper color */
+    background-color: #554957;
+    /* Dark Mat Color (Matched) */
 
-    /* Paper Texture Simulation */
+    /* Paper Texture Simulation - Matches Outer Mat */
     background-image:
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.05) 100%),
-        repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 3px);
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
 
     box-shadow:
-        inset 1px 1px 2px rgba(255, 255, 255, 0.5),
-        inset -1px -1px 2px rgba(0, 0, 0, 0.15),
-        0 0 5px rgba(0, 0, 0, 0.2);
+        inset 0 0 5px rgba(0, 0, 0, 0.4);
     position: relative;
     z-index: 2;
 }
@@ -487,43 +484,37 @@ body.is-paper-mode .view-controls {
     display: inline-block;
 
     font-size: 3.8rem;
-    /* Slightly larger for impact */
     font-weight: 700;
-    color: #2c2826;
-    /* Deep Dark Ink */
     line-height: 1;
 
-    /* Material: Expensive White Cotton Paper / Thick Cardboard */
-    background-color: #fcfbf9;
-    /* Almost white, warm paper */
+    /* DEEP DEBOSSED / LETTERPRESS on DARK CARD */
+    color: #332f2b;
+    /* Darker than background */
+    text-shadow:
+        1px 1px 0 rgba(255, 255, 255, 0.25),
+        /* Bottom-Right Light (Edge catch) */
+        -1px -1px 1px rgba(0, 0, 0, 0.5);
+    /* Top-Left Shadow (Inner depth) */
+
+    /* Material: Dark Mat Color */
+    background-color: #554957;
     background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E"),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(240, 235, 230, 0.5));
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
 
     padding: 20px 50px;
     border-radius: 2px;
     white-space: nowrap;
 
-    /* Physical Thickness (Cardboard Edges) */
-    border-top: 1px solid #fff;
-    border-left: 1px solid #fff;
-    border-right: 1px solid rgba(0, 0, 0, 0.05);
-    border-bottom: 3px solid #d1cbbd;
-    /* Shadow of the thickness */
+    /* Physical Thickness */
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid #3a323b;
 
-    /* Lifted shadow */
+    /* Shadow */
     box-shadow:
-        0 15px 35px rgba(0, 0, 0, 0.15),
-        0 5px 10px rgba(0, 0, 0, 0.05),
-        inset 0 0 20px rgba(255, 255, 255, 0.8);
-    /* Inner glow to feel rich */
-
-    /* DEEP LETTERPRESS EFFECT (Inked & Pressed) */
-    text-shadow:
-        0 1px 1px rgba(255, 255, 255, 1),
-        /* Bottom Highlight (Edge of depression) */
-        0 -1px 1px rgba(0, 0, 0, 0.1);
-    /* Subtle top inner shadow */
+        0 15px 35px rgba(0, 0, 0, 0.2),
+        0 5px 10px rgba(0, 0, 0, 0.1);
 
     transform: translateY(-0.2rem);
 }
