@@ -12,7 +12,8 @@ https://olgarozet.ru
 2004
 
 ## price
-€ 10 000
+€
+10 000
 
 ## price_note
 Ольге давно не здоровится.

@@ -458,12 +458,12 @@ body.is-paper-mode .view-controls {
 
 
 .info-panel {
-    /* Subtle Blue Tint (Cooler than Mat) */
-    background-color: #504E5E !important;
+    /* Wall: Slightly Darker & More Saturated than Mat (#554957) */
+    background-color: #4D4452 !important;
 
-    /* Different Texture: Finer grain (0.9 frequency vs 0.65 on wall) */
+    /* Coarse/Rough Texture: 0.35 frequency (Very Rough) */
     background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
 
     color: #f2f0eb !important;
     /* Light Ink */
@@ -472,10 +472,7 @@ body.is-paper-mode .view-controls {
     flex-direction: column;
     justify-content: center;
     border-left: 1px solid rgba(255, 255, 255, 0.05);
-    /* Slight separation remains */
-    position: relative;
-    z-index: 5;
-    /* Ensure above body */
+    /* Light separation line */
     position: relative;
     z-index: 5;
 }
@@ -488,6 +485,7 @@ body.is-paper-mode .view-controls {
     letter-spacing: -0.02em;
     text-wrap: balance;
     color: #f2f0eb !important;
+    /* Light Title */
     overflow-wrap: break-word;
     /* Safety */
 }
@@ -496,46 +494,52 @@ body.is-paper-mode .view-controls {
 
 .price-display {
     position: relative;
-    display: inline-block;
+    /* Stack Euro and Number vertically */
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     font-size: 3.8rem;
     font-weight: 700;
     line-height: 1;
 
-    /* REQIUREMENT: Volumetric White Print (Raised/Thick Ink) */
-    color: #ffffff;
+    /* REQIUREMENT: Dark Ink on Light Whitish Cardboard */
+    color: #2c2826;
+    /* Deep Letterpress Effect (Dark Text on Light Paper) */
     text-shadow:
-        0 2px 3px rgba(0, 0, 0, 0.6),
-        /* Shadow cast by the thick ink on the card */
-        0 0 1px rgba(0, 0, 0, 0.5);
-    /* Crisp edge definition */
+        0 1px 1px rgba(255, 255, 255, 1),
+        /* Bottom Highlight (Edge of depression) */
+        0 -1px 1px rgba(0, 0, 0, 0.1);
+    /* Subtle top inner shadow */
 
-    /* REQIUREMENT: Dark Mat Color Cardboard with Max Texture */
-    background-color: #554957;
+    /* REQIUREMENT: Whitish Cardboard (Matches Slip #e6e0d3) */
+    background-color: #e6e0d3;
     background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E"),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.1));
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E"),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.05) 100%);
 
     padding: 20px 50px;
     border-radius: 2px;
     white-space: nowrap;
 
-    /* Physical Thickness (Cardboard Edges) */
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    border-right: 1px solid rgba(0, 0, 0, 0.4);
-    border-bottom: 3px solid #2a222b;
-    /* Darker shadow of the cardboard itself */
+    /* Physical Thickness (Cardboard Edges) - Adjusted for Light Card */
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #bdae93;
+    /* Darker paper shade for thickness */
 
     /* Lifted shadow */
     box-shadow:
-        0 15px 35px rgba(0, 0, 0, 0.3),
+        0 15px 35px rgba(0, 0, 0, 0.2),
         0 5px 10px rgba(0, 0, 0, 0.1);
 
-    /* GEOMETRY BREAK: Hanging off the left edge */
-    margin-left: -4.5rem;
-    /* Pull left past the 3.5rem padding */
-    z-index: 10;
+    /* GEOMETRY BREAK: Overlapping the Frame */
+    margin-left: -19rem;
+    /* Extreme overlap to hit the frame */
+    z-index: 999;
+    position: relative;
     transform: translateY(-0.2rem);
 }
 
