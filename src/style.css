@@ -463,49 +463,18 @@ body.is-paper-mode .view-controls {
 }
 
 .title {
-    font-size: 5rem;
+    font-size: 3.5rem;
     font-weight: 100;
-    line-height: 1;
+    line-height: 1.1;
     margin-bottom: 2.5rem;
     letter-spacing: -0.02em;
     text-wrap: balance;
     color: #f2f0eb !important;
+    overflow-wrap: break-word;
+    /* Safety */
 }
 
-.meta {
-    display: inline-block;
-    font-size: 1.35rem;
-    /* Larger Meta */
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    line-height: 1.4;
-    color: #15448c;
-    background: #c9b896;
-    padding: 24px 40px;
-    /* More generous padding */
-    margin-bottom: 3rem;
-}
-
-.author-link {
-    color: #15448c !important;
-    /* Vivid Pegasus Blue - Forced */
-    text-decoration: none;
-}
-
-.author-link:hover {
-    text-decoration: underline;
-}
-
-.module {
-    margin-bottom: 3rem;
-}
-
-.fact {
-    font-size: 1.4rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-}
+/* ... */
 
 .price-display {
     position: relative;
@@ -514,34 +483,36 @@ body.is-paper-mode .view-controls {
 
     font-size: 3.5rem;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.95);
+    color: #2c2826;
+    /* Dark Ink on Light Cardboard */
     line-height: 1;
 
-    /* Material: Thick Museum Cardboard */
-    background-color: #554957;
+    /* Material: Thick Museum Cardboard (Light) */
+    background-color: #ece5cf;
+    /* Matches --bg-price */
     background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
 
-    padding: 10px 35px;
+    padding: 15px 40px;
     border-radius: 2px;
     white-space: nowrap;
 
     /* Realistic Cardboard Edges & Depth */
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    border-left: 1px solid rgba(255, 255, 255, 0.08);
-    border-right: 1px solid rgba(0, 0, 0, 0.3);
-    border-bottom: 3px solid #3a323b;
-    /* Physical thickness */
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #bdae93;
+    /* Darker paper shade for thickness */
 
     /* Shadow on the paper below */
     box-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.2),
-        0 2px 4px rgba(0, 0, 0, 0.1);
+        0 10px 20px rgba(0, 0, 0, 0.3),
+        0 4px 6px rgba(0, 0, 0, 0.1);
 
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+    /* Letterpress highlight */
 
     transform: translateY(-0.2rem);
-    /* Slight lift */
 }
 
 .price-note {
