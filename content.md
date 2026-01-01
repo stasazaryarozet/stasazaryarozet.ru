@@ -31,8 +31,7 @@ olgarozet.ru
 ## offer_card
 
 
-## beneficiary
-всю сумму получит Автор
+
 
 ## pickup
 МОСКВА
