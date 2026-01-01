@@ -12,7 +12,8 @@
     <!-- Fonts: Standard of Excellence -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800&display=swap"
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <style>
@@ -43,8 +44,11 @@
         }
 
         body {
-            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            font-weight: 300;
+            font-family: 'Cormorant Garamond', serif;
+            /* Switch to Serif for Congruence */
+            font-size: 1.1rem;
+            /* Serif needs slightly larger base */
+            font-weight: 400;
             /* Thin default */
             background: var(--bg-neutral);
             color: var(--text-ink-light);
@@ -442,7 +446,7 @@
         .view-btn {
             background: none;
             border: none;
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             font-weight: 700;
             color: rgba(255, 255, 255, 0.3);
             /* Muted but defined */
@@ -523,28 +527,29 @@
         }
 
         .price-display {
-            font-size: 4rem;
-            font-weight: 600;
-            /* Semi-Bold */
-            display: inline-block;
-            /* Wrap background tight */
-            margin-bottom: 2rem;
+            position: absolute;
+            bottom: 10px;
+            /* On the bottom frame rail */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
 
-            /* Cardboard/Mat Backing */
-            background-color: #4a3e4c;
-            /* Slightly darker than main bg for depth, or same */
-            /* Let's try matching the mat color but with a slight shadow to pop */
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #f2f0eb;
+
+            /* Sticker Style */
             background: #554957;
-            /* Matches mat */
-            padding: 1rem 2rem;
-            border-radius: 2px;
+            /* Mat Color */
+            padding: 2px 12px;
+            border-radius: 1px;
+            white-space: nowrap;
 
             box-shadow:
-                0 4px 10px rgba(0, 0, 0, 0.3),
-                inset 0 0 20px rgba(0, 0, 0, 0.2);
-            /* Inner depth like thick card */
+                0 1px 3px rgba(0, 0, 0, 0.4),
+                inset 0 0 5px rgba(0, 0, 0, 0.2);
 
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .price-note {
@@ -826,25 +831,23 @@
                     <div class="frame-side right"></div>
                     <div class="slip">
                         <div class="outer-paper-mat">
-                            <div class="slip">
-                                <div class="outer-paper-mat">
-                                    <div class="inner-dark-mat">
-                                        <img id="main-artwork" src="artwork_canvas_clean.jpg"
-                                            alt="Последний шанс Пегаса — ОЛЬГА РОЗЕТ" onclick="toggleView()"
-                                            style="cursor: zoom-in; box-shadow: 0 3px 8px rgba(0,0,0,0.25);">
-                                    </div>
-                                </div>
+                            <div class="inner-dark-mat">
+                                <img id="main-artwork" src="artwork_canvas_clean.jpg" alt="Последний шанс Пегаса — ОЛЬГА РОЗЕТ"
+                                    onclick="toggleView()"
+                                    style="cursor: zoom-in; box-shadow: 0 3px 8px rgba(0,0,0,0.25);">
                             </div>
-                            <!-- Price Tag Sticker on Frame -->
-                            <div class="price-display">€10,000</div>
                         </div>
-                    </div> <!-- End frame-system -->
-
-                    <div class="view-controls">
-                        <button class="view-btn active" onclick="switchView('framed')">В РАМЕ</button>
-                        <span style="opacity:0.3; margin: 0 0.5rem;">|</span>
-                        <button class="view-btn" onclick="switchView('paper')">БУМАГА</button>
                     </div>
+                    <!-- Price Tag Sticker on Frame -->
+                    <div class="price-display">€10,000</div>
+                </div>
+            </div> <!-- End frame-system -->
+
+            <div class="view-controls">
+                <button class="view-btn active" onclick="switchView('framed')">В РАМЕ</button>
+                <span style="opacity:0.3; margin: 0 0.5rem;">|</span>
+                <button class="view-btn" onclick="switchView('paper')">БУМАГА</button>
+            </div>
         </section>
 
         <section class="info-panel">
