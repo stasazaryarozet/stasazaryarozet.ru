@@ -260,7 +260,10 @@ body.is-paper-mode .info-panel {
 .nameplate-pale {
     display: block;
     width: fit-content;
-    margin: 5rem auto 3rem auto;
+    margin: 0 auto;
+    transform: translateY(-2px);
+    /* Slight overlap for seamlessness */
+    z-index: 10;
 
     /* Pale Brushed Metal Texture (Steel/Silver) */
     background: linear-gradient(135deg,
@@ -676,8 +679,8 @@ transform: translateY(-0.2rem);
     /* Visual continuity */
     border-top: 1px dashed rgba(0, 0, 0, 0.1);
     /* Perforation line effect */
-    border-radius: 0 0 2px 2px;
-    /* Rounded only at bottom */
+    border-radius: 0;
+    /* Squared off to meet the metal plaque below */
 
     /* Shadow continues naturally */
     box-shadow: none;

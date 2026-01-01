@@ -7,7 +7,7 @@
 ОЛЬГА РОЗЕТ
 
 ## author_url
-https://olgarozet.ru
+olgarozet.ru
 ## year
 2004
 
@@ -37,7 +37,7 @@ https://olgarozet.ru
 ИЛИ ВСЮ СУММУ
 
 ## beneficiary
-все деньги получит Ольга
+все деньги получит Автор
 
 ## pickup
 МОСКВА
