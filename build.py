@@ -49,7 +49,16 @@ def parse_content(md_path: Path) -> dict:
             else:
                 val = val.replace('---', get_rose_html(clean=False), 1)
 
-        # 5. Replace ALL newlines with <br> for HTML rendering
+        # 5. Russian Typography: NBSP for better flow
+        # a. NBSP after prepositions/short words (1-2 chars)
+        # We run it twice to catch adjacent short words
+        for _ in range(2):
+            val = re.sub(r'\b([а-яА-Яa-zA-Z]{1,2}) +', r'\1&nbsp;', val)
+
+        # b. NBSP before dash (—) to prevent it from starting a new line
+        val = re.sub(r' +—', r'&nbsp;—', val)
+
+        # 6. Replace ALL newlines with <br> for HTML rendering
         return val.replace('\n', '<br>')
 
     for line in content.split('\n'):

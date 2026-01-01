@@ -41,6 +41,7 @@
     --shadow-mat: inset 0 0 30px rgba(0, 0, 0, 0.2);
     --shadow-letterpress-light: -0.5px -1px 0.5px rgba(0, 0, 0, 0.3), 0.5px 1px 1px #fff;
     --shadow-letterpress-dark: 0 1px 0px #fff, 0 -1px 0px rgba(0, 0, 0, 0.1);
+    --shadow-inset-soft: inset 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
 /* --- 1. BASE LAYERS --- */
@@ -61,7 +62,8 @@ body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-    transition: background 0.8s ease;
+
+    text-align: left;
 }
 
 /* Global Atmosphere Overlay */
@@ -214,6 +216,12 @@ body::after {
     margin-bottom: var(--sp-l);
     text-wrap: balance;
 
+    /* Expansion: Break out of the info-panel column */
+    position: relative;
+    width: 155%;
+    z-index: 100;
+    pointer-events: none;
+
     /* Transparent body (hollow), visible outline only */
     /* Solid White with Outline */
     background: none;
@@ -273,20 +281,24 @@ body::after {
     box-sizing: border-box;
     /* Critical for padding containment */
     margin: 0;
-    background: linear-gradient(135deg, #c0c5c8, #d8dbdd, #c8ced2, #e1e4e6, #c8ced2, #c0c5c8);
+    /* Light Bronze Gradient */
+    background: linear-gradient(135deg, #e6d3a3 0%, #f2e6c2 20%, #d9c088 40%, #f9f1d8 50%, #d9c088 60%, #f2e6c2 80%, #e6d3a3 100%);
+    border: 1px solid #c4a16b;
     padding: 24px var(--sp-m);
     /* Reduced horizontal padding to prevent text overflow */
     font-size: 1.4rem;
     font-weight: 700;
     line-height: 1.6;
     letter-spacing: 0.15em;
-    color: var(--color-pegasus-blue);
-    text-shadow: 0.5px 0.5px 1px rgba(255, 255, 255, 0.3), -0.3px -0.3px 0.5px rgba(0, 0, 0, 0.2);
+    color: #4a3c28;
+    /* Deep Bronze/Brown */
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6), 0 -1px 0 rgba(0, 0, 0, 0.1);
     border-radius: 2px 2px 0 0;
 }
 
 .nameplate a {
-    color: var(--color-pegasus-blue);
+    color: #2c241b;
+    /* Darker ink for the name */
     text-decoration: none;
     font-weight: 900;
     font-size: 1.5rem;
@@ -386,12 +398,9 @@ body::after {
         repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 3px),
         linear-gradient(115deg, #f4f9ff 0%, #dcecf9 10%, #bdd4e7 20%, #9ab7d3 30%, #7a9ac0 40%, #5d80ab 50%, #456695 60%, #304d7f 70%, #1f3668 80%, #12224d 90%, #0a1135 100%);
     background-blend-mode: overlay, multiply, normal;
-    #1f3668 80%,
-    #12224d 90%,
-    #0a1135 100%);
-    background-blend-mode: overlay, normal;
-
     color: #ffffff;
+    text-decoration: none;
+    /* For <a> tag */
     margin-top: var(--sp-m);
     margin-left: -3.5rem;
     margin-right: -10rem;
@@ -399,6 +408,13 @@ body::after {
     z-index: 999;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+
+    /* Interaction Transition */
+    transition: box-shadow 0.3s ease;
+}
+
+.price-display:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
 }
 
 .price-content {
@@ -422,7 +438,7 @@ body::after {
     cursor: pointer;
 }
 
-.buy-tab:hover {
+.price-display:hover .buy-tab {
     background-color: #d40000;
 }
 
@@ -457,16 +473,24 @@ body::after {
 }
 
 .price-note {
+    /* Restore Manifesto Paper Box Style */
     background-color: #f7f3eb;
     background-image: var(--tex-noise-fine), linear-gradient(135deg, rgba(235, 225, 210, 0.4), transparent);
     padding: var(--sp-l);
     color: #332f2b;
     font-size: 1.35rem;
     line-height: 1.7;
+
+    /* Letterpress/Embossed Effect */
     box-shadow: var(--shadow-lift), var(--shadow-inset-soft), 0 1px 1px rgba(255, 255, 255, 0.4);
     text-shadow: var(--shadow-letterpress-light);
+
     margin-top: var(--sp-m);
     border-radius: 2px 2px 0 0;
+
+    /* Non-italic as requested */
+    font-style: normal;
+    font-weight: 500;
 }
 
 .offer-card {
@@ -703,4 +727,18 @@ body.is-paper-mode .view-controls {
         margin-right: -3.5rem;
         padding-right: 0;
     }
+}
+
+/* --- GRAFFITI ELEMENT --- */
+.graffiti-footer {
+    display: block;
+    width: 70%;
+    margin: var(--sp-xl) auto 0 auto;
+    opacity: 0.75;
+    mix-blend-mode: multiply;
+    filter: contrast(120%) grayscale(100%);
+    transform: rotate(-2deg);
+    pointer-events: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
