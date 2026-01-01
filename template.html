@@ -544,6 +544,43 @@
                 0.5px 1px 1px rgba(255, 255, 255, 1);
         }
 
+        /* The Offer Card - A separate pinned note */
+        .offer-card {
+            display: block;
+            margin: -1.5rem auto 3rem auto;
+            /* Overlap slightly or sit tight */
+            width: 90%;
+            max-width: 320px;
+
+            /* Distinct Finish: Smoother, Warmer Manila/Kraft or heavily textured 'cardstock' */
+            background-color: #d6c6b0;
+            /* Warm Beige/Kraft */
+            /* Subtle smooth noise */
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+
+            padding: 1.5rem 2rem;
+            color: #2c2826;
+
+            /* Typography */
+            font-size: 1.1rem;
+            font-weight: 400;
+            /* Not bold */
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 0.1em;
+            line-height: 1.4;
+
+            /* Pin shadow / Floating card effect */
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.3),
+                0 1px 2px rgba(0, 0, 0, 0.2);
+
+            transform: rotate(-1deg);
+            /* Slight organic tilt */
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
         /* Internal composition hierarchy within manifesto */
         .price-note strong {
             font-weight: 700;
@@ -736,6 +773,7 @@
             <div class="module">
                 <span class="price-display">{{ price }}</span>
                 <div class="price-note">{{ price_note }}</div>
+                <div class="offer-card">{{ offer_card }}</div>
             </div>
 
             <div class="module logistics">
