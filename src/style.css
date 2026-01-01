@@ -212,7 +212,11 @@ body::after {
     transform: rotate(-3deg);
     margin-bottom: var(--sp-l);
     text-wrap: balance;
-    color: var(--color-ink-light);
+
+    /* Outline Style */
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-ink-light);
+    opacity: 0.8;
 }
 
 /* Unified Functional Font Override */
