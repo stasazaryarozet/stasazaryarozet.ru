@@ -238,12 +238,14 @@
                 0.5px 0.5px 1px rgba(255, 255, 255, 0.3),
                 -0.3px -0.3px 0.5px rgba(0, 0, 0, 0.2);
 
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            padding: 22px 55px;
+            font-size: 0.95rem;
+            /* Year size (Base) */
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            /* Wider spacing for year */
+            padding: 24px 60px;
             text-align: center;
-            line-height: 1.4;
+            line-height: 1.6;
 
             /* Beveled Edge */
             border: 1px solid rgba(0, 0, 0, 0.2);
@@ -255,7 +257,6 @@
                 inset -1px -1px 1px rgba(0, 0, 0, 0.1);
 
             white-space: normal;
-            /* Allow lines to wrap/break */
             z-index: 10;
         }
 
@@ -267,7 +268,6 @@
             top: 50%;
             transform: translateY(-50%);
             width: 8px;
-            /* Slightly larger for detail */
             height: 8px;
             background: radial-gradient(circle at center, #95a5a6 0%, #7f8c8d 60%, #2c3e50 100%);
             border-radius: 50%;
@@ -299,7 +299,16 @@
             color: #15448c !important;
             /* Vivid Pegasus Blue - ALL STATES */
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 800;
+            /* Extra bold for name */
+            font-size: 1.25rem;
+            /* Larger Name */
+            letter-spacing: 0.15em;
+            /* Slightly tighter than year */
+            display: block;
+            /* Ensure it takes its own line spacing */
+            margin-bottom: 0.2rem;
+            /* Detail spacing */
         }
 
         .frame-system.is-paper .nameplate {
