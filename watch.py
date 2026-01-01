@@ -1,54 +1,80 @@
-#!/usr/bin/env python3
 import time
-import os
-import subprocess
+import shutil
 from pathlib import Path
+import build
 
-BASE = Path(__file__).parent.absolute()
-CONTENT = BASE / 'content.md'
-TEMPLATE = BASE / 'template.html'
-BUILD_SCRIPT = BASE / 'build.py'
-PEGASUS_SALE = BASE.parent / 'pegasus-sale'
+# Configuration
+WATCH_DIRS = [Path("."), Path("src")]
+EXTENSIONS = {'.md', '.html', '.css', '.py'}
+# Output dir for the separate "pegasus-sale" folder which presumably is being served
+TARGET_DIR = Path("../pegasus-sale")
 
-def run_build():
-    print(f"[{time.strftime('%H:%M:%S')}] Change detected. Building...")
-    try:
-        # Run build script
-        subprocess.run(['python3', str(BUILD_SCRIPT)], check=True, cwd=str(BASE))
-        
-        # Sync to pegasus-sale for local preview
-        if PEGASUS_SALE.exists():
-            dest = PEGASUS_SALE / 'index.html'
-            src = BASE / 'pegasus' / 'index.html'
-            if src.exists():
-                subprocess.run(['cp', str(src), str(dest)], check=True)
-                print(f"Synced to {dest}")
-        
-        # Git auto-deploy (optional but helps "deploy" part)
-        subprocess.run(['git', 'add', '.'], cwd=str(BASE))
-        subprocess.run(['git', 'commit', '-m', 'Auto-sync from content.md'], cwd=str(BASE))
-        subprocess.run(['git', 'push'], cwd=str(BASE))
-        print("Pushed to GitHub.")
-        
-    except Exception as e:
-        print(f"Error during build/deploy: {e}")
+def get_mtimes():
+    mtimes = {}
+    for d in WATCH_DIRS:
+        for p in d.rglob("*"):
+            if p.suffix in EXTENSIONS:
+                try:
+                    mtimes[str(p)] = p.stat().st_mtime
+                except FileNotFoundError:
+                    pass
+    return mtimes
 
-def watch():
-    print(f"Watching {CONTENT} and {TEMPLATE}...")
-    last_mtime = {
-        CONTENT: CONTENT.stat().st_mtime if CONTENT.exists() else 0,
-        TEMPLATE: TEMPLATE.stat().st_mtime if TEMPLATE.exists() else 0
-    }
+def sync_artifacts():
+    """Copies built artifacts from internal 'pegasus' dir to external 'pegasus-sale'"""
+    source_dir = Path("pegasus")
+    if not source_dir.exists():
+        return
+
+    if not TARGET_DIR.exists():
+        TARGET_DIR.mkdir(parents=True)
+        
+    # Sync files
+    for file_path in source_dir.glob("*"):
+        if file_path.is_file():
+            shutil.copy2(file_path, TARGET_DIR / file_path.name)
+            
+    print(f"   -> Synced to {TARGET_DIR}")
+
+def main():
+    print("--- Pegasus Watcher & Auto-Builder Started ---")
+    print(f"Monitoring in real-time: {', '.join([str(d) for d in WATCH_DIRS])}")
     
-    while True:
-        time.sleep(1)
-        for path in last_mtime:
-            if path.exists():
-                current_mtime = path.stat().st_mtime
-                if current_mtime > last_mtime[path]:
-                    last_mtime[path] = current_mtime
-                    run_build()
+    # Initial build
+    try:
+        build.build()
+        sync_artifacts()
+    except Exception as e:
+        print(f"Initial build failed: {e}")
 
-if __name__ == '__main__':
-    run_build() # Initial build
-    watch()
+    last_mtimes = get_mtimes()
+
+    try:
+        while True:
+            time.sleep(0.5) # Fast check
+            current_mtimes = get_mtimes()
+            
+            changed = False
+            for p, mtime in current_mtimes.items():
+                if p not in last_mtimes or last_mtimes[p] != mtime:
+                    print(f"\n[Detected change] {p}")
+                    changed = True
+                    break
+            
+            if changed:
+                try:
+                    # Re-run build
+                    build.build()
+                    # Sync to serving dir
+                    sync_artifacts()
+                    print("[Done] Updated.")
+                except Exception as e:
+                    print(f"[Error] Build cycle failed: {e}")
+                
+                last_mtimes = current_mtimes
+                
+    except KeyboardInterrupt:
+        print("\nWatcher stopped.")
+
+if __name__ == "__main__":
+    main()

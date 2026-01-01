@@ -878,3 +878,11 @@ To https://github.com/stasazaryarozet/stasazaryarozet.ru.git
    35f0341..19c99c7  main -> main
 Injecting styles from /Users/azaryarozet/Library/Mobile Documents/com~apple~CloudDocs/○/stasazaryarozet/src/style.css...
 Built Masterpiece: /Users/azaryarozet/Library/Mobile Documents/com~apple~CloudDocs/○/stasazaryarozet/pegasus/index.html
+[main 64400a8] Auto-sync from content.md
+ 5 files changed, 150 insertions(+), 37 deletions(-)
+To https://github.com/stasazaryarozet/stasazaryarozet.ru.git
+   19c99c7..64400a8  main -> main
+Reading content from: /Users/azaryarozet/Library/Mobile Documents/com~apple~CloudDocs/○/stasazaryarozet/content.md
+Reading template from: /Users/azaryarozet/Library/Mobile Documents/com~apple~CloudDocs/○/stasazaryarozet/src/template.html
+Built HTML: /Users/azaryarozet/Library/Mobile Documents/com~apple~CloudDocs/○/stasazaryarozet/pegasus/index.html
+Copied CSS to: /Users/azaryarozet/Library/Mobile Documents/com~apple~CloudDocs/○/stasazaryarozet/pegasus/style.css

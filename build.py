@@ -8,8 +8,10 @@ from pathlib import Path
 BASE = Path(__file__).parent
 CONTENT = BASE / 'content.md'
 TEMPLATE = BASE / 'src' / 'template.html'
-STYLES = BASE / 'src' / 'style.css'
-OUTPUT = BASE / 'pegasus' / 'index.html'
+STYLES_SRC = BASE / 'src' / 'style.css'
+OUTPUT_DIR = BASE / 'pegasus'
+OUTPUT_HTML = OUTPUT_DIR / 'index.html'
+OUTPUT_CSS = OUTPUT_DIR / 'style.css'
 
 def parse_content(md_path: Path) -> dict:
     """Parse key-value markdown into dict"""
@@ -70,26 +72,32 @@ def build():
         return
     
     # 1. Parse Content
+    print(f"Reading content from: {CONTENT}")
     data = parse_content(CONTENT)
     
     # 2. Load Template
+    print(f"Reading template from: {TEMPLATE}")
     template = TEMPLATE.read_text(encoding='utf-8')
     
-    # 3. Inject Styles (Architectural Assembly)
-    if STYLES.exists():
-        print(f"Injecting styles from {STYLES}...")
-        styles_content = STYLES.read_text(encoding='utf-8')
-        template = template.replace('/* STYLES_INJECTED_HERE */', styles_content)
-    else:
-        print(f"WARNING: Styles not found at {STYLES}")
-
-    # 4. Inject Data
+    
+    # 3. Inject Data
     for key, value in data.items():
         placeholder = f'{{{{ {key} }}}}'
         template = template.replace(placeholder, value)
     
-    OUTPUT.write_text(template, encoding='utf-8')
-    print(f"Built Masterpiece: {OUTPUT}")
+    # 4. Write HTML and Copy CSS
+    if not OUTPUT_DIR.exists():
+        OUTPUT_DIR.mkdir(parents=True)
+
+    OUTPUT_HTML.write_text(template, encoding='utf-8')
+    print(f"Built HTML: {OUTPUT_HTML}")
+
+    if STYLES_SRC.exists():
+        css_content = STYLES_SRC.read_text(encoding='utf-8')
+        OUTPUT_CSS.write_text(css_content, encoding='utf-8')
+        print(f"Copied CSS to: {OUTPUT_CSS}")
+    else:
+        print(f"WARNING: Styles source not found at {STYLES_SRC}")
 
 if __name__ == '__main__':
     build()
