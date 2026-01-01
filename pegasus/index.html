@@ -528,41 +528,43 @@
 
         .price-display {
             position: absolute;
-            bottom: 25px;
-            /* Higher up, overlapping frame and mat */
+            bottom: 5px;
+            /* Centered on the 40px bottom frame rail */
             left: 50%;
             transform: translateX(-50%);
             z-index: 20;
 
-            font-size: 3.5rem;
+            font-size: 3rem;
+            /* Slightly reduced to breathe */
             font-weight: 700;
-            color: #f2f0eb;
+            color: rgba(255, 255, 255, 0.9);
+            /* Slightly off-white for realism */
 
-            /* Photo-realistic Expensive Cardboard */
+            /* Material: Thick Cardboard */
             background-color: #554957;
+            /* Mat Color */
             background-image:
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
 
-            padding: 4px 30px;
-            border-radius: 2px;
+            padding: 2px 20px;
+            border-radius: 1px;
+            /* Sharp paper corners */
             white-space: nowrap;
 
-            /* Physical Thickness & Shadow */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 2px solid #2a222b;
-            /* Physical edge darkening */
+            /* Realistic Cardboard Edges */
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 1px solid rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+            /* Physical thickness */
 
+            /* Natural Drop Shadow on Wood */
             box-shadow:
-                0 2px 0 #3a323b,
-                /* Thickness layer 1 */
-                0 4px 0 #3a323b,
-                /* Thickness layer 2 */
-                0 15px 30px rgba(0, 0, 0, 0.6),
-                /* Deep Drop shadow */
-                inset 0 0 30px rgba(0, 0, 0, 0.3);
-            /* Inner thick cardboard vignette */
+                0 2px 5px rgba(0, 0, 0, 0.4),
+                inset 0 0 10px rgba(0, 0, 0, 0.1);
 
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+            /* Letterpress ink feel */
         }
 
         .price-note {
