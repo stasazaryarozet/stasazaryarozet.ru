@@ -15,7 +15,8 @@ olgarozet.ru
 <span class="currency-symbol">€</span> 10 000
 
 ## price_note
-Ольге не здоровится.
+Ольге
+не здоровится.
 
 Деньги на Жизнь —
 отдохнуть и порисовать,
