@@ -35,7 +35,10 @@ def parse_content(md_path: Path) -> dict:
 
     def process_val(lines):
         val = '\n'.join(lines).strip('\n') # Strip only trailing/leading newlines, not spaces
+        # val = '\n'.join(lines).strip('\n') # Strip only trailing/leading newlines, not spaces
         print(f"Processing chunk: {val[:30]!r}...")
+        if 'нужно' in val:
+            print(f"FULL CHUNK: {val!r}")
         # 1. Handle Markdown Links [text](url) - using class for hover state
         val = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" class="red-link">\1</a>', val)
         # 2. Handle Markdown Bold **text**
@@ -57,7 +60,11 @@ def parse_content(md_path: Path) -> dict:
             val = re.sub(r'(?<=[\s^])([а-яА-Яa-zA-Z]{1,5}) +', lambda m: m.group(1) + '\u00A0', val)
 
         # b. NBSP before dash (—) to prevent it from starting a new line
+        # b. NBSP before dash (—) to prevent it from starting a new line
         val = re.sub(r' +—', '\u00A0—', val)
+
+        if "ОЛЬГИ" in val:
+            print(f"DEBUG FINAL HTML: {val}")
 
         if "уставшая" in val:
             print(f"DEBUG process_val RESULT: {val!r}")

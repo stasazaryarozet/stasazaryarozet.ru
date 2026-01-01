@@ -234,7 +234,6 @@ body::after {
     z-index: 100;
     pointer-events: none;
 
-    /* Transparent body (hollow), visible outline only */
     /* Solid White with Outline */
     background: none;
     -webkit-text-fill-color: initial;
@@ -284,48 +283,87 @@ body::after {
 
 /* Original Pargue (Framed Mode) */
 .nameplate {
-    /* Flexbox architecture for robust centering */
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
     box-sizing: border-box;
-    /* Critical for padding containment */
     margin: 0;
-    /* Light Bronze Gradient */
-    background: linear-gradient(135deg, #e6d3a3 0%, #f2e6c2 20%, #d9c088 40%, #f9f1d8 50%, #d9c088 60%, #f2e6c2 80%, #e6d3a3 100%);
-    border: 1px solid #c4a16b;
-    padding: 24px var(--sp-m);
-    /* Reduced horizontal padding to prevent text overflow */
-    font-size: 1.4rem;
-    font-weight: 700;
-    line-height: 1.6;
-    letter-spacing: 0.15em;
-    color: #4a3c28;
-    /* Deep Bronze/Brown */
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6), 0 -1px 0 rgba(0, 0, 0, 0.1);
+
+    /* Brushed Metal - matching frame burlywood tones */
+    background: linear-gradient(135deg,
+            #c9a87c 0%,
+            /* Darker tan */
+            #deb887 25%,
+            /* Burlywood (frame color) */
+            #c4a070 50%,
+            /* Mid tan */
+            #deb887 75%,
+            /* Burlywood */
+            #c9a87c 100%);
+    /* Darker tan */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 28px var(--sp-m);
     border-radius: 2px 2px 0 0;
+
+    /* Matching Site Shadows */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), inset 1px 1px 2px rgba(255, 255, 255, 0.35);
 }
 
-.nameplate a {
-    color: #2c241b;
-    /* Darker ink for the name */
+/* Simulated Screws */
+.nameplate::before,
+.nameplate::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle at 30% 30%, #e9d5a3, #8a7346);
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.nameplate::before {
+    left: 15px;
+}
+
+.nameplate::after {
+    right: 15px;
+}
+
+.nameplate .author-link {
+    color: #4a3c28;
     text-decoration: none;
-    font-weight: 900;
-    font-size: 1.5rem;
-    /* Restored from user's test value */
-    letter-spacing: 0.05em;
-    white-space: nowrap;
+    font-weight: 800;
+    font-size: 1.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    /* Letterpress / Engraving Effect */
+    text-shadow:
+        1px 1px 1px rgba(255, 255, 255, 0.4),
+        -0.5px -0.5px 1px rgba(0, 0, 0, 0.4);
+
+    line-height: 1.2;
 }
 
-.year-label {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-top: 0.2rem;
-    color: var(--color-pegasus-blue);
-    letter-spacing: 0.15em;
+.nameplate .year-label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 6px;
+    color: #3d3122;
+    /* High-contrast dark bronze */
+    letter-spacing: 0.25em;
+
+    /* Subtle Engraving */
+    text-shadow: 0.5px 0.5px 0px rgba(255, 255, 255, 0.3);
 }
+
+
 
 /* Pale Metal Plaque (Manifesto Mode) */
 .nameplate-pale {
@@ -379,8 +417,17 @@ body::after {
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    /* Complex Gradient "Pegasus Blue" */
-    /* "Deep Pegasus" Multi-Point Gradient - richer, more vibrant blues */
+
+    /* Physical "Heavy Cardstock" depth */
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.45),
+        /* Main lift */
+        inset 0 0 50px rgba(0, 0, 0, 0.25),
+        /* Ambient depth */
+        inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    /* Top cut-edge highlight */
+
+    /* Restored "Deep Pegasus" Multi-Point Gradient */
     background: linear-gradient(115deg,
             #f4f9ff 0%,
             /* Icy White */
@@ -406,21 +453,25 @@ body::after {
             /* Abyss */
         );
     background-image:
-        var(--tex-noise-fine),
-        repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 3px),
-        linear-gradient(115deg, #f4f9ff 0%, #dcecf9 10%, #bdd4e7 20%, #9ab7d3 30%, #7a9ac0 40%, #5d80ab 50%, #456695 60%, #304d7f 70%, #1f3668 80%, #12224d 90%, #0a1135 100%);
-    background-blend-mode: overlay, multiply, normal;
+        var(--tex-noise-coarse),
+        /* Base grain */
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15), transparent),
+        /* Light wash center */
+        repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255, 255, 255, 0.04) 1px, rgba(255, 255, 255, 0.04) 2px),
+        /* Fine horizontal fibers */
+        repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(0, 0, 0, 0.04) 1px, rgba(0, 0, 0, 0.04) 2px);
+    /* Fine vertical fibers */
+    background-blend-mode: overlay, screen, overlay, overlay;
+    background-size: 200px 200px, 100% 100%, 100% 3px, 3px 100%;
+
     color: #ffffff;
     text-decoration: none;
-    /* For <a> tag */
     margin-top: var(--sp-m);
     margin-left: -3.5rem;
     margin-right: -10rem;
-    border-bottom: 3px solid #e0e0e0;
+    border-bottom: 5px solid rgba(0, 0, 0, 0.3);
+    /* Physical cut edge thickness */
     z-index: 999;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
-    overflow: hidden;
-
     overflow: hidden;
 }
 
@@ -428,14 +479,20 @@ body::after {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
-    padding: 30px 0 25px 0;
+    padding: 40px 70px 35px 0;
+    /* significantly more vertical space */
 }
 
 .buy-tab {
-    width: 65px;
+    width: 70px;
+    /* Reverted to good horizontal size */
+    min-width: 70px;
     background-color: var(--color-accent-red);
+    background-image: var(--tex-noise-coarse);
+    /* Inherit grain */
+    background-blend-mode: multiply;
     color: #ffffff;
     text-decoration: none;
     display: flex;
@@ -443,6 +500,8 @@ body::after {
     justify-content: center;
     transition: background-color 0.3s ease;
     cursor: pointer;
+    box-shadow: inset 5px 0 15px rgba(0, 0, 0, 0.2);
+    /* Depth from main body */
 }
 
 .price-display:hover .buy-tab {
@@ -455,7 +514,12 @@ body::after {
     font-weight: 800;
     font-size: 1.25rem;
     letter-spacing: 0.15em;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    /* Debossed Effect on Red */
+    text-shadow:
+        -1px -1px 1.5px rgba(0, 0, 0, 0.6),
+        /* Inner shadow */
+        1px 1px 0.5px rgba(255, 255, 255, 0.2);
+    /* Surface catch */
 }
 
 .price-value {
@@ -463,9 +527,28 @@ body::after {
     font-weight: 800;
     line-height: 1;
     letter-spacing: -0.02em;
-    text-shadow: var(--shadow-letterpress-dark);
-    margin-left: 65px;
-    /* Visual centering offset */
+
+    /* Dark Pegasus Blue Gradient Text */
+    background: linear-gradient(135deg,
+            #1f3668 0%,
+            /* Midnight */
+            #12224d 25%,
+            /* Deep Navy */
+            #0a1135 50%,
+            /* Abyss */
+            #12224d 75%,
+            /* Deep Navy */
+            #1f3668 100%
+            /* Midnight */
+        );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Deep Letterpress / Debossed Effect */
+    filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 0.3)) drop-shadow(-1px -1px 1px rgba(0, 0, 0, 0.6));
+
+    margin: 0;
 }
 
 .beneficiary-note-on-card {
