@@ -77,6 +77,15 @@ body::after {
     z-index: 1000;
 }
 
+/* Emoji styling - edit opacity here */
+.emoji {
+    display: inline-block !important;
+    opacity: 0.1 !important;
+    -webkit-text-stroke: 0px transparent !important;
+    transform: translateZ(0);
+    filter: none !important;
+}
+
 /* --- 2. LAYOUT LAYERS --- */
 
 .container {
@@ -227,6 +236,9 @@ body::after {
     transform: rotate(-3deg);
     margin-bottom: var(--sp-l);
     text-wrap: balance;
+    word-break: keep-all;
+    /* Prevent breaking within words with emoji */
+    overflow-wrap: normal;
 
     /* Expansion: Break out of the info-panel column */
     position: relative;

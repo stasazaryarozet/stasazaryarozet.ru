@@ -4,6 +4,7 @@ Build pegasus/index.html from content.md and template
 """
 import re
 from pathlib import Path
+import settings
 
 BASE = Path(__file__).parent
 CONTENT = BASE / 'content.md'
@@ -12,6 +13,20 @@ STYLES_SRC = BASE / 'src' / 'style.css'
 OUTPUT_DIR = BASE / 'pegasus'
 OUTPUT_HTML = OUTPUT_DIR / 'index.html'
 OUTPUT_CSS = OUTPUT_DIR / 'style.css'
+
+# Emoji detection regex
+EMOJI_PATTERN = re.compile(
+    "["
+    "\U0001F600-\U0001F64F"  # emoticons
+    "\U0001F300-\U0001F5FF"  # symbols & pictographs
+    "\U0001F680-\U0001F6FF"  # transport & map
+    "\U0001F1E0-\U0001F1FF"  # flags
+    "\U00002702-\U000027B0"  # dingbats
+    "\U0001F900-\U0001F9FF"  # supplemental symbols
+    "\U0001FA00-\U0001FA6F"  # chess symbols
+    "\U0001FA70-\U0001FAFF"  # symbols extended
+    "]+", flags=re.UNICODE
+)
 
 def parse_content(md_path: Path) -> dict:
     """Parse key-value markdown into dict"""
@@ -35,7 +50,6 @@ def parse_content(md_path: Path) -> dict:
 
     def process_val(lines):
         val = '\n'.join(lines).strip('\n') # Strip only trailing/leading newlines, not spaces
-        # val = '\n'.join(lines).strip('\n') # Strip only trailing/leading newlines, not spaces
         print(f"Processing chunk: {val[:30]!r}...")
         if 'нужно' in val:
             print(f"FULL CHUNK: {val!r}")
@@ -53,13 +67,17 @@ def parse_content(md_path: Path) -> dict:
             else:
                 val = val.replace('---', get_rose_html(clean=False), 1)
 
-        # 5. Russian Typography: NBSP for better flow
+        # 5. Wrap emoji in span with class for CSS styling
+        val = EMOJI_PATTERN.sub(
+            lambda m: f'<span class="emoji">{m.group(0)}</span>',
+            val
+        )
+
+        # 6. Russian Typography: NBSP for better flow
         # a. NBSP after prepositions/short words (1-5 chars) using Unicode NBSP
-        # Using lookbehind (?<=\s|^) to match words preceded by space or start of line
         for _ in range(2):
             val = re.sub(r'(?<=[\s^])([а-яА-Яa-zA-Z]{1,5}) +', lambda m: m.group(1) + '\u00A0', val)
 
-        # b. NBSP before dash (—) to prevent it from starting a new line
         # b. NBSP before dash (—) to prevent it from starting a new line
         val = re.sub(r' +—', '\u00A0—', val)
 
@@ -69,7 +87,7 @@ def parse_content(md_path: Path) -> dict:
         if "уставшая" in val:
             print(f"DEBUG process_val RESULT: {val!r}")
 
-        # 6. Replace ALL newlines with <br> for HTML rendering
+        # 7. Replace ALL newlines with <br> for HTML rendering
         return val.replace('\n', '<br>')
 
     for line in content.split('\n'):
