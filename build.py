@@ -50,10 +50,10 @@ def parse_content(md_path: Path) -> dict:
                 val = val.replace('---', get_rose_html(clean=False), 1)
 
         # 5. Russian Typography: NBSP for better flow
-        # a. NBSP after prepositions/short words (1-2 chars)
+        # a. NBSP after prepositions/short words (1-3 chars, e.g. "чтобы", "или", "для")
         # We run it twice to catch adjacent short words
         for _ in range(2):
-            val = re.sub(r'\b([а-яА-Яa-zA-Z]{1,2}) +', r'\1&nbsp;', val)
+            val = re.sub(r'\b([а-яА-Яa-zA-Z]{1,3}) +', r'\1&nbsp;', val)
 
         # b. NBSP before dash (—) to prevent it from starting a new line
         val = re.sub(r' +—', r'&nbsp;—', val)

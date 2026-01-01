@@ -473,8 +473,9 @@ body::after {
     background-image: var(--tex-noise-fine), linear-gradient(135deg, rgba(235, 225, 210, 0.4), transparent);
     padding: var(--sp-l);
     color: #332f2b;
-    font-size: 1.35rem;
-    line-height: 1.7;
+    font-size: 1.15rem;
+    /* Smaller text as requested */
+    line-height: 1.6;
 
     /* Letterpress/Embossed Effect */
     box-shadow: var(--shadow-lift), var(--shadow-inset-soft), 0 1px 1px rgba(255, 255, 255, 0.4);
