@@ -1,0 +1,233 @@
+:root {
+            --bg-page: #fcfcfc;
+            --bg-paper: #ffffff;
+            --text-main: #000000;
+            --text-dim: #555555;
+            --text-tag: #9da8b0;
+            --accent: #b38b4d;
+            --divider: #ecece1;
+            --line-num: #d0d0d0;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 0;
+            background-color: #f2f2f2;
+            font-family: 'Lora', serif;
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 30mm 20mm;
+            background: var(--bg-paper);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                border: none;
+            }
+        }
+
+        header {
+            margin-bottom: 60px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid var(--text-main);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .manuscript {
+            margin-top: 20px;
+        }
+
+        .strophe {
+            margin-bottom: 45px;
+        }
+
+        .line {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .line-num {
+            position: absolute;
+            left: -35px;
+            top: 4px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.75rem;
+            color: var(--line-num);
+            font-weight: 600;
+        }
+
+        /* The Core Interlinear Row */
+        .interlinear-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px 32px;
+            /* Horizontal / Vertical gap */
+            align-items: flex-start;
+        }
+
+        /* Unified Container for Vertical Alignment */
+        .word-cell {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 1px;
+            min-width: 45px;
+        }
+
+        .oe-orig {
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            white-space: nowrap;
+            margin-bottom: 1px;
+        }
+
+        .pron, .ru-trans, .cognate, .tag {
+            display: block;
+            min-height: 1.1em;
+        }
+
+        .pron {
+            font-size: 0.68rem;
+            color: #5c728a;
+            /* Muted blue-grey */
+            font-weight: 500;
+            font-style: italic;
+            margin-bottom: 1px;
+        }
+
+        .m-sep {
+            color: #d1d1d1;
+            font-weight: 300;
+            padding: 0 1px;
+            font-family: sans-serif;
+            font-size: 1.1rem;
+            vertical-align: middle;
+            user-select: none;
+        }
+
+        .ru-trans {
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            font-style: italic;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .cognate {
+            font-size: 0.72rem;
+            color: #9b6c4e;
+            /* Warm earth tone */
+            font-weight: 500;
+            line-height: 1.1;
+            margin: 1px 0;
+        }
+
+        .cognate b {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.65rem;
+            opacity: 0.8;
+        }
+
+        .tag {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.6rem;
+            color: var(--text-tag);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            font-weight: 600;
+        }
+
+        /* Dropcap specific */
+        .drop-cell .oe-orig::first-letter {
+            font-size: 3.5rem;
+            float: left;
+            line-height: 0.8;
+            padding-right: 8px;
+            margin-top: 5px;
+            color: var(--accent);
+            font-family: 'Lora', serif;
+        }
+
+        /* Notes & Footer */
+        .notes-grid {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 30px 0;
+            border-top: 1px solid var(--divider);
+        }
+
+        .section-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .note-body {
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .translation-box {
+            background: #fafaf5;
+            padding: 25px;
+            border-radius: 2px;
+            font-style: italic;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
