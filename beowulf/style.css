@@ -231,3 +231,16 @@
             font-size: 0.95rem;
             line-height: 1.6;
         }
+
+        .version-info {
+            margin-top: 50px;
+            padding-top: 15px;
+            border-top: 1px solid var(--divider);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.65rem;
+            color: var(--text-tag);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-align: right;
+            opacity: 0.7;
+        }
