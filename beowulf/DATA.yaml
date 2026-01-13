@@ -1,0 +1,19 @@
+project:
+  name: Beowulf
+  type: creative
+  status: active
+
+# >>> THINGS SYNC >>>
+things_sync:
+  uuid: 7QG7u3f92tdRdELyT2zBvG
+  updated: 0
+  tasks:
+  - title: Исправить последовательность строк
+    status: open
+    uuid: 6B57u7J2yWtWqoUXW1JpHq
+  - title: Сгенерировать чистую версию (строки 80-188)
+    status: open
+    notes: |
+      Попытки автогенерации неуспешны.
+      Требуется ручная экспертная работа или внешний источник данных.
+# <<< THINGS SYNC <<<
