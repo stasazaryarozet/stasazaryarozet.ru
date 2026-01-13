@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пегас — Ольга Розет</title>
+    <meta name="description"
+        content="«Последний шанс» — это не метафора мифа. Это повторяющийся сценарий, за который каждый раз платится предельная цена.">
+
+    <!-- Fonts: Standard of Excellence -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* Palette: High-End Gallery with Physical Accuracy */
+            --bg-neutral: #554957;
+            /* Synchronized with mat color */
+            --frame-gold: #b39b7a;
+            --outer-mat-color: #f2ebd5;
+            --inner-mat-color: #2c2826;
+            --text-ink: #f2f0eb;
+            --text-muted: #aca4ac;
+            --accent-gold: #c4a16b;
+            --accent-red: #ff8a80;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--bg-neutral);
+            color: var(--text-ink);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 1000;
+        }
+
+        body.is-paper-mode {
+            background-color: #000;
+            background-image: url('artwork_canvas_clean.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        body.is-paper-mode::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            /* Darken for focus on the main image */
+            backdrop-filter: blur(20px);
+            z-index: -1;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 480px;
+            min-height: 100vh;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.is-paper-mode .container {
+            grid-template-columns: 1fr;
+        }
+
+        /* ARTWORK SECTION */
+        .artwork-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body.is-paper-mode .artwork-section {
+            padding: 0;
+            cursor: zoom-out;
+        }
+
+        body.is-paper-mode .info-panel {
+            display: none;
+        }
+
+        /* THE TRIPLE-LAYERED FRAME ENGINE */
+        .frame-system {
+            position: relative;
+            display: inline-block;
+            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+            line-height: 0;
+            cursor: zoom-in;
+        }
+
+        /* 1. OUTER WOODEN FRAME - REALISTIC MITER JOINTS */
+        .outer-frame {
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            /* This is now just a container */
+            padding: 40px;
+            background: #deb887;
+            /* Fallbox color underneath */
+        }
+
+        /* Frame Side Base - CSS Procedural Wood */
+        .frame-side {
+            position: absolute;
+            background-color: #dcb382;
+            z-index: 1;
+        }
+
+        /* Wood Grain Pattern Helper */
+        /* Using repeating gradients to simulate grain */
+
+        /* Top Side */
+        .frame-side.top {
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 40px 100%);
+            background-image:
+                repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(160, 82, 45, 0.05) 3px, transparent 6px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+        }
+
+        /* Bottom Side */
+        .frame-side.bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            clip-path: polygon(40px 0, calc(100% - 40px) 0, 100% 100%, 0 100%);
+            background-image:
+                repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(160, 82, 45, 0.05) 3px, transparent 6px),
+                linear-gradient(to top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.2) 100%);
+        }
+
+        /* Left Side */
+        .frame-side.left {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            clip-path: polygon(0 0, 100% 40px, 100% calc(100% - 40px), 0 100%);
+            /* 90deg grain */
+            background-image:
+                repeating-linear-gradient(90deg, transparent 0px, transparent 2px, rgba(160, 82, 45, 0.05) 3px, transparent 6px),
+                linear-gradient(to right, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+        }
+
+        /* Right Side */
+        .frame-side.right {
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 calc(100% - 40px));
+            /* 90deg grain */
+            background-image:
+                repeating-linear-gradient(90deg, transparent 0px, transparent 2px, rgba(160, 82, 45, 0.05) 3px, transparent 6px),
+                linear-gradient(to left, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.2) 100%);
+        }
+
+        /* Proper Frame Overlay: Volume Only */
+        .outer-frame::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+
+            /* Inner bevel shadow/highlight for depth */
+            box-shadow:
+                inset 1px 1px 0 rgba(255, 255, 255, 0.3),
+                inset -2px -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        /* Museum nameplate */
+        /* Museum nameplate */
+        .nameplate {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #c89a5f;
+            color: #15448c;
+            /* Vivid Pegasus Blue */
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            padding: 4px 16px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .nameplate a,
+        .nameplate a:visited,
+        .nameplate a:hover,
+        .nameplate a:active {
+            color: #15448c !important;
+            /* Vivid Pegasus Blue - ALL STATES */
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .frame-system.is-paper .nameplate {
+            display: none;
+        }
+
+        /* Light slip between frame and mat */
+        /* 2. INNER SLIP (NARROW MAT) */
+        .slip {
+            padding: 8px;
+            /* Narrow width */
+            background-color: #e6e0d3;
+            /* Darker, warmer paper color */
+
+            /* Paper Texture Simulation */
+            background-image:
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.05) 100%),
+                repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 3px);
+
+            box-shadow:
+                inset 1px 1px 2px rgba(255, 255, 255, 0.5),
+                inset -1px -1px 2px rgba(0, 0, 0, 0.15),
+                0 0 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .frame-system.is-paper .slip {
+            padding: 0;
+            background: transparent;
+        }
+
+        /* 2. THE WIDE DARK MAT */
+        .outer-paper-mat {
+            padding: 60px;
+            background: #554957;
+            position: relative;
+            z-index: 2;
+        }
+
+        .inner-dark-mat {
+            position: relative;
+            z-index: 3;
+        }
+
+
+
+        /* The Image */
+        .frame-system img {
+            max-height: 55vh;
+            width: auto;
+            max-width: 100%;
+            display: block;
+            box-shadow: none;
+            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        /* PAPER VIEW STATE (is-paper) */
+        .frame-system.is-paper .outer-frame {
+            padding: 0;
+            background: none;
+            box-shadow: none;
+        }
+
+        .frame-system.is-paper .outer-paper-mat,
+        .frame-system.is-paper .inner-dark-mat {
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
+            border: none;
+        }
+
+        .frame-system.is-paper .outer-frame::after,
+        .frame-system.is-paper .outer-frame::before {
+            display: none;
+        }
+
+        .frame-system.is-paper img {
+            max-height: 98vh;
+            max-width: 98vw;
+            cursor: zoom-out;
+        }
+
+        body.is-paper-mode .view-controls {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .view-controls {
+            margin-top: 3.5rem;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .view-controls:hover {
+            opacity: 1;
+        }
+
+        .view-btn {
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-weight: 500;
+            font-size: inherit;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            padding: 0.5rem 1.5rem;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .view-btn.active {
+            color: var(--text-ink);
+            border-bottom-color: var(--accent-gold);
+            text-shadow: none;
+        }
+
+        .info-panel {
+            background: var(--bg-paper);
+            padding: 4rem 3.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .title {
+            font-size: 4.8rem;
+            font-weight: 300;
+            line-height: 1.05;
+            margin-bottom: 2rem;
+            letter-spacing: -0.015em;
+            font-feature-settings: "kern" 1, "onum" 1;
+            text-wrap: balance;
+            color: var(--text-ink);
+        }
+
+        .meta {
+            display: inline-block;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            line-height: 1.5;
+            color: #1a1510;
+            background: #c9b896;
+            padding: 16px 32px;
+            margin-bottom: 4rem;
+        }
+
+        .author-link {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .author-link:hover {
+            text-decoration: underline;
+        }
+
+        .module {
+            margin-bottom: 3rem;
+        }
+
+        .fact {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-display {
+            font-size: 4.5rem;
+            font-weight: 300;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-note {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #3a3530;
+            font-style: normal;
+            line-height: 1.6;
+            background: #f5f0e6;
+            padding: 20px 28px;
+            margin-top: 1.5rem;
+        }
+
+        .context-statement {
+            margin: 4rem 0;
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .context-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-ink);
+            font-style: italic;
+            position: relative;
+        }
+
+        .object-status {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .object-status::before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(196, 161, 107, 0.3);
+        }
+
+        .logistics {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .logistics strong {
+            color: var(--text-ink);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .restriction {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--accent-red);
+        }
+
+        .contact-area {
+            margin-top: auto;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .email-link {
+            font-size: 2.5rem;
+            color: var(--text-ink);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-gold);
+            transition: color 0.3s;
+        }
+
+        .email-link:hover {
+            color: var(--accent-gold);
+        }
+
+        .organizer {
+            margin-top: 1rem;
+            font-size: 1.4rem;
+            color: var(--text-muted);
+        }
+
+        #google_translate_element {
+            filter: invert(1) hue-rotate(180deg);
+        }
+
+        @media (max-width: 1100px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .artwork-section {
+                min-height: 60vh;
+                padding: 1rem;
+            }
+
+            .info-panel {
+                padding: 3rem 2rem;
+                border: none;
+            }
+
+            .title {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <section class="artwork-section">
+            <div class="frame-system">
+                <div class="outer-frame">
+                    <div class="frame-side top"></div>
+                    <div class="frame-side bottom"></div>
+                    <div class="frame-side left"></div>
+                    <div class="frame-side right"></div>
+                    <div class="slip">
+                        <div class="outer-paper-mat">
+                            <div class="inner-dark-mat">
+                                <img id="main-artwork" src="artwork_canvas_clean.jpg"
+                                    alt="Последний шанс Пегаса — Ольга Розет" onclick="switchView('paper')"
+                                    style="cursor: zoom-in; box-shadow: 0 3px 8px rgba(0,0,0,0.25);">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Restoring Museum Nameplate -->
+                    <div class="nameplate" style="white-space: nowrap;">
+                        <span style="color: #15448c; font-weight: 700;">ОЛЬГА РОЗЕТ, 2004.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-controls">
+                <button class="view-btn active" onclick="switchView('framed')">В РАМЕ</button>
+                <span style="opacity:0.3">/</span>
+                <button class="view-btn" onclick="switchView('paper')">БУМАГА</button>
+            </div>
+        </section>
+
+        <section class="info-panel">
+            <h1 class="title">Последний шанс Пегаса</h1>
+            <p class="meta"><a href="https://olgarozet.ru" class="author-link">ОЛЬГА РОЗЕТ</a>,<br>2004.</p>
+
+            <div class="module">
+                <span class="price-display">€10,000</span>
+                <p class="price-note">Сбор на Жизнь и возможность продолжать. Картину получает внесший наибольшую или
+                    всю сумму.
+                </p>
+            </div>
+
+            <div class="module logistics">
+                <p><strong>САМОВЫВОЗ:</strong><br>Москва</p>
+                <p style="margin-top: 0.75rem;"><strong>ДОСТАВКА:</strong><br>СНГ, Китай, ОАЭ, Турция, Сербия<br>и
+                    некоторые другие страны</p>
+            </div>
+
+            <div class="contact-area">
+                <div class="contact-label">Связь:</div>
+                <a href="mailto:azrozet@gmail.com" class="email-link">azrozet@gmail.com</a>
+                <p class="organizer">Азарья Розет</p>
+            </div>
+        </section>
+    </div>
+
+    <div id="google_translate_element" style="position:fixed;bottom:1rem;right:1rem;opacity:0.6;"></div>
+
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ru',
+                includedLanguages: 'en,de,fr,zh-CN,es,ar,he',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: true
+            }, 'google_translate_element');
+        }
+
+        function switchView(mode) {
+            const system = document.querySelector('.frame-system');
+            const btns = document.querySelectorAll('.view-btn');
+            const body = document.body;
+
+            if (mode === 'framed') {
+                system.classList.remove('is-paper');
+                body.classList.remove('is-paper-mode');
+                btns[0].classList.add('active');
+                btns[1].classList.remove('active');
+            } else {
+                system.classList.add('is-paper');
+                body.classList.add('is-paper-mode');
+                btns[0].classList.remove('active');
+                btns[1].classList.add('active');
+            }
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <div
+        style="position:fixed; bottom:10px; left:10px; opacity:0.6; font-family:monospace; font-size:12px; z-index:9999; color:red; background:white; padding:2px;">
+        v.1.2 (Fixed Blue)</div>
+</body>
+
+</html>

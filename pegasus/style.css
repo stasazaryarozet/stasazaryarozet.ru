@@ -80,10 +80,11 @@ body::after {
 /* Emoji styling - edit opacity here */
 .emoji {
     display: inline-block !important;
-    opacity: 0.1 !important;
+    opacity: 0.5 !important;
     -webkit-text-stroke: 0px transparent !important;
     transform: translateZ(0);
     filter: none !important;
+    isolation: isolate;
 }
 
 /* --- 2. LAYOUT LAYERS --- */

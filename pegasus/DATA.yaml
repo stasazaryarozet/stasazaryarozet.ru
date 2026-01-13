@@ -1,0 +1,12 @@
+project:
+  name: Pegasus
+  type: sale
+  status: active
+  url: stasazaryarozet.ru/pegasus
+
+# >>> THINGS SYNC >>>
+things_sync:
+  project: Pegasus Sale
+  tasks:
+  - title: Продать Пегас
+# <<< THINGS SYNC <<<
