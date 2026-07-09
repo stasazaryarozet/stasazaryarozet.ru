@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Математика для детей 8–12 лет: лучшие пособия</title>
-<meta name="description" content="Восемь книг — от самых одарённых к максимально доступным. Только лучшие издания; наличие на московских маркетплейсах проверено.">
+<meta name="description" content="Восемь книг — от самых одарённых к максимально доступным">
 <style>
   /* Исследование → решения (Butterick: 4 столпа; iA: постоянная мера; WCAG 2.2):
      кегль 19–21px fluid · интерлиньяж 1.45 · мера 34em ≈ 66 зн. · серифный текст,
@@ -13,12 +13,29 @@
     --bg: #faf9f7; --ink: #1e1c1a; --muted: #6f6a63;
     --rule: #e4e0da; --chip-bg: #efece7; --chip-ink: #3d3a35; --accent: #8a4b12;
   }
+  /* День-ночь (первый витнесс класса «Спецификация уровня Сайты», admin 2026-07-10):
+     АВТОМАТИКА = prefers-color-scheme; ВЫБОР = data-theme на :root (персистентен,
+     localStorage), селектор-приоритетом ПОБЕЖДАЕТ автоматику. Цвета — только токены;
+     при появлении классовой Спеки у Lumen значения замещаются compiled-токенами. */
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --bg: #121212; --ink: #e8e6e3; --muted: #a09a92;
       --rule: #2a2a2a; --chip-bg: #1f1f1f; --chip-ink: #cfcac3; --accent: #d99a5b;
     }
   }
+  :root[data-theme="dark"] {
+    --bg: #121212; --ink: #e8e6e3; --muted: #a09a92;
+    --rule: #2a2a2a; --chip-bg: #1f1f1f; --chip-ink: #cfcac3; --accent: #d99a5b;
+  }
+  .theme-toggle {
+    position: fixed; top: 0.9rem; right: 0.9rem;
+    min-width: 44px; min-height: 44px;             /* тап-закон */
+    border: 1px solid var(--rule); border-radius: 10px;
+    background: var(--chip-bg); color: var(--chip-ink);
+    font: 500 0.9rem/1 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    cursor: pointer; padding: 0 0.7em;
+  }
+  .theme-toggle:hover, .theme-toggle:focus-visible { border-color: var(--accent); color: var(--accent); }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
@@ -61,30 +78,45 @@
     vertical-align: 0.25em; margin-left: 0.45em;
   }
   .why { margin-top: 0.35rem; }
-  .shops { margin-top: 0.7rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .shops a {
-    font: 500 0.75em/1 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    color: var(--chip-ink); background: var(--chip-bg);
-    text-decoration: none; border-radius: 8px;
-    display: inline-flex; align-items: center;
-    min-height: 44px; padding: 0 1.1em;   /* WCAG/thumb: тап-цель ≥44px — явно, не следствием кегля */
-    border: 1px solid var(--rule);
+  .imprint {
+    margin-top: 0.55rem;
+    font: 400 0.72em/1.45 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--muted); letter-spacing: 0.01em;
   }
-  .shops a:hover, .shops a:focus-visible { border-color: var(--accent); color: var(--accent); }
   .note { margin-top: 2.2rem; padding-top: 1.1rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.88em; }
   footer { margin-top: 2.6rem; color: var(--muted); font-size: 0.78em;
            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
   @media print {
-    .shops a { background: none; border: none; padding: 0; min-height: 0; text-decoration: underline; }
+    .theme-toggle { display: none; }
     body { padding: 0; }
   }
 </style>
 </head>
 <body>
+<button class="theme-toggle" id="tt" aria-label="Тема: авто / светлая / тёмная">авто</button>
+<script>
+(function () {
+  var KEY = "theme", order = ["auto", "light", "dark"],
+      lab = { auto: "авто", light: "день", dark: "ночь" },
+      root = document.documentElement, btn = document.getElementById("tt");
+  function get() { try { return localStorage.getItem(KEY) || "auto"; } catch (e) { return "auto"; } }
+  function apply(v) {
+    if (v === "auto") root.removeAttribute("data-theme");
+    else root.setAttribute("data-theme", v);
+    btn.textContent = lab[v];
+  }
+  btn.addEventListener("click", function () {
+    var v = order[(order.indexOf(get()) + 1) % order.length];
+    try { v === "auto" ? localStorage.removeItem(KEY) : localStorage.setItem(KEY, v); } catch (e) {}
+    apply(v);
+  });
+  apply(get());
+})();
+</script>
 <main>
   <header>
     <h1>Математика для детей 8–12 лет: лучшие пособия</h1>
-    <p class="sub">Восемь книг — от самых одарённых к максимально доступным. Только лучшие издания; наличие на московских маркетплейсах проверено.</p>
+    <p class="sub">Восемь книг — от самых одарённых к максимально доступным</p>
   </header>
 
   <p class="pole">↑ для самых одарённых</p>
@@ -94,83 +126,56 @@
       <div>
         <p class="t"><span class="au">В. Арнольд.</span> «Задачи для детей от 5 до 15 лет»<span class="age">5–15 лет</span></p>
         <p class="why">79 задач на культуру мышления от великого математика. Эталон: простые условия — глубокая математика.</p>
-        <div class="shops">
-          <a href="https://www.labirint.ru/books/656553/">Лабиринт</a>
-          <a href="https://megamarket.ru/catalog/details/arnold-zadachi-dlya-detey-ot-5-do-15-let-100025489462/">Мегамаркет</a>
-          <a href="http://fizmatkniga.org/catalog/section-105/s_products-price/p_products-5/product-1458/">Физматкнига</a>
-        </div>
+        <p class="imprint">М.: МЦНМО · переиздаётся; актуальное изд. 2022 · ISBN&nbsp;978-5-4439-4270-4</p>
       </div>
     </li>
     <li class="bk">
       <div>
         <p class="t"><span class="au">Генкин, Итенберг, Фомин.</span> «Ленинградские математические кружки»<span class="age">10–12 лет</span></p>
         <p class="why">Библия кружковой работы: задачник и метод в одной книге, опыт поколений ленинградской школы.</p>
-        <div class="shops">
-          <a href="https://www.labirint.ru/books/811894/">Лабиринт</a>
-          <a href="https://www.sima-land.ru/7855617/leningradskie-matematicheskie-kruzhki-2-e-izdanie-genkin-s-a-itenberg-i-v-fomin-d-v/">Sima-land</a>
-        </div>
+        <p class="imprint">М.: МЦНМО · 2-е изд., стереотипное (первое — Киров: АСА, 1994)</p>
       </div>
     </li>
     <li class="bk">
       <div>
         <p class="t"><span class="au">Серия МЦНМО.</span> «Школьные математические кружки»<span class="age">8–12 лет</span></p>
         <p class="why">26 тонких книг — по одной теме на книгу («Инварианты», «Графы», «Индукция»…): готовый систематический кружок.</p>
-        <div class="shops">
-          <a href="https://www.ozon.ru/category/shkolnye-matematicheskie-kruzhki/">Ozon</a>
-          <a href="https://www.labirint.ru/series/40886/">Лабиринт</a>
-          <a href="https://biblio.mccme.ru/series/170">МЦНМО</a>
-        </div>
+        <p class="imprint">М.: МЦНМО · серия, 26 выпусков; каждый — одна тема</p>
       </div>
     </li>
     <li class="bk">
       <div>
         <p class="t"><span class="au">А. Спивак.</span> «Тысяча и одна задача по математике»<span class="age">10–12 лет</span></p>
         <p class="why">Мост между школой и кружком: от арифметики до первых олимпиадных идей, задач хватит на годы.</p>
-        <div class="shops">
-          <a href="https://www.ozon.ru/product/tysyacha-i-odna-zadacha-po-matematike-5-7-klassy-zadachnik-spivak-aleksandr-vasilevich-262313391/">Ozon</a>
-          <a href="https://www.labirint.ru/books/231812/">Лабиринт</a>
-          <a href="https://biblio.mccme.ru/node/95503/shop">МЦНМО</a>
-        </div>
+        <p class="imprint">М.: Просвещение · 5–7 классы; переиздаётся (также изд. МЦНМО) · ISBN&nbsp;978-5-09-034433-3</p>
       </div>
     </li>
     <li class="bk">
       <div>
         <p class="t"><span class="au">Е. Козлова.</span> «Сказки и подсказки»<span class="age">8–11 лет</span></p>
         <p class="why">350 настоящих кружковых задач в сказочной оболочке — вход в серьёзную математику через игру.</p>
-        <div class="shops">
-          <a href="https://www.ozon.ru/context/detail/id/162338731/">Ozon</a>
-          <a href="https://www.labirint.ru/books/623091/">Лабиринт</a>
-          <a href="https://mdk-arbat.ru/book/3375340">МДК</a>
-        </div>
+        <p class="imprint">М.: МЦНМО · задачи для математического кружка; регулярно переиздаётся</p>
       </div>
     </li>
     <li class="bk">
       <div>
         <p class="t"><span class="au">Б. Кордемский.</span> «Математическая смекалка»<span class="age">9–12 лет</span></p>
         <p class="why">369 задач; главная русская классика смекалки, переиздаётся 70 лет — работает без взрослого рядом.</p>
-        <div class="shops">
-          <a href="https://www.labirint.ru/books/662070/">Лабиринт</a>
-          <a href="https://ast.ru/book/matematicheskaya-smekalka-luchshie-logicheskie-zadachi-golovolomki-i-uprazhneniya-839377/">АСТ</a>
-        </div>
+        <p class="imprint">М.: АСТ · полное совр. издание («Лучшие логические задачи, головоломки и упражнения») · ISBN&nbsp;978-5-17-111240-0</p>
       </div>
     </li>
     <li class="bk">
       <div>
         <p class="t"><span class="au">Я. Перельман.</span> «Живая математика»<span class="age">9–12 лет</span></p>
         <p class="why">Классика занимательности: математика как приключение, читается как рассказы.</p>
-        <div class="shops">
-          <a href="https://www.ozon.ru/category/perelman-zanimatelnaya-matematika/">Ozon</a>
-        </div>
+        <p class="imprint">многочисленные переиздания (АСТ и др.) · классика 1934 г.; подойдёт любое современное издание</p>
       </div>
     </li>
     <li class="bk">
       <div>
         <p class="t"><span class="au">Г. Остер.</span> «Задачник»<span class="age">8–10 лет</span></p>
         <p class="why">Смех как дверь в задачи: ребёнок решает сам и просит ещё. Самый лёгкий вход.</p>
-        <div class="shops">
-          <a href="https://www.ozon.ru/category/grigoriy-oster-zadachnik-po-matematike/">Ozon</a>
-          <a href="https://www.wildberries.ru/catalog/tags/grigorii-oster-zadacznik-po-matematike">Wildberries</a>
-        </div>
+        <p class="imprint">М.: АСТ · он же «Задачник по математике. Ненаглядное пособие»; переиздаётся</p>
       </div>
     </li>
   </ol>
@@ -179,7 +184,7 @@
 
   <p class="note">Стержень списка — кружковая линия МЦНМО (№№ 1–5): именно она считается лучшей русской традицией. №№ 6–8 — проверенная временем занимательная классика: с неё можно начинать без взрослого рядом.</p>
 
-  <footer>Сумма Системы Дела · наличие проверено 10.07.2026</footer>
+  <footer>Сумма Системы Дела</footer>
 </main>
 </body>
 </html>

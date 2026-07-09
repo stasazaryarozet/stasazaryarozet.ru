@@ -37,16 +37,18 @@ def esc(s: str) -> str:
 
 
 def book_li(b: dict) -> str:
-    shops = "\n".join(
-        f'          <a href="{html.escape(s["url"])}">{esc(s["name"])}</a>'
-        for s in b["shops"])
+    im = b["imprint"]
+    parts = [esc(im["publisher"])]
+    if im.get("note"):
+        parts.append(esc(im["note"]))
+    if im.get("isbn"):
+        parts.append(f'ISBN&nbsp;{esc(im["isbn"])}')
+    imprint = " · ".join(parts)
     return f"""    <li class="bk">
       <div>
         <p class="t"><span class="au">{esc(b["author"])}.</span> «{esc(b["title"])}»<span class="age">{esc(b["age"])}</span></p>
         <p class="why">{esc(b["why"])}</p>
-        <div class="shops">
-{shops}
-        </div>
+        <p class="imprint">{imprint}</p>
       </div>
     </li>"""
 
@@ -59,12 +61,29 @@ CSS = """\
     --bg: #faf9f7; --ink: #1e1c1a; --muted: #6f6a63;
     --rule: #e4e0da; --chip-bg: #efece7; --chip-ink: #3d3a35; --accent: #8a4b12;
   }
+  /* День-ночь (первый витнесс класса «Спецификация уровня Сайты», admin 2026-07-10):
+     АВТОМАТИКА = prefers-color-scheme; ВЫБОР = data-theme на :root (персистентен,
+     localStorage), селектор-приоритетом ПОБЕЖДАЕТ автоматику. Цвета — только токены;
+     при появлении классовой Спеки у Lumen значения замещаются compiled-токенами. */
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --bg: #121212; --ink: #e8e6e3; --muted: #a09a92;
       --rule: #2a2a2a; --chip-bg: #1f1f1f; --chip-ink: #cfcac3; --accent: #d99a5b;
     }
   }
+  :root[data-theme="dark"] {
+    --bg: #121212; --ink: #e8e6e3; --muted: #a09a92;
+    --rule: #2a2a2a; --chip-bg: #1f1f1f; --chip-ink: #cfcac3; --accent: #d99a5b;
+  }
+  .theme-toggle {
+    position: fixed; top: 0.9rem; right: 0.9rem;
+    min-width: 44px; min-height: 44px;             /* тап-закон */
+    border: 1px solid var(--rule); border-radius: 10px;
+    background: var(--chip-bg); color: var(--chip-ink);
+    font: 500 0.9rem/1 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    cursor: pointer; padding: 0 0.7em;
+  }
+  .theme-toggle:hover, .theme-toggle:focus-visible { border-color: var(--accent); color: var(--accent); }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
@@ -107,21 +126,16 @@ CSS = """\
     vertical-align: 0.25em; margin-left: 0.45em;
   }
   .why { margin-top: 0.35rem; }
-  .shops { margin-top: 0.7rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .shops a {
-    font: 500 0.75em/1 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    color: var(--chip-ink); background: var(--chip-bg);
-    text-decoration: none; border-radius: 8px;
-    display: inline-flex; align-items: center;
-    min-height: 44px; padding: 0 1.1em;   /* WCAG/thumb: тап-цель ≥44px — явно, не следствием кегля */
-    border: 1px solid var(--rule);
+  .imprint {
+    margin-top: 0.55rem;
+    font: 400 0.72em/1.45 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--muted); letter-spacing: 0.01em;
   }
-  .shops a:hover, .shops a:focus-visible { border-color: var(--accent); color: var(--accent); }
   .note { margin-top: 2.2rem; padding-top: 1.1rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.88em; }
   footer { margin-top: 2.6rem; color: var(--muted); font-size: 0.78em;
            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
   @media print {
-    .shops a { background: none; border: none; padding: 0; min-height: 0; text-decoration: underline; }
+    .theme-toggle { display: none; }
     body { padding: 0; }
   }"""
 
@@ -137,6 +151,26 @@ page = f"""<!DOCTYPE html>
 </style>
 </head>
 <body>
+<button class="theme-toggle" id="tt" aria-label="Тема: авто / светлая / тёмная">авто</button>
+<script>
+(function () {{
+  var KEY = "theme", order = ["auto", "light", "dark"],
+      lab = {{ auto: "авто", light: "день", dark: "ночь" }},
+      root = document.documentElement, btn = document.getElementById("tt");
+  function get() {{ try {{ return localStorage.getItem(KEY) || "auto"; }} catch (e) {{ return "auto"; }} }}
+  function apply(v) {{
+    if (v === "auto") root.removeAttribute("data-theme");
+    else root.setAttribute("data-theme", v);
+    btn.textContent = lab[v];
+  }}
+  btn.addEventListener("click", function () {{
+    var v = order[(order.indexOf(get()) + 1) % order.length];
+    try {{ v === "auto" ? localStorage.removeItem(KEY) : localStorage.setItem(KEY, v); }} catch (e) {{}}
+    apply(v);
+  }});
+  apply(get());
+}})();
+</script>
 <main>
   <header>
     <h1>{esc(D["title"])}</h1>
@@ -153,7 +187,7 @@ page = f"""<!DOCTYPE html>
 
   <p class="note">{esc(D["note"])}</p>
 
-  <footer>{esc(D["credit"])} · наличие проверено {esc(D["verified"])}</footer>
+  <footer>{esc(D["credit"])}</footer>
 </main>
 </body>
 </html>
