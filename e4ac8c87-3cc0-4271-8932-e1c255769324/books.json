@@ -1,0 +1,152 @@
+{
+  "books": [
+    {
+      "author": "В. Арнольд",
+      "shops": [
+        {
+          "name": "Лабиринт",
+          "url": "https://www.labirint.ru/books/656553/"
+        },
+        {
+          "name": "Мегамаркет",
+          "url": "https://megamarket.ru/catalog/details/arnold-zadachi-dlya-detey-ot-5-do-15-let-100025489462/"
+        },
+        {
+          "name": "Физматкнига",
+          "url": "http://fizmatkniga.org/catalog/section-105/s_products-price/p_products-5/product-1458/"
+        }
+      ],
+      "title": "Задачи для детей от 5 до 15 лет",
+      "age": "5–15 лет",
+      "why": "79 задач на культуру мышления от великого математика. Эталон: простые условия — глубокая математика."
+    },
+    {
+      "author": "Генкин, Итенберг, Фомин",
+      "shops": [
+        {
+          "name": "Лабиринт",
+          "url": "https://www.labirint.ru/books/811894/"
+        },
+        {
+          "name": "Sima-land",
+          "url": "https://www.sima-land.ru/7855617/leningradskie-matematicheskie-kruzhki-2-e-izdanie-genkin-s-a-itenberg-i-v-fomin-d-v/"
+        }
+      ],
+      "title": "Ленинградские математические кружки",
+      "age": "10–12 лет",
+      "why": "Библия кружковой работы: задачник и метод в одной книге, опыт поколений ленинградской школы."
+    },
+    {
+      "author": "Серия МЦНМО",
+      "shops": [
+        {
+          "name": "Ozon",
+          "url": "https://www.ozon.ru/category/shkolnye-matematicheskie-kruzhki/"
+        },
+        {
+          "name": "Лабиринт",
+          "url": "https://www.labirint.ru/series/40886/"
+        },
+        {
+          "name": "МЦНМО",
+          "url": "https://biblio.mccme.ru/series/170"
+        }
+      ],
+      "title": "Школьные математические кружки",
+      "age": "8–12 лет",
+      "why": "26 тонких книг — по одной теме на книгу («Инварианты», «Графы», «Индукция»…): готовый систематический кружок."
+    },
+    {
+      "author": "А. Спивак",
+      "shops": [
+        {
+          "name": "Ozon",
+          "url": "https://www.ozon.ru/product/tysyacha-i-odna-zadacha-po-matematike-5-7-klassy-zadachnik-spivak-aleksandr-vasilevich-262313391/"
+        },
+        {
+          "name": "Лабиринт",
+          "url": "https://www.labirint.ru/books/231812/"
+        },
+        {
+          "name": "МЦНМО",
+          "url": "https://biblio.mccme.ru/node/95503/shop"
+        }
+      ],
+      "title": "Тысяча и одна задача по математике",
+      "age": "10–12 лет",
+      "why": "Мост между школой и кружком: от арифметики до первых олимпиадных идей, задач хватит на годы."
+    },
+    {
+      "author": "Е. Козлова",
+      "shops": [
+        {
+          "name": "Ozon",
+          "url": "https://www.ozon.ru/context/detail/id/162338731/"
+        },
+        {
+          "name": "Лабиринт",
+          "url": "https://www.labirint.ru/books/623091/"
+        },
+        {
+          "name": "МДК",
+          "url": "https://mdk-arbat.ru/book/3375340"
+        }
+      ],
+      "title": "Сказки и подсказки",
+      "age": "8–11 лет",
+      "why": "350 настоящих кружковых задач в сказочной оболочке — вход в серьёзную математику через игру."
+    },
+    {
+      "author": "Б. Кордемский",
+      "shops": [
+        {
+          "name": "Лабиринт",
+          "url": "https://www.labirint.ru/books/662070/"
+        },
+        {
+          "name": "АСТ",
+          "url": "https://ast.ru/book/matematicheskaya-smekalka-luchshie-logicheskie-zadachi-golovolomki-i-uprazhneniya-839377/"
+        }
+      ],
+      "title": "Математическая смекалка",
+      "age": "9–12 лет",
+      "why": "369 задач; главная русская классика смекалки, переиздаётся 70 лет — работает без взрослого рядом."
+    },
+    {
+      "author": "Я. Перельман",
+      "shops": [
+        {
+          "name": "Ozon",
+          "url": "https://www.ozon.ru/category/perelman-zanimatelnaya-matematika/"
+        }
+      ],
+      "title": "Живая математика",
+      "age": "9–12 лет",
+      "why": "Классика занимательности: математика как приключение, читается как рассказы."
+    },
+    {
+      "author": "Г. Остер",
+      "shops": [
+        {
+          "name": "Ozon",
+          "url": "https://www.ozon.ru/category/grigoriy-oster-zadachnik-po-matematike/"
+        },
+        {
+          "name": "Wildberries",
+          "url": "https://www.wildberries.ru/catalog/tags/grigorii-oster-zadacznik-po-matematike"
+        }
+      ],
+      "title": "Задачник",
+      "age": "8–10 лет",
+      "why": "Смех как дверь в задачи: ребёнок решает сам и просит ещё. Самый лёгкий вход."
+    }
+  ],
+  "title": "Математика для детей 8–12 лет: лучшие пособия",
+  "subtitle": "Восемь книг — от самых одарённых к максимально доступным. Только лучшие издания; наличие на московских маркетплейсах проверено.",
+  "pole_top": "↑ для самых одарённых",
+  "pole_bottom": "максимально доступные ↓",
+  "note": "Стержень списка — кружковая линия МЦНМО (№№ 1–5): именно она считается лучшей русской традицией. №№ 6–8 — проверенная временем занимательная классика: с неё можно начинать без взрослого рядом.",
+  "credit": "Сумма Системы Дела",
+  "verified": "10.07.2026",
+  "_readme": "SoT страницы. index.html ДЕРИВИРУЕТСЯ: python3 build.py (чистый stdlib, детерминированно). Новый список = новый json, тот же build.py. Порядок books = ось «одарённые→доступные»."
+}

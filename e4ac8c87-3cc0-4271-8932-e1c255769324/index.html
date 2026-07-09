@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Математика для детей 8–12 лет: лучшие пособия</title>
-<meta name="description" content="Восемь лучших русскоязычных пособий по математике для детей 8–12 лет — от книг для самых одарённых до максимально доступных. Наличие на московских маркетплейсах проверено.">
+<title>Математика для детей 8–12 лет: лучшие пособия</title>
+<meta name="description" content="Восемь книг — от самых одарённых к максимально доступным. Только лучшие издания; наличие на московских маркетплейсах проверено.">
 <style>
   /* Исследование → решения (Butterick: 4 столпа; iA: постоянная мера; WCAG 2.2):
      кегль 19–21px fluid · интерлиньяж 1.45 · мера 34em ≈ 66 зн. · серифный текст,
@@ -48,7 +48,8 @@
   }
   li.bk::before {
     content: counter(bk);
-    font: 300 1.5rem/1 Georgia, serif; color: var(--muted);
+    /* w400: у Georgia нет 300 — синтетика была бы ложью; приглушение цветом */
+    font: 400 1.5rem/1 Georgia, serif; color: var(--muted);
     padding-top: 0.15rem; text-align: right;
   }
   .t { font-weight: 700; }
@@ -62,10 +63,11 @@
   .why { margin-top: 0.35rem; }
   .shops { margin-top: 0.7rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .shops a {
-    font: 500 0.72em/1 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font: 500 0.75em/1 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     color: var(--chip-ink); background: var(--chip-bg);
     text-decoration: none; border-radius: 8px;
-    padding: 0.8em 1em;               /* ⇒ ≥44px эффективная тап-зона */
+    display: inline-flex; align-items: center;
+    min-height: 44px; padding: 0 1.1em;   /* WCAG/thumb: тап-цель ≥44px — явно, не следствием кегля */
     border: 1px solid var(--rule);
   }
   .shops a:hover, .shops a:focus-visible { border-color: var(--accent); color: var(--accent); }
@@ -73,7 +75,7 @@
   footer { margin-top: 2.6rem; color: var(--muted); font-size: 0.78em;
            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
   @media print {
-    .shops a { background: none; border: none; padding: 0; text-decoration: underline; }
+    .shops a { background: none; border: none; padding: 0; min-height: 0; text-decoration: underline; }
     body { padding: 0; }
   }
 </style>
@@ -81,17 +83,17 @@
 <body>
 <main>
   <header>
-    <h1>Математика для детей 8–12&nbsp;лет: лучшие пособия</h1>
-    <p class="sub">Восемь книг — от&nbsp;самых одарённых к&nbsp;максимально доступным. Только лучшие издания; наличие на&nbsp;московских маркетплейсах проверено.</p>
+    <h1>Математика для детей 8–12 лет: лучшие пособия</h1>
+    <p class="sub">Восемь книг — от самых одарённых к максимально доступным. Только лучшие издания; наличие на московских маркетплейсах проверено.</p>
   </header>
 
-  <p class="pole">↑ для самых одарённых</p>
+  <p class="pole">↑ для самых одарённых</p>
 
   <ol>
     <li class="bk">
       <div>
-        <p class="t"><span class="au">В.&nbsp;Арнольд.</span> «Задачи для детей от&nbsp;5 до&nbsp;15&nbsp;лет»<span class="age">5–15&nbsp;лет</span></p>
-        <p class="why">79 задач на&nbsp;культуру мышления от&nbsp;великого математика. Эталон: простые условия — глубокая математика.</p>
+        <p class="t"><span class="au">В. Арнольд.</span> «Задачи для детей от 5 до 15 лет»<span class="age">5–15 лет</span></p>
+        <p class="why">79 задач на культуру мышления от великого математика. Эталон: простые условия — глубокая математика.</p>
         <div class="shops">
           <a href="https://www.labirint.ru/books/656553/">Лабиринт</a>
           <a href="https://megamarket.ru/catalog/details/arnold-zadachi-dlya-detey-ot-5-do-15-let-100025489462/">Мегамаркет</a>
@@ -101,8 +103,8 @@
     </li>
     <li class="bk">
       <div>
-        <p class="t"><span class="au">Генкин, Итенберг, Фомин.</span> «Ленинградские математические кружки»<span class="age">10–12&nbsp;лет</span></p>
-        <p class="why">Библия кружковой работы: задачник и&nbsp;метод в&nbsp;одной книге, опыт поколений ленинградской школы.</p>
+        <p class="t"><span class="au">Генкин, Итенберг, Фомин.</span> «Ленинградские математические кружки»<span class="age">10–12 лет</span></p>
+        <p class="why">Библия кружковой работы: задачник и метод в одной книге, опыт поколений ленинградской школы.</p>
         <div class="shops">
           <a href="https://www.labirint.ru/books/811894/">Лабиринт</a>
           <a href="https://www.sima-land.ru/7855617/leningradskie-matematicheskie-kruzhki-2-e-izdanie-genkin-s-a-itenberg-i-v-fomin-d-v/">Sima-land</a>
@@ -111,8 +113,8 @@
     </li>
     <li class="bk">
       <div>
-        <p class="t"><span class="au">Серия МЦНМО.</span> «Школьные математические кружки»<span class="age">8–12&nbsp;лет</span></p>
-        <p class="why">26 тонких книг — по&nbsp;одной теме на&nbsp;книгу («Инварианты», «Графы», «Индукция»…): готовый систематический кружок.</p>
+        <p class="t"><span class="au">Серия МЦНМО.</span> «Школьные математические кружки»<span class="age">8–12 лет</span></p>
+        <p class="why">26 тонких книг — по одной теме на книгу («Инварианты», «Графы», «Индукция»…): готовый систематический кружок.</p>
         <div class="shops">
           <a href="https://www.ozon.ru/category/shkolnye-matematicheskie-kruzhki/">Ozon</a>
           <a href="https://www.labirint.ru/series/40886/">Лабиринт</a>
@@ -122,8 +124,8 @@
     </li>
     <li class="bk">
       <div>
-        <p class="t"><span class="au">А.&nbsp;Спивак.</span> «Тысяча и&nbsp;одна задача по&nbsp;математике»<span class="age">10–12&nbsp;лет</span></p>
-        <p class="why">Мост между школой и&nbsp;кружком: от&nbsp;арифметики до&nbsp;первых олимпиадных идей, задач хватит на&nbsp;годы.</p>
+        <p class="t"><span class="au">А. Спивак.</span> «Тысяча и одна задача по математике»<span class="age">10–12 лет</span></p>
+        <p class="why">Мост между школой и кружком: от арифметики до первых олимпиадных идей, задач хватит на годы.</p>
         <div class="shops">
           <a href="https://www.ozon.ru/product/tysyacha-i-odna-zadacha-po-matematike-5-7-klassy-zadachnik-spivak-aleksandr-vasilevich-262313391/">Ozon</a>
           <a href="https://www.labirint.ru/books/231812/">Лабиринт</a>
@@ -133,8 +135,8 @@
     </li>
     <li class="bk">
       <div>
-        <p class="t"><span class="au">Е.&nbsp;Козлова.</span> «Сказки и&nbsp;подсказки»<span class="age">8–11&nbsp;лет</span></p>
-        <p class="why">350 настоящих кружковых задач в&nbsp;сказочной оболочке — вход в&nbsp;серьёзную математику через игру.</p>
+        <p class="t"><span class="au">Е. Козлова.</span> «Сказки и подсказки»<span class="age">8–11 лет</span></p>
+        <p class="why">350 настоящих кружковых задач в сказочной оболочке — вход в серьёзную математику через игру.</p>
         <div class="shops">
           <a href="https://www.ozon.ru/context/detail/id/162338731/">Ozon</a>
           <a href="https://www.labirint.ru/books/623091/">Лабиринт</a>
@@ -144,8 +146,8 @@
     </li>
     <li class="bk">
       <div>
-        <p class="t"><span class="au">Б.&nbsp;Кордемский.</span> «Математическая смекалка»<span class="age">9–12&nbsp;лет</span></p>
-        <p class="why">369 задач; главная русская классика смекалки, переиздаётся 70&nbsp;лет — работает без взрослого рядом.</p>
+        <p class="t"><span class="au">Б. Кордемский.</span> «Математическая смекалка»<span class="age">9–12 лет</span></p>
+        <p class="why">369 задач; главная русская классика смекалки, переиздаётся 70 лет — работает без взрослого рядом.</p>
         <div class="shops">
           <a href="https://www.labirint.ru/books/662070/">Лабиринт</a>
           <a href="https://ast.ru/book/matematicheskaya-smekalka-luchshie-logicheskie-zadachi-golovolomki-i-uprazhneniya-839377/">АСТ</a>
@@ -154,8 +156,8 @@
     </li>
     <li class="bk">
       <div>
-        <p class="t"><span class="au">Я.&nbsp;Перельман.</span> «Живая математика»<span class="age">9–12&nbsp;лет</span></p>
-        <p class="why">Классика занимательности: математика как приключение, читается как рассказы.</p>
+        <p class="t"><span class="au">Я. Перельман.</span> «Живая математика»<span class="age">9–12 лет</span></p>
+        <p class="why">Классика занимательности: математика как приключение, читается как рассказы.</p>
         <div class="shops">
           <a href="https://www.ozon.ru/category/perelman-zanimatelnaya-matematika/">Ozon</a>
         </div>
@@ -163,8 +165,8 @@
     </li>
     <li class="bk">
       <div>
-        <p class="t"><span class="au">Г.&nbsp;Остер.</span> «Задачник»<span class="age">8–10&nbsp;лет</span></p>
-        <p class="why">Смех как дверь в&nbsp;задачи: ребёнок решает сам и&nbsp;просит ещё. Самый лёгкий вход.</p>
+        <p class="t"><span class="au">Г. Остер.</span> «Задачник»<span class="age">8–10 лет</span></p>
+        <p class="why">Смех как дверь в задачи: ребёнок решает сам и просит ещё. Самый лёгкий вход.</p>
         <div class="shops">
           <a href="https://www.ozon.ru/category/grigoriy-oster-zadachnik-po-matematike/">Ozon</a>
           <a href="https://www.wildberries.ru/catalog/tags/grigorii-oster-zadacznik-po-matematike">Wildberries</a>
@@ -175,7 +177,7 @@
 
   <p class="pole pole--down">максимально доступные ↓</p>
 
-  <p class="note">Стержень списка — кружковая линия МЦНМО (№№&nbsp;1–5): именно она считается лучшей русской традицией. №№&nbsp;6–8 — проверенная временем занимательная классика: с&nbsp;неё можно начинать без взрослого рядом.</p>
+  <p class="note">Стержень списка — кружковая линия МЦНМО (№№ 1–5): именно она считается лучшей русской традицией. №№ 6–8 — проверенная временем занимательная классика: с неё можно начинать без взрослого рядом.</p>
 
   <footer>Сумма Системы Дела · наличие проверено 10.07.2026</footer>
 </main>
