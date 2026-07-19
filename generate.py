@@ -1366,7 +1366,20 @@ def _layout(d: dict[str, Any], *, title: str, description: str, body: str,
     _slug_meta = f'<meta name="dela:slug" content="{_t(slug)}">\n' if slug else ""
     head = _head(title, description, canonical=canonical, og_image=og_image,
                  extra=(_slug_meta + extra_head), structured=structured, d=d)
-    nav_html = '<nav class="nav-fade"><a href="/" aria-label="На главную">←</a></nav>' if nav else ''
+    # СТРЕЛКА «НА ГЛАВНУЮ» ЖИВЁТ РОВНО ТОГДА, КОГДА ГЛАВНОЙ ЕСТЬ ЧТО ПОКАЗАТЬ.
+    # `nav` был ФЛАГОМ, объявляемым вызывающим, — и на владельце, чей индекс пуст по
+    # директиве («на stasazaryarozet.ru в индексе ничего не должно быть»), давал ребро,
+    # ведущее в пустоту: читатель жмёт ← и получает страницу без содержания. Это тот же
+    # закон, что `refs ⊆ delivered` у site_closure, только про содержание, а не про
+    # существование файла: ссылка обязана иметь КОНЕЦ.
+    #
+    # Условие ВЫВЕДЕНО из той же величины, которой p_site решает свою шапку (строка ниже
+    # по файлу: «Условие ВЫВЕДЕНО из самих секций, а не объявлено флагом»), и спрошено У
+    # НЕЁ САМОЙ — второго кодирования пустоты не заводится. Появится у владельца хоть
+    # одна секция — стрелка вернётся сама, ничьей правкой. p_site зовёт `_layout` без
+    # `nav`, поэтому рекурсии здесь нет и быть не может.
+    nav_html = ('<nav class="nav-fade"><a href="/" aria-label="На главную">←</a></nav>'
+                if nav and "<header>" in p_site(d) else '')
     ftr = _footer(d.get("urls", {}), (d.get("bio") or {}).get("title", ""), portrait, portrait_night) if footer else ''
     # WCAG 2.4.1 «Bypass Blocks» — single skip-link before nav, jumps to <main>.
     # Visually hidden until keyboard focus; one definition serves every surface.
