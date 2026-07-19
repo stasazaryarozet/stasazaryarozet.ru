@@ -23,6 +23,7 @@
   --doc-lh-h1: 1.36;  /* ratio · knowledge/people/azaryarozet/site/_design.yaml */
   --doc-lh-h2: 1.25;  /* ratio · knowledge/people/azaryarozet/site/_design.yaml */
   --doc-lh-h3: 1.3;  /* ratio · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-menu-transform: uppercase;  /* text-transform · knowledge/people/azaryarozet/site/_design.yaml */
   --focus-outline-min: 2px;  /* length · knowledge/system/specifications/text/site.md */
   --font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);  /* length · knowledge/system/specifications/text/site.md */
   --font-size-h1: clamp(2.5rem, 1.5rem + 5vw, 7rem);  /* length · knowledge/system/specifications/text/site.md */

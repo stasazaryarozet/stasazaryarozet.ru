@@ -191,6 +191,10 @@ td { color: var(--ink); }
   display: flex; flex-wrap: wrap; gap: 0.5rem;
   font-family: var(--sans);
 }
+/* Регистр ряда — из контура: ярлыки меню равноправны, и «Распечатать» не может стоять
+   строчным рядом с ODT · TXT · PDF (admin 2026-07-19). Апрош тот же, что у прописных
+   заголовков: разрядка нужна капители, а не роли. */
+.doc-menu__item { text-transform: var(--doc-menu-transform); letter-spacing: var(--doc-h-tracking); }
 .doc-menu a, .doc-menu button {
   display: inline-flex; align-items: center;
   min-height: 44px; padding: 0 0.9rem;
