@@ -1,0 +1,9 @@
+# azaryarozet site SoT (seed 2026-07-19, shkolyar по директиве публикации fcac6fcc).
+# Минимум истинных полей: рендер статических страниц (p_static_page) + canonical.
+# Расширяется владельцем/по директивам; НЕ копия olgarozet-схемы (No-Stubs).
+lang: ru
+bio:
+  title: Азарья Розет
+site:
+  canonical: https://stasazaryarozet.ru
+events: []

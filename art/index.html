@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Азарья Розет</title>
-<meta name="description" content="Азарья Розет">
-<link rel="canonical" href="">
+<title>Азарья Розет — Искусство</title>
+<meta name="description" content="Искусство — Азарья Розет">
+<link rel="canonical" href="/art/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Азарья Розет">
-<meta property="og:description" content="Азарья Розет">
-<meta property="og:url" content="">
+<meta property="og:title" content="Азарья Розет — Искусство">
+<meta property="og:description" content="Искусство — Азарья Розет">
+<meta property="og:url" content="/art/">
 <meta property="og:image" content="">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Азарья Розет">
-<meta name="twitter:description" content="Азарья Розет">
+<meta name="twitter:title" content="Азарья Розет — Искусство">
+<meta name="twitter:description" content="Искусство — Азарья Розет">
 <meta name="twitter:image" content="">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
@@ -61,49 +61,20 @@
 })();
 </script>
 <link rel="stylesheet" href="/styles.css?v=d25a1219ce">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Азарья Розет", "url": "", "image": "", "sameAs": []}</script>
 
 </head>
 <body>
 <a class="skip-link" href="#main">Перейти к содержанию</a>
-
+<nav class="nav-fade"><a href="/" aria-label="На главную">←</a></nav>
 <button type="button" class="theme-toggle" data-theme-toggle aria-label="Тема: авто (по солнцу) — переключить">◐</button><script>(function(){var STATES=["auto", "day", "night"],GLYPHS={"auto": "◐", "day": "☀", "night": "☾"},LABELS={"auto": "Тема: авто (по солнцу)", "day": "Тема: дневная", "night": "Тема: ночная"},STORAGE_KEY="dela.theme.v1",MODE_VALUES=["day", "night"],SUFFIX=" — переключить";var btn=document.querySelector("[data-theme-toggle]");if(!btn)return;function current(){var s=null;try{s=localStorage.getItem(STORAGE_KEY);}catch(e){}return (MODE_VALUES.indexOf(s)!==-1)?s:STATES[0];}function paint(st){btn.textContent=GLYPHS[st]||GLYPHS[STATES[0]];btn.setAttribute("aria-label",(LABELS[st]||LABELS[STATES[0]])+SUFFIX);}paint(current());btn.addEventListener("click",function(){var i=STATES.indexOf(current());var next=STATES[(i+1)%STATES.length];try{localStorage.setItem(STORAGE_KEY,next);}catch(e){}if(window.__applyTheme)window.__applyTheme();paint(next);});})();</script>
 
 <main id="main" role="main">
-  <div class="content-wrapper">
-    <header>
-      <h1>Азарья Розет</h1>
-    </header>
+  <div class="progress-bar" id="progress"></div>
+  <main class="gallery">
 
-    <main>
-
-
-
-
-
-
-
-    </main>
-  </div>
+  </main>
 </main>
-<footer>
-  <div class="footer-content">
-    
-    <img src="/" alt="Азарья Розет" class="footer-portrait day">
-    
-    
-  </div>
-  <a href="#" class="scroll-top" aria-label="Наверх" title="Наверх" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
-    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V4M5 11l7-7 7 7"/></svg>
-  </a>
-</footer>
-<script>
-const footer = document.querySelector('.footer-content');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-observer.observe(footer);
-</script>
+
 
 <script>
 /* Display-window indicator 1[from ≤ now < until) per viewer clock
