@@ -6,8 +6,12 @@
      python3 scripts/css_compile.py --owner <owner> [--event <event>]
 */
 :root {
+  --accent: #8a4b12;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --baseline: 1.6925rem;  /* length · knowledge/system/specifications/text/typography.md */
+  --bg: #faf9f7;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --breakpoint: 880px;  /* length · knowledge/system/specifications/text/site.md */
+  --chip-bg: #efece7;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
+  --chip-ink: #3d3a35;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --focus-outline-min: 2px;  /* length · knowledge/system/specifications/text/site.md */
   --font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);  /* length · knowledge/system/specifications/text/site.md */
   --font-size-h1: clamp(2.5rem, 1.5rem + 5vw, 7rem);  /* length · knowledge/system/specifications/text/site.md */
@@ -23,6 +27,7 @@
   --fs-s: 1.0625rem;  /* length · knowledge/system/specifications/text/typography.md */
   --fs-xl: 1.953rem;  /* length · knowledge/system/specifications/text/site.md */
   --fs-xs: max(0.800rem, var(--fs-body-min));  /* length · knowledge/system/specifications/text/site.md */
+  --ink: #1e1c1a;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --lh-body: 1.55;  /* ratio · knowledge/system/specifications/text/typography.md */
   --lh-display: 0.95;  /* ratio · knowledge/system/specifications/text/typography.md */
   --lh-flush: 1.0;  /* ratio · knowledge/system/specifications/text/typography.md */
@@ -30,7 +35,9 @@
   --lh-tight: 1.2;  /* ratio · knowledge/system/specifications/text/typography.md */
   --max-width: min(50em, 90vw);  /* length · knowledge/system/specifications/text/site.md */
   --measure: 34em;  /* length · knowledge/system/specifications/text/typography.md */
+  --muted: #6f6a63;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --rail: 7.5em;  /* length · knowledge/system/specifications/text/typography.md */
+  --rule: #e4e0da;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --sans: 'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;  /* font-stack · knowledge/system/specifications/text/typography.md */
   --sans-display: 'Inter Tight', 'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;  /* font-stack · knowledge/system/specifications/text/typography.md */
   --script: 'Bad Script', 'Marck Script', cursive;  /* font-stack · knowledge/system/specifications/text/typography.md */
@@ -64,4 +71,24 @@
 }
 :root[data-surface="editorial"] {
   --accent: #1E407C;  /* color · :root[data-surface="editorial"] · knowledge/system/specifications/text/site.md */
+}
+:root[data-theme="night"] {
+  --accent: #d99a5b;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
+  --bg: #121212;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
+  --chip-bg: #1f1f1f;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
+  --chip-ink: #cfcac3;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
+  --ink: #e8e6e3;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
+  --muted: #a09a92;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
+  --rule: #2a2a2a;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
+}
+@media print {
+  :root {
+    --accent: #000;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
+    --bg: #fff;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
+    --chip-bg: #fff;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
+    --chip-ink: #000;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
+    --ink: #000;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
+    --muted: #444;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
+    --rule: #bbb;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
+  }
 }

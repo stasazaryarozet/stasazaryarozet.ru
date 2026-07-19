@@ -29,25 +29,25 @@
    @import обязан предшествовать всем правилам (CSS §3) — комментарии не считаются. */
 @import url("_tokens.generated.css");
 
+/* ПАЛИТРА ЗДЕСЬ НЕ ОБЪЯВЛЯЕТСЯ. --bg/--ink/--muted/--rule/--chip-*/--accent приходят из
+   _tokens.generated.css, выведенного из site/_design.yaml: день = :root, ночь =
+   :root[data-theme="night"] (`theme: night`), печать = @media print (`media: print`) —
+   ОДНО пространство имён, ТРИ валюации. --sans — оттуда же, из text/typography.md.
+   Два объявления = два источника истины, и побеждал бы порядок загрузки, а не Спека
+   (Inv-CSS-tokens-from-Spec). --mono Спекой пока не покрыт и потому объявлен ниже.
+
+   Σ 2026-07-19: здесь стояли ЛИТЕРАЛЫ палитры и СВОЙ алфавит тем — `[data-theme="dark"]`
+   и `:root:not([data-theme="light"])` — при том, что резолвер пишет {day, night}
+   (text/interface.md::Inv-IFACE-day-night-mode::mode_values). Алфавиты не пересекались:
+   «dark» не наступал никогда, «not light» — всегда, ⇒ тумблер был no-op, а тема шла за
+   ОС, а не за солнцем. Алфавит был написан ДВАЖДЫ, и ничто не делало вторую запись
+   ФУНКЦИЕЙ первой. Теперь селектор ночи ЭМИТИТ css_compile из объявленного mode_values —
+   рассогласование стало непредставимым, а не просто запрещённым.
+
+   Комментарий стоит СНАРУЖИ блока: внутри него парсер аудита терял следующее за ним
+   объявление (--mono читался как dangling). Отдельная находка, не замаскирована. */
 :root {
-  --bg: #faf9f7;  --ink: #1e1c1a;  --muted: #6f6a63;  --rule: #e4e0da;
-  --chip-bg: #efece7;  --chip-ink: #3d3a35;  --accent: #8a4b12;
-  /* --sans НЕ объявляется здесь: он приходит из _tokens.generated.css, выведенного из
-     text/typography.md. Два объявления = два источника истины, и побеждал бы порядок
-     загрузки, а не Спека (Inv-CSS-tokens-from-Spec). --mono Спекой пока не покрыт. */
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #121212;  --ink: #e8e6e3;  --muted: #a09a92;  --rule: #2a2a2a;
-    --chip-bg: #1f1f1f;  --chip-ink: #cfcac3;  --accent: #d99a5b;
-  }
-}
-
-:root[data-theme="dark"] {
-  --bg: #121212;  --ink: #e8e6e3;  --muted: #a09a92;  --rule: #2a2a2a;
-  --chip-bg: #1f1f1f;  --chip-ink: #cfcac3;  --accent: #d99a5b;
 }
 
 html { -webkit-text-size-adjust: 100%; }
@@ -185,8 +185,12 @@ td { color: var(--ink); }
 @page { margin: 18mm; }
 
 @media print {
-  :root { --bg: #fff; --ink: #000; --muted: #444; --rule: #bbb; --chip-bg: #fff; --chip-ink: #000; --accent: #000; }
-  body { padding: 0; font-size: 11.5pt; background: #fff; color: #000; }
+  /* Печатная ПАЛИТРА здесь не объявляется: она приходит из _tokens.generated.css,
+     выведенного из _design.yaml (`media: print`) — третья валюация ОДНОГО
+     пространства имён, наравне с днём и ночью. Σ 2026-07-19: она была последней,
+     жившей литералами, и Inv-CSS-tokens-from-Spec поймал её ровно в тот момент,
+     когда пара день/ночь стала выводимой. */
+  body { padding: 0; font-size: 11.5pt; background: var(--bg); color: var(--ink); }
   .theme-toggle, .doc-menu, .skip-link { display: none !important; }
   main, header, footer { max-width: none; }
   a { color: #000; text-decoration: underline; }
