@@ -3644,6 +3644,11 @@ def anchor(heading: str, seen: "set[str] | None" = None) -> str:
 #: терминатор: оно объявляет обрыв мысли, тогда как точка объявляет её завершённость.
 _H_STOP_RE = _re.compile(r"(?<!\.)\.(?=(?:\s*</[^>]+>)*\s*$)")
 
+#: Тематический разрыв (CommonMark §4.1): ≥3 знака ОДНОГО вида из `-_*`, пробелы между
+#: ними допустимы, ничего иного в строке нет. Записан как ОДНА обратная ссылка, поэтому
+#: смешанное `-*-` разрывом не является — по спецификации, а не по вкусу.
+_MD_RULE_RE = _re.compile(r"([-_*])[ \t]*(?:\1[ \t]*){2,}")
+
 
 def _h_punct(heading_html: str) -> str:
     """Заголовочный типограф static-страниц. Трёхчастный, чистый, идемпотентный:
@@ -3928,6 +3933,17 @@ def _md_static_to_html(md_body: str, line_mode: str = "verse",
 
     for raw_line in body.split("\n"):
         line = raw_line.rstrip()
+        # ТЕМАТИЧЕСКИЙ РАЗРЫВ (CommonMark §4.1): строка из трёх и более `-`, `_` или `*`
+        # одного вида. Грамматика его НЕ ЗНАЛА, и потому `---` доезжал до мира АБЗАЦЕМ —
+        # тремя дефисами на странице и в каждой её проекции (замер 2026-07-19, PDF ТКП,
+        # стр. 1). Молчаливая деградация стандартной конструкции: документ написан верно,
+        # рендерер прочёл его как прозу. Граница частей уже рисуется `.doc-part-rule`, и
+        # разрыв — та же граница, объявленная разметкой вместо frontmatter, поэтому и
+        # носитель у них один.
+        if _MD_RULE_RE.fullmatch(line.strip()):
+            _flush_all()
+            out.append('<hr class="doc-part-rule" aria-hidden="true">')
+            continue
         m_img = _MD_IMG_RE.fullmatch(line.strip())      # СТРОКА-КАРТИНКА = БЛОК (figure+caption)
         if m_img:
             _flush_all()
@@ -4225,6 +4241,52 @@ def p_document_menu(delivered: "Any" = (), *, printable: bool = True) -> str:
             if items else "")
 
 
+def _document_body(md_text: str) -> "tuple[dict[str, Any], str]":
+    """(front-matter, rendered body) — the ONE call that turns a document's source into
+    its body, shared by every projection of it.
+
+    Written because the document projection had just copied it: two call sites naming
+    the same three front-matter keys, and the fourth key to join the grammar would have
+    reached one of them.  A projection family whose members re-derive the body
+    separately is the drift this whole module is about, one floor down."""
+    fm, body_md = parse_static_md(md_text)
+    return fm, _md_static_to_html(
+        body_md, line_mode=str(fm.get("line_mode") or "verse"),
+        fragments=fm.get("fragments") or (),
+        structural=fm.get("structural_headings") or ())
+
+
+def p_document(d: dict[str, Any], md_text: str, slug: str = "", css: str = "") -> str:
+    """Project (D, static.md) → a SELF-CONTAINED document.  The transport source.
+
+    A SEPARATE projection, not `p_static_page` with a flag: a PAGE is a document plus
+    the chrome that lets a visitor navigate a site, and a DOCUMENT is what a reader
+    downloads.  They differ in KIND, and the previous shape — one renderer whose
+    `formats is None` suppressed the menu ALONE — leaked the rest of the chrome into
+    every artifact.  Measured 2026-07-19: line 1 of the published .txt was «Перейти к
+    содержанию ← ◐» — the skip-link and the theme toggle, inside a document a client
+    opens.
+
+    CARRIES ITS OWN FORM.  `<link href="/styles.css">` is ROOT-ABSOLUTE and the
+    converter runs over a temp dir holding one file, so it resolved to
+    `file:///styles.css` — absent.  Every artifact was therefore set in WeasyPrint's
+    fallback serif at WeasyPrint's default margin, while `@page` declared 18mm and the
+    stylesheet's own comment promised «Печать и „сохранить в PDF“ — ОДНА проекция…
+    иначе PDF и печать разойдутся молча».  A document that travels must carry its form
+    WITH it — a reference into a site is a reference the document loses the moment it
+    leaves.  So the caller resolves the Form once and passes it in; nothing here knows
+    a font name (Inv-FORM-derived: the Form is resolved from the contour, never
+    written twice)."""
+    fm, body_html = _document_body(md_text)
+    lang = (d.get("languages") or {}).get("host") or "ru"
+    style = f"<style>\n{css}\n</style>\n" if css else ""
+    return (f'<!DOCTYPE html>\n<html lang="{_t(lang)}">\n<head>\n'
+            f'<meta charset="utf-8">\n'
+            f'<title>{_t(fm.get("title") or slug)}</title>\n{style}</head>\n'
+            f'<body>\n<article class="article-wrapper">{body_html}</article>\n'
+            f'</body>\n</html>\n')
+
+
 def p_static_page(d: dict[str, Any], md_text: str, slug: str = "",
                   formats: "Any" = None) -> str:
     """Project (D, static.md) → standalone HTML page.
@@ -4242,14 +4304,10 @@ def p_static_page(d: dict[str, Any], md_text: str, slug: str = "",
     Web-Broadcasting host (konspekt: canonical → parisinseptember.ru while
     mirrored on olgarozet.ru — mirror must not self-canonicalize).
     """
-    fm, body_md = parse_static_md(md_text)
+    fm, body_html = _document_body(md_text)
     title = fm.get("title") or ""
     description = fm.get("description") or title
     slug = fm.get("slug") or slug
-    body_html = _md_static_to_html(
-        body_md, line_mode=str(fm.get("line_mode") or "verse"),
-        fragments=fm.get("fragments") or (),
-        structural=fm.get("structural_headings") or ())
     # footer.legal block — Inv-SITE-trust-base. Same projection used by
     # p_event_landing (line ~2055) so the legal colophon is byte-equivalent
     # across every surface (event landing, owner site, static page).

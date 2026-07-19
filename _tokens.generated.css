@@ -27,6 +27,9 @@
   --fs-s: 1.0625rem;  /* length · knowledge/system/specifications/text/typography.md */
   --fs-xl: 1.953rem;  /* length · knowledge/system/specifications/text/site.md */
   --fs-xs: max(0.800rem, var(--fs-body-min));  /* length · knowledge/system/specifications/text/site.md */
+  --h1-size: clamp(1.6rem, 1.3rem + 1.6vw, 2.1rem);  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --h2-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --h3-size: 1.05em;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
   --ink: #1e1c1a;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --lh-body: 1.55;  /* ratio · knowledge/system/specifications/text/typography.md */
   --lh-display: 0.95;  /* ratio · knowledge/system/specifications/text/typography.md */
@@ -87,7 +90,11 @@
     --bg: #fff;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
     --chip-bg: #fff;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
     --chip-ink: #000;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
+    --h1-size: 20pt;  /* length · @media print · knowledge/people/azaryarozet/site/_design.yaml */
+    --h2-size: 15pt;  /* length · @media print · knowledge/people/azaryarozet/site/_design.yaml */
+    --h3-size: 12.5pt;  /* length · @media print · knowledge/people/azaryarozet/site/_design.yaml */
     --ink: #000;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
+    --measure: none;  /* length · @media print · knowledge/people/azaryarozet/site/_design.yaml */
     --muted: #444;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
     --rule: #bbb;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
   }
