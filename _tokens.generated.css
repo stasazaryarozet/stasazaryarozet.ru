@@ -12,6 +12,8 @@
   --breakpoint: 880px;  /* length · knowledge/system/specifications/text/site.md */
   --chip-bg: #efece7;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --chip-ink: #3d3a35;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-abbr-caps: all-small-caps;  /* font-variant · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-abbr-tracking: 0.02em;  /* tracking · knowledge/people/azaryarozet/site/_design.yaml */
   --doc-face: Georgia, 'Times New Roman', serif;  /* font-stack · knowledge/people/azaryarozet/site/_design.yaml */
   --doc-fs-body: clamp(1.1875rem, 1.05rem + 0.6vw, 1.3125rem);  /* length · knowledge/people/azaryarozet/site/_design.yaml */
   --doc-fs-h1: calc(clamp(1.1875rem, 1.05rem + 0.6vw, 1.3125rem) * 1.25);  /* scale · knowledge/people/azaryarozet/site/_design.yaml */
