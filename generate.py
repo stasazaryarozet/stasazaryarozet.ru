@@ -1381,12 +1381,19 @@ def _layout(d: dict[str, Any], *, title: str, description: str, body: str,
     nav_html = ('<nav class="nav-fade"><a href="/" aria-label="На главную">←</a></nav>'
                 if nav and "<header>" in p_site(d) else '')
     ftr = _footer(d.get("urls", {}), (d.get("bio") or {}).get("title", ""), portrait, portrait_night) if footer else ''
-    # WCAG 2.4.1 «Bypass Blocks» — single skip-link before nav, jumps to <main>.
-    # Visually hidden until keyboard focus; one definition serves every surface.
-    skip_link = (f'<a class="skip-link" href="#main">{_typo("Перейти к содержанию")}</a>')
-    # Day/night toggle — chrome, present on EVERY page regardless of `nav`
-    # (FQDN landings suppress .nav-fade but keep the theme toggle). Inv-IFACE-day-night-mode.
-    theme_toggle = _theme_toggle(d)
+    # ХРОМ, ДЕЙСТВУЮЩИЙ НАД СОДЕРЖАНИЕМ, ТРЕБУЕТ СОДЕРЖАНИЯ — тот же закон, что снял
+    # стрелку ← выше: аффорданс, чей референт пуст, лжёт о нём. «Перейти к содержанию»
+    # ведёт в пустой <main>, а тумблер темы перекрашивает страницу, на которой нечего
+    # читать (замерено на живом индексе: 22 видимых знака, и оба — это они).
+    # Условие ВЫВЕДЕНО из самого тела, а не объявлено флагом: страница, у которой
+    # появится содержание, получит и хром — ничьей правкой. WCAG 2.4.1 не нарушается:
+    # обязанность обойти блоки возникает вместе с блоками, которые надо обходить.
+    _has_body = bool(_re.sub(r"(?s)<[^>]+>", "", body or "").strip())
+    skip_link = (f'<a class="skip-link" href="#main">{_typo("Перейти к содержанию")}</a>'
+                 if _has_body else '')
+    # Day/night toggle — chrome on every page that HAS content, regardless of `nav`
+    # (FQDN landings suppress .nav-fade but keep the toggle). Inv-IFACE-day-night-mode.
+    theme_toggle = _theme_toggle(d) if _has_body else ''
     cookie_banner = _cookie_banner(d) if cookie_banner_enabled else ""
     # Inv-SEM-html-lang: document language от data.yaml.languages.host —
     # single SoT за document-level lang. Fallback "ru" preserved for legacy
