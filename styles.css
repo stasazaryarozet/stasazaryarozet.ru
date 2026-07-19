@@ -29,7 +29,8 @@
    @import обязан предшествовать всем правилам (CSS §3) — комментарии не считаются. */
 @import url("_tokens.generated.css");
 
-/* ПАЛИТРА ЗДЕСЬ НЕ ОБЪЯВЛЯЕТСЯ. --bg/--ink/--muted/--rule/--chip-*/--accent приходят из
+/* ПАЛИТРА ЗДЕСЬ НЕ ОБЪЯВЛЯЕТСЯ. --bg, --ink, --muted, --rule, --chip-bg, --chip-ink,
+   --accent приходят из
    _tokens.generated.css, выведенного из site/_design.yaml: день = :root, ночь =
    :root[data-theme="night"] (`theme: night`), печать = @media print (`media: print`) —
    ОДНО пространство имён, ТРИ валюации. --sans — оттуда же, из text/typography.md.
