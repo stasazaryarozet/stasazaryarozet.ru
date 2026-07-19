@@ -60,7 +60,7 @@
   setInterval(window.__applyTheme, 300000);
 })();
 </script>
-<link rel="stylesheet" href="/styles.css?v=b0f650e67a">
+<link rel="stylesheet" href="/styles.css?v=9015e06e6f">
 <meta name="dela:slug" content="tkp-agentic-workbench">
 
 </head>
@@ -68,10 +68,9 @@
 <a class="skip-link" href="#main">Перейти к содержанию</a>
 <nav class="nav-fade"><a href="/" aria-label="На главную">←</a></nav>
 <button type="button" class="theme-toggle" data-theme-toggle aria-label="Тема: авто (по солнцу) — переключить">◐</button><script>(function(){var STATES=["auto", "day", "night"],GLYPHS={"auto": "◐", "day": "☀", "night": "☾"},LABELS={"auto": "Тема: авто (по солнцу)", "day": "Тема: дневная", "night": "Тема: ночная"},STORAGE_KEY="dela.theme.v1",MODE_VALUES=["day", "night"],SUFFIX=" — переключить";var btn=document.querySelector("[data-theme-toggle]");if(!btn)return;function current(){var s=null;try{s=localStorage.getItem(STORAGE_KEY);}catch(e){}return (MODE_VALUES.indexOf(s)!==-1)?s:STATES[0];}function paint(st){btn.textContent=GLYPHS[st]||GLYPHS[STATES[0]];btn.setAttribute("aria-label",(LABELS[st]||LABELS[STATES[0]])+SUFFIX);}paint(current());btn.addEventListener("click",function(){var i=STATES.indexOf(current());var next=STATES[(i+1)%STATES.length];try{localStorage.setItem(STORAGE_KEY,next);}catch(e){}if(window.__applyTheme)window.__applyTheme();paint(next);});})();</script>
-<nav class="doc-menu" aria-label="Форматы документа"><a class="doc-menu__item" href="tkp-agentic-workbench.odt" download title="Открытый редактируемый формат — OpenDocument, ISO/IEC 26300">ODT</a><a class="doc-menu__item" href="tkp-agentic-workbench.md" download title="Исходник документа">Markdown</a><a class="doc-menu__item" href="tkp-agentic-workbench.txt" download title="Простой текст">TXT</a><a class="doc-menu__item" href="tkp-agentic-workbench.pdf" download title="Постоянная вёрстка">PDF</a><button class="doc-menu__item" type="button" onclick="window.print()">Распечатать</button></nav>
+<nav class="doc-menu" aria-label="Форматы документа"><a class="doc-menu__item" href="tkp-agentic-workbench.odt" download title="Открытый редактируемый формат — OpenDocument, ISO/IEC 26300">ODT</a><a class="doc-menu__item" href="tkp-agentic-workbench.txt" download title="Простой текст">TXT</a><a class="doc-menu__item" href="tkp-agentic-workbench.pdf" download title="Постоянная вёрстка">PDF</a><button class="doc-menu__item" type="button" onclick="window.print()">Распечатать</button></nav>
 <main id="main" role="main">
   <article class="article-wrapper"><h1 id="ii-agent-dlya-buhgalterii-i-sistemnogo-administrirovaniya">ИИ‑агент для бухгалтерии и системного администрирования</h1>
-<h2 id="summary">SUMMARY</h2>
 <p><span class="l"><strong>Чьи задачи это закрывает.</strong></span></p>
 <p><span class="l">Бухгалтер: требования ФНС в срок; завал первички; сверки; выписки.</span><br>
 <span class="l">Сисадмин: ночные сбои; бэкапы; рутинные настройки.</span><br>
@@ -98,7 +97,7 @@
 <span class="l">Приёмка: ноль изменений без подтверждения,</span><br>
 <span class="l">ноль неразрешённых подмен, полный журнал.</span></p>
 <p><span class="l">---</span></p>
-<h2 id="telo">ТЕЛО</h2>
+<hr class="doc-part-rule" aria-hidden="true">
 <h3 id="1-chto-eto-i-kak-rabotaet">1. Что это и как работает</h3>
 <p><span class="l">ИИ-модель сама по себе только отвечает текстом. Агент — это модель плюс программа-исполнитель. Цикл простой: модель предлагает шаг — программа выполняет (открыть файл, запросить 1С, запустить команду) — результат возвращается модели — следующий шаг.</span></p>
 <p><span class="l">Так это описывает Anthropic: «Claude Code is an agentic coding tool that reads your codebase, edits files, runs commands» — читает ваши файлы, редактирует их, запускает команды. «Кодовая база» здесь — любые рабочие файлы, включая 1С.</span></p>
@@ -119,11 +118,7 @@
 <p><span class="l">Два случая 2025 года. Агент сервиса Replit удалил рабочую базу клиента — «This was a catastrophic failure on my part» (признание самого агента). В помощник Amazon Q через обновление внедрили команду-стиратель (бюллетень AWS-2025-019).</span></p>
 <p><span class="l">Выводы встроены в решение — и годятся как правила для любого ИИ в компании: рабочая и тестовая среды разделены; любое изменение — сначала вхолостую, потом подтверждение; песочница на уровне операционной системы — «the operating system enforces that boundary for every Bash command»; пароли и базы агенту недоступны. Отраслевая норма та же: агент дежурного сервиса PagerDuty рекомендует действия — применяют люди по утверждённым сценариям. Журнал всех действий — это и приёмка, и защита при разборе.</span></p>
 <h3 id="5-iz-chego-sobiraetsya-stek-v-obschih-chertah">5. Из чего собирается — стек в общих чертах</h3>
-<table><thead><tr><th>Слой</th><th>Компоненты</th></tr></thead><tbody><tr><td>Оболочка-агент</td><td>Claude Code (+ Agent SDK) — фирменная; OpenCode, Aider, Cline — открытые, бесплатные («75+ LLM providers … supports running local models»)</td></tr><tr><td>Модели</td><td>Claude (зарубежная); GigaChat, YandexGPT (Россия); у себя — Qwen3-Coder-30B (Q4 ≈ 19 ГБ видеопамяти), DeepSeek-R1-Distill-32B, T-Pro 2.0 — через Ollama или vLLM</td></tr><tr><td>Фильтр обезличивания</td><td>Presidio (детекция и обратная замена) + spaCy-ru или Natasha (имена, адреса) + свои правила ИНН/КПП/счетов; прокси-шлюз LiteLLM</td></tr><tr><td>Интеграции</td><td>1С: OData, HTTP-сервисы; Контур.Экстерн API, СБИС API; ДиректБанк; распознавание — OCR 1С</td></tr><tr><td>Контроль</td><td>песочница ОС (список разрешённых файлов и адресов), холостой прогон + подтверждение, полный журнал, git для конфигураций</td></tr><tr><td>Канал (вариант 1)</td><td>туннель до зарубежного API; словарь и данные остаются у вас</td></tr><tr><td>Бесплатный пилот</td><td>OpenCode или Aider + GigaChat freemium (~1 млн токенов, физлицам) или Gemini CLI (1 000 запросов в день)</td></tr></tbody></table>
-<h3 id="6-kak-vnedryat-i-kak-prinimat-rabotu">6. Как внедрять и как принимать работу</h3>
-<p><span class="l">Неделя 1: установка; пилот одного процесса — требования ФНС или разбор сбоев; бесплатный контур. Месяц 1: агент только предлагает; каждый результат сверяется. Дальше: расширение по журналу пилота; при росте требований к качеству — платный контур из Summary.</span></p>
-<p><span class="l">Приёмка — проверяемая: 100% обратных замен; ноль изменений без подтверждения; полный журнал; если обезличивание разрушает смысл задачи — она автоматически уходит на локальную модель, не в облако.</span></p>
-<p><span class="l">От пользователя: своя квалификация (агент — исполнитель, не подписант), проверка предложенного, задача текстом. Программировать не нужно.</span></p></article>
+<table><thead><tr><th>Слой</th><th>Компоненты</th></tr></thead><tbody><tr><td>Оболочка-агент</td><td>Claude Code (+ Agent SDK) — фирменная; OpenCode, Aider, Cline — открытые, бесплатные («75+ LLM providers … supports running local models»)</td></tr><tr><td>Модели</td><td>Claude (зарубежная); GigaChat, YandexGPT (Россия); у себя — Qwen3-Coder-30B (Q4 ≈ 19 ГБ видеопамяти), DeepSeek-R1-Distill-32B, T-Pro 2.0 — через Ollama или vLLM</td></tr><tr><td>Фильтр обезличивания</td><td>Presidio (детекция и обратная замена) + spaCy-ru или Natasha (имена, адреса) + свои правила ИНН/КПП/счетов; прокси-шлюз LiteLLM</td></tr><tr><td>Интеграции</td><td>1С: OData, HTTP-сервисы; Контур.Экстерн API, СБИС API; ДиректБанк; распознавание — OCR 1С</td></tr><tr><td>Контроль</td><td>песочница ОС (список разрешённых файлов и адресов), холостой прогон + подтверждение, полный журнал, git для конфигураций</td></tr><tr><td>Канал (вариант 1)</td><td>туннель до зарубежного API; словарь и данные остаются у вас</td></tr><tr><td>Бесплатный пилот</td><td>OpenCode или Aider + GigaChat freemium (~1 млн токенов, физлицам) или Gemini CLI (1 000 запросов в день)</td></tr></tbody></table></article>
 </main>
 
 

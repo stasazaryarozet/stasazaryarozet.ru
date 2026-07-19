@@ -201,3 +201,20 @@ td { color: var(--ink); }
   thead { display: table-header-group; }
   img { max-width: 100%; }
 }
+
+/* Граница ЧАСТЕЙ документа (frontmatter `structural_headings:`) — рисуется ВМЕСТО заголовка
+   вроде SUMMARY/ТЕЛО: такой заголовок размечает границу, а не называет раздел, и слово о ней
+   читателю ничего не сообщает. Разделение — работа типографики, не лексики.
+   Не hairline: часть от части отделяет ВОЗДУХ, линия лишь удерживает ритм. Цвет — из контура
+   (--rule), поэтому граница живёт во всех трёх валюациях (день/ночь/печать) без своей правки. */
+.doc-part-rule {
+  border: 0;
+  height: 1px;
+  background: var(--rule);
+  width: 4rem;
+  margin: 3.5rem auto 3rem;
+}
+
+@media print {
+  .doc-part-rule { margin: 2rem auto 1.75rem; break-after: avoid; }
+}
