@@ -14,6 +14,7 @@
   --chip-ink: #3d3a35;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --doc-face: Georgia, 'Times New Roman', serif;  /* font-stack · knowledge/people/azaryarozet/site/_design.yaml */
   --doc-fs-body: clamp(1.1875rem, 1.05rem + 0.6vw, 1.3125rem);  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-h1: calc(clamp(1.1875rem, 1.05rem + 0.6vw, 1.3125rem) * 1.25);  /* scale · knowledge/people/azaryarozet/site/_design.yaml */
   --doc-h-tracking: 0.03em;  /* tracking · knowledge/people/azaryarozet/site/_design.yaml */
   --doc-h-transform: uppercase;  /* text-transform · knowledge/people/azaryarozet/site/_design.yaml */
   --doc-lh-body: 1.45;  /* ratio · knowledge/people/azaryarozet/site/_design.yaml */
@@ -98,6 +99,7 @@
     --chip-ink: #000;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
     --doc-face: 'Noto Serif', serif;  /* font-stack · @media print · knowledge/people/azaryarozet/site/_design.yaml */
     --doc-fs-body: 11.5pt;  /* length · @media print · knowledge/people/azaryarozet/site/_design.yaml */
+    --doc-fs-h1: 14.38pt;  /* scale · @media print · knowledge/people/azaryarozet/site/_design.yaml */
     --ink: #000;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
     --muted: #444;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */
     --rule: #bbb;  /* color · @media print · knowledge/people/azaryarozet/site/_design.yaml */

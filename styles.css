@@ -96,7 +96,9 @@ h1, h2, h3 {
   font-size: inherit;
   text-wrap: balance;
 }
-h1 { line-height: var(--doc-lh-h1); margin: 0 0 0.4em; }
+/* Титул тратит ВТОРОЙ шаг порядка — кегль; регистр уже потрачен на отличие от текста.
+   Один маркер на шаг: body ≺ h3 (регистр) ≺ h1 (кегль). */
+h1 { font-size: var(--doc-fs-h1); line-height: var(--doc-lh-h1); margin: 0 0 0.4em; }
 h2 {
   line-height: var(--doc-lh-h2);
   margin: 2.2em 0 0.6em; padding-top: 0.6em; border-top: 1px solid var(--rule);
