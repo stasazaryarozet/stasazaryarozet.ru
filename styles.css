@@ -53,19 +53,22 @@
 
 html { -webkit-text-size-adjust: 100%; }
 
+/* КЕГЛЬ И ГАРНИТУРА ЗДЕСЬ НЕ ОБЪЯВЛЯЮТСЯ — наравне с палитрой. --doc-face, --doc-fs-*,
+   --doc-h-transform приходят из _tokens.generated.css, выведенного из _design.yaml. Шкала
+   объявлена ШАГАМИ (μⁿ = base·ratioⁿ), поэтому у листа своя валюация: на бумаге --doc-fs-*
+   абсолютны в pt, на экране — текучи. Писать здесь `clamp()` для заголовка значило бы отдать
+   бумаге экранную идиому: вьюпорта на листе нет, и рендерер выбрасывает `clamp()` ЦЕЛИКОМ —
+   замерено, иерархия схлопывалась в кегль тела. Σ 2026-07-19. */
 body {
   background: var(--bg);
   color: var(--ink);
-  font: 400 clamp(1.1875rem, 1.05rem + 0.6vw, 1.3125rem)/1.45 Georgia, 'Times New Roman', serif;
+  font-family: var(--doc-face);
+  font-size: var(--doc-fs-body);
+  font-weight: 400;
+  line-height: var(--doc-lh-body);
   padding: clamp(1.25rem, 4vw, 3rem) 1.25rem 4rem;
 }
 
-/* МЕРА — контурный узел, не литерал. `--measure` компилируется из
-   specifications/text/typography.md вместе с палитрой и `--sans` (Inv-CSS-tokens-from-Spec),
-   и стояла здесь ЧЕТЫРЬМЯ копиями «34em» — ровно то, что `Inv-FORM-derived` называет
-   дефектом: «a Form literal duplicating a contour node, in ANY π». Копии держали бы
-   конгруэнтность СОВПАДЕНИЕМ и разошлись бы при первой правке Спеки.
-   Следствие для печати — ниже: бумага переоценивает ОДИН узел, а не перечисляет носителей. */
 main { max-width: var(--measure); margin: 0 auto; }
 header { max-width: var(--measure); margin: 0 auto 2.5rem; }
 footer {
@@ -74,24 +77,40 @@ footer {
 }
 
 /* ── заголовки ─────────────────────────────────────────────────────────────── */
-/* Кегли — контурные узлы (_design.yaml), а не литералы: у бумаги своя валюация той же
-   шкалы, потому что `clamp()`+`vw` осмысленны лишь при неизвестной ширине носителя, и
-   WeasyPrint отбрасывает такую запись ЦЕЛИКОМ — иерархия исчезала на печати молча
-   (замер: титул 12.7pt при тексте 12.7pt). Одно пространство имён, две валюации. */
+/* Регистр — ОБЪЯВЛЕННАЯ форма (--doc-h-transform), а не правка текста: upper не инъективно,
+   и вписанный в содержание он уничтожил бы авторский регистр безвозвратно. Трекинг положителен,
+   потому что прописные набираются с разрядкой (Bringhurst §3.2.2); отрицательный кегельный
+   апрош здесь стоял под СМЕШАННЫЙ регистр и с прописными читался бы слипшимся. */
+h1, h2, h3 {
+  text-transform: var(--doc-h-transform);
+  letter-spacing: var(--doc-h-tracking);
+  font-weight: 700;
+  text-wrap: balance;
+}
 h1 {
-  font-size: var(--h1-size);
-  line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; text-wrap: balance;
+  font-size: var(--doc-fs-h1);
+  /* Интерлиньяж титула не может быть теснее натуральной строки гарнитуры: при нулевом
+     верхнем отступе первая строка кладёт выносные ВЫШЕ строчного бокса, то есть в поле
+     страницы. Замерено на листе: 1.2 давало верхнюю кромку 17.36мм при объявленных 18 —
+     недостача 0.64мм есть ровно половина разницы (1.36 − 1.2)em от кегля титула. Закон
+     @page не «строгий»: содержание действительно вторгалось в поле. */
+  line-height: var(--doc-lh-h1);
   margin: 0 0 0.4em;
 }
 h2 {
-  font-size: var(--h2-size);
-  line-height: 1.25; font-weight: 700; letter-spacing: -0.005em; text-wrap: balance;
+  font-size: var(--doc-fs-h2);
+  line-height: var(--doc-lh-h2);
   margin: 2.2em 0 0.6em; padding-top: 0.6em; border-top: 1px solid var(--rule);
 }
 h3 {
-  font-size: var(--h3-size); line-height: 1.3; font-weight: 700;
+  font-size: var(--doc-fs-h3); line-height: var(--doc-lh-h3);
   margin: 1.6em 0 0.4em; color: var(--ink);
 }
+/* Разрядка прописных добавляет зазор и ПОСЛЕ последней литеры — перед знаком препинания он
+   читается как отбивка («Т Е З И С .»). Компенсируется тем же токеном, которым введён.
+   Пролёт закона темы: `_h_punct` эмитит этот span с 2026-07-11, а правила у него не было
+   вовсе — selectors(theme) ⊉ elements(projection), при законе в шапке этого файла. */
+.h-punct { margin-left: calc(-1 * var(--doc-h-tracking)); }
 .sub { color: var(--muted); font-size: 0.92em; margin: 0; text-wrap: balance; }
 
 /* ── поток ─────────────────────────────────────────────────────────────────── */
@@ -201,21 +220,16 @@ td { color: var(--ink); }
      пространства имён, наравне с днём и ночью. Σ 2026-07-19: она была последней,
      жившей литералами, и Inv-CSS-tokens-from-Spec поймал её ровно в тот момент,
      когда пара день/ночь стала выводимой. */
-  body { padding: 0; font-size: 11.5pt; background: var(--bg); color: var(--ink); }
+  /* Кегль ЗДЕСЬ НЕ ПЕРЕОБЪЯВЛЯЕТСЯ: --doc-fs-body имеет печатную валюацию (11.5pt), и от
+     неё индуцирована вся шкала листа. Второе объявление было бы вторым источником истины.
+     `margin: 0` — не косметика: UA держит у body поле 8px, и оно ложилось ПОВЕРХ поля @page,
+     давая замеренные 57.0pt при объявленных 51.0pt (18mm). `padding: 0` его не снимал. */
+  body { padding: 0; margin: 0; background: var(--bg); color: var(--ink); }
   .theme-toggle, .doc-menu, .skip-link { display: none !important; }
-  /* Мера на бумаге СНИМАЕТСЯ переоценкой ОДНОГО узла — и валюация объявлена в
-     _design.yaml (`print-measure`), а не здесь: Inv-CSS-tokens-from-Spec поймал, что
-     объявление в styles.css есть ВТОРОЙ источник истины того же токена. Прежде тут
-     стоял перечень носителей (`main, header, footer`) — правка потребителей вместо
-     источника: носитель, добавленный завтра, молча остался бы с экранной мерой. */
+  main, header, footer { max-width: none; }
   a { color: #000; text-decoration: underline; }
   h1, h2, h3 { break-after: avoid; }
-  figure, blockquote, aside { break-inside: avoid; }
-  /* ТАБЛИЦА ДЕЛИТСЯ, СТРОКА — НЕТ. `break-inside: avoid` на всей таблице уводил её на
-     следующую страницу целиком: замер 2026-07-19 — 55–69 мм пустого низа на страницах
-     1–3 из четырёх. Неделимой обязана быть СТРОКА (разрыв внутри неё рвёт ячейку), а
-     шапка повторяется сама — `thead` уже объявлен группой заголовка. */
-  tr { break-inside: avoid; }
+  table, figure, blockquote, aside { break-inside: avoid; }
   table { display: table; font-size: 9.5pt; }
   thead { display: table-header-group; }
   img { max-width: 100%; }
