@@ -53,73 +53,36 @@
 
 html { -webkit-text-size-adjust: 100%; }
 
-/* КЕГЛЬ И ГАРНИТУРА ЗДЕСЬ НЕ ОБЪЯВЛЯЮТСЯ — наравне с палитрой. --doc-face, --doc-fs-*,
-   --doc-h-transform приходят из _tokens.generated.css, выведенного из _design.yaml. Шкала
-   объявлена ШАГАМИ (μⁿ = base·ratioⁿ), поэтому у листа своя валюация: на бумаге --doc-fs-*
-   абсолютны в pt, на экране — текучи. Писать здесь `clamp()` для заголовка значило бы отдать
-   бумаге экранную идиому: вьюпорта на листе нет, и рендерер выбрасывает `clamp()` ЦЕЛИКОМ —
-   замерено, иерархия схлопывалась в кегль тела. Σ 2026-07-19. */
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--doc-face);
-  font-size: var(--doc-fs-body);
-  font-weight: 400;
-  line-height: var(--doc-lh-body);
+  font: 400 clamp(1.1875rem, 1.05rem + 0.6vw, 1.3125rem)/1.45 Georgia, 'Times New Roman', serif;
   padding: clamp(1.25rem, 4vw, 3rem) 1.25rem 4rem;
 }
 
-main { max-width: var(--measure); margin: 0 auto; }
-header { max-width: var(--measure); margin: 0 auto 2.5rem; }
+main { max-width: 34em; margin: 0 auto; }
+header { max-width: 34em; margin: 0 auto 2.5rem; }
 footer {
-  max-width: var(--measure); margin: 2.6rem auto 0;
+  max-width: 34em; margin: 2.6rem auto 0;
   color: var(--muted); font-size: 0.78em; font-family: var(--sans);
 }
 
 /* ── заголовки ─────────────────────────────────────────────────────────────── */
-/* Регистр — ОБЪЯВЛЕННАЯ форма (--doc-h-transform), а не правка текста: upper не инъективно,
-   и вписанный в содержание он уничтожил бы авторский регистр безвозвратно. Трекинг положителен,
-   потому что прописные набираются с разрядкой (Bringhurst §3.2.2); отрицательный кегельный
-   апрош здесь стоял под СМЕШАННЫЙ регистр и с прописными читался бы слипшимся. */
-h1, h2, h3 {
-  /* ОДИН МАРКЕР ОТЛИЧИЯ — И НЕ БОЛЕЕ (admin 2026-07-19). Полужирный, прописные и иной
-     кегль суть ТРИ независимых сигнала «это не следующий текст», и стоя разом они не
-     усиливают друг друга, а спорят: читатель получает перескок там, где довольно смены
-     регистра. Тратится РЕГИСТР — он и назван; вес и кегль возвращаются к телу. Апрош
-     маркером не считается: разрядка есть ИСПРАВЛЕНИЕ капители (прописные, набранные
-     солидом, слипаются), то есть часть того же единственного сигнала, а не второй.
-     Конгруэнтно объявленной родословной шкалы — «Bauhaus modernist preference for
-     restrained progressions» (text/typography.md::fs-ratio). */
-  text-transform: var(--doc-h-transform);
-  letter-spacing: var(--doc-h-tracking);
-  font-weight: inherit;
-  font-size: inherit;
-  text-wrap: balance;
+h1 {
+  font-size: clamp(1.6rem, 1.3rem + 1.6vw, 2.1rem);
+  line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; text-wrap: balance;
+  margin: 0 0 0.4em;
 }
-/* Титул тратит ВТОРОЙ шаг порядка — кегль; регистр уже потрачен на отличие от текста.
-   Один маркер на шаг: body ≺ h3 (регистр) ≺ h1 (кегль). */
-h1 { font-size: var(--doc-fs-h1); line-height: var(--doc-lh-h1); margin: 0 0 0.4em; }
 h2 {
-  line-height: var(--doc-lh-h2);
+  font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
+  line-height: 1.25; font-weight: 700; letter-spacing: -0.005em; text-wrap: balance;
   margin: 2.2em 0 0.6em; padding-top: 0.6em; border-top: 1px solid var(--rule);
 }
-h3 { line-height: var(--doc-lh-h3); margin: 1.6em 0 0.4em; color: var(--ink); }
-
-/* Разрядка прописных добавляет зазор и ПОСЛЕ последней литеры — перед знаком препинания он
-   читается как отбивка («Т Е З И С .»). Компенсируется тем же токеном, которым введён.
-   Пролёт закона темы: `_h_punct` эмитит этот span с 2026-07-11, а правила у него не было
-   вовсе — selectors(theme) ⊉ elements(projection), при законе в шапке этого файла. */
-.h-punct { margin-left: calc(-1 * var(--doc-h-tracking)); }
-.sub { color: var(--muted); font-size: 0.92em; margin: 0; text-wrap: balance; }
-
-/* Аббревиатура — роль, размеченная рендерером по морфологии (site_generator._abbr_smallcaps);
-   НАЧЕРТАНИЕ берётся из контура. В заголовках капитель не наступает: они целиком прописные по
-   объявленной форме, и капитель сделала бы аббревиатуру МЕЛЬЧЕ соседних литер. */
-abbr {
-  font-variant-caps: var(--doc-abbr-caps);
-  letter-spacing: var(--doc-abbr-tracking);
-  text-decoration: none;
+h3 {
+  font-size: 1.05em; line-height: 1.3; font-weight: 700;
+  margin: 1.6em 0 0.4em; color: var(--ink);
 }
+.sub { color: var(--muted); font-size: 0.92em; margin: 0; text-wrap: balance; }
 
 /* ── поток ─────────────────────────────────────────────────────────────────── */
 p { margin: 0 0 1.05em; }
@@ -195,14 +158,10 @@ td { color: var(--ink); }
 /* Меню представлений документа. Пункты — СЛЕДСТВИЕ наличных проекций, не фиксированный
  * список: появится новый формат — вырастет пункт (см. p_document_menu). */
 .doc-menu {
-  max-width: var(--measure); margin: 0 auto 2rem;
+  max-width: 34em; margin: 0 auto 2rem;
   display: flex; flex-wrap: wrap; gap: 0.5rem;
   font-family: var(--sans);
 }
-/* Регистр ряда — из контура: ярлыки меню равноправны, и «Распечатать» не может стоять
-   строчным рядом с ODT · TXT · PDF (admin 2026-07-19). Апрош тот же, что у прописных
-   заголовков: разрядка нужна капители, а не роли. */
-.doc-menu__item { text-transform: var(--doc-menu-transform); letter-spacing: var(--doc-h-tracking); }
 .doc-menu a, .doc-menu button {
   display: inline-flex; align-items: center;
   min-height: 44px; padding: 0 0.9rem;
@@ -232,11 +191,7 @@ td { color: var(--ink); }
      пространства имён, наравне с днём и ночью. Σ 2026-07-19: она была последней,
      жившей литералами, и Inv-CSS-tokens-from-Spec поймал её ровно в тот момент,
      когда пара день/ночь стала выводимой. */
-  /* Кегль ЗДЕСЬ НЕ ПЕРЕОБЪЯВЛЯЕТСЯ: --doc-fs-body имеет печатную валюацию (11.5pt), и от
-     неё индуцирована вся шкала листа. Второе объявление было бы вторым источником истины.
-     `margin: 0` — не косметика: UA держит у body поле 8px, и оно ложилось ПОВЕРХ поля @page,
-     давая замеренные 57.0pt при объявленных 51.0pt (18mm). `padding: 0` его не снимал. */
-  body { padding: 0; margin: 0; background: var(--bg); color: var(--ink); }
+  body { padding: 0; font-size: 11.5pt; background: var(--bg); color: var(--ink); }
   .theme-toggle, .doc-menu, .skip-link { display: none !important; }
   main, header, footer { max-width: none; }
   a { color: #000; text-decoration: underline; }
