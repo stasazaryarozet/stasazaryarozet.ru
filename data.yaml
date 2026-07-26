@@ -4,6 +4,7 @@
 lang: ru
 bio:
   title: Азарья Розет
-site:
+  # canonical живёт в bio.* — путь, который читает site_generator._canonical
+  # (схема корпуса: olgarozet то же); = domains.primary(azaryarozet).
   canonical: https://stasazaryarozet.ru
 events: []
