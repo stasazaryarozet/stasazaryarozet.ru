@@ -1608,6 +1608,37 @@ def _all_stages_non_terminal() -> frozenset[str]:
 effective_stage = _effective_stage
 
 
+def landing_surfaces() -> "frozenset[str]":
+    """Токены broadcast, при которых событие ПОЛУЧАЕТ ЛЕНДИНГ — данные Спеки
+    (entity-event.md::enforcement_data.landing_surfaces), не литерал гейта.
+
+    До 2026-08-08 предикат «эмитить лендинг» был написан ТРЕМЯ литералами `'site' in
+    broadcast` (broadcast_html.update_site, site_preview ×2), и рода «лендинг без
+    листинга на индексе» не существовало вовсе: страница-дело по UUID-адресу упиралась
+    в выбор между утечкой на главную и ложью в поле stage. Ось объявлена данными;
+    гейты — читатели ОДНОГО аксессора; новая поверхность рода = строка в Спеке.
+    Фолбэк {'site'} — прежнее поведение, если Спека недоступна (fail-open с прежней
+    семантикой, не с новой)."""
+    try:
+        from spec_data import vocabulary
+        return frozenset(vocabulary("entity-event", "landing_surfaces"))
+    except Exception as exc:
+        # Фолбэк ГРОМКИЙ: молчаливое сужение оси прятало бы страницы рода 'landing'
+        # (нелистингуемые) при рваной Спеке — тихий отказ ровно того сорта, который
+        # attestation запрещает; лог называет причину, семантика остаётся прежней.
+        import logging
+        logging.getLogger(__name__).warning(
+            "landing_surfaces: Spec unreadable (%s: %s) — falling back to {'site'}; "
+            "'landing'-events will NOT emit until the Spec reads again",
+            type(exc).__name__, exc)
+        return frozenset({"site"})
+
+
+def emits_landing(ev: "dict[str, Any]") -> bool:
+    """ЕДИНСТВЕННЫЙ предикат «у события есть лендинг». Все гейты эмиссии зовут его."""
+    return bool(landing_surfaces() & set(ev.get("broadcast") or ()))
+
+
 def sorted_events(d: dict[str, Any], surface: str = "site", now_iso: str | None = None) -> list[Any]:
     """Events filtered by render-surface marker AND effective stage, ASC by t_key.
 
@@ -3047,11 +3078,20 @@ def _render_sections_and_programme(ctx: "_LandingCtx") -> "list[str]":
                 f"<strong>Оплата:</strong> {int(pct)}% предоплата при "
                 "подтверждении участия. Условия по остатку — в финальной программе."
             )
-    # Language (RU is owner-default; explicit terms.language can override)
-    terms_items.append(
-        "<strong>Язык:</strong> программа на русском. С партнёрами и музеями "
-        "по необходимости — наш перевод."
-    )
+    # Language (RU is owner-default; explicit terms.language can override).
+    # ГЕЙТ — САМ УЗЕЛ ПОЛИТИКИ, а не литерал. Весь блок «Условия и сроки» есть проекция
+    # графового узла `event_policy`: оплата читает policy.design_travel, доступность —
+    # policy.accessibility, и только эта строка добавлялась БЕЗУСЛОВНО. У владельца без
+    # узла политики (stasazaryarozet.ru: дело о репатриации) она печатала на странице
+    # «программа на русском… с партнёрами и музеями» — утверждение о программе, которой
+    # нет: единственный литерал пережил деривацию и стал ложью ровно там, где род
+    # поверхности сменился. Полярность та же, что у landing_surfaces: НЕТ объявления ⇒
+    # НЕТ утверждения (Inv-FACT: говорить лишь то, что содержит Память).
+    if policy:
+        terms_items.append(
+            "<strong>Язык:</strong> программа на русском. С партнёрами и музеями "
+            "по необходимости — наш перевод."
+        )
     # Accessibility (System policy). Surface min_free_slots explicitly when
     # the policy guarantees a number (≥1) — admin spec: «минимум 1 бесплатное
     # место в каждом проекте». Falls back to soft phrasing only if policy

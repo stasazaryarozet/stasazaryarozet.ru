@@ -1,0 +1,7 @@
+{
+  "kind": "signup",
+  "slug": "13642c68-889c-4711-a4ae-a8be28e72c7c",
+  "transport_url": "",
+  "owner_email": "",
+  "note": "Drop Apps Script URL into transport_url to upgrade from mailto fallback."
+}
