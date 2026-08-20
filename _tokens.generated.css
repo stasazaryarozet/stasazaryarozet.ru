@@ -36,6 +36,8 @@
   --max-width: min(50em, 90vw);  /* length · knowledge/system/specifications/text/site.md */
   --measure: 34em;  /* length · knowledge/system/specifications/text/typography.md */
   --muted: #6f6a63;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
+  --radius-card: 12px;  /* length · knowledge/system/specifications/text/typography.md */
+  --radius-control: 8px;  /* length · knowledge/system/specifications/text/typography.md */
   --rail: 7.5em;  /* length · knowledge/system/specifications/text/typography.md */
   --rule: #e4e0da;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --sans: 'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;  /* font-stack · knowledge/system/specifications/text/typography.md */
@@ -58,6 +60,7 @@
   --tracking-caps-mid: 0.05em;  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-display: -0.02em;  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-display-soft: -0.018em;  /* tracking · knowledge/system/specifications/text/typography.md */
+  --tracking-emphasis: 0.02em;  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-fine: -0.002em;  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-micro: -0.005em;  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-spread-mild: 0.005em;  /* tracking · knowledge/system/specifications/text/typography.md */
