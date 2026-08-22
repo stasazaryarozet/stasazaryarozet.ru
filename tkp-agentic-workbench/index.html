@@ -60,7 +60,7 @@
   setInterval(window.__applyTheme, 300000);
 })();
 </script>
-<link rel="stylesheet" href="/styles.css?v=12aa1881aa">
+<link rel="stylesheet" href="/styles.css?v=749a873741">
 <meta name="dela:slug" content="tkp-agentic-workbench">
 
 </head>
@@ -68,6 +68,7 @@
 <a class="skip-link" href="#main">Перейти к содержанию</a>
 
 <button type="button" class="theme-toggle" data-theme-toggle aria-label="Тема: авто (по солнцу) — переключить">◐</button><script>(function(){var STATES=["auto", "day", "night"],GLYPHS={"auto": "◐", "day": "☀", "night": "☾"},LABELS={"auto": "Тема: авто (по солнцу)", "day": "Тема: дневная", "night": "Тема: ночная"},STORAGE_KEY="dela.theme.v1",MODE_VALUES=["day", "night"],SUFFIX=" — переключить";var btn=document.querySelector("[data-theme-toggle]");if(!btn)return;function current(){var s=null;try{s=localStorage.getItem(STORAGE_KEY);}catch(e){}return (MODE_VALUES.indexOf(s)!==-1)?s:STATES[0];}function paint(st){btn.textContent=GLYPHS[st]||GLYPHS[STATES[0]];btn.setAttribute("aria-label",(LABELS[st]||LABELS[STATES[0]])+SUFFIX);}paint(current());btn.addEventListener("click",function(){var i=STATES.indexOf(current());var next=STATES[(i+1)%STATES.length];try{localStorage.setItem(STORAGE_KEY,next);}catch(e){}if(window.__applyTheme)window.__applyTheme();paint(next);});})();</script>
+
 
 <main id="main" role="main">
   <article class="article-wrapper"><h1 id="ii-agent-dlya-buhgalterii-i-sistemnogo-administrirovaniya">ИИ‑агент для бухгалтерии и системного администрирования</h1>
@@ -117,6 +118,7 @@
 </main>
 
 
+<link rel="stylesheet" href="/media.css"><script src="/media.js" defer></script>
 <script>
 /* Display-window indicator 1[from ≤ now < until) per viewer clock
    (Inv-STF-window-derived, surface-temporal-fixpoint.md). The reveal
