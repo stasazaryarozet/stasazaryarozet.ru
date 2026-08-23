@@ -27,7 +27,6 @@
   --fs-s: 1.0625rem;  /* length · knowledge/system/specifications/text/typography.md */
   --fs-xl: 1.953rem;  /* length · knowledge/system/specifications/text/site.md */
   --fs-xs: max(0.800rem, var(--fs-body-min));  /* length · knowledge/system/specifications/text/site.md */
-  --gutter: 2em;  /* length · knowledge/system/specifications/text/site.md */
   --ink: #1e1c1a;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --lh-body: 1.55;  /* ratio · knowledge/system/specifications/text/typography.md */
   --lh-display: 0.95;  /* ratio · knowledge/system/specifications/text/typography.md */
@@ -37,7 +36,6 @@
   --max-width: min(50em, 90vw);  /* length · knowledge/system/specifications/text/site.md */
   --measure: 34em;  /* length · knowledge/system/specifications/text/typography.md */
   --muted: #6f6a63;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
-  --page: min(72em, 94vw);  /* length · knowledge/system/specifications/text/site.md */
   --radius-card: 12px;  /* length · knowledge/system/specifications/text/typography.md */
   --radius-control: 8px;  /* length · knowledge/system/specifications/text/typography.md */
   --rail: 7.5em;  /* length · knowledge/system/specifications/text/typography.md */
