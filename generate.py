@@ -1426,6 +1426,74 @@ observer.observe(footer);
 </script>"""
 
 
+def stamp_form_addresses(html: str) -> str:
+    """ПОКАЗ СТАВИТ ВЫЧИСЛЕННЫЕ ОТВЕТЫ АТРИБУТАМИ — регистр заголовка и адрес контракта.
+
+    Оба ответа суть одно движение: закон объявляет ИМЯ атрибута, показ ставит ЗНАЧЕНИЕ,
+    компилятор эмитит правило при том же адресе. Один разбор документа на оба — второй
+    был бы вторым чтением того же дерева.
+
+    `Inv-TYPO-heading-case-by-depth`.
+
+    Директива принципала 2026-08-25, дословно: «по умолчанию заголовки, кроме самых
+    подробных при многоуровневой иерархии, — прописными», и область её — ВСЁ, что
+    публикуется под его редакцией. Отсюда место: не рендерер класса, а ОДНА дверь, через
+    которую проходит всякая страница сайта.
+
+    Пусть L — множество глубин заголовков, РЕАЛИЗОВАННЫХ документом:
+        case(ℓ) = upper  ⟺  |L| = 1  ∨  ℓ < max L
+    Функция тотальна на L и ПЕРЕВЫВОДИТСЯ САМА, когда у главы появляется подзаголовок:
+    человеческое усилие = 0, и второго объявления регистра не существует.
+
+    L СПРАШИВАЕТСЯ У ДОКУМЕНТА, А НЕ У СЛОВАРЯ ТЕГОВ: страница вправе начинаться с h2 и
+    не иметь h4. Перечень селекторов выразить это не мог по построению — он не знает
+    оглавления (`text/landing.md::caps_eyebrow_selectors`, девять имён, объявлены
+    поглощаемыми этой дверью).
+
+    ПОКАЗ НЕСЁТ ВЫЧИСЛЕННЫЙ ОТВЕТ АТРИБУТОМ, А НЕ СЕЛЕКТОРОМ: имя атрибута и значения —
+    данные Спеки (`enforcement_data[Inv-TYPO-heading-case-by-depth]`), таблица держит
+    РОВНО ОДНО правило на значение, и разрядка привязана к регистру ТЕМ ЖЕ правилом
+    (`Inv-TYPO-consistent-tracking-caps`). Датум при этом остаётся строчным
+    (`Inv-TYPO-case-is-form-not-text`): он ищется, переносится, читается диктором и
+    приезжает в другой канал, где решение о регистре СВОЁ.
+
+    ОТКАЗ СПЕКИ ЕСТЬ ОТКАЗ, А НЕ НЕТРОНУТАЯ СТРАНИЦА. Первая редакция глотала любое
+    исключение и отдавала документ как есть — а страница без штампа НЕОТЛИЧИМА от
+    страницы, которой штамп не нужен, и закон исчезал бы молча со всего сайта разом
+    (`Inv-EPI-unknown-is-identity`, `Inv-CS-fail-loud`; гейт Π отказал этому дважды за
+    вечер и был прав оба раза). Документ БЕЗ ЗАГОЛОВКОВ — законный пустой случай и
+    возвращается как есть; нечитаемая Спека — отказ.
+    """
+    if not html:
+        return html
+    from spec_data import enforcement_data_for_invariant as _ed
+    law = _ed("Inv-TYPO-heading-case-by-depth")
+    if not law:
+        raise RuntimeError(
+            "site_generator: enforcement_data[Inv-TYPO-heading-case-by-depth] отсутствует — "
+            "регистр заголовков невыводим; молчаливый пропуск снял бы закон со ВСЕХ страниц")
+    attr = str(law.get("attr") or "")
+    vals = dict(law.get("values") or {})
+    if not attr or not vals:
+        raise RuntimeError(
+            "site_generator: закон регистра объявлен без `attr`/`values` — показу нечем "
+            "нести вычисленный ответ")
+    from bs4 import BeautifulSoup  # type: ignore[import-not-found]
+    soup = BeautifulSoup(html, "html.parser")
+    # АТРИБУТ ЗАВОДИТСЯ ТОЛЬКО ПОД ВЫЧИСЛЕННЫЙ ОТВЕТ. Регистр заголовка зависит от
+    # множества глубин, РЕАЛИЗОВАННЫХ документом, — CSS этого не знает, и потому ответ
+    # обязан ехать атрибутом. Контракт набора ни от чего в документе не зависит и потому
+    # адресуется корнем без всякого механизма (`reader_witness.address`).
+    heads = soup.find_all(_HEADING_TAG_RE)
+    if heads:
+        levels = sorted({int(h.name[1]) for h in heads})
+        deepest = levels[-1]
+        for h in heads:
+            key = "upper" if (len(levels) == 1 or int(h.name[1]) < deepest) else "plain"
+            h[attr] = key
+    return str(soup)
+
+
 def _layout(d: dict[str, Any], *, title: str, description: str, body: str,
             nav: bool = False, canonical: str | None = None,
             extra_head: str = "", footer: bool = True, structured: str | None = None,
@@ -1513,7 +1581,7 @@ def _layout(d: dict[str, Any], *, title: str, description: str, body: str,
     # `editorial` = event-landings + static-pages (concrete-paper / Outremer).
     # Single SoT — no parallel `:root`/`:has(.article-wrapper)` cascade hack.
     surface_attr = f' data-surface="{_t(surface)}"' if surface else ''
-    return f"""<!DOCTYPE html>
+    _page = f"""<!DOCTYPE html>
 <html lang="{_t(lang)}"{surface_attr}>
 <head>
 {head}
@@ -1584,6 +1652,10 @@ def _layout(d: dict[str, Any], *, title: str, description: str, body: str,
 </body>
 </html>
 """
+    # ШТАМП ЗДЕСЬ НЕ СТОИТ. Он стоял — и достигал ровно этой двери из семи, которыми
+    # страница становится байтами (замер 2026-08-26: лендинг 13/13, рассказ-показ 0/9,
+    # событие 0/14). Место закона о странице — НОСИТЕЛЬ страницы: `site_page.write_carrier`.
+    return _page
 
 
 # ── Invariants ───────────────────────────────────────────────────────
@@ -5372,7 +5444,7 @@ def retired_carriers(d: dict[str, Any]) -> "list[Path]":
 if __name__ == "__main__":
     d = load()
     for _pr in owner_projections(d):
-        _write(ROOT / _pr.file, _pr.render())
+        _page.write_carrier(ROOT / _pr.file, _pr.render())
         print(f"{_pr.label}: {_pr.file}")
     for _dead in retired_carriers(d):
         if _dead.is_dir():
