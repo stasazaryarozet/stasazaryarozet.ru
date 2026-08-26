@@ -76,7 +76,8 @@
   -webkit-hyphens: auto;  /* law · Inv-TYPO-hyphenation-per-language */
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1, "onum" 1, "pnum" 1;  /* law · Inv-TYPO-figures-context-aware */
   font-variant-numeric: oldstyle-nums proportional-nums;  /* law · Inv-TYPO-figures-context-aware */
-  hanging-punctuation: first;  /* law · Inv-TYPO-hanging-punctuation */
+  hanging-punctuation: first allow-end last;  /* law · Inv-TYPO-hanging-punctuation */
+  hyphenate-limit-chars: 6 3 3;  /* law · Inv-TYPO-hyphenation-per-language */
   hyphens: auto;  /* law · Inv-TYPO-hyphenation-per-language */
   text-wrap: pretty;  /* law · Inv-TYPO-text-wrap-pretty */
 }
