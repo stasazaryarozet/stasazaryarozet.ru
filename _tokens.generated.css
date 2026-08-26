@@ -7,6 +7,7 @@
 */
 :root {
   --accent: #8a4b12;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
+  --atom-min: 15rem;  /* length · knowledge/system/specifications/text/site.md */
   --baseline: 1.6925rem;  /* length · knowledge/system/specifications/text/typography.md */
   --bg: #faf9f7;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --breakpoint: 880px;  /* length · knowledge/system/specifications/text/site.md */
@@ -35,7 +36,9 @@
   --lh-loose: 1.5;  /* ratio · knowledge/system/specifications/text/typography.md */
   --lh-tight: 1.2;  /* ratio · knowledge/system/specifications/text/typography.md */
   --max-width: min(50em, 90vw);  /* length · knowledge/system/specifications/text/site.md */
-  --measure: 34em;  /* length · knowledge/system/specifications/text/typography.md */
+  --measure: 60ch;  /* length · knowledge/system/specifications/text/typography.md */
+  --measure-max: 75ch;  /* length · knowledge/system/specifications/text/typography.md */
+  --measure-min: 45ch;  /* length · knowledge/system/specifications/text/typography.md */
   --muted: #6f6a63;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --page: min(72em, 94vw);  /* length · knowledge/system/specifications/text/site.md */
   --radius-card: 12px;  /* length · knowledge/system/specifications/text/typography.md */
