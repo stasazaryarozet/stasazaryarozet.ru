@@ -56,7 +56,19 @@ html { -webkit-text-size-adjust: 100%; }
 body {
   background: var(--bg);
   color: var(--ink);
-  font: 400 clamp(1.1875rem, 1.05rem + 0.6vw, 1.3125rem)/1.45 Georgia, 'Times New Roman', serif;
+  /* СОКРАЩЁННОЕ СВОЙСТВО НЕ АДДИТИВНО, И ЗДЕСЬ ЭТО СТОИЛО ВСЕГО КОНТРАКТА НАБОРА.
+     `font:` сбрасывает ВСЕ свои составляющие к начальным значениям, включая
+     `font-variant-numeric`, — а контракт читателя объявлен при `:root`
+     (`_tokens.generated.css`, Inv-TYPO-figures-context-aware) и приходит сюда
+     НАСЛЕДОВАНИЕМ. Одна эта строка обнуляла его для ВСЕГО документа: замер
+     2026-08-26 — 720 находок «род цифр не дошёл до узла» на трёх страницах, то
+     есть 52 % всех причин удержания сайта. Ни один статический закон этого не
+     видел: правило существует, значения верны, а унаследованное молча стёрто.
+     Длиннописи вместо сокращения — и наследование доживает до узла. */
+  font-weight: 400;
+  font-size: clamp(1.1875rem, 1.05rem + 0.6vw, 1.3125rem);
+  line-height: 1.45;
+  font-family: Georgia, 'Times New Roman', serif;
   padding: clamp(1.25rem, 4vw, 3rem) 1.25rem 4rem;
 }
 
@@ -96,7 +108,7 @@ a {
 a:hover, a:focus-visible { text-decoration-thickness: 2px; }
 
 code {
-  font: 0.86em/1.4 var(--mono);
+  font-size: 0.86em; line-height: 1.4; font-family: var(--mono);
   background: var(--chip-bg); color: var(--chip-ink);
   padding: 0.12em 0.34em; border-radius: 4px;
   overflow-wrap: break-word;
@@ -125,7 +137,7 @@ figure { margin: 1.6em 0; }
 img { max-width: 100%; height: auto; display: block; border-radius: 6px; }
 figcaption {
   margin-top: 0.5em; color: var(--muted);
-  font: 0.82em/1.4 var(--sans); text-wrap: balance;
+  font-size: 0.82em; line-height: 1.4; font-family: var(--sans); text-wrap: balance;
 }
 audio { width: 100%; margin: 1.2em 0; }
 
@@ -151,7 +163,8 @@ td { color: var(--ink); }
   min-width: 44px; min-height: 44px;
   border: 1px solid var(--rule); border-radius: 10px;
   background: var(--chip-bg); color: var(--chip-ink);
-  font: 500 0.9rem/1 var(--sans); cursor: pointer; padding: 0 0.7rem;
+  font-weight: 500; font-size: 0.9rem; line-height: 1; font-family: var(--sans);
+  cursor: pointer; padding: 0 0.7rem;
 }
 .theme-toggle:hover, .theme-toggle:focus-visible { border-color: var(--accent); }
 
@@ -167,7 +180,8 @@ td { color: var(--ink); }
   min-height: 44px; padding: 0 0.9rem;
   border: 1px solid var(--rule); border-radius: 10px;
   background: var(--chip-bg); color: var(--chip-ink);
-  font: 500 0.82rem/1 var(--sans); text-decoration: none; cursor: pointer;
+  font-weight: 500; font-size: 0.82rem; line-height: 1; font-family: var(--sans);
+  text-decoration: none; cursor: pointer;
 }
 .doc-menu a:hover, .doc-menu a:focus-visible,
 .doc-menu button:hover, .doc-menu button:focus-visible { border-color: var(--accent); }
