@@ -56,45 +56,33 @@ html { -webkit-text-size-adjust: 100%; }
 body {
   background: var(--bg);
   color: var(--ink);
-  /* СОКРАЩЁННОЕ СВОЙСТВО НЕ АДДИТИВНО, И ЗДЕСЬ ЭТО СТОИЛО ВСЕГО КОНТРАКТА НАБОРА.
-     `font:` сбрасывает ВСЕ свои составляющие к начальным значениям, включая
-     `font-variant-numeric`, — а контракт читателя объявлен при `:root`
-     (`_tokens.generated.css`, Inv-TYPO-figures-context-aware) и приходит сюда
-     НАСЛЕДОВАНИЕМ. Одна эта строка обнуляла его для ВСЕГО документа: замер
-     2026-08-26 — 720 находок «род цифр не дошёл до узла» на трёх страницах, то
-     есть 52 % всех причин удержания сайта. Ни один статический закон этого не
-     видел: правило существует, значения верны, а унаследованное молча стёрто.
-     Длиннописи вместо сокращения — и наследование доживает до узла. */
-  font-weight: 400;
-  font-size: var(--doc-fs-body);
-  line-height: var(--doc-lh-body);
-  font-family: var(--doc-serif);
+  font: 400 clamp(1.1875rem, 1.05rem + 0.6vw, 1.3125rem)/1.45 Georgia, 'Times New Roman', serif;
   padding: clamp(1.25rem, 4vw, 3rem) 1.25rem 4rem;
 }
 
-main { max-width: var(--doc-measure); margin: 0 auto; }
-header { max-width: var(--doc-measure); margin: 0 auto 2.5rem; }
+main { max-width: 34em; margin: 0 auto; }
+header { max-width: 34em; margin: 0 auto 2.5rem; }
 footer {
-  max-width: var(--doc-measure); margin: 2.6rem auto 0;
-  color: var(--muted); font-size: var(--doc-fs-byline); font-family: var(--sans);
+  max-width: 34em; margin: 2.6rem auto 0;
+  color: var(--muted); font-size: 0.78em; font-family: var(--sans);
 }
 
 /* ── заголовки ─────────────────────────────────────────────────────────────── */
 h1 {
-  font-size: var(--doc-fs-h1);
-  line-height: var(--lh-tight); font-weight: 700; letter-spacing: var(--doc-tracking-h1); text-wrap: balance;
+  font-size: clamp(1.6rem, 1.3rem + 1.6vw, 2.1rem);
+  line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; text-wrap: balance;
   margin: 0 0 0.4em;
 }
 h2 {
-  font-size: var(--doc-fs-h2);
-  line-height: var(--doc-lh-h2); font-weight: 700; letter-spacing: var(--tracking-micro); text-wrap: balance;
+  font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
+  line-height: 1.25; font-weight: 700; letter-spacing: -0.005em; text-wrap: balance;
   margin: 2.2em 0 0.6em; padding-top: 0.6em; border-top: 1px solid var(--rule);
 }
 h3 {
-  font-size: var(--doc-fs-h3); line-height: var(--lh-tight); font-weight: 700;
+  font-size: 1.05em; line-height: 1.3; font-weight: 700;
   margin: 1.6em 0 0.4em; color: var(--ink);
 }
-.sub { color: var(--muted); font-size: var(--doc-fs-sub); margin: 0; text-wrap: balance; }
+.sub { color: var(--muted); font-size: 0.92em; margin: 0; text-wrap: balance; }
 
 /* ── поток ─────────────────────────────────────────────────────────────────── */
 p { margin: 0 0 1.05em; }
@@ -108,7 +96,7 @@ a {
 a:hover, a:focus-visible { text-decoration-thickness: 2px; }
 
 code {
-  font-size: var(--doc-fs-code); line-height: var(--doc-lh-caption); font-family: var(--mono);
+  font: 0.86em/1.4 var(--mono);
   background: var(--chip-bg); color: var(--chip-ink);
   padding: 0.12em 0.34em; border-radius: 4px;
   overflow-wrap: break-word;
@@ -127,7 +115,7 @@ blockquote {
 aside {
   margin: 1.4em 0; padding: 0.9em 1.1em;
   background: var(--chip-bg); color: var(--chip-ink);
-  border-radius: 8px; font-size: var(--doc-fs-chip);
+  border-radius: 8px; font-size: 0.94em;
 }
 
 hr { border: 0; border-top: 1px solid var(--rule); margin: 2em 0; }
@@ -137,7 +125,7 @@ figure { margin: 1.6em 0; }
 img { max-width: 100%; height: auto; display: block; border-radius: 6px; }
 figcaption {
   margin-top: 0.5em; color: var(--muted);
-  font-size: var(--doc-fs-caption); line-height: var(--doc-lh-caption); font-family: var(--sans); text-wrap: balance;
+  font: 0.82em/1.4 var(--sans); text-wrap: balance;
 }
 audio { width: 100%; margin: 1.2em 0; }
 
@@ -146,7 +134,7 @@ audio { width: 100%; margin: 1.2em 0; }
  * горизонтали не едет никогда (иначе на телефоне уезжает весь текст, не только таблица). */
 table {
   width: 100%; border-collapse: collapse;
-  margin: 1.5em 0; font-size: var(--doc-fs-aside); font-family: var(--sans);
+  margin: 1.5em 0; font-size: 0.88em; font-family: var(--sans);
   display: block; overflow-x: auto; -webkit-overflow-scrolling: touch;
 }
 thead { border-bottom: 2px solid var(--rule); }
@@ -163,15 +151,14 @@ td { color: var(--ink); }
   min-width: 44px; min-height: 44px;
   border: 1px solid var(--rule); border-radius: 10px;
   background: var(--chip-bg); color: var(--chip-ink);
-  font-weight: 500; font-size: var(--doc-fs-control); line-height: var(--lh-flush); font-family: var(--sans);
-  cursor: pointer; padding: 0 0.7rem;
+  font: 500 0.9rem/1 var(--sans); cursor: pointer; padding: 0 0.7rem;
 }
 .theme-toggle:hover, .theme-toggle:focus-visible { border-color: var(--accent); }
 
 /* Меню представлений документа. Пункты — СЛЕДСТВИЕ наличных проекций, не фиксированный
  * список: появится новый формат — вырастет пункт (см. p_document_menu). */
 .doc-menu {
-  max-width: var(--doc-measure); margin: 0 auto 2rem;
+  max-width: 34em; margin: 0 auto 2rem;
   display: flex; flex-wrap: wrap; gap: 0.5rem;
   font-family: var(--sans);
 }
@@ -180,8 +167,7 @@ td { color: var(--ink); }
   min-height: 44px; padding: 0 0.9rem;
   border: 1px solid var(--rule); border-radius: 10px;
   background: var(--chip-bg); color: var(--chip-ink);
-  font-weight: 500; font-size: var(--doc-fs-control-sm); line-height: var(--lh-flush); font-family: var(--sans);
-  text-decoration: none; cursor: pointer;
+  font: 500 0.82rem/1 var(--sans); text-decoration: none; cursor: pointer;
 }
 .doc-menu a:hover, .doc-menu a:focus-visible,
 .doc-menu button:hover, .doc-menu button:focus-visible { border-color: var(--accent); }
@@ -205,13 +191,13 @@ td { color: var(--ink); }
      пространства имён, наравне с днём и ночью. Σ 2026-07-19: она была последней,
      жившей литералами, и Inv-CSS-tokens-from-Spec поймал её ровно в тот момент,
      когда пара день/ночь стала выводимой. */
-  body { padding: 0; font-size: var(--doc-fs-print-body); background: var(--bg); color: var(--ink); }
+  body { padding: 0; font-size: 11.5pt; background: var(--bg); color: var(--ink); }
   .theme-toggle, .doc-menu, .skip-link { display: none !important; }
   main, header, footer { max-width: none; }
   a { color: #000; text-decoration: underline; }
   h1, h2, h3 { break-after: avoid; }
   table, figure, blockquote, aside { break-inside: avoid; }
-  table { display: table; font-size: var(--doc-fs-print-table); }
+  table { display: table; font-size: 9.5pt; }
   thead { display: table-header-group; }
   img { max-width: 100%; }
 }
