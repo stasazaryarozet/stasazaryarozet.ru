@@ -13,6 +13,26 @@
   --breakpoint: 880px;  /* length · knowledge/system/specifications/text/site.md */
   --chip-bg: #efece7;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --chip-ink: #3d3a35;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-aside: 0.88em;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-body: clamp(1.1875rem, 1.05rem + 0.6vw, 1.3125rem);  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-byline: 0.78em;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-caption: 0.82em;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-chip: 0.94em;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-code: 0.86em;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-control: 0.9rem;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-control-sm: 0.82rem;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-h1: clamp(1.6rem, 1.3rem + 1.6vw, 2.1rem);  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-h2: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-h3: 1.05em;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-print-body: 11.5pt;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-print-table: 9.5pt;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-fs-sub: 0.92em;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-lh-body: 1.45;  /* ratio · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-lh-caption: 1.4;  /* ratio · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-lh-h2: 1.25;  /* ratio · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-measure: 34em;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-serif: Georgia, 'Times New Roman', serif;  /* font-stack · knowledge/people/azaryarozet/site/_design.yaml */
+  --doc-tracking-h1: -0.01em;  /* tracking · knowledge/people/azaryarozet/site/_design.yaml */
   --focus-outline-min: 2px;  /* length · knowledge/system/specifications/text/site.md */
   --font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);  /* length · knowledge/system/specifications/text/site.md */
   --font-size-h1: clamp(2.5rem, 1.5rem + 5vw, 7rem);  /* length · knowledge/system/specifications/text/site.md */
@@ -76,13 +96,15 @@
   -webkit-hyphens: auto;  /* law · Inv-TYPO-hyphenation-per-language */
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1, "onum" 1, "pnum" 1;  /* law · Inv-TYPO-figures-context-aware */
   font-variant-numeric: oldstyle-nums proportional-nums;  /* law · Inv-TYPO-figures-context-aware */
-  hanging-punctuation: first;  /* law · Inv-TYPO-hanging-punctuation */
+  hanging-punctuation: first allow-end last;  /* law · Inv-TYPO-hanging-punctuation */
+  hyphenate-limit-chars: 6 3 3;  /* law · Inv-TYPO-hyphenation-per-language */
   hyphens: auto;  /* law · Inv-TYPO-hyphenation-per-language */
   text-wrap: pretty;  /* law · Inv-TYPO-text-wrap-pretty */
 }
 :root :is(h1,h2,h3,h4,h5,h6) {
-  -webkit-hyphens: manual;  /* law · :root :is(h1,h2,h3,h4,h5,h6) · Inv-TYPO-hyphenation-per-language */
-  hyphens: manual;  /* law · :root :is(h1,h2,h3,h4,h5,h6) · Inv-TYPO-hyphenation-per-language */
+  -webkit-hyphens: auto;  /* law · :root :is(h1,h2,h3,h4,h5,h6) · Inv-TYPO-hyphenation-per-language */
+  hyphenate-limit-chars: 10 4 4;  /* law · :root :is(h1,h2,h3,h4,h5,h6) · Inv-TYPO-hyphenation-per-language */
+  hyphens: auto;  /* law · :root :is(h1,h2,h3,h4,h5,h6) · Inv-TYPO-hyphenation-per-language */
 }
 :root[data-surface="*"] {
   --math-rel-shift: 0.09em;  /* length · :root[data-surface="*"] · knowledge/system/specifications/text/site.md */
