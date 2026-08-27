@@ -1,28 +1,29 @@
 <!DOCTYPE html>
-<html lang="ru" data-surface="editorial">
+
+<html data-surface="editorial" lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ИИ-станция под Gemma 4 31B — полный контекст 256K</title>
-<meta name="description" content="Рабочая станция локального инференса под Gemma 4 31B q8 с полным окном 256 тыс токенов и автокомплитом. Покупка или аренда GPU в России — конфигурации, цены…">
-<link rel="canonical" href="https://stasazaryarozet.ru/tkp-gemma-local-station/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ИИ-станция под Gemma 4 31B — полный контекст 256K">
-<meta property="og:description" content="Рабочая станция локального инференса под Gemma 4 31B q8 с полным окном 256 тыс токенов и автокомплитом. Покупка или аренда GPU в России — конфигурации, цены…">
-<meta property="og:url" content="https://stasazaryarozet.ru/tkp-gemma-local-station/">
-<meta property="og:image" content="">
-<meta property="og:locale" content="ru_RU">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ИИ-станция под Gemma 4 31B — полный контекст 256K">
-<meta name="twitter:description" content="Рабочая станция локального инференса под Gemma 4 31B q8 с полным окном 256 тыс токенов и автокомплитом. Покупка или аренда GPU в России — конфигурации, цены…">
-<meta name="twitter:image" content="">
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>ИИ-станция под Gemma 4 31B — полный контекст 256K</title>
+<meta content="Рабочая станция локального инференса под Gemma 4 31B q8 с полным окном 256 тыс токенов и автокомплитом. Покупка или аренда GPU в России — конфигурации, цены…" name="description"/>
+<link href="https://stasazaryarozet.ru/tkp-gemma-local-station/" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="ИИ-станция под Gemma 4 31B — полный контекст 256K" property="og:title"/>
+<meta content="Рабочая станция локального инференса под Gemma 4 31B q8 с полным окном 256 тыс токенов и автокомплитом. Покупка или аренда GPU в России — конфигурации, цены…" property="og:description"/>
+<meta content="https://stasazaryarozet.ru/tkp-gemma-local-station/" property="og:url"/>
+<meta content="" property="og:image"/>
+<meta content="ru_RU" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="ИИ-станция под Gemma 4 31B — полный контекст 256K" name="twitter:title"/>
+<meta content="Рабочая станция локального инференса под Gemma 4 31B q8 с полным окном 256 тыс токенов и автокомплитом. Покупка или аренда GPU в России — конфигурации, цены…" name="twitter:description"/>
+<meta content="" name="twitter:image"/>
+<link href="/manifest.json" rel="manifest"/>
+<meta content="#ffffff" media="(prefers-color-scheme: light)" name="theme-color"/>
+<meta content="#111111" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <!-- Inv-WEB-font-preconnect (text/site.md): early DNS+TLS handshake к font CDN.
      Reduces FCP/LCP by ~100-300ms на TLS-cold connections. -->
-<link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
-<link rel="dns-prefetch" href="https://fonts.bunny.net">
+<link crossorigin="" href="https://fonts.bunny.net" rel="preconnect"/>
+<link href="https://fonts.bunny.net" rel="dns-prefetch"/>
 <script>
 // Day/night theme — user-override-first, then solar-automatic. FOUC-critical:
 // runs synchronously in <head> before paint. Resolution: read dela.theme.v1
@@ -60,55 +61,49 @@
   setInterval(window.__applyTheme, 300000);
 })();
 </script>
-<link rel="stylesheet" href="/styles.css?v=9015e06e6f">
-<meta name="dela:slug" content="tkp-gemma-local-station">
-
+<link href="/styles.css?v=c1ded4f562" rel="stylesheet"/>
+<meta content="tkp-gemma-local-station" name="dela:slug"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Перейти к содержанию</a>
-
-<button type="button" class="theme-toggle" data-theme-toggle aria-label="Тема: авто (по солнцу) — переключить">◐</button><script>(function(){var STATES=["auto", "day", "night"],GLYPHS={"auto": "◐", "day": "☀", "night": "☾"},LABELS={"auto": "Тема: авто (по солнцу)", "day": "Тема: дневная", "night": "Тема: ночная"},STORAGE_KEY="dela.theme.v1",MODE_VALUES=["day", "night"],SUFFIX=" — переключить";var btn=document.querySelector("[data-theme-toggle]");if(!btn)return;function current(){var s=null;try{s=localStorage.getItem(STORAGE_KEY);}catch(e){}return (MODE_VALUES.indexOf(s)!==-1)?s:STATES[0];}function paint(st){btn.textContent=GLYPHS[st]||GLYPHS[STATES[0]];btn.setAttribute("aria-label",(LABELS[st]||LABELS[STATES[0]])+SUFFIX);}paint(current());btn.addEventListener("click",function(){var i=STATES.indexOf(current());var next=STATES[(i+1)%STATES.length];try{localStorage.setItem(STORAGE_KEY,next);}catch(e){}if(window.__applyTheme)window.__applyTheme();paint(next);});})();</script>
-
-
+<button aria-label="Тема: авто (по солнцу) — переключить" class="theme-toggle" data-theme-toggle="" type="button">◐</button><script>(function(){var STATES=["auto", "day", "night"],GLYPHS={"auto": "◐", "day": "☀", "night": "☾"},LABELS={"auto": "Тема: авто (по солнцу)", "day": "Тема: дневная", "night": "Тема: ночная"},STORAGE_KEY="dela.theme.v1",MODE_VALUES=["day", "night"],SUFFIX=" — переключить",CYCLE=["day", "night"],MODE_ATTR="data-theme";var btn=document.querySelector("[data-theme-toggle]");if(!btn)return;function current(){var s=null;try{s=localStorage.getItem(STORAGE_KEY);}catch(e){}return (MODE_VALUES.indexOf(s)!==-1)?s:STATES[0];}function paint(st){btn.textContent=GLYPHS[st]||GLYPHS[STATES[0]];btn.setAttribute("aria-label",(LABELS[st]||LABELS[STATES[0]])+SUFFIX);}paint(current());function rendered(){var a=null;try{a=document.documentElement.getAttribute(MODE_ATTR);}catch(e){}return (CYCLE.indexOf(a)!==-1)?a:null;}btn.addEventListener("click",function(){var seen=rendered();var i=CYCLE.indexOf(seen);var next=CYCLE[(i+1)%CYCLE.length];try{localStorage.setItem(STORAGE_KEY,next);}catch(e){}if(window.__applyTheme)window.__applyTheme();paint(next);});})();</script>
 <main id="main" role="main">
-  <article class="article-wrapper"><h1 id="ii-stantsiya-pod-gemma-4-31b-polnyy-kontekst-256k">ИИ‑станция под Gemma 4 31B — полный контекст 256K</h1>
+<article class="article-wrapper"><h1 data-case="upper" id="ii-stantsiya-pod-gemma-4-31b-polnyy-kontekst-256k">ИИ‑станция под Gemma 4 31B — полный контекст 256K</h1>
 <p><span class="l">Задача: Gemma 4 31B в формате q8 с полным окном в 256 тысяч токенов, рядом — быстрый автокомплит класса Qwen2.5-Coder-7B. Работа командой.</span></p>
-<p><span class="l">Один сеанс с полным окном занимает 48–59 <abbr>ГБ</abbr> видеопамяти: веса 33,5 <abbr>ГБ</abbr> плюс память контекста — 11 <abbr>ГБ</abbr> в сжатом виде или 22 <abbr>ГБ</abbr> в полной точности. Есть два пути.</span></p>
-<p><span class="l"><strong>Купить станцию.</strong> Карта на 96 <abbr>ГБ</abbr> (<abbr>RTX</abbr> <abbr>PRO</abbr> 6000 Blackwell, ≈1,0–1,15 млн ₽) закрывает запрос целиком и оставляет запас на второй сеанс. Дешевле — 64 <abbr>ГБ</abbr> из двух <abbr>RTX</abbr> 5090 (≈0,6–0,7 млн ₽) или 48 <abbr>ГБ</abbr> на модифицированной 4090 (≈0,25–0,4 млн ₽, без гарантии). Автокомплит выносится на отдельную карту за ≈50 тыс ₽, чтобы подсказки не ждали большую модель. Станция целиком — примерно 1,2–1,5 млн ₽.</span></p>
-<p><span class="l"><strong>Арендовать <abbr>GPU</abbr> в российском облаке.</strong> A100 на 80 <abbr>ГБ</abbr> — от ≈212 ₽/час с посекундной тарификацией: рабочий день обходится в ≈25–40 тыс ₽/мес, круглосуточная работа — ≈150 тыс ₽/мес. На одной такой карте помещаются и Gemma с полным окном, и автокомплит. Начать можно сегодня без вложений; при постоянной командной нагрузке покупка окупается за 8–10 месяцев, при дневном режиме аренда выгоднее ещё около трёх лет.</span></p>
-<p><span class="l">Данные: на своей станции они не покидают офис; при аренде уходят на серверы провайдера (в России) — чувствительное закрывается фильтром обратимого обезличивания: наружу идут подменённые имена и реквизиты, словарь замен остаётся у вас.</span></p>
-<hr class="doc-part-rule" aria-hidden="true">
-<h3 id="otkuda-chisla">Откуда числа</h3>
+<p><span class="l">Один сеанс с полным окном занимает 48–59 <abbr>ГБ</abbr> видеопамяти: веса 33,5 <abbr>ГБ</abbr> плюс память контекста — 11 <abbr>ГБ</abbr> в сжатом виде или 22 <abbr>ГБ</abbr> в полной точности. Есть два пути.</span></p>
+<p><span class="l"><strong>Купить станцию.</strong> Карта на 96 <abbr>ГБ</abbr> (<abbr>RTX</abbr> <abbr>PRO</abbr> 6000 Blackwell, ≈1,0–1,15 млн ₽) закрывает запрос целиком и оставляет запас на второй сеанс. Дешевле — 64 <abbr>ГБ</abbr> из двух <abbr>RTX</abbr> 5090 (≈0,6–0,7 млн ₽) или 48 <abbr>ГБ</abbr> на модифицированной 4090 (≈0,25–0,4 млн ₽, без гарантии). Автокомплит выносится на отдельную карту за ≈50 тыс ₽, чтобы подсказки не ждали большую модель. Станция целиком — примерно 1,2–1,5 млн ₽.</span></p>
+<p><span class="l"><strong>Арендовать <abbr>GPU</abbr> в российском облаке.</strong> A100 на 80 <abbr>ГБ</abbr> — от ≈212 ₽/час с посекундной тарификацией: рабочий день обходится в ≈25–40 тыс ₽/мес, круглосуточная работа — ≈150 тыс ₽/мес. На одной такой карте помещаются и Gemma с полным окном, и автокомплит. Начать можно сегодня без вложений; при постоянной командной нагрузке покупка окупается за 8–10 месяцев, при дневном режиме аренда выгоднее ещё около трёх лет.</span></p>
+<p><span class="l">Данные: на своей станции они не покидают офис; при аренде уходят на серверы провайдера (в России) — чувствительное закрывается фильтром обратимого обезличивания: наружу идут подменённые имена и реквизиты, словарь замен остаётся у вас.</span></p>
+<hr aria-hidden="true" class="doc-part-rule"/>
+<h3 data-case="plain" id="otkuda-chisla">Откуда числа</h3>
 <p><span class="l">Видеопамять складывается из весов, памяти контекста и рабочих буферов.</span></p>
 <p><span class="l">Веса: 31 млрд параметров в q8 — 33,5 <abbr>ГБ</abbr>, константа.</span></p>
-<p><span class="l">Память контекста (<abbr>KV</abbr>-кэш) растёт с окном. У Gemma 4 шестьдесят слоёв: пятьдесят скользящих с окном 1024 и десять глобальных, у которых ключи и значения объединены. На 262 144 токена глобальные слои занимают 21,5 <abbr>ГБ</abbr> в полной точности или 10,7 <abbr>ГБ</abbr> в q8; скользящие добавляют меньше гигабайта. Каждый параллельный сеанс несёт свой контекст — при командной работе именно контекст, а не веса, определяет размер парка.</span></p>
+<p><span class="l">Память контекста (<abbr>KV</abbr>-кэш) растёт с окном. У Gemma 4 шестьдесят слоёв: пятьдесят скользящих с окном 1024 и десять глобальных, у которых ключи и значения объединены. На 262 144 токена глобальные слои занимают 21,5 <abbr>ГБ</abbr> в полной точности или 10,7 <abbr>ГБ</abbr> в q8; скользящие добавляют меньше гигабайта. Каждый параллельный сеанс несёт свой контекст — при командной работе именно контекст, а не веса, определяет размер парка.</span></p>
 <p><span class="l">Буферы — 2–4 <abbr>ГБ</abbr>.</span></p>
 <p><span class="l">Один сеанс: 33,5 + 22,3 + 3 ≈ 59 <abbr>ГБ</abbr> в полной точности контекста, ≈48 <abbr>ГБ</abbr> в q8.</span></p>
-<h3 id="pokupka">Покупка</h3>
-<table><thead><tr><th>Видеопамять</th><th>Состав</th><th>Что даёт</th><th style="text-align:right">Цена карт</th></tr></thead><tbody><tr><td>96 ГБ</td><td>1× RTX PRO 6000 Blackwell</td><td>256K в полной точности + запас (2-й сеанс или автокомплит рядом)</td><td style="text-align:right">0,95–1,14 млн ₽</td></tr><tr><td>64 ГБ</td><td>2× RTX 5090 32 ГБ</td><td>256K со сжатым KV свободно; с полным — впритык</td><td style="text-align:right">≈0,6–0,7 млн ₽</td></tr><tr><td>48 ГБ</td><td>1× 4090 48 ГБ (мод)</td><td>один сеанс, только сжатый KV, без гарантии</td><td style="text-align:right">≈0,25–0,4 млн ₽</td></tr><tr><td>+16 ГБ</td><td>RTX 5060 Ti 16 ГБ</td><td>автокомплит изолированно</td><td style="text-align:right">≈0,05 млн ₽</td></tr></tbody></table>
-<p><span class="l">Платформа под любой вариант — 128–256 <abbr>ГБ</abbr> <abbr>DDR</abbr>5, <abbr>PCI</abbr>e5 x16 на карту, блок питания 1600 Вт, два <abbr>NVM</abbr>e по 4 <abbr>ТБ</abbr> — ещё 0,2–0,3 млн ₽.</span></p>
-<h3 id="arenda-v-rossiyskom-oblake">Аренда в российском облаке</h3>
+<h3 data-case="plain" id="pokupka">Покупка</h3>
+<table><thead><tr><th>Видеопамять</th><th>Состав</th><th>Что даёт</th><th style="text-align:right">Цена карт</th></tr></thead><tbody><tr><td>96 ГБ</td><td>1× RTX PRO 6000 Blackwell</td><td>256K в полной точности + запас (2-й сеанс или автокомплит рядом)</td><td style="text-align:right">0,95–1,14 млн ₽</td></tr><tr><td>64 ГБ</td><td>2× RTX 5090 32 ГБ</td><td>256K со сжатым KV свободно; с полным — впритык</td><td style="text-align:right">≈0,6–0,7 млн ₽</td></tr><tr><td>48 ГБ</td><td>1× 4090 48 ГБ (мод)</td><td>один сеанс, только сжатый KV, без гарантии</td><td style="text-align:right">≈0,25–0,4 млн ₽</td></tr><tr><td>+16 ГБ</td><td>RTX 5060 Ti 16 ГБ</td><td>автокомплит изолированно</td><td style="text-align:right">≈0,05 млн ₽</td></tr></tbody></table>
+<p><span class="l">Платформа под любой вариант — 128–256 <abbr>ГБ</abbr> <abbr>DDR</abbr>5, <abbr>PCI</abbr>e5 x16 на карту, блок питания 1600 Вт, два <abbr>NVM</abbr>e по 4 <abbr>ТБ</abbr> — ещё 0,2–0,3 млн ₽.</span></p>
+<h3 data-case="plain" id="arenda-v-rossiyskom-oblake">Аренда в российском облаке</h3>
 <p><span class="l">Почасовые цены июля 2026, immers.cloud — тарификация посекундная, вход от 100 ₽ предоплаты:</span></p>
-<table><thead><tr><th>Карта</th><th>Память</th><th style="text-align:right">₽/час</th><th>Полное окно 256K</th></tr></thead><tbody><tr><td>A100</td><td>80 ГБ</td><td style="text-align:right">от 212</td><td>да, в полной точности; рядом встаёт автокомплит</td></tr><tr><td>H100</td><td>80 ГБ</td><td style="text-align:right">от 342</td><td>да, быстрее A100</td></tr><tr><td>2× RTX 5090</td><td>64 ГБ</td><td style="text-align:right">от 262</td><td>да, со сжатым KV свободно</td></tr><tr><td>2× RTX 3090</td><td>48 ГБ</td><td style="text-align:right">от 134</td><td>только сжатый KV, без запаса</td></tr></tbody></table>
+<table><thead><tr><th>Карта</th><th>Память</th><th style="text-align:right">₽/час</th><th>Полное окно 256K</th></tr></thead><tbody><tr><td>A100</td><td>80 ГБ</td><td style="text-align:right">от 212</td><td>да, в полной точности; рядом встаёт автокомплит</td></tr><tr><td>H100</td><td>80 ГБ</td><td style="text-align:right">от 342</td><td>да, быстрее A100</td></tr><tr><td>2× RTX 5090</td><td>64 ГБ</td><td style="text-align:right">от 262</td><td>да, со сжатым KV свободно</td></tr><tr><td>2× RTX 3090</td><td>48 ГБ</td><td style="text-align:right">от 134</td><td>только сжатый KV, без запаса</td></tr></tbody></table>
 <p><span class="l">У Selectel лендинг цен не публикует — расчёт в их калькуляторе; каталожный ориентир A100 80 <abbr>ГБ</abbr> — от 188 ₽/час, на странице заявлена скидка −21% на A100.</span></p>
-<p><span class="l">Месяц A100 80 <abbr>ГБ</abbr>: у immers.cloud дневной режим (8 часов × 22 дня) ≈ 37 тыс ₽, круглосуточно ≈ 152 тыс ₽; у Selectel по ориентиру 188 ₽/час — ≈ 33 тыс и ≈ 135 тыс ₽ (сверить в калькуляторе при заказе). Против станции за 1,2–1,5 млн ₽ это значит: при круглосуточной командной нагрузке покупка окупается за 8–11 месяцев, при дневной — за 32–45. Практичный порядок: начать с аренды, замерить реальную нагрузку, покупать под неё.</span></p>
-<h3 id="dannye-i-obezlichivanie">Данные и обезличивание</h3>
+<p><span class="l">Месяц A100 80 <abbr>ГБ</abbr>: у immers.cloud дневной режим (8 часов × 22 дня) ≈ 37 тыс ₽, круглосуточно ≈ 152 тыс ₽; у Selectel по ориентиру 188 ₽/час — ≈ 33 тыс и ≈ 135 тыс ₽ (сверить в калькуляторе при заказе). Против станции за 1,2–1,5 млн ₽ это значит: при круглосуточной командной нагрузке покупка окупается за 8–11 месяцев, при дневной — за 32–45. Практичный порядок: начать с аренды, замерить реальную нагрузку, покупать под неё.</span></p>
+<h3 data-case="plain" id="dannye-i-obezlichivanie">Данные и обезличивание</h3>
 <p><span class="l">На своей станции данные не покидают офис — главный аргумент покупки.</span></p>
-<p><span class="l">При аренде вычисления идут в дата-центре провайдера. Серверы перечисленных провайдеров стоят в России — требование 152-<abbr>ФЗ</abbr> о базах данных на территории <abbr>РФ</abbr> соблюдается. Но это всё же чужие серверы, поэтому чувствительное — имена, реквизиты, коммерческая тайна — закрывается фильтром обратимого обезличивания: наружу уходят подменённые значения, словарь замен остаётся у вас, ответ восстанавливается обратно; неразрешённая подмена останавливает выдачу. Фильтр собирается из открытых компонентов — Presidio плюс правила для русских реквизитов — и работает на обычном процессоре, без видеокарты.</span></p>
-<h3 id="komanda">Команда</h3>
-<p><span class="l">На своей станции токены не тарифицируются — расход нулевой при любом объёме работы; в аренде платится время сервера, не токены. Масштаб задаёт число параллельных сеансов: каждый полный контекст добавляет 11,2 <abbr>ГБ</abbr> в q8 или 22,3 <abbr>ГБ</abbr> в полной точности. Карта на 96 <abbr>ГБ</abbr> держит модель и два полных или пять сжатых сеансов; команде больше — вторая карта, вторая станция или облачный сервер рядом. Модель раздаёт сервер v<abbr>LLM</abbr> — стандартный <abbr>API</abbr>, к которому подключаются привычные инструменты, сразу на все рабочие места.</span></p>
-<h3 id="skorost">Скорость</h3>
+<p><span class="l">При аренде вычисления идут в дата-центре провайдера. Серверы перечисленных провайдеров стоят в России — требование 152-<abbr>ФЗ</abbr> о базах данных на территории <abbr>РФ</abbr> соблюдается. Но это всё же чужие серверы, поэтому чувствительное — имена, реквизиты, коммерческая тайна — закрывается фильтром обратимого обезличивания: наружу уходят подменённые значения, словарь замен остаётся у вас, ответ восстанавливается обратно; неразрешённая подмена останавливает выдачу. Фильтр собирается из открытых компонентов — Presidio плюс правила для русских реквизитов — и работает на обычном процессоре, без видеокарты.</span></p>
+<h3 data-case="plain" id="komanda">Команда</h3>
+<p><span class="l">На своей станции токены не тарифицируются — расход нулевой при любом объёме работы; в аренде платится время сервера, не токены. Масштаб задаёт число параллельных сеансов: каждый полный контекст добавляет 11,2 <abbr>ГБ</abbr> в q8 или 22,3 <abbr>ГБ</abbr> в полной точности. Карта на 96 <abbr>ГБ</abbr> держит модель и два полных или пять сжатых сеансов; команде больше — вторая карта, вторая станция или облачный сервер рядом. Модель раздаёт сервер v<abbr>LLM</abbr> — стандартный <abbr>API</abbr>, к которому подключаются привычные инструменты, сразу на все рабочие места.</span></p>
+<h3 data-case="plain" id="skorost">Скорость</h3>
 <p><span class="l">Скорость вывода упирается в пропускную способность памяти: на картах с 1792 <abbr>ГБ</abbr>/с (<abbr>PRO</abbr> 6000, 5090) — реально 35–45 токенов в секунду. Первое прочтение полного 256K-контекста занимает две-три минуты и происходит один раз — прочитанное кэшируется.</span></p>
-<h3 id="avtokomplit">Автокомплит</h3>
-<p><span class="l">Qwen2.5-Coder-7B q8 занимает 8,1 <abbr>ГБ</abbr> весов и до 12 <abbr>ГБ</abbr> с контекстом и батчем — своя карта на 16 <abbr>ГБ</abbr> или угол арендованной A100. Отдельная карта нужна не ради памяти, а ради скорости отклика: подсказки должны приходить мгновенно, не стоя в очереди, пока большая модель читает свой длинный контекст.</span></p>
-<p><span class="l">Сегодняшний уровень «7B-автокомплита» — Qwen3-Coder-30B-A3B: качество модели на 30 млрд параметров при скорости трёхмиллиардной — на каждом шаге работает лишь малая часть весов. Родное окно 256K, в сжатии Q4 — 19 <abbr>ГБ</abbr>. Встаёт на карту 24–32 <abbr>ГБ</abbr>, если нужен автокомплит сильнее.</span></p>
-<h3 id="proverit-pri-zakupke">Проверить при закупке</h3>
-<p><span class="l">Поддержку объединённых ключей-значений глобальных слоёв Gemma 4 в выбранном сервере (v<abbr>LLM</abbr>, llama.cpp): без неё память контекста глобальных слоёв удваивается — плюс 10,7 <abbr>ГБ</abbr> в q8 или плюс 21,5 в полной точности — и 48-<abbr>ГБ</abbr> конфигурация перестаёт держать 256K.</span></p>
-<p><span class="l">Для кодовых задач на том же железе Qwen3-Coder-30B-A3B даёт качество кода не ниже при десятикратной скорости — один парк обслуживает обе модели.</span></p></article>
+<h3 data-case="plain" id="avtokomplit">Автокомплит</h3>
+<p><span class="l">Qwen2.5-Coder-7B q8 занимает 8,1 <abbr>ГБ</abbr> весов и до 12 <abbr>ГБ</abbr> с контекстом и батчем — своя карта на 16 <abbr>ГБ</abbr> или угол арендованной A100. Отдельная карта нужна не ради памяти, а ради скорости отклика: подсказки должны приходить мгновенно, не стоя в очереди, пока большая модель читает свой длинный контекст.</span></p>
+<p><span class="l">Сегодняшний уровень «7B-автокомплита» — Qwen3-Coder-30B-A3B: качество модели на 30 млрд параметров при скорости трёхмиллиардной — на каждом шаге работает лишь малая часть весов. Родное окно 256K, в сжатии Q4 — 19 <abbr>ГБ</abbr>. Встаёт на карту 24–32 <abbr>ГБ</abbr>, если нужен автокомплит сильнее.</span></p>
+<h3 data-case="plain" id="proverit-pri-zakupke">Проверить при закупке</h3>
+<p><span class="l">Поддержку объединённых ключей-значений глобальных слоёв Gemma 4 в выбранном сервере (v<abbr>LLM</abbr>, llama.cpp): без неё память контекста глобальных слоёв удваивается — плюс 10,7 <abbr>ГБ</abbr> в q8 или плюс 21,5 в полной точности — и 48-<abbr>ГБ</abbr> конфигурация перестаёт держать 256K.</span></p>
+<p><span class="l">Для кодовых задач на том же железе Qwen3-Coder-30B-A3B даёт качество кода не ниже при десятикратной скорости — один парк обслуживает обе модели.</span></p></article>
 </main>
-
-
-<link rel="stylesheet" href="/media.css"><script src="/media.js" defer></script>
+<link href="/media.css" rel="stylesheet"/><script defer="" src="/media.js"></script>
 <script>
 /* Display-window indicator 1[from ≤ now < until) per viewer clock
    (Inv-STF-window-derived, surface-temporal-fixpoint.md). The reveal
