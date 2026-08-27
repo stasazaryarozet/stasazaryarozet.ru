@@ -109,8 +109,8 @@
 :root[data-surface="*"] {
   --math-rel-shift: 0.09em;  /* length · :root[data-surface="*"] · knowledge/system/specifications/text/site.md */
 }
-:root[data-surface="editorial"] .article-wrapper {
-  --accent: #1E407C;  /* color · :root[data-surface="editorial"] .article-wrapper · knowledge/system/specifications/text/site.md */
+:root[data-surface="editorial"] {
+  --accent: #1E407C;  /* color · :root[data-surface="editorial"] · knowledge/system/specifications/text/site.md */
 }
 :root[data-theme="night"] {
   --accent: #d99a5b;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
