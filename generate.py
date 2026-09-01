@@ -5030,20 +5030,52 @@ def artworks_of(d: dict[str, Any]) -> "list[dict[str, Any]]":
     return out
 
 
+def _raw_works(d: dict[str, Any]) -> "list[dict[str, Any]]":
+    """Строки `artworks` как записаны — структура Объекта, без деривации представлений."""
+    return [w for w in (d.get("artworks") or []) if isinstance(w, dict)]
+
+
+def series_record_index(d: dict[str, Any], slug: str) -> "int | None":
+    """Индекс ЗАПИСИ серии в `art_series` (база расслоения: имя, общая часть поста) — None,
+    если серия объявлена лишь работами: слой без записи законен, запись без слоя — пустая база."""
+    for i, r in enumerate(d.get("art_series") or []):
+        if isinstance(r, dict) and str(r.get("id") or "").strip() == slug:
+            return i
+    return None
+
+
+def series_record(d: dict[str, Any], slug: str) -> dict[str, Any]:
+    """Запись серии или {} — «не объявлена» есть факт, не отказ."""
+    i = series_record_index(d, slug)
+    return (d.get("art_series") or [])[i] if i is not None else {}
+
+
 def art_series(d: dict[str, Any]) -> "list[str]":
-    """ОБРАЗ σ — серии, которые кто-то объявил. Порядок первого появления: он несёт
-    авторскую последовательность, а сортировка навязала бы алфавит там, где его нет."""
+    """ОБРАЗ σ — серии, у которых ЕСТЬ работы. Порядок: объявленный записями `art_series`
+    (авторская последовательность), затем первое появление у работ — сортировка навязала бы
+    алфавит там, где его нет. Запись без работ слоя не даёт: страница пустого слоя — не страница."""
+    # СЫРЫЕ строки Объекта, а не `artworks_of`: образ σ — факт данных и не вправе зависеть от
+    # того, достались ли байты рендиции в эту минуту (artworks_of придерживает такую работу —
+    # верно для показа, ложно для структуры: серия исчезала бы из навигации и из таблицы
+    # поверхностей линзы при молчании хаба).
     seen: "list[str]" = []
-    for w in artworks_of(d):
+    for w in _raw_works(d):
         s = str(w.get("series") or "").strip()
         if s and s not in seen:
             seen.append(s)
-    return seen
+    declared = [str(r.get("id") or "").strip() for r in (d.get("art_series") or [])
+                if isinstance(r, dict)]
+    rank = {s: i for i, s in enumerate(declared)}
+    return sorted(seen, key=lambda s: (rank.get(s, len(rank)), seen.index(s)))
 
 
 def _series_label(d: dict[str, Any], slug: str) -> str:
-    """Человеческое имя слоя — объявленное работой, иначе сам слаг (честно, а не красиво)."""
-    for w in artworks_of(d):
+    """Человеческое имя слоя — объявленное ЗАПИСЬЮ серии, иначе работой, иначе сам слаг
+    (честно, а не красиво)."""
+    name = str(series_record(d, slug).get("title") or "").strip()
+    if name:
+        return name
+    for w in _raw_works(d):
         if str(w.get("series") or "").strip() == slug:
             name = str(w.get("series_title") or "").strip()
             if name:
