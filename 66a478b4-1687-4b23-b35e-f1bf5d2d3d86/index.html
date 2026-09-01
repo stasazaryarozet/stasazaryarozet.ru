@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html data-surface="editorial" lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Дофонетические абстракции в письме</title>
+<meta content="Абстрактные знаки до фонетизации — по всем архаичным письменностям. Механизмы, проверка источниками, синтез." name="description"/>
+<link href="https://stasazaryarozet.ru/66a478b4-1687-4b23-b35e-f1bf5d2d3d86/" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Дофонетические абстракции в письме" property="og:title"/>
+<meta content="Абстрактные знаки до фонетизации — по всем архаичным письменностям. Механизмы, проверка источниками, синтез." property="og:description"/>
+<meta content="https://stasazaryarozet.ru/66a478b4-1687-4b23-b35e-f1bf5d2d3d86/" property="og:url"/>
+<meta content="" property="og:image"/>
+<meta content="ru_RU" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Дофонетические абстракции в письме" name="twitter:title"/>
+<meta content="Абстрактные знаки до фонетизации — по всем архаичным письменностям. Механизмы, проверка источниками, синтез." name="twitter:description"/>
+<meta content="" name="twitter:image"/>
+<link href="/manifest.json" rel="manifest"/>
+<meta content="#ffffff" media="(prefers-color-scheme: light)" name="theme-color"/>
+<meta content="#111111" media="(prefers-color-scheme: dark)" name="theme-color"/>
+<!-- Inv-WEB-font-preconnect (text/site.md): early DNS+TLS handshake к font CDN.
+     Reduces FCP/LCP by ~100-300ms на TLS-cold connections. -->
+<link crossorigin="" href="https://fonts.bunny.net" rel="preconnect"/>
+<link href="https://fonts.bunny.net" rel="dns-prefetch"/>
+<script>
+// Day/night theme — user-override-first, then solar-automatic. FOUC-critical:
+// runs synchronously in <head> before paint. Resolution: read dela.theme.v1
+// from localStorage; if ∈ ['day', 'night'] use it (user override) else solar
+// altitude (lat 55.0° / alt-threshold -0.1 rad). Config: solar calc from
+// spec.enforcement_data.Inv-SITE-solar-theme (+ data.yaml.bio.solar_calibration
+// override); attr/key/values from spec.enforcement_data.Inv-IFACE-day-night-mode.
+// No hardcoded constants in code — both Specs are SoT, code falls back gracefully.
+(function(){
+  var MODE_ATTR="data-theme", MODE_VALUES=["day", "night"], STORAGE_KEY="dela.theme.v1";
+  function solarTheme(){
+    var r=Math.PI/180, now=new Date();
+    var J=now.valueOf()/86400000 + 2440587.5 - 2451545.0;
+    var L=(280.460+0.9856474*J)%360;
+    var g=((357.528+0.9856003*J)%360)*r;
+    var lam=(L+1.915*Math.sin(g)+0.020*Math.sin(2*g))*r;
+    var eps=(23.439-4e-7*J)*r;
+    var dec=Math.asin(Math.sin(eps)*Math.sin(lam));
+    var ra=Math.atan2(Math.cos(eps)*Math.sin(lam), Math.cos(lam));
+    var lon=-now.getTimezoneOffset()/4, lat=55.0;
+    var gmst=(18.697374558+24.06570982441908*J)*15;
+    var H=((gmst+lon)%360)*r - ra;
+    var alt=Math.asin(Math.sin(lat*r)*Math.sin(dec)+Math.cos(lat*r)*Math.cos(dec)*Math.cos(H));
+    return alt > -0.1 ? 'day' : 'night';
+  }
+  // stored override ∈ MODE_VALUES → use it; else (incl. 'auto', absent, bad) → solar.
+  window.__resolveTheme=function(){
+    var s=null; try{ s=localStorage.getItem(STORAGE_KEY); }catch(e){}
+    return (MODE_VALUES.indexOf(s) !== -1) ? s : solarTheme();
+  };
+  window.__applyTheme=function(){
+    document.documentElement.setAttribute(MODE_ATTR, window.__resolveTheme());
+  };
+  window.__applyTheme();
+  setInterval(window.__applyTheme, 300000);
+})();
+</script>
+<link href="/styles.css?v=c1ded4f562" rel="stylesheet"/>
+<meta content="66a478b4-1687-4b23-b35e-f1bf5d2d3d86" name="dela:slug"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<button aria-label="Тема: авто (по солнцу) — переключить" class="theme-toggle" data-theme-toggle="" type="button">◐</button><script>(function(){var STATES=["auto", "day", "night"],GLYPHS={"auto": "◐", "day": "☀", "night": "☾"},LABELS={"auto": "Тема: авто (по солнцу)", "day": "Тема: дневная", "night": "Тема: ночная"},STORAGE_KEY="dela.theme.v1",MODE_VALUES=["day", "night"],SUFFIX=" — переключить",CYCLE=["day", "night"],MODE_ATTR="data-theme";var btn=document.querySelector("[data-theme-toggle]");if(!btn)return;function current(){var s=null;try{s=localStorage.getItem(STORAGE_KEY);}catch(e){}return (MODE_VALUES.indexOf(s)!==-1)?s:STATES[0];}function paint(st){btn.textContent=GLYPHS[st]||GLYPHS[STATES[0]];btn.setAttribute("aria-label",(LABELS[st]||LABELS[STATES[0]])+SUFFIX);}paint(current());function rendered(){var a=null;try{a=document.documentElement.getAttribute(MODE_ATTR);}catch(e){}return (CYCLE.indexOf(a)!==-1)?a:null;}btn.addEventListener("click",function(){var seen=rendered();var i=CYCLE.indexOf(seen);var next=CYCLE[(i+1)%CYCLE.length];try{localStorage.setItem(STORAGE_KEY,next);}catch(e){}if(window.__applyTheme)window.__applyTheme();paint(next);});})();</script>
+<main id="main" role="main">
+<article class="article-wrapper"><p>Письмо не родилось как запись речи. У старейших систем есть <strong>дофонетическое окно</strong> — состояние, когда знаки уже работают, а звука в них ещё нет: они несут числа, категории, имена и отношения, но не слоги языка. В Месопотамии это окно длилось века; в Египте оно почти нулевое; в Андах не закрылось никогда. Абстракция в письме — не поздняя надстройка над «картинками». Она в письме с первого дня — и задолго до него.</p>
+<h2 data-case="upper" id="do-pisma-abstraktsiya-starshe-zapisi">До письма: абстракция старше записи</h2>
+<p>Конвенциональные знаки без языка появляются за десятки тысяч лет до первой таблички. В пещерах ледниковой Европы (40–10 тыс. лет назад) на 368 памятниках повторяются всего <strong>32 типа геометрических знаков</strong> — точки, решётки, зигзаги, кресты; геометрических меток вдвое больше, чем изображений зверей. Малый устойчивый инвентарь, живущий тысячелетиями, — это уже система условных знаков. Счётные зарубки того же времени держат количество без слов для чисел.</p>
+<p>Ближний Восток добавляет две линии. С <abbr>VIII</abbr> тысячелетия до н. э. — глиняные <strong>токены</strong>: фишки-эталоны, где «одна мера зерна» существует как вещь. И <strong>печати</strong>: геометрический узор как знак владельца или инстанции — абстракция идентичности до всякого письма. В Старой Европе тем временем живёт знаковая система Винчи (<abbr>VI</abbr>–V тыс.) — структурированная, но, по консенсусу, не кодирующая речь: прото-письмо, мнемоника, ритуал.</p>
+<h2 data-case="upper" id="uruk-3350-3000-do-n-e-mashina-abstraktsii-bez-zvuka">Урук, ~3350–3000 до н. э.: машина абстракции без звука</h2>
+<p>Протоклинопись — самый документированный случай: ~5000 табличек, из них ~85 % — учёт; инвентарь ~2000 знаков (~350 числовых, ~1100 простых, ~600 комбинаций). Система, по формуле исследователей, <em>essentially non-phonetic</em>: она не транскрибирует речь, и язык за ней до сих пор не установлен. Четыре механизма делали в ней абстракцию без фонетики.</p>
+<ol><li><strong>Расщепление количества и качества.</strong> Цифра пишется отдельно от товара — впервые в истории. Но число ещё не абстрактно: числовых систем 13–15, и один знак несёт разные значения по контексту (N14 — десять при счёте штук, шесть — в зерновой метрологии). Это «конкретное число» Дамерова; полная абстракция числа придёт лишь к концу <abbr>III</abbr> тысячелетия, с позиционной шестидесятеричной записью.</li><li><strong>Условный знак вместо изображения.</strong> Значительная часть инвентаря не возводится к рисунку вещи: цифры унаследованы от оттисков токенов, часть знаков — от мотивов цилиндрических печатей и эмблем-штандартов. Смысл держится конвенцией, не сходством: знак работает как индекс, а не как портрет.</li><li><strong>Структура вместо грамматики.</strong> Синтаксиса речи нет — его заменяет топология носителя: ячейки-клетки, вложенность клеток (партия и её части), оборот таблички как место итога. Новые понятия производятся операциями над знаком: штриховка gunû (голова + штрихи у рта = «рот»), удвоение, комбинирование. Алгебра знаков вместо предложения.</li><li><strong>Генеративность: творческое комбинирование в списках.</strong> Не-учётная часть корпуса — лексические списки (1 % текстов Урук <abbr>IV</abbr>, уже 20 % Урук <abbr>III</abbr>): каталоги профессий, животных, сосудов. В списке сосудов базовый знак систематически модифицируется и наполняется другими знаками — и большинство порождённых комбинаций не встречается ни в одном хозяйственном тексте. Комбинаторика, заведённая для учёта, генерирует знаки для означаемых, которых нет в мире: воображаемые сосуды, умозрительные категории. Письмо становится лабораторией понятий. Список профессий Lu A (129 строк) копируется почти без изменений около тысячи лет — первый канон.</li></ol>
+<p>Выход из окна — <strong>ребус</strong>: знак вещи берётся ради одного звучания (стрела <em>ti</em> → «жизнь» <em>ti(l)</em>, ок. 2800 до н. э.). Единичные случаи — в 3200–3000; систематической фонетизация становится лишь в раннединастическое время, и первые связные шумерские предложения отстоят от первых табличек на века.</p>
+<h2 data-case="upper" id="ispytanie-drugimi-pismennostyami">Испытание другими письменностями</h2>
+<p><strong>Протоэламская</strong> (Иран, ~3100–2900). Большинство знаков абстрактны <em>без пиктографической стадии вообще</em>; система не расшифрована, язык неизвестен. Возможно, имена людей писались слоговыми знаками (гипотеза Даля) — тогда фонетика применялась точечно, внутри в остальном учётной системы. Умерла, не фонетизировавшись.</p>
+<p><strong>Египет</strong> (Абидос U-j, ~3320). Древнейшие бирки с 1–4 знаками и цифры; уже около 3200 — ребусные написания. Дофонетическое окно почти нулевое: фонетизация — не «ступень зрелости», а выбор системы. Стержень при этом тот же: числа, категории, имена, учёт.</p>
+<p><strong>Инд</strong> (2600–1900). Стандартизованный инвентарь, строгий порядок знаков, тексты в среднем ~5 знаков; не расшифрована. Спор о нелингвистичности (Фармер–Спроут–Витцель против статистических контраргументов) не разрешён: возможно, развитая эмблематика-семасиография без фонетики.</p>
+<p><strong>Китай</strong> (метки с ~6600, письмо с ~1250). Пять тысячелетий разрозненных дописьменных меток (Цзяху, эмблемы Давэнькоу — по консенсусу ещё не письмо) — и затем первое настоящее письмо гадательных костей появляется <em>сразу фонетизированным</em>. Дофонетическая фаза либо не сохранилась, либо прошла на недолговечных носителях.</p>
+<p><strong>Мезоамерика</strong> (с ~900 до н. э.). Блок Каскахаль: 62 знака, повторы и порядок как у письма — не расшифрован и ни на что не похож. Костяк ранних надписей региона — цифры «палочка-точка» и календарь; полный слоговой аппарат доводят до конца майя, много позже.</p>
+<p><strong>Анды</strong> (кипу, традиция до <abbr>XVI</abbr> в. н. э.). Предельный случай: узловая десятичная позиционная запись, которой велась статистика империи, — и никакой фонетики за всю жизнь системы; «нарративные» кипу не читаются. Если пучки шнуров из Караля (~2500 до н. э.) — прото-кипу, традиции больше четырёх тысяч лет. Письмоподобная система может прожить всю жизнь и умереть дофонетической.</p>
+<p><strong>Рапа-Нуи</strong> (ронго-ронго). Около 400 типов знаков; радиоуглерод 2024 года дал одной табличке <abbr>XV</abbr> век — до контакта с европейцами, то есть вероятно независимое изобретение. Не расшифровано; фонетичность не доказана.</p>
+<h2 data-case="upper" id="sintez-poryadok-rozhdeniya-abstraktsiy">Синтез: порядок рождения абстракций</h2>
+<p>Дофонетическая абстракция первична и повсеместна. Везде, где окно длинное, видна одна машина: <strong>учёт порождает алгебру условных знаков; алгебра, будучи комбинаторной, порождает больше означаемых, чем есть в мире; и лишь затем — иногда — знак отрывают ещё и от смысла, оставляя один звук.</strong></p>
+<p>Фонетизация — не телос письма, а один из исходов. Египет вошёл в неё почти мгновенно; Месопотамия — через века, через ребус; протоэламская система, Инд (вероятно), кипу и ронго-ронго — никогда или недоказуемо.</p>
+<p><strong>Число → категория → структура → звук.</strong> Три первых шага не нуждаются в языке — и потому старше его записи.</p>
+<h2 data-case="upper" id="chto-utochneno-proverkoy">Что уточнено проверкой</h2>
+<p>Исходные тезисы (структурная природа первичной абстракции; списки как «когнитивная лаборатория»; механизм ребуса) проверены по первоисточникам и текущему консенсусу и подтверждены. Поправки:</p>
+<ul><li><strong>Число.</strong> «Чистая математическая абстракция числа» — завышение: числовые знаки Урука контекстно-зависимы (13–15 метрологий, один знак — разные значения); абстрактное число — достижение конца <abbr>III</abbr> тысячелетия, не Урука.</li><li><strong>Токены.</strong> Сильная версия токен-теории Шмандт-Бессерат (каждый знак ← токен) не принята: доказуемо только числовое наследование (Энглунд, Зимански); токены многофункциональны. Для не-числовых знаков активна линия «печати → знаки».</li><li><strong>Инвентарь.</strong> «~800 знаков» — устаревший подсчёт; текущий: ~2000 (350 числовых + 1100 простых + 600 комбинаций).</li><li><strong>Доля списков.</strong> Средняя по корпусу ~15 % и растёт от 1 % (Урук <abbr>IV</abbr>) до 20 % (Урук <abbr>III</abbr>): «лаборатория» — феномен зрелости системы, не первого дня.</li><li><strong>Ребус.</strong> Пример <abbr>TI</abbr> («стрела» → «жизнь») датируется ~2800; для 3200–3000 ребус — единичные спорные случаи. Механизм верен, хронология сдвинута позже.</li><li><strong>Границы семантики.</strong> «Абстракций вне бюрократии не было» — верно о происхождении семантики, но списки показывают немедленный выход системы за пределы фиксации имеющегося — в порождение возможного.</li></ul>
+<h2 data-case="upper" id="istochniki">Источники</h2>
+<p><a href="https://books.google.com/books/about/Archaic_Bookkeeping.html?id=YBAzXV4YtQ8C">Nissen, Damerow, Englund — Archaic Bookkeeping</a> · <a href="https://en.wikipedia.org/wiki/Proto-cuneiform">Proto-cuneiform: обзор и цифры корпуса</a> · <a href="https://www.researchgate.net/publication/347363927_Numeracy_at_the_dawn_of_writing_Mesopotamia_and_beyond">Numeracy at the dawn of writing</a> · <a href="https://cdli.earth/articles/cdlb/2021-6">Quantitative Analysis of Proto-Cuneiform Sign Use (<abbr>CDLI</abbr>)</a> · <a href="https://oracc.museum.upenn.edu/dcclt/intro/arch_intro.html"><abbr>DCCLT</abbr>: Archaic Lexical Texts</a> · <a href="https://cdli.earth/articles/cdlj/2003-3"><abbr>ED</abbr> Lu A from Tell Brak (<abbr>CDLI</abbr>)</a> · <a href="https://www.cambridge.org/core/journals/antiquity/article/seals-and-signs-tracing-the-origins-of-writing-in-ancient-southwest-asia/B3C2D400F3F80A7A0162D9035C9C2804">Seals and signs (Antiquity, 2024)</a> · <a href="https://www.cambridge.org/core/journals/cambridge-archaeological-journal/article/abs/reconsidering-tokens-the-neolithic-origins-of-accounting-or-multifunctional-utilitarian-tools/7E6C04CB040AD8AA0EA84B94D4D275C4">Reconsidering ‘Tokens’ (<abbr>CAJ</abbr>)</a> · <a href="https://cdli.earth/files-up/publications/englund2004c.pdf">Englund — The state of decipherment of proto-Elamite</a> · <a href="https://www.historyofinformation.com/detail.php?id=3428">Abydos U-j labels</a> · <a href="https://aclanthology.org/J10-4016.pdf">Rao et al. — Entropy and the Indus Script</a> · <a href="https://safarmer.com/fsw2.pdf">Farmer, Sproat, Witzel</a> · <a href="https://en.wikipedia.org/wiki/Jiahu_symbols">Jiahu symbols</a> · <a href="https://en.wikipedia.org/wiki/Neolithic_symbols_in_China">Neolithic symbols in China</a> · <a href="https://en.wikipedia.org/wiki/Cascajal_Block">Cascajal Block</a> · <a href="https://en.wikipedia.org/wiki/Quipu">Quipu</a> · <a href="https://www.nature.com/articles/s41598-024-53063-7">Rongorongo: new radiocarbon dates (Sci Rep, 2024)</a> · <a href="https://www.ted.com/talks/genevieve_von_petzinger_why_are_these_32_symbols_found_in_ancient_caves_all_over_europe">von Petzinger — 32 signs</a> · <a href="https://www.youtube.com/watch?v=_UiOq0w_hWM">исходное видео (NativLang)</a></p></article>
+</main>
+<link href="/media.css" rel="stylesheet"/><script defer="" src="/media.js"></script>
+<script>
+/* Display-window indicator 1[from ≤ now < until) per viewer clock
+   (Inv-STF-window-derived, surface-temporal-fixpoint.md). The reveal
+   (`data-visible-from`) is the exact dual of the original auto-hide
+   (`data-visible-until`, admin 2026-05-13: «пусть блок исчезнет после 20:30
+   по Москве») — one indicator covers both: a block appears at its window
+   start and disappears at its window end, so a page deployed before a
+   boundary still transitions at the precise moment without a redeploy.
+   Runs at page-load and every 30s thereafter — covers tabs left open across
+   a boundary. An unparseable/absent bound fails open on that side (a parse
+   error must never hide content). */
+(function(){
+  function _applyWindows(){
+    var nodes = document.querySelectorAll('[data-visible-until],[data-visible-from]');
+    var now = Date.now();
+    for (var i = 0; i < nodes.length; i++) {
+      var from = Date.parse(nodes[i].getAttribute('data-visible-from') || '');
+      var until = Date.parse(nodes[i].getAttribute('data-visible-until') || '');
+      var vis = (isNaN(from) || now >= from) && (isNaN(until) || now < until);
+      nodes[i].style.display = vis ? '' : 'none';
+    }
+  }
+  _applyWindows();
+  setInterval(_applyWindows, 30000);
+})();
+
+/* Pageview pingback — entity-statistics G-Set event (admin 2026-05-13 «считает
+   статистику»). One event per page-load → CF Worker /pv → DELA_STATS KV.
+   No cookies, no client-id; idempotency via cf-ray (CF generates per request).
+   No-op gracefully if Worker unreachable (sendBeacon + fallback fetch). */
+(function(){
+  var slug = (document.querySelector('meta[name="dela:slug"]') || {}).content;
+  if (!slug) return;
+  var payload = JSON.stringify({
+    p: slug,
+    r: (window.crypto && crypto.randomUUID) ? crypto.randomUUID() :
+       (Date.now() + '-' + Math.random().toString(36).slice(2)),
+    ref: document.referrer || ''
+  });
+  var url = 'https://dela-edge.azaryarozet.workers.dev/pv';
+  try {
+    var blob = new Blob([payload], { type: 'application/json' });
+    if (!navigator.sendBeacon || !navigator.sendBeacon(url, blob)) {
+      fetch(url, {
+        method: 'POST', body: payload, keepalive: true,
+        headers: { 'Content-Type': 'application/json' }
+      }).catch(function(){});
+    }
+  } catch (e) { /* swallow */ }
+})();
+</script>
+</body>
+</html>
