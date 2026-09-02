@@ -2230,6 +2230,15 @@ def p_site(d: dict[str, Any]) -> str:
     about_parts = _join_defined([
         _defined(lambda: f"""    <p><span class="artist-highlight"><a href="{bio['artist']['link']}">{bio['artist']['text']}</a></span><br>•</p>""",
                  section="about.artist"),
+        # ВХОД В СЛОЙ — ЗДЕСЬ, А НЕ В ЛЕНТЕ. `/art` есть сплошная лента БЕЗ СЛОВ (принципал
+        # 2026-09-02), поэтому имя серии внутри нее стоять не может; но страница слоя обязана
+        # быть достижимой, иначе она построена и не подана. Место, где у ссылки ЕСТЬ контекст, —
+        # индекс: «на /art/something/ могут быть ссылки из других мест, включая индекс» (он же).
+        # Квантор по ОБЪЯВЛЕННЫМ сериям: владелец без серий не получает ни строки (фрагмент
+        # неопределен), и «если есть рубрикация» снова не становится ветвлением.
+        _defined(lambda: "    <p>" + "<br>".join(
+            f'<a href="art/{sl}/">{_h(_series_label(d, sl))}</a>' for sl in art_series(d)
+        ) + "<br>•</p>", section="about.art_series"),
         chr(10).join(role_lines),
         _defined(lambda: f"""    <p class="inspire">{"<br>".join(bio["inspire"].strip().splitlines())}<br>•</p>""",
                  section="about.inspire"),
@@ -5685,6 +5694,21 @@ class Projection(NamedTuple):
         return _page.address_of(self.file)
 
 
+def _ar_mod():
+    import art_renditions
+    return art_renditions
+
+
+def _ob_mod():
+    import observation
+    return observation
+
+
+def _rendition_bytes(r):
+    """Байты рендиции для носителя Сайта; ⊥ ⇒ None — мир остается как есть (write_carrier)."""
+    b = _ar_mod().bytes_of(r)
+    return b.value if isinstance(b, _ob_mod().Confirmed) else None
+
 def owner_projections(d: dict[str, Any]) -> "list[Projection]":
     """ЕДИНСТВЕННАЯ деривация «что владелец публикует СОБОЙ» — π и F одной функцией.
 
@@ -5725,6 +5749,27 @@ def owner_projections(d: dict[str, Any]) -> "list[Projection]":
             out.append(Projection(f"art-img:{_r.filename}", PurePosixPath("art/img") / _r.filename,
                                   lambda r=_r: _rendition_bytes(r)))
     cons = d.get("consultations")
+    # КАДРЫ ПРОЕКЦИЙ — ТОЖЕ НОСИТЕЛИ ЭТОГО НАБОРА. Карусель Instagram берет изображения ПО
+    # АДРЕСУ Сайта (один выведенный артефакт, две поверхности), поэтому кадр, на который канал
+    # укажет, обязан существовать в мире: иначе подпись уходит, а изображение отдает 404, и
+    # «ссылка на отсутствующий байт» есть тот самый свежий битый линк, которым гейт публикации
+    # отказывает всей странице. Квантор — по объявленным предметам проекции, не по условию.
+    try:
+        import art_broadcast as _ab
+        for _s in _ab.subjects(d):
+            for _w2, _v in _ab.frames(d, _s):
+                _src = str(_w2.get("source") or "")
+                if not _src:
+                    continue
+                _rr = _ar_mod().rendition(_src, view=(dict(_v) or None) or None,
+                                          frame=_ab.frame_policy())
+                if isinstance(_rr, _ob_mod().Confirmed):
+                    out.append(Projection(f"art-img:{_rr.value.filename}",
+                                          PurePosixPath("art/img") / _rr.value.filename,
+                                          lambda r=_rr.value: _rendition_bytes(r)))
+    except Exception as _e:                      # ⊥ кадров не рушит Сайт: он строится без них
+        _LOG.warning("frames of art projections withheld from this render — %s", _e)
+
     if cons is not None and not _booking_disabled(d):
         # Публичный путь записи ВЫВОДИТСЯ из consultations.link — один источник (админ «одна
         # ссылка — init», 2026-06-24): каталог страницы, href на главной и канон следуют ему,
