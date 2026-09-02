@@ -5015,7 +5015,13 @@ def artworks_of(d: dict[str, Any]) -> "list[dict[str, Any]]":
                 # вслух; носитель в мире не трогается (прежняя рендиция в деплое остаётся).
                 import art_renditions as _ar
                 import observation as _ob
-                r = _ar.rendition(src)
+                # ЛЕНТА ПОКАЗЫВАЕТ ВИД, А НЕ СНИМОК. Снимок работы может нести набранный блок
+                # со сведениями о ней; их место — в ПОЛЯХ работы (entity-artwork::work_spec), и
+                # на ленте им делать нечего (принципал 2026-09-02: «Убери с самого изображения
+                # подпись. Без подписи же оно должно быть в /art»). Первый объявленный вид и
+                # есть канонический показ работы; холст — политика КАНАЛА, лента его не просит.
+                _views = a.get("views") or []
+                r = _ar.rendition(src, view=(dict(_views[0]) if _views else None))
                 if isinstance(r, _ob.Bottom):
                     _LOG.warning("artwork %s withheld from this render — %s", src[:12], r.reason())
                     continue
@@ -5102,17 +5108,15 @@ def p_art(d: dict[str, Any]) -> str:
     """Полное пространство. Работы из data.artworks (единственный источник)."""
     bio = d.get("bio") or {}
     works = artworks_of(d)
-    series = art_series(d)
-    # Слой, до которого нельзя дотянуться, построен и не подан — поэтому полное
-    # пространство НЕСЁТ входы в свои слои. Ссылки относительные: база разрешения — /art/.
-    nav = ""
-    if series:
-        links = " ".join(
-            f'<a href="{sl}/">{_h(_series_label(d, sl))}</a>' for sl in series
-        )
-        nav = f'  <nav class="art-series">{links}</nav>\n'
+    # СПЛОШНАЯ ЛЕНТА БЕЗ СЛОВ. Принципал 2026-09-02, дословно: «в /art не должно быть разделов
+    # и подписей — этот раздел продолжает быть сплошной лентой без слов. При этом на
+    # /art/something/ могут быть ссылки из других мест, включая индекс». Здесь стоял
+    # <nav class="art-series"> со ссылками-именами серий, то есть РАЗДЕЛЫ и СЛОВА внутри самой
+    # ленты. Достижимость слоя от этого не теряется: она есть свойство ГРАФА ссылок, а не этой
+    # страницы, и живет там, где у ссылки есть контекст (индекс, тексты); здесь контекста нет
+    # ПО ПОСТРОЕНИЮ — здесь нет слов.
     body = f"""  <div class="progress-bar" id="progress"></div>
-{nav}  <main class="gallery">
+  <main class="gallery">
 {_art_items(d, works)}
   </main>"""
     art_label = bio.get("art_page_label", "Искусство")
