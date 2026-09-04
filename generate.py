@@ -1838,6 +1838,80 @@ def _ongoing_eligible() -> frozenset[str]:
     return frozenset({"OPEN", "CLOSED"})
 
 
+@_functools.lru_cache(maxsize=1)
+def _accepting_signup_stages() -> frozenset[str]:
+    """Inv-EV-signup-accepting-only — Spec-loaded stages that may embed a
+    conversion form. CLOSED is absent by construction. Fallback = the set
+    Offer.availability already used for InStock before the Spec house existed."""
+    try:
+        fm = _spec_fm("entity-event")
+        stages = (fm.get("enforcement_data") or {}).get("accepting_signup_stages") or []
+        if stages:
+            return frozenset(str(s) for s in stages)
+    except Exception:
+        pass
+    return frozenset({"OPEN", "PLANNING", "DRAFT", "PLANNED"})
+
+
+@_functools.lru_cache(maxsize=1)
+def _status_banner_tables() -> tuple[dict[str, str], frozenset[str]]:
+    """Inv-EV-status-banner-derived — (copy_by_stage, optional_stages)."""
+    try:
+        ed = (_spec_fm("entity-event").get("enforcement_data") or {})
+        copy = ed.get("status_banner_copy") or {}
+        optional = ed.get("status_banner_optional_stages") or []
+        if isinstance(copy, dict) and copy:
+            return (
+                {str(k): str(v) for k, v in copy.items()},
+                frozenset(str(s) for s in optional),
+            )
+    except Exception:
+        pass
+    return (
+        {
+            "PLANNING": "Программа собирается. Лист ожидания открыт.",
+            "DRAFT": "Программа собирается. Лист ожидания открыт.",
+            "CLOSED": "Набор закончен.",
+        },
+        frozenset({"PLANNING", "DRAFT"}),
+    )
+
+
+def _signup_accepting(event: dict[str, Any], now_iso: str | None = None) -> bool:
+    """Inv-EV-signup-accepting-only: effective_stage ∈ Spec accepting set.
+
+    Independent of whether `signup` / `lead_capture` are declared — those
+    decide whether a conversion surface EXISTS; this decides whether it is
+    open for intake. Witness: tests/test_signup_accepting_stages.py.
+    """
+    if not isinstance(event, dict):
+        return False
+    return _effective_stage(event, now_iso) in _accepting_signup_stages()
+
+
+def _status_banner_html(event: dict[str, Any], *,
+                        status_banner_on: bool = True,
+                        now_iso: str | None = None) -> str:
+    """Lifecycle status banner — Spec copy keyed by effective_stage.
+
+    Optional stages (PLANNING/DRAFT) respect `status_banner` flag.
+    Required stages (CLOSED, …) always surface when copy is declared.
+    """
+    if not isinstance(event, dict):
+        return ""
+    stage = _effective_stage(event, now_iso)
+    copy_map, optional = _status_banner_tables()
+    text = copy_map.get(stage)
+    if not text:
+        return ""
+    if stage in optional and not status_banner_on:
+        return ""
+    return (
+        f'<p class="status-banner" role="status" aria-live="polite">'
+        f'{_t(text)}</p>'
+    )
+
+
 def _effective_stage(event: dict[str, Any], now_iso: str | None = None) -> str:
     """Inv-EV-stage-time-derived (entity-event.md::stage_time_derivation),
     datetime-precise per Inv-STF-datetime-precise (surface-temporal-fixpoint.md):
@@ -2848,7 +2922,7 @@ def _event_jsonld(d: dict[str, Any], ev: dict[str, Any]) -> str:
                        "price": str(fee["amount"]),
                        "priceCurrency": fee.get("currency", "EUR"),
                        "availability": "https://schema.org/InStock"
-                       if status_raw in ("OPEN", "PLANNING", "DRAFT")
+                       if status_raw in _accepting_signup_stages()
                        else "https://schema.org/SoldOut"}
         # priceValidUntil = trip start date (offers expire when the
         # trip begins). ISO yyyy-mm-dd is acceptable per Schema.org.
@@ -3224,17 +3298,15 @@ def _render_pricing_status(ctx: "_LandingCtx") -> "list[str]":
         ctx.ph["team_fee_half"] = f"{_half_disp} {cur_glyph}".strip()
         ctx.ph["team_fee"] = f"{amount_str} {cur_glyph}".strip()
 
-    # Status banner — DRAFT/PLANNING openly stated, congruent with «программа дописывается».
-    # admin 2026-05-11 (feedback.txt) suppressed it for paris-2026-09 via `status_banner: false`;
-    # default True keeps it for other PLANNING/DRAFT events.
-    status = m.status if hasattr(m, "status") else m.get("status", "")
-    _status_banner_on = ev.get("status_banner", True) if isinstance(ev, dict) else True
-    if status in ("PLANNING", "DRAFT") and _status_banner_on:
-        # WAI-ARIA: status banner is a non-critical live region. role=status
-        # + aria-live=polite makes screen readers announce "Программа собирается"
-        # when the page first reads, without interrupting other narration.
-        parts.append('<p class="status-banner" role="status" aria-live="polite">'
-                     'Программа собирается. Лист ожидания открыт.</p>')
+    # Status banner — Inv-EV-status-banner-derived. Copy + optional/required
+    # stage sets live in entity-event.md::status_banner_copy; PLANNING/DRAFT
+    # respect data.yaml::status_banner (paris-2026-09 once muted the wait-list
+    # line); CLOSED always surfaces.
+    _raw_ev = ev if isinstance(ev, dict) else {}
+    _status_banner_on = bool(_raw_ev.get("status_banner", True))
+    _banner = _status_banner_html(_raw_ev, status_banner_on=_status_banner_on)
+    if _banner:
+        parts.append(_banner)
     return parts
 
 
@@ -3654,53 +3726,62 @@ def _render_open_questions(ctx: "_LandingCtx") -> "list[str]":
 
 def _render_signup(ctx: "_LandingCtx") -> "list[str]":
     """Phase (i) — `<section class="signup-wrap">` + the embedded
-    `<form id="signup-form">` (built by `event_signup_form`)."""
+    `<form id="signup-form">` (built by `event_signup_form`).
+
+    Inv-EV-signup-accepting-only: form ships only while effective_stage ∈
+    Spec accepting_signup_stages. CLOSED keeps the page public and drops
+    the conversion UI (lead_capture may remain in data as history).
+    """
     m, slug, bio, date_str = ctx.m, ctx.slug, ctx.bio, ctx.date_str
     inline = ctx.inline
     parts: list[str] = []
 
     # Signup
     signup = m.signup if hasattr(m, "signup") else m.get("signup")
-    if signup:
-        s_title = signup.title if hasattr(signup, "title") else signup.get("title", "Записаться")
-        s_note = signup.note if hasattr(signup, "note") else signup.get("note", "")
-        s_cta = signup.cta_label if hasattr(signup, "cta_label") else signup.get("cta_label", "Оставить email")
-        parts.append(f'<section class="signup-wrap"><h2>{inline(s_title)}</h2>')
-        if s_note:
-            parts.append(f'<p>{inline(s_note)}</p>')
-        ev_label = f"{m.title if hasattr(m,'title') else m.get('title','Событие')} {date_str}".strip()
-        lc = m.lead_capture if hasattr(m, "lead_capture") else m.get("lead_capture")
-        # Inv-LDG-FORMS-NO-MAILTO-LOSSY-FALLBACK: form action = real
-        # transport URL (CF Worker /lead). Resolved via secrets_manager
-        # signup_capture_url (canonical lead endpoint, configurable per
-        # deployment). No-JS submit lands at Worker; JS upgrades AJAX UX.
+    if not signup:
+        return parts
+    _raw_ev = ctx.ev if isinstance(ctx.ev, dict) else {}
+    if not _signup_accepting(_raw_ev):
+        return parts
+    s_title = signup.title if hasattr(signup, "title") else signup.get("title", "Записаться")
+    s_note = signup.note if hasattr(signup, "note") else signup.get("note", "")
+    s_cta = signup.cta_label if hasattr(signup, "cta_label") else signup.get("cta_label", "Оставить email")
+    parts.append(f'<section class="signup-wrap"><h2>{inline(s_title)}</h2>')
+    if s_note:
+        parts.append(f'<p>{inline(s_note)}</p>')
+    ev_label = f"{m.title if hasattr(m,'title') else m.get('title','Событие')} {date_str}".strip()
+    lc = m.lead_capture if hasattr(m, "lead_capture") else m.get("lead_capture")
+    # Inv-LDG-FORMS-NO-MAILTO-LOSSY-FALLBACK: form action = real
+    # transport URL (CF Worker /lead). Resolved via secrets_manager
+    # signup_capture_url (canonical lead endpoint, configurable per
+    # deployment). No-JS submit lands at Worker; JS upgrades AJAX UX.
+    _transport_url = ""
+    try:
+        import sys as _sys, os as _os
+        # НЕ хардкодить дом: путь приходит из СВОЕГО расположения (модуль
+        # знает, где он лежит) — иначе archive-mode теряет изоляцию и
+        # подтягивает код с ОТСТАВШЕГО диска реплики (Σ 2026-07-11:
+        # деплой из архива импортировал старый broadcast_relation с FP).
+        _sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from secrets_manager import secrets as _secrets
+        _transport_url = _secrets.get_key("signup_capture_url") or ""
+    except Exception as _e:
+        _LOG.warning("signup_capture_url unread (%s) — empty transport", type(_e).__name__)
         _transport_url = ""
-        try:
-            import sys as _sys, os as _os
-            # НЕ хардкодить дом: путь приходит из СВОЕГО расположения (модуль
-            # знает, где он лежит) — иначе archive-mode теряет изоляцию и
-            # подтягивает код с ОТСТАВШЕГО диска реплики (Σ 2026-07-11:
-            # деплой из архива импортировал старый broadcast_relation с FP).
-            _sys.path.insert(0, str(Path(__file__).resolve().parent))
-            from secrets_manager import secrets as _secrets
-            _transport_url = _secrets.get_key("signup_capture_url") or ""
-        except Exception as _e:
-            _LOG.warning("signup_capture_url unread (%s) — empty transport", type(_e).__name__)
-            _transport_url = ""
-        parts.append(event_signup_form(
-            slug,
-            ev_label,
-            bio.get("email", "info@example.com"),
-            cta_label=s_cta,
-            lead_capture=lc if isinstance(lc, dict) else None,
-            transport_url=_transport_url,
-        ))
-        # Сообщение о персональных данных — У ФОРМЫ, единственное место
-        # (admin 2026-07-11); страничный overlay отключён всюду (_layout).
-        _consent = _cookie_banner(ctx.d, placement="inline")
-        if _consent:
-            parts.append(_consent)
-        parts.append("</section>")
+    parts.append(event_signup_form(
+        slug,
+        ev_label,
+        bio.get("email", "info@example.com"),
+        cta_label=s_cta,
+        lead_capture=lc if isinstance(lc, dict) else None,
+        transport_url=_transport_url,
+    ))
+    # Сообщение о персональных данных — У ФОРМЫ, единственное место
+    # (admin 2026-07-11); страничный overlay отключён всюду (_layout).
+    _consent = _cookie_banner(ctx.d, placement="inline")
+    if _consent:
+        parts.append(_consent)
+    parts.append("</section>")
     return parts
 
 
