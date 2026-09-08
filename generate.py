@@ -2209,7 +2209,10 @@ def _recent_rows(d: dict[str, Any]) -> "list[dict[str, Any]]":
     for r in (d.get("art_series") or []):
         out = r.get("out") or {}
         sid, at = str(r.get("id") or ""), str(out.get("at") or "")
-        if not (sid and at):
+        # ДВЕРЬ ОБЯЗАНА ВЕСТИ. Слой строится только у серии, у которой ЕСТЬ работы
+        # (`art_series` — образ σ), поэтому ряд о выходе серии без работ вёл бы в 404:
+        # объявление о выходе и наличие того, что вышло, суть разные факты.
+        if not (sid and at) or sid not in art_series(d):
             continue
         rows.append({"at": at, "kind": str(out.get("kind") or ""),
                      "name": _series_label(d, sid), "door": f"/art/{sid}/",
@@ -2289,7 +2292,7 @@ def p_recent(d: dict[str, Any]) -> str:
             lines.append(f'        <p class="detail as-is">{"<br>".join(_t(x) for x in r["detail"])}</p>')
         lines.append("      </article>")
         parts.append("\n".join(lines))
-    return ('    <section id="recent" aria-labelledby="recent-heading">\n'
+    return ('    <section id="recent" class="board" aria-labelledby="recent-heading">\n'
             f'      <h2 id="recent-heading">{_h(heading)}</h2>\n'
             + "".join(parts) + "\n    </section>")
 
@@ -2460,7 +2463,10 @@ def p_site(d: dict[str, Any]) -> str:
     # The heading is a PROMISE about content; with nothing to announce, «СКОРО:» over empty
     # space is a stub in markup rather than in data. Wrapper follows its content (the same
     # identity-absorption as the about-section), so a total record renders byte-identically.
-    events_section = f"""      <section id="events" aria-labelledby="events-heading">
+    # `class="board"` — РОД РАЗДЕЛА, и по нему берётся набор (styles.css: `.board …`).
+    # Прежде набор доски стоял на её ИМЕНИ (`#events`), и вторая доска той же страницы
+    # («НЕДАВНО») получила бы его только копией правил.
+    events_section = f"""      <section id="events" class="board" aria-labelledby="events-heading">
         <h2 id="events-heading">{skoro_header}</h2>
 {events_html}
       </section>""" if events_html.strip() else ""
