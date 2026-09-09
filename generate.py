@@ -5456,12 +5456,15 @@ def p_collection(d: dict[str, Any], u: "Any") -> str:
             _tab_href(u, b.leaf), _cur if (u.bucket and u.bucket.leaf == b.leaf) else "",
             _h(b.label))
         for b in _sp.buckets(d).values())
-    body = f"""  <main class="board collection" id="collection">
+    # СЕКЦИЯ, А НЕ MAIN: `_layout` уже оборачивает тело в <main id="main" role="main">, и
+    # второй main той же страницы есть дефект разметки и диктора разом.
+    body = f"""  <section class="board collection" id="collection"
+           aria-labelledby="collection-heading">
       <nav class="crumbs">{crumbs}</nav>
       <h1 id="collection-heading">{_h(heading)}</h1>
       <nav class="tabs">{tabs}</nav>
 {body_rows}
-  </main>"""
+  </section>"""
     return _layout(
         d,
         title=f"{bio['title']} — {' · '.join(labels) if labels else u.label}",
