@@ -101,6 +101,9 @@
   hyphens: auto;  /* law · Inv-TYPO-hyphenation-per-language */
   text-wrap: pretty;  /* law · Inv-TYPO-text-wrap-pretty */
 }
+:root .pricing-amount {
+  font-variant-numeric: lining-nums tabular-nums;  /* law · :root .pricing-amount · Inv-TYPO-figures-context-aware */
+}
 :root :is(h1,h2,h3,h4,h5,h6) {
   -webkit-hyphens: auto;  /* law · :root :is(h1,h2,h3,h4,h5,h6) · Inv-TYPO-hyphenation-per-language */
   hyphenate-limit-chars: 10 4 4;  /* law · :root :is(h1,h2,h3,h4,h5,h6) · Inv-TYPO-hyphenation-per-language */

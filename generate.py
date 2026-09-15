@@ -3451,7 +3451,7 @@ def _render_pricing_status(ctx: "_LandingCtx") -> "list[str]":
         # говорит сама.
         _pricing_aside = (
             '<aside class="pricing-display" aria-label="Стоимость">'
-            f'<div class="pricing-amount">{amount_str}'
+            f'<div class="pricing-amount">{amount_str}{_NBSP}'
             f'<span class="currency">{cur_glyph}</span></div>'
             + (f'<div class="pricing-note">{_t(note)}</div>' if note else '')
             + '</aside>'
