@@ -82,10 +82,10 @@
   --space-section: clamp(3rem, 2rem + 4vw, 6rem);  /* length · knowledge/system/specifications/text/site.md */
   --space-top: clamp(6rem, 4rem + 12vh, 20vh);  /* length · knowledge/system/specifications/text/site.md */
   --touch-min: 44px;  /* length · knowledge/system/specifications/text/site.md */
-  --tracking-caps: max(var(--tracking-caps-mid), calc(1.6px + 0.02em));  /* tracking · knowledge/system/specifications/text/typography.md */
+  --tracking-caps: calc(1.6px + 0.02em);  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-caps-ceiling: calc(2.8px + 0.02em);  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-caps-emphasis: 0.08em;  /* tracking · knowledge/system/specifications/text/typography.md */
-  --tracking-caps-floor: min(var(--tracking-caps-mid), var(--tracking-caps-ceiling));  /* tracking · knowledge/system/specifications/text/typography.md */
+  --tracking-caps-floor: min(var(--tracking-caps-mid), var(--tracking-caps));  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-caps-mid: 0.05em;  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-display: -0.02em;  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-display-soft: -0.018em;  /* tracking · knowledge/system/specifications/text/typography.md */
