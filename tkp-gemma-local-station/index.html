@@ -4,17 +4,17 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<title>ИИ-станция под Gemma 4 31B — полный контекст 256K</title>
+<title>ИИ-станция под Gemma 4 31B — полный контекст 256K — Азарья Розет</title>
 <meta content="Рабочая станция локального инференса под Gemma 4 31B q8 с полным окном 256 тыс токенов и автокомплитом. Покупка или аренда GPU в России — конфигурации, цены…" name="description"/>
 <link href="https://stasazaryarozet.ru/tkp-gemma-local-station/" rel="canonical"/>
 <meta content="website" property="og:type"/>
-<meta content="ИИ-станция под Gemma 4 31B — полный контекст 256K" property="og:title"/>
+<meta content="ИИ-станция под Gemma 4 31B — полный контекст 256K — Азарья Розет" property="og:title"/>
 <meta content="Рабочая станция локального инференса под Gemma 4 31B q8 с полным окном 256 тыс токенов и автокомплитом. Покупка или аренда GPU в России — конфигурации, цены…" property="og:description"/>
 <meta content="https://stasazaryarozet.ru/tkp-gemma-local-station/" property="og:url"/>
 <meta content="" property="og:image"/>
 <meta content="ru_RU" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="ИИ-станция под Gemma 4 31B — полный контекст 256K" name="twitter:title"/>
+<meta content="ИИ-станция под Gemma 4 31B — полный контекст 256K — Азарья Розет" name="twitter:title"/>
 <meta content="Рабочая станция локального инференса под Gemma 4 31B q8 с полным окном 256 тыс токенов и автокомплитом. Покупка или аренда GPU в России — конфигурации, цены…" name="twitter:description"/>
 <meta content="" name="twitter:image"/>
 <link href="/manifest.json" rel="manifest"/>
@@ -143,7 +143,8 @@
        (Date.now() + '-' + Math.random().toString(36).slice(2)),
     ref: document.referrer || ''
   });
-  var url = 'https://dela-edge.azaryarozet.workers.dev/pv';
+  var url = "https://dela-edge.azaryarozet.workers.dev/pv";
+  if (!url) return;
   try {
     var blob = new Blob([payload], { type: 'application/json' });
     if (!navigator.sendBeacon || !navigator.sendBeacon(url, blob)) {
