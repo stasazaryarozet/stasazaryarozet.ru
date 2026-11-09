@@ -1,5 +1,5 @@
 {
- "at": "2026-11-09T13:11:33+00:00",
+ "at": "2026-11-09T13:15:47+00:00",
  "domain": [
   ".state/engage/azaryarozet/slots.json",
   "knowledge/finance/entities.yaml",
@@ -77,7 +77,6 @@
   "scripts/http_budgets.py",
   "scripts/identity_primacy.py",
   "scripts/ig_digest_plate.py",
-  "scripts/ig_web_ops.py",
   "scripts/knowledge.py",
   "scripts/lead_form_client.py",
   "scripts/lead_ingest.py",
@@ -120,6 +119,6 @@
   "scripts/typography.py",
   "scripts/utils/git_publish.py"
  ],
- "rev": "e77b88234290c1c54980259cb7ae065c089f931b",
- "src_oid": "5894a0a6b8f99161"
+ "rev": "bbe40a562324373aed48ad016253e03390461741",
+ "src_oid": "2b654adc5fba4258"
 }
