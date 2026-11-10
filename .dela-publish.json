@@ -1,5 +1,5 @@
 {
- "at": "2026-11-10T04:51:40+00:00",
+ "at": "2026-11-10T05:34:10+00:00",
  "domain": [
   ".state/engage/azaryarozet/slots.json",
   "knowledge/finance/entities.yaml",
@@ -169,6 +169,6 @@
   "scripts/typography.py",
   "scripts/utils/git_publish.py"
  ],
- "rev": "56cc68109a59d1a74b991a858a262bf3466a15de",
+ "rev": "f93c72905b6daec58a9c840ed451731174a91006",
  "src_oid": "e80b5bd330e0dca2"
 }
