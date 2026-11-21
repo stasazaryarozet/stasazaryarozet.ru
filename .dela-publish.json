@@ -1,9 +1,10 @@
 {
- "at": "2026-11-21T20:53:48+00:00",
+ "at": "2026-11-21T22:15:52+00:00",
  "domain": [
   ".state/engage/azaryarozet/slots.json",
   "config/code_dirs.txt",
   "config/derivation_stamp.txt",
+  "knowledge/claim-qualification/ledger",
   "knowledge/finance/entities.yaml",
   "knowledge/people/azaryarozet/site",
   "knowledge/people/azaryarozet/texts",
@@ -173,6 +174,6 @@
   "scripts/typography.py",
   "scripts/utils/git_publish.py"
  ],
- "rev": "33060eebb0f4f8af00f1e82539367f32d5c5bc73",
- "src_oid": "126b09c4c4e758fe"
+ "rev": "36f97b2a7eca4a30b09d914a96f25d916d49656e",
+ "src_oid": "419a25fa3f6f2fce"
 }
