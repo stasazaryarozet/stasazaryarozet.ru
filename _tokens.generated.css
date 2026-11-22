@@ -69,8 +69,8 @@
   --radius-control: 8px;  /* length · knowledge/system/specifications/text/typography.md */
   --rail: 7.5em;  /* length · knowledge/system/specifications/text/typography.md */
   --rule: #e4e0da;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
-  --sans: 'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;  /* font-stack · knowledge/system/specifications/text/typography.md */
-  --sans-display: 'Inter Tight', 'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;  /* font-stack · knowledge/system/specifications/text/typography.md */
+  --sans: 'Inter', 'Inter Fallback', 'Noto Sans Symbols', 'Noto Sans Symbols 2', 'Noto Sans Math', 'Noto Sans Bamum', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;  /* font-stack · knowledge/system/specifications/text/typography.md */
+  --sans-display: 'Inter Tight', 'Inter', 'Inter Fallback', 'Noto Sans Symbols', 'Noto Sans Symbols 2', 'Noto Sans Math', 'Noto Sans Bamum', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;  /* font-stack · knowledge/system/specifications/text/typography.md */
   --script: 'Bad Script', 'Marck Script', cursive;  /* font-stack · knowledge/system/specifications/text/typography.md */
   --sp-1: 0.50rem;  /* length · knowledge/system/specifications/text/site.md */
   --sp-2: 0.75rem;  /* length · knowledge/system/specifications/text/site.md */
@@ -171,9 +171,9 @@
     -webkit-hyphens: manual;  /* law · :root :is([data-role='inscription'], [data-role='inscription_list'], [data-role='inscription_ordered_list'])[data-case='upper'] · @floor · Inv-TYPO-hyphenation-per-language */
     hyphens: manual;  /* law · :root :is([data-role='inscription'], [data-role='inscription_list'], [data-role='inscription_ordered_list'])[data-case='upper'] · @floor · Inv-TYPO-hyphenation-per-language */
   }
-  :root :is(a[href], button, summary, label, [role=button], [role=link], [role=tab], [role=menuitem]) {
-    -webkit-hyphens: manual;  /* law · :root :is(a[href], button, summary, label, [role=button], [role=link], [role=tab], [role=menuitem]) · @floor · Inv-TYPO-hyphenation-per-language */
-    hyphens: manual;  /* law · :root :is(a[href], button, summary, label, [role=button], [role=link], [role=tab], [role=menuitem]) · @floor · Inv-TYPO-hyphenation-per-language */
+  :root :is(a[href], button, summary, label, [role=button], [role=link], [role=tab], [role=menuitem], input, textarea, select) {
+    -webkit-hyphens: manual;  /* law · :root :is(a[href], button, summary, label, [role=button], [role=link], [role=tab], [role=menuitem], input, textarea, select) · @floor · Inv-TYPO-hyphenation-per-language */
+    hyphens: manual;  /* law · :root :is(a[href], button, summary, label, [role=button], [role=link], [role=tab], [role=menuitem], input, textarea, select) · @floor · Inv-TYPO-hyphenation-per-language */
   }
   :root :is(h1,h2,h3,h4,h5,h6) {
     -webkit-hyphens: auto;  /* law · :root :is(h1,h2,h3,h4,h5,h6) · @floor · Inv-TYPO-hyphenation-per-language */
