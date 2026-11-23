@@ -1,5 +1,5 @@
 {
- "at": "2026-11-23T13:27:51+00:00",
+ "at": "2026-11-23T13:47:54+00:00",
  "domain": [
   ".state/engage/azaryarozet/slots.json",
   "config/code_dirs.txt",
@@ -112,6 +112,7 @@
   "knowledge/system/site/documents",
   "knowledge/system/specifications/channel.md",
   "knowledge/system/specifications/entity-event.md",
+  "knowledge/system/specifications/git.md",
   "knowledge/system/specifications/identity-primacy.md",
   "knowledge/system/specifications/provider/agy-image-tool.md",
   "knowledge/system/specifications/provider/apple.md",
@@ -274,6 +275,6 @@
   "scripts/typography.py",
   "scripts/utils/git_publish.py"
  ],
- "rev": "a6ebb73889dcb4e2ffa09d02f52f9d2936cdeb3f",
- "src_oid": "a42d789aa34a2495"
+ "rev": "f417f8be9da64fac251d3ac4bb5d26e4778ec6c3",
+ "src_oid": "d5934d2f2c30413d"
 }
