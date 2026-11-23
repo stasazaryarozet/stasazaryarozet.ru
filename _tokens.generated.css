@@ -115,7 +115,7 @@
   --ink: #e8e6e3;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
   --muted: #a09a92;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
   --rule: #2a2a2a;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
-  --sheet-filter: brightness(0.84) contrast(1.04);  /* filter · :root[data-theme="night"] · knowledge/system/specifications/text/interface.md */
+  --sheet-filter: brightness(0.72) contrast(1.06);  /* filter · :root[data-theme="night"] · knowledge/system/specifications/text/interface.md */
 }
 :root[data-theme="night"][data-surface="editorial"] .article-wrapper {
   --accent: #a1bbe8;  /* color · :root[data-theme="night"][data-surface="editorial"] .article-wrapper · knowledge/system/specifications/text/site.md */
