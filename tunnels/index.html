@@ -5,427 +5,352 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="noindex,nofollow,noarchive" name="robots"/>
-<meta content="dark light" name="color-scheme"/>
-<title>Тоннели Системы · QR</title>
+<meta content="light dark" name="color-scheme"/>
+<title>Тоннели</title>
 <link href="https://stasazaryarozet.ru/tunnels/" rel="canonical"/>
+<link href="/_tokens.generated.css" rel="stylesheet"/>
 <style>
-    :root {
-      --bg: #0f1216;
-      --surface: #171c22;
-      --surface-alt: #1f2630;
-      --border: #2c3644;
-      --ink: #eef2f6;
-      --muted: #9aa7b8;
-      --accent: #66b3ff;
-      --accent-ink: #08131f;
-      --ok: #5dd39e;
-      --warn: #f4b860;
-      --danger: #f07178;
-      --radius: clamp(10px, 1.5vw, 16px);
-      --pad: clamp(12px, 2.6vw, 24px);
-      --gap: clamp(10px, 1.8vw, 18px);
-      --fs-body: clamp(0.92rem, 0.88rem + 0.25vw, 1.02rem);
-      --fs-sm: clamp(0.78rem, 0.75rem + 0.18vw, 0.88rem);
-      --fs-h1: clamp(1.18rem, 1.04rem + 0.75vw, 1.65rem);
-      --fs-h2: clamp(1.02rem, 0.96rem + 0.35vw, 1.25rem);
-      --qr-size: clamp(210px, 56vw, 292px);
-    }
-    @media (prefers-color-scheme: light) {
-      :root:not([data-theme="night"]) {
-        --bg: #f4f6f9;
-        --surface: #ffffff;
-        --surface-alt: #eef2f7;
-        --border: #cfd8e3;
-        --ink: #121821;
-        --muted: #4b5a6d;
-        --accent: #0b5ed7;
-        --accent-ink: #ffffff;
-        --ok: #146c43;
-        --warn: #9a5b00;
-        --danger: #b42318;
+    @layer owner {
+      :root {
+        --portal-radius: clamp(10px, 1.5vw, 16px);
+        --portal-pad: clamp(12px, 2.6vw, 24px);
+        --portal-gap: clamp(10px, 1.8vw, 18px);
+        --portal-fs: clamp(0.95rem, 0.92rem + 0.22vw, 1.04rem);
+        --portal-fs-sm: max(var(--fs-body-min, 0.875rem), clamp(0.875rem, 0.85rem + 0.12vw, 0.92rem));
+        --portal-qr: clamp(210px, 56vw, 292px);
       }
-    }
-    :root[data-theme="day"] {
-      --bg: #f4f6f9;
-      --surface: #ffffff;
-      --surface-alt: #eef2f7;
-      --border: #cfd8e3;
-      --ink: #121821;
-      --muted: #4b5a6d;
-      --accent: #0b5ed7;
-      --accent-ink: #ffffff;
-      --ok: #146c43;
-      --warn: #9a5b00;
-      --danger: #b42318;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
-      font-size: var(--fs-body);
-      line-height: 1.48;
-      -webkit-text-size-adjust: 100%;
-    }
-    .wrap {
-      width: min(100%, 960px);
-      margin: 0 auto;
-      padding: clamp(12px, 2.5vw, 28px) clamp(10px, 2.5vw, 24px) clamp(24px, 4vw, 48px);
-    }
-    .topbar {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: var(--gap);
-    }
-    .brand {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      min-width: 0;
-    }
-    h1 {
-      margin: 0;
-      font-size: var(--fs-h1);
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      overflow-wrap: anywhere;
-    }
-    .meta-line {
-      font-size: var(--fs-sm);
-      color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      font-size: var(--fs-sm);
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    button, input {
-      font: inherit;
-      color: inherit;
-    }
-    .btn {
-      appearance: none;
-      cursor: pointer;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--ink);
-      border-radius: 10px;
-      padding: 8px 13px;
-      font-size: var(--fs-sm);
-      font-weight: 600;
-      transition: background-color 140ms ease, border-color 140ms ease;
-    }
-    .btn:hover, .btn:focus-visible {
-      border-color: var(--accent);
-      outline: none;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: var(--accent-ink);
-      border-color: var(--accent);
-    }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: var(--pad);
-    }
-    .lock-card {
-      max-width: 480px;
-      margin: clamp(18px, 6vh, 64px) auto;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .lock-card h2 {
-      margin: 0;
-      font-size: var(--fs-h2);
-    }
-    .lock-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: var(--fs-sm);
-    }
-    .key-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .key-input {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--surface-alt);
-      color: var(--ink);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: var(--fs-sm);
-    }
-    .err-msg {
-      color: var(--danger);
-      font-size: var(--fs-sm);
-      min-height: 1.2em;
-    }
-    .exit-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(156px, 1fr));
-      gap: 8px;
-      margin-bottom: var(--gap);
-    }
-    .exit-tab {
-      appearance: none;
-      cursor: pointer;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--ink);
-      min-width: 0;
-      transition: border-color 140ms ease, background-color 140ms ease;
-    }
-    .exit-tab:hover, .exit-tab:focus-visible {
-      border-color: var(--accent);
-      outline: none;
-    }
-    .exit-tab[aria-selected="true"] {
-      border-color: var(--accent);
-      background: var(--surface-alt);
-      box-shadow: inset 0 0 0 1px var(--accent);
-    }
-    .exit-tab-head {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 700;
-      font-size: var(--fs-body);
-      min-width: 0;
-    }
-    .exit-tab-name {
-      overflow-wrap: anywhere;
-      line-height: 1.25;
-    }
-    .exit-tab-sub {
-      font-size: var(--fs-sm);
-      color: var(--muted);
-      overflow-wrap: anywhere;
-    }
-    .stage {
-      display: grid;
-      grid-template-columns: minmax(0, auto) minmax(0, 1fr);
-      gap: clamp(16px, 3vw, 28px);
-      align-items: start;
-    }
-    @media (max-width: 680px) {
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif);
+        font-size: var(--portal-fs);
+        line-height: 1.48;
+        font-variant-numeric: oldstyle-nums proportional-nums;
+        text-wrap: pretty;
+        -webkit-text-size-adjust: 100%;
+      }
+      .theme-toggle {
+        position: fixed;
+        top: 0.9rem;
+        right: 0.9rem;
+        z-index: 20;
+        min-width: 44px;
+        min-height: 44px;
+        border: 1px solid var(--rule);
+        border-radius: 10px;
+        background: var(--chip-bg);
+        color: var(--chip-ink);
+        font-weight: 500;
+        font-size: var(--doc-fs-control, 1rem);
+        line-height: var(--lh-flush, 1);
+        font-family: inherit;
+        cursor: pointer;
+        padding: 0 0.7rem;
+        transition: border-color 140ms ease, background-color 140ms ease;
+      }
+      .theme-toggle:hover, .theme-toggle:focus-visible {
+        border-color: var(--accent);
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .wrap {
+        width: min(100%, 960px);
+        margin: 0 auto;
+        padding: calc(44px + 1.8rem) clamp(10px, 2.5vw, 24px) clamp(24px, 4vw, 48px);
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 2px 9px;
+        border-radius: 999px;
+        background: var(--chip-bg);
+        border: 1px solid var(--rule);
+        font-size: var(--portal-fs-sm);
+        color: var(--chip-ink);
+        white-space: nowrap;
+      }
+      button {
+        font: inherit;
+        font-variant-numeric: inherit;
+        color: inherit;
+      }
+      .btn {
+        appearance: none;
+        cursor: pointer;
+        border: 1px solid var(--rule);
+        background: var(--chip-bg);
+        color: var(--chip-ink);
+        border-radius: 10px;
+        padding: 8px 13px;
+        font-size: var(--portal-fs-sm);
+        font-weight: 600;
+        transition: background-color 140ms ease, border-color 140ms ease;
+      }
+      .btn:hover, .btn:focus-visible {
+        border-color: var(--accent);
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: var(--bg);
+        border-color: var(--accent);
+      }
+      .card {
+        background: var(--bg);
+        border: 1px solid var(--rule);
+        border-radius: var(--portal-radius);
+        padding: var(--portal-pad);
+      }
+      .exit-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(204px, 1fr));
+        gap: 8px;
+        margin-bottom: var(--portal-gap);
+      }
+      .exit-tab {
+        appearance: none;
+        cursor: pointer;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--rule);
+        background: var(--bg);
+        color: var(--ink);
+        min-width: 0;
+        transition: border-color 140ms ease, background-color 140ms ease;
+      }
+      .exit-tab:hover, .exit-tab:focus-visible {
+        border-color: var(--accent);
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .exit-tab[aria-selected="true"] {
+        border-color: var(--accent);
+        background: var(--chip-bg);
+        box-shadow: inset 0 0 0 1px var(--accent);
+      }
+      .exit-tab-head {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 700;
+        font-size: var(--portal-fs);
+        min-width: 0;
+      }
+      .exit-tab-name {
+        overflow-wrap: anywhere;
+        line-height: 1.25;
+      }
+      .exit-tab-sub {
+        font-size: var(--portal-fs-sm);
+        color: var(--muted);
+        text-wrap: pretty;
+        overflow-wrap: anywhere;
+      }
       .stage {
-        grid-template-columns: minmax(0, 1fr);
+        display: grid;
+        grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+        gap: clamp(16px, 3vw, 28px);
+        align-items: start;
       }
-    }
-    .qr-panel {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-    .qr-frame {
-      width: var(--qr-size);
-      max-width: 100%;
-      aspect-ratio: 1 / 1;
-      background: #ffffff;
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .qr-frame svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-    .details {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      min-width: 0;
-    }
-    .exit-title-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 8px;
-    }
-    .exit-title-row h2 {
-      margin: 0;
-      font-size: var(--fs-h2);
-      overflow-wrap: anywhere;
-    }
-    .hop-box {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .hop-caption {
-      font-size: var(--fs-sm);
-      color: var(--muted);
-      font-weight: 600;
-    }
-    .hop-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .hop-pill {
-      appearance: none;
-      cursor: pointer;
-      padding: 7px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--surface-alt);
-      color: var(--ink);
-      font-size: var(--fs-sm);
-      font-weight: 600;
-      transition: border-color 140ms ease, background-color 140ms ease;
-    }
-    .hop-pill:hover, .hop-pill:focus-visible {
-      border-color: var(--accent);
-      outline: none;
-    }
-    .hop-pill[aria-pressed="true"] {
-      background: var(--accent);
-      color: var(--accent-ink);
-      border-color: var(--accent);
-    }
-    .hint {
-      margin: 0;
-      font-size: var(--fs-sm);
-      color: var(--warn);
-    }
-    .hint-ok {
-      color: var(--ok);
-    }
-    .specs {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
-      gap: 8px;
-      margin: 0;
-    }
-    .spec-item {
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 8px 10px;
-      min-width: 0;
-    }
-    .spec-item dt {
-      font-size: var(--fs-sm);
-      color: var(--muted);
-      margin: 0 0 2px;
-    }
-    .spec-item dd {
-      margin: 0;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: var(--fs-sm);
-      overflow-wrap: anywhere;
-    }
-    .uri-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-link {
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .copy-status {
-      font-size: var(--fs-sm);
-      color: var(--ok);
-    }
-    details.raw-uri {
-      border-top: 1px solid var(--border);
-      padding-top: 10px;
-    }
-    details.raw-uri summary {
-      cursor: pointer;
-      font-size: var(--fs-sm);
-      color: var(--muted);
-      font-weight: 600;
-    }
-    .uri-code {
-      width: 100%;
-      margin: 8px 0 0;
-      padding: 10px;
-      border-radius: 8px;
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      color: var(--ink);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.76rem;
-      line-height: 1.4;
-      resize: vertical;
-      max-width: 100%;
-    }
-    .hidden { display: none !important; }
-    @media (prefers-reduced-motion: reduce) {
-      .btn, .exit-tab, .hop-pill {
-        transition: none;
+      @media (max-width: 680px) {
+        .stage {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      .qr-panel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .qr-frame {
+        width: var(--portal-qr);
+        max-width: 100%;
+        aspect-ratio: 1 / 1;
+        background: #ffffff;
+        padding: 12px;
+        border-radius: 14px;
+        border: 1px solid var(--rule);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .qr-frame svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .details {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        min-width: 0;
+      }
+      .exit-title-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 8px;
+      }
+      .exit-title-row h2 {
+        margin: 0;
+        font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.12rem);
+        line-height: 1.3;
+        overflow-wrap: anywhere;
+      }
+      .hop-box {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .hop-caption {
+        font-size: var(--portal-fs-sm);
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .hop-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .hop-pill {
+        appearance: none;
+        cursor: pointer;
+        border: 1px solid var(--rule);
+        background: var(--chip-bg);
+        color: var(--chip-ink);
+        border-radius: 999px;
+        padding: 7px 12px;
+        font-size: var(--portal-fs-sm);
+        font-weight: 600;
+        transition: background-color 140ms ease, border-color 140ms ease;
+      }
+      .hop-pill:hover, .hop-pill:focus-visible {
+        border-color: var(--accent);
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .hop-pill[aria-pressed="true"] {
+        background: var(--accent);
+        color: var(--bg);
+        border-color: var(--accent);
+      }
+      .hint {
+        margin: 0;
+        font-size: var(--portal-fs-sm);
+        color: var(--muted);
+        text-wrap: pretty;
+      }
+      .specs {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+        gap: 8px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: var(--chip-bg);
+        border: 1px solid var(--rule);
+        font-size: var(--portal-fs-sm);
+        margin: 0;
+      }
+      .spec-item {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+      }
+      .spec-item dt {
+        color: var(--muted);
+        font-size: var(--portal-fs-sm);
+      }
+      .spec-item dd {
+        margin: 0;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-variant-numeric: inherit;
+        overflow-wrap: anywhere;
+      }
+      .uri-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+      .btn-link {
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .copy-status {
+        font-size: var(--portal-fs-sm);
+        color: var(--accent);
+        min-height: 1.2em;
+      }
+      details.raw-uri {
+        border-top: 1px solid var(--rule);
+        padding-top: 10px;
+      }
+      details.raw-uri summary {
+        cursor: pointer;
+        font-size: var(--portal-fs-sm);
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .uri-code {
+        width: 100%;
+        margin: 8px 0 0;
+        padding: 10px;
+        border-radius: 8px;
+        background: var(--chip-bg);
+        border: 1px solid var(--rule);
+        color: var(--ink);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: var(--portal-fs-sm);
+        line-height: 1.4;
+        resize: vertical;
+        max-width: 100%;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .theme-toggle, .btn, .exit-tab, .hop-pill {
+          transition: none;
+        }
       }
     }
   </style>
+<script>
+    (function () {
+      var STORAGE_KEY = "theme.v1";
+      var MODE_ATTR = "data-theme";
+      var DAY_VAL = "day";
+      var NIGHT_VAL = "night";
+      window.__applyTheme = function (override) {
+        var t = override;
+        if (t !== DAY_VAL && t !== NIGHT_VAL) {
+          try { t = localStorage.getItem(STORAGE_KEY) || ""; } catch (_e) { t = ""; }
+        }
+        var val = (t === DAY_VAL || t === NIGHT_VAL)
+          ? t
+          : ((window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? NIGHT_VAL : DAY_VAL);
+        document.documentElement.setAttribute(MODE_ATTR, val);
+        return val;
+      };
+      window.__applyTheme();
+    })();
+  </script>
 </head>
 <body>
+<button aria-label="Тема: авто (по солнцу) — переключить" class="theme-toggle" data-theme-toggle="" type="button">◐</button>
 <main class="wrap">
-<header class="topbar">
-<div class="brand">
-<h1 data-case="upper">Тоннели Системы</h1>
-<div class="meta-line">
-<span class="badge" id="rev-badge">rev a61ba89f53</span>
-<span class="badge" id="count-badge">7 выходов</span>
-</div>
-</div>
-<div class="actions">
-<button aria-label="Переключить тему" class="btn" id="theme-btn" type="button">Тема</button>
-<button class="btn hidden" id="lock-btn" type="button">Сбросить ключ</button>
-</div>
-</header>
-<section aria-live="polite" class="card lock-card" id="lock-view">
-<h2 data-case="plain">Доступ по ключу</h2>
-<p>Конфигурация тоннелей зашифрована <abbr>AES</abbr>-256-<abbr>GCM</abbr> в браузере. Откройте ссылку с ключом один раз — браузер запомнит его локально.</p>
-<form class="key-form" id="key-form">
-<input aria-label="Ключ доступа" autocomplete="off" class="key-input" id="key-input" placeholder="Вставьте ключ доступа" spellcheck="false" type="password"/>
-<button class="btn btn-primary" type="submit">Открыть тоннели</button>
-</form>
-<div class="err-msg" id="lock-err" role="alert"></div>
-</section>
-<section aria-live="polite" class="hidden" id="app-view">
+<section aria-live="polite" id="app-view">
 <nav aria-label="Выбор выхода" class="exit-grid" id="exit-tabs" role="tablist"></nav>
 <div class="card stage">
 <div class="qr-panel">
@@ -434,7 +359,7 @@
 </div>
 <div class="details">
 <div class="exit-title-row">
-<h2 data-case="plain" id="exit-title"></h2>
+<h2 data-case="upper" id="exit-title"></h2>
 <span class="badge" id="exit-role-badge"></span>
 </div>
 <div class="hop-box">
@@ -456,31 +381,49 @@
 <span aria-live="polite" class="copy-status" id="copy-status"></span>
 </div>
 <details class="raw-uri">
-<summary>Показать <abbr>URI</abbr> подключения</summary>
-<textarea aria-label="URI подключения" class="uri-code" id="uri-code" readonly="" rows="4"></textarea>
+<summary>Показать ссылку подключения</summary>
+<textarea aria-label="Ссылка подключения" class="uri-code" id="uri-code" readonly="" rows="4"></textarea>
 </details>
 </div>
 </div>
 </section>
 </main>
-<script id="tunnels-envelope" type="application/json">{"v":1,"alg":"AES-256-GCM","aad":"dela-tunnels-portal-v1","rev":"a61ba89f53","count":7,"iv":"RuyHVEjIPnM55P4g","ct":"4jQsbzukFTB3LuXTWUsgaZugpB80QMZsXxmm0IhNeG-lGAAmsX8ChW_RiQXY2Eol-oXutzRIPasPuF1nTr0oQs5TFTRhBrFZsbZSzOh383Io4pWF1NsO2Jz_bBaKAgUUO5wC9VoXwI8bxzXFdOgxZV-A0ZFzRRic1ftIE_ZqGE_8AWE41sdkj7Pcdjfpag6mCLtjq_e6kCeOeooAbA6lepYw9uYhF0vA_paK2Aevjo5gAoL58ahxYIJDff-sdGKKRR6m2d6dWAewlQVFr3FWXgvw_8cpIyzq23n-7wgI6jtMmJ2BB48DDXKseBgW7z46w13EEAKmbnPihHn8BRePh4epVgz1C18uWTCUiBTkJGghtCGHo9qDXjzu5HiV2xs6XiNQqte3XyBWHcBNYSl3dqrkTgoCMQcKHDVy1TK1Ma-nA_F0m1o0GiisXcmYFNzWbvgn34aqw6svVBnCQHGlJt-dVFPUCKTXCfythlU7V2B4r0oUvrHIQBzk0GnAZl8mcKP-jctC4ZBe-2wY9AjVZOVfRecSJmNXhnzW9U6Ounum9yRHuAA0a9VB2RLq24xJf50oKXX6ObrwDdLLihS8jKJWzq6mWWj8SorDNY_cB2sTGyySvw95E-Lo_x9tw_JtKN11jcJ3_Nprri7KdJHzh3srKxj-tSdj-iX1B0dopXar8Y7B2W7KWKRZITTBzIU6w_kb_KF48tAJYvI0J_GFjgVeXpjrBmXIgNs2pPW2WO17TErXalBBzKNRaJ8LfnBScmpUvjRmHTzYJcIN1sD9-w-cXTfYfl4qb7-hGrYgTRktOMGy70WhGaYatr8TYc_JHDcjHU4G-0sKN9I5FxYhtzaxXT1VbjS8asjZsYPvpo-vndi21vj0NofrDoRos4hVlrgU3L9f1ZNqDUNUg7nBVXvPIsvKYLOmTdk_GNTgdv7jnqYIRG-SkDifKYFkednNb2BxYaPrdAt10G1Aexv37pIl-eGHgmNvpgYjCiWZwe0GAl2epSpMrDb0fYDbzrp7tmNOujeodnt_-XvuLojUcQzEPKPL9gWwKP5zyEtTS7vvqGqPykRMKl8Dz1Gheo2Pm_HOSbYIjZIz98cu8U8GtkE3M3_NwIgjg3PHAEEEyI7zKlLLDo3JUThLG3p4roLaecaChxOTmixNAFF68J2XCrzhHug2xRMHSFjcb30mqGYotQQttFyCIkMAlEeqAd-WjbRAJddSvWu4Y0c4A8rsg6eHrl0JlyOuYLRipwjwqIU657sV9TbOo0NmIG7IFnxQQ8AJs3DeIw87mo0LpoKhGKti6A-hnmo4s4I8HZubVXjIssmAj8qRG2tyevA_qi4yDMI0rmhTKKV_ScXF6gal3JuzOc43FsSNBwLh1VA7y7HLbJtBP1RWpkhLd1ynJsxHuS9ak-gIT5PCt9uYgYl7gk650GX3t54WN5lF7jGUB-KK_7FKkr1KB6jBC1rFfmGCXGH7ttiCdClk9f_y01zD7OvVhtKsB9JcREGczIHiKfLgZW2iHqDgea4HuH-jCS2k3_yTdPj9ZU4Hh-H7n9rca0D6xEMkigQP2FXr_Y5TnAx_dHOBc4ZFc6BhieZhVwknbOt9cNVw6tF_sYgy_6ykqSYYitWYRA4E2TGlmQ-OxeMQQG9YuDxKXMyvAIAvHmjW9fiqbbcwklW7Kq_fGA1BmwLer01egh9RuOkDI7MSx5V_9cWTInxchQtmxtKESBsl2Xj3GjMT55M8_JsSa04IjHmh57-srCSMrg6r1e0hTXVRFQn-x0hVF9Cz2uNwiVYYrQ7Awr5zRN6XEX_QFhvAXuz-DltcsK6xG1F3L__nZg-2Tz1p_qayczHuarkKhee0ZzUJll47p1P7fBf4n2Z74wKu6mQ2PPEXVChOWwOexHcO6KSeCE2TZcB0zAeQTDSWqcZFzrgcFIunrc4Q9J2tAFSQ7goNi6PYsj-usQVZ6jQD_zI2z9xqHJ2lrD7bu7TKjZGAFqfIGS3npVlfIgXctY4iXvDRbNvuPWJkTvjjMNporhJxRveq7rzeNDDgwfdQdWvvDxvUqRUwESRKxqQMvQDRvb_OQ6ukg7KLz9q7AoOB3yr3EaFW9pVRIu93en2VzxGhqUtZYuWwSXZ50ZQa1FKjXbu1tL72XTYTeUWcxP2YIVMDh6IaabUGrc0yNb2ZpzXbaCPHV1zwhCIVsyuQrfsBAohXweOB4JpH52aWaF7JvBSPO7sJo2aUk9fXVEAVH0OFqJX3ZcU-zk_DsPgUSqsOEbs7lUrmdV2idFjyOIJL12eVJbnyip1rpQRAuwJltTVm1LkSICihbH_ohMcqtiv34Fd-RnRR0gJwSTmmNoJVHTwB7FULMDrgOJKV_p6hECDbQKEWg-CLdE-WDnG_1iV0BwhAnMBxLQoT9uuBrLSvV4hh7PFzf5E9QWx3qNtvDRw1wqwxb96o9l-zWKzbHvpLsURw1GBZwamcxPEiw8fEfZzH7yr3RsMl_GLXFKRYF1bdIoqtXd5biAcTcOReDc80Jc0LM-ysRkg67Yq15c4VV6_LAYm0NF_5XumJZ4zUW4i4BrQiFwd20TJdBTlGLfcW8GOC_URMl654-LsNz1wngzfxmNMZeXuBJUIw5TDGC2olL7O2Szmodjw8n5LjOpSfHPetGiLEIJ57-fisrgj909fB5vg23qlPQxf90vReJBnoxdsoPxVIEb3_kgoZnzcAz8IqM_XhjgyQcTe-niMsK81AIjZBETe4J6u-lqCQefJvKyR1fVEdjsZO7Pkur2wl8zF_CgeBZ4H75XyAGuT8wfhkHnOkibOKDl0LH4ZtKNbUMU7vcmZlPb4YcKKdc6qoqKxEIBOH4PLqHxi_eky41tFEkdXFHddLhFNTApG6LqAORHgt7hVEOoR6D4_naFYaDy9cS2dcAQOTml97sexRLqCmbl6L48Fdt_kIKhwzteWp1nT0Gi__FrtIx8gcmT4ue76Ryi_NK2aoKCaiHjA84hHCNfpihEP7tGFrow27UchyVGSE9liFrFFuQZIb6XVUJZQLOK2fVsxMw3ISK0lUIbAuBG0xbrSAy3tBAGxwOpK-E48mHHKGvhv9zBfpu5UqP_Ui2WidreJJfhbMRkXp3w8xCT4v3maGuaOFfZc5u9uQKtF9t-dM7-1LI6bsqJIMXUKjJ34r0qPmKZdgUuQwRJzeDdYxuVcUrdKNSKJxGJSH1h9XgmRqbHOL0_EunCiCqEUsqsj6C8jS3hiYN9OgtNuKHFoJHjl9Q2lDjiRudJcPdFFety-vR8sCH6fkEYD58EVZRb-6lkhJ8ftKg_t8LA-Tg8lmaIHjQydo8u5gIEs_aTFPjfNtCsRXRqxFtk2-lOTPfGWwE2B57XhdJFxM3e5gVHZVRc4MjcZKPIBbDzyierOTmeSvTN2OEoPUC04ra_ws0A_SKZ4YlJWo6kz6Vi-qWLDOGUBnZRD5uwqPYKAq0CPQ1DCym9ox7xaqX1xt2aqt4ds9o-6OG6ax5q4gIzwaVt32RJMIarXfR4WgJQ-VqW0H93ZvUo7n_cZ48_9_uBDusfAdEHECX1o3B1ItzF19TdecgnEi90APdYUh2mBu-is-K5YG4wJY1XkGe9B7NBNw_fJhL8oyzqmyidFi7NUCYJd0IGrKWbrDEwrq0nye_4zP0SijAUAayvfjfJbx_8aXpVGO8WB4L7Q38BP41zePSdelzOdWAxkQZqR6B8YFotFYBlYh6VzpGQRW0Aymii3_hfnOPHVWaxQ5AjpMnljVEKY-buI1oisEdl8vXzqoQ89KValq6ZgYAVGr8TlJjwiutPWu56CGrG-GBbfSZm5q1EWcUBpzEI0kals5S2uaBrLhMKnF09n-nDyKCTMuIfb5qGlvHahIHi2QMOFVo3V7wuIm-oaLPQxWUQUSOZMRYWLEf_yecweihaYEpB6rzCD8DCQm7BfOx5GEPjLg7gjV0sUb1-J8MgpJaam0IxXKAXL09eTAjFA_XvXeAzNrbJtlKhrsCTtImH_7e1lZdNLBxfCPXd-itk5dEgGJHJyXv_D0c_r3eS4ysf70Kt_6CGFNhNfBpJIV42bcD0kDQp-z0CqEEIjjTq6kSiDrZHlnGC3L_xnTc7woe8KTLZJRHzR4LDahAi2pBDpu0SMABxgJOys9ei98Tym4TCgqG5v9OHY1rEsDgWEz-_ddlsy63qXjRy5E5cadxIKOHBWVWCXRn29dB6874eQm5IVNIlr_EKO5nCZK6DEzbeMbIu90SN3ulrbD_ArWN4ZTAseyq_8nDPMzlCIt4w70h3KiVwS6-fL2yb4r6EFzbRgQpPlNiPxsYN_ciJsFMA43-40puWxkcFQ06O6gE_FEUUf05SKRgchK6jne406Weac8XhBaVdqLYpJi84wok8Z8hnJ_9ol969ZoJblvxFvPMFfvoykgUj_43f-GcHKEyNzNOCrFfHwMAMXXAvd8i5RVNuEO2gIKIkQi-jRmA4qCzRNrgt3kBvxEaneEWN3nPpRCOxf3JnYNLNe7NN-zvbNshA2Mew7EZXjewx180kPWNG3q4TD8mMD1AbE2hmFdvqhHBVJDv7VeYQzdZQ-LFS0Jy_f5vbQ3m7uJ-Ec2K9F4wdXELja2pX3HJFfqW6hN-jVlrIJcovs1x0Ir98owXRJATyHpJeelczri3tzJaiCv1gXa48zPb97JgdfOM6hkLzC62U2-RgE6gXA9ah4yzw0TkXyNaeoxCEpFtpAAviMpbVWjH-913mGiTwYaRFKvyam-th5ekfKmmxQCzjyipHVshro38fLxwEZB9cN0Dd89yFwvw5p-8oP01VRj9QUjHP5SYTOULRd-Ou_QCIwCxmrBf-LBmKEL1iaM_nzysFU5BzDEA1lZhL9hgozyzow9YjwhglGAAIPy8NKsQQ52BIXDZ4_Ar6HsmqS9CzhRXbN5loVTanIt57TwlBX0bw3V0RZjpSxAA-92B6FWorIyXWmZkrVacYBwqpdjfVWb45yc9ZxPMi_vJ42FPbSIm0hULYBymKesyxjIJYul2W5tFqm-csdM1GqDG_Zm_H7Q6A2UqjSVi8RLYT8sRLMEf4NDpY_CbPCtOgivLUSpyynaRr2EcYUJQyhedUZmPywyj34Q2tFWQ0VybdpbW31aTLMEGozLIR3mTKj60Q5uL7eKqw0AbPlyv9Z7klLZj91mSp2pXfVl7wBOELvDqGHJRvpLzDfTnDnGNs_rqJxV3BPDoxkOJyt5dnkRpUM9S77AbAxkCA9zMBwwPHYyqpIA14-s40KO02DUfiEylk7BCTMLK6x2hnp2i8I7r33fZmyAN7KRpMWy2DxwL1LoMcAhIguNWUUzEeGOzNKvPA0BvxzRIDgzeiyEVQUW1nX3IIUW7Sg89K7dySJ8URzLw3l-RxAJZSEbhY2uHHRwNZIhV_Ng4NoA8xjjOeSh_2cHXFhTMVYug5dyqgXONJJXySCiha7nUn5NzcPec5nCKDt9xqwJyWMgYcZ3XGPKm7E6ddX-iN1e3K01_cxm9CTDDuXuOUZpw1ey1Nn8Or5SnoPDWh44H_QOXFXMSAa5MhlsRVlmWIur_kJWMZSG9RhjA_Ifk2Arbv5W213blyj9zy8_ERzrqYWh3DvqjWraAnxAK6pcFCl-ObS47lYHVbxxQgdHUgPh3aDGCP9fY822NlrakF77SXMxwsfpc7yW098ffd0Z6XtcswABav1eyEya5rpziAeOMjBDuKJbdHVxJJDYp7DPp-K9Qy-xapu5oeP_FI3ywZF0I3CL8bh8Bc_P6qC6UOcHEbabL605dxjr2kInbL81WaWI7zTc4mWhXhLpf-clJ3FZV7-qZFBDpxOngnL6FCMo7JPY9rlo6l-vXZ4tcf1kV4-KKDSzi11hgQNB8oG0OHe7IXRGrnUjutFNmtrpsWPuIsii6UDAFjYbnQ1K1K5MGZeR_-gHNtlceOiIBSz4NK3mOQSBmlbvMp9TKvwKtjp_PjsuWoUh4CbNWoNAApLAOIIdLtgVP9CGidQTwSSpJyjwrPE7NQCd_9lp8_9SCSJ71olIXq2R1AlR-2Gv7RllHmOeUD8ZiNQd5U1WCrpEmekuSa8P4KxpecUs7ywNNWYKtwciDeG-kABfLNOtT7M8mQuc8C7MLFSmCd3h9XNzzDfV0sq0eDPCItEpLw9DZ3wexHgTyHRanHcdbev-eNRGRFvZ61h72L09VMwsuc--za67V1jRgoJ5NtwP5xZhYVcSp9KjQJRLi_gN8Rcr6SlQ8ZD9_diQ3mHAjX4ipzFCCv6_gR1Za9nrEp_lNa477V045QbnbQ_0LIS2IGZnnPta37HgvtUy6cCbH92dYFVeCHlKvDAIwcH75VvgiCnjw7n-06w0OWhq_WVXkoYnk6Ex5A5J9_dlDDgS6oFHZ1nIJ6sFAyxHqXay4TBsO3-w7ih2onph4HwkND5AqTLin0YqDeme5GxKto9a5cut9QYoK5-25N_t5tq4A7rUowcdAnEzA0JSywnSBB3ImQcbWQiTmREGxPCnNoNaGBauhaFB0fbTHui0Jow9lFVbVyX0NGkHTryLtaxLafGdfroWFFa6FRTjsXdytYqc25lcu30luqTgkIaWpNC_zOQ9NMRpcMS6AVyaJ-r-kPAu-6r4xyLuOm8YJHulYR7AucDtOlYFL7-qGscTj5nKGrJJKV5sxrV6VwVtOr4ymxGyohOXpT4q9uc61it_n9hrd3UvlazFVL30eaeE39kZnwBohc8DjVE54-W_tHuBYr8ZwUWBFJ1exmxlJs_niSLyZKoRbKp-VKm7axOy7N_1YGev_Gw7Z9MJQba29xoRN7la5OYXz90Tu8cbnZOJqk_NLVoy89kDOfmZwOBcBV5886fC58Ey-pVRO_h5n-uATO3vFK9E6xR4IgRBzsMRBawW2xjrtyjaARzolLv1sM6AemI918BGwz4Lk9lCwqo4mLG4NvOAc9ujRw5BTq6CjQ_f5k43T-G0fzWJeZ32E6fD3lvYZZes_K8-ECE_MbdgZV7nJrsL1q43E-Wz8p3Qk9cU6dX0ePW3vErikU2OB64eEqwi1w4ezt-4_I9gKWE3gWHy0BKNEtf36B79BCR3kKTHJ5yyrA9b7gX7VOn1-HT88x8iuNoYhapDxmYE7EB12RjIbpfbVZsETcag9oZ1njLNJ8_A-u7nIXSwVnL0QlDCGkPUNm1t-EhL0egoc85DZu4lWJerRBJ4pUu9k2sb4sgCARZZbkTLDQqL-n2FqHAswB9eoNlaRHshJ6De-9nD7Ztks3Hxl59ocZibv1_QVJE1UMDwAYO44XEZLDoM8yhKGEGIXlXdjMwIfb5mVpykRNNAC1j9OeZ0ac6xjYy4Yj6EEB5FJsnoQKG9c5HaTfcEZ1h6urRa9eAg_z1bX_J0wdSn_c5-EksdqGeYUorCxNIbhxtmxuQ44IhzWq2UUVkvTAgBEyaZ7kK3kxmT-S1pMOGjsYTUxR59XV4eE5n_YACwnPLfucgmWn24Zso5l11LBhTPMtrCy8TSPdegDmHMn-QoobVt8Uydn8tgSxi3lPbS3J9BoaAtn8Vas4hvjzJxeUNjgD3lOT_CIPloDtETzAcqixfXMns6tvehYPLa7vhLccybMLHVxmV735DdlJAwfmWEih8q9jAO3ECw8ZvO9t7rZ_bal5AxzKCq2VdO1gd0y0QqKeZrM48FKQebjna--SZ5EL0dQtajV2KtlrUAm9IC0HF0GFyasujKy79GVa8wgyRpUCHwFpJn8uEEgYiwhHu7Vpowtyjdg_UVU4LXv6-HuuYxhaD02LVZDeouQnbVQQUt03JUT7L5XUHaRtUH9jhcztV80r-gXb_nhe0uP5trzxnY5KbLBcq0voSf2tWpsnzCYUZv9u3iUlq6767YXuQMtV_J_7K2gpeLoC3DJMqLRRMHf6TlvETKyodGnGOfljct7bGjh2rP2EXYHnEC4PGhYK5kr9JzIOX_6X-qg7MhMSUGuZwFbuVv8qoZ7HxKgZBDMUoAbPlqtsyVCCLThBjvsolANGMYEkwizKeV84c1Xxdf4msuCamXTuUdD_4dl_MJMGwjhGB1qhRw92ekHgl1lQP-PlRD-nsjpxJ-jFUWXutnwnJHCcfc8O4az_h5nhsGz76jDLpwFVVMUd9OtjAhM04WJESsFYGYgy6N1y2sx2rRqImSg2PvJwyBQc80A8s9QOSMXURTI1xLmOngqtxwwoZCrQbx16wKN36zM4NGBUH6iQiZFfvlu9SZZtLtsRUJw5vtEOSnPt3Q05GgfGrpYC-D6h843P9zq8hJwFJjFPF0N6g-uVqfPNEXzAxQfRplhZwSceMMFG74aGWDb84_bZDZe0js17D66qS_5oSsWBAP4i3IdJCYijhIZIEZBh6jP8HlfRFfdRVImphPhliUV3XjFFb0MBZtMUXseb3SS2Sm3TLOJ98tC_kluQQKS3tYFMuHnA5DhUMDg4b7Es_zVI16a9rWhXgA7l3ucU0a8HlOWWf-osWBDhmrhN9PhO5SufGSSz9LlL7WFb3TIR8Q6r3qpMDdVgHgFu2M2UJlmWLy683kw7yBy_uTQV6wbiLbuLoti9slMJaeAIgz_XuYqlTZr8tJ7zWxxeAaYH6NMPqWD1Cbw4fj5SqG8ZSSdo0Mn8vuv68CrcTtTV8nwO-mUEr6xwQeQIswODsXWlvCeWO6yTYYotMOCifKxV2VKGHTuF-Cky_1mQxGTXc3ECVdujKRcFShYZRi7TXnLSPLkq1hnUtC1V9pT4KWp31yN63ms_Gl0TyZAjo5CaVVHkiJpkNS0ZLKy7pxf9fvlCAr1ktlM1uNlUm5XwF4dXQjQzc6bClSjvgoHuwclKXLPcpkI-vp2I8uYfdtEFyFSgi2VoE4hTVdLWP8N8lr1WhQXPwCcVHRl7MSKE9-6dc-vjHa1TTibcovxHmaNC8uQpMLPBX4KlBqpgZUtaVF2Ldxq_mVQR3jjVidwmWh9GJGH3Os_E7_MMcLm4XEM9SHhQ-vyU5g0NmGbO3hwnfzS9KS0raybbmxRnsAP0BdkE6ND5ldyQqbnz8qIsCQneOLrgOKv_cl6gY0f1Sm0X9OI1JG-IOXTgXtTF4A809VhV-Vb1YCUkf_b4lb5Dt_nhHn4VtgaXR1loMXySmp8gRtFFLEZpMUjS5oGsTrcOxYAaTB8bNSkd94ki_FyCNpivD6vhxt3IdWBwwLlsiCc2-Yi-qUj9pGbEDGV2f7mFfpufT06TUI5q5mBAPiW88qF1JKlBRHegbMTwEKRD0pnNkUP9TzyUOdzQ_yXdGqkDEoGRgkv9jQe7NVYgdSIooyfoauszWkXyBzyQKGXo4C9ClLA6IaU1wo2t2g7ssE67fzfVeIp7o8G3oEigWssReZoJ2N-tERTWa8vb5SHrhm-acQ_2YX6tCpA0F74x9Kf_szQdbOCiS-BF7WyrWSoARrGqxPLVbnxx6SKXf4H4ze3d9Hx4tE5t5Ewn_VAMxQnrAUZ2ooQR3JmlBaPzc77dkuGjWDF-6q28C6LMtMJIZreS6xnY9NlLiodHktlmWtuWtVpVH0DA74D48zHG1NWq62MYIdTewViWZoHjy8cPac9Du2CWoHsAbZssoPyHmBgnOwCHa-yip92SaTlv-pqMYBXq0n4nY9lxwyKF90Mi6ZrsMylENYq_KQU45qVDDN7Aq2CEhXeaobWNTiTGeRr_yr0-UNwbKhcaP7-NpLkCnQW-Yr868yz54R8s0Ho_Y2AR3O15DjdMIlZyPdBpc1sjGOX8ACZffyAavvo9-YDP3elZD4I4MurNqc0WA0Rxo5arW5shFBfbcwMq9DhT62Zg-5FghSdnto4TGYQmi15ogWb5wV6ruz-ubfb5kDgAsw6ZTtyZItKxMFCoy29T6BRIdYhuaLsoEOCfCJaQsIEBrXG00zeaSA4tHSeJt94ACDZHcGFgtm5wkkbsfejcw4zqJCrnpISuQ635u-WQfhURIcNEf2sQB1jEffPmXNy9DgkS2Sc6_-FojZw9zTGs79Qc7i8b_NY6fS0DfdVr__9iHm5SOVn21ZR8XufrMpHqDRJsUFPqIzmgrlOdi0iYgPRIUSOaGJh7_SNWHVUjySIDo7YDc7b3l64PCn76dV_SJ-kJzbejX1FDLsiZEy3disOy7aIzQrSAPMAjV8Kao97p3dCovjhE2QpuZL3IjuK7eH9FBzCUW6CEy69r1lDGJdrZAmFno1S1Sn9S-FAMykO7EUoTy2CpACAzcvqxuocbrl6Lnf3Q5kXYCOImFEZV2EBc8tmwR2LFQk0ng-uSbo8nenxuxy8frCeUke60KF9SgBtwSAA4tQkxIoLAJAuQeoN6BnM8AxKXT7PEPLMDXmcVNgssyuDiOPMEyyy1DODzPTb5GPAkRGnXuRFLRigknBEud_cZ_1L0oJad9S4waCKyvIYERiNWPtYX9VrH-PcWR1ONFMqElRaSp1zP7ooTADl_Va6TQYvIcpx7hpqEU1G5sdJcfXqhuMstDTuQLcmhigEK9b8zmYyE4Yu2ye_sFKkusGmGrIn6RwElyB7MrrJjEdXZRvX6EXRBeVS6B4WWy-zUd21JJ6p9Zo1GABLAn4kNho7kDpgONkc2XucnY3srTsWqRC603eRq_WmD2lEarNJlmBQvxRTsPFBwjeRSFSBuoB1Xgzt9hodAL5Epwp1qHsecortogLr6CIBbwaOF2E5FKwXaXOzx9FfO5cNr61cC5Ipf44-5fOObShVPlCzjlkRoSo5Q7AciVThH02n6tXR5Z4ZTVirBFr--C1iTIxhDs93GWIf6rxBGOstdHjqk98H8C4SFDWvEhwuo98yHylWKN51VdNRyORxThaZmlTp9q0MUgUDGNvqt8R9MTd-XIrwVMztHUcQJ3Ch7hQnWYQhGQfGYivzk09Tx0URxHOOWeI8PIoRw_xvfoxqO69a6FK2MZUpY8jVr4FYqVh73TChWdnRL5u9OdtshlZht6n2s-5p32wMN7PUJXzZQhPvgT9Ju7cbpCIZONdtnA2FBO0SewQNhCfqdkJmArqC8TM_N7yp5awuHp7KYIK5edl3IXfSNuAbCoCZBvpxmT3hBmbBbFlOPyFEQu2mzRddvtFF1noOoXwzVdqYUVhYPVGVVD3kr3mgoWslbDOy7Bv_rc8-_6oS3HmBK3NJt9_Q4yDqCuPS7vhZX_gyc1u_6Az5FNxrshybRNUI3W_0PGTBhxAwbhUiLx5DTppvTLndND_HXWZlCpdeiHEaQNsX4vsOu48lZjmkShl1T2-Ih_Je_ONCbdFz-tgnbUAChE1GHdRDpOE95qu4mx_DYPLcvON_K7u27OLubkO2S3LGnxoap0u4Byxf38QNbuurdf8GxJl7g9YoA1P9JePbbCvJNZ8J2QgfYKjReBGkszPa0OaGuf-Cs-tobWGJDnBfXlzasnXyKsugNtomJODZrGBM4-JacOY72L-XVs4Tur6YkfzPV2sKBoCZLvRN1Ygjn3IWmVtSRzPJ1qWqPa6jE85F967Yi_3sx4PbbuO3p6H7KwBK_eoqK8e8Qc0T5ulmXAPPytpPbHUpE01T43GTzRrx4iKuzJg0uXfU2RUqsityNog2g6a1k3Ln89fuu8_8JEecf-Jdt30Iv6AD4I17bT8ku4Bx0pAy1cjpLVUSn56_wibbgkVgzj6ruGMi8fJ8BsEnrx48rAg0nbu5coCr74-1m63XJolMSgdnnQ8aTqvIEjY3xLuk-ywDUdnybG7ZfLHuOS5hGxN36C-s7IVIrY8VBuTolAleyAzKW6G0JNdIj7HPLzKk2MD14bpWHghxO5e0yz-rigBqZMHTLgONqgs3Z0rED9vtPMOtMKuDryW8MtoXf__g6fN6L5QbCvwLDr5fLH8pZlx3w-_xPP5x031ebtFZuhs3AYt28B3VaRJz_tQwjtjxSAnTPA_Bb_IDwz92LIL-aDkXIc9yAP7ff3dIis3JzbrAt-3Gtuh3tJaFRDL2c_eXbetJsOsdOh9-hDAPGx506sGI0ynF6WP6GlKDwvOaUhxm2OBi9pGzSGb5lvyQTmLqtFzxmiXGBFXuFgjgwSDbQzmPdxGjC4XVY36Nt752kwCjOHlG-34dLhZt2W4WBqlBF6HmGRIQY8XQ5yLEN3zbzGg_theK4eoc018uWFklyfCKDebp0cqdtfp9VGSRAq-YE32-sW1iy2ywJj7noi1xn6OE8h5KQa-fusdtBf2N2w4t7dYvaBEGkhunHH_3igfcICAKn1bDwkzZgeF57CBh1-b5YrTXbvIzhOsiANao7xqCwIkg0ce5E3xsvTzL-VisVxpp630mCOEArWI5icA_nUIcL-KRGDj8LsNUoyvgx8jqQOBkc0jOk6vFh1r0zuEqspjrBNYgKb4HVpvCPdyyoloYCjbSwhEzRxhHDlcu3hajNIGL6h7AYco_3ySEaSS0920RdZzpR4wObjU7-VxOkEF3zMai-wHHoyOMYkHI3sZPtVy5k1uK89J38kqIOPZsX0opawBM0qi6dFzPFTtEDtXCHJRtdTCidGN9rxujztU9u9xhEkpxSVolA5qqQ8G0Aq5WOjPPRvNTEBwhOOHVXinGN-HAGMuH1zU6_wxOxqGoC8H9mKpEuLm2heuW37P-tpKIT1Mt09BtgfoIMQEXr-IzX52yIx7FpVZ4bY1NrpcvtTBNbV3jaZPmjWiCd9TwgItw3eWMiR46qYmzLV3nOLu36LrvCNyJkDMyTtd6f2oC0yu9Uoc7IK9H7VHQymMqaJgPwstEwdH_QsR9GL2CT_E1E9jayFWgJhHmIRmOUh1ssHUWUzqyrFJFcvNfMo-sbYc3QCvZsNk5_SF9gOz2U8xWMeT7bhTiwx9GbftH9-ULWVnBrToafk-Jgd9-Gywf_eDJNhiAtKfaudDiEHxdSTSqcsysxEvKJpKiLJ20vchC7VVgfJ6C-DaJ6B0hWheD5WQ8z03pwopiXyhYYwwnJ7pl_OuypZH0zVgg86Z4p1TGTrZZos5mQC7ZmcJ51s14PWHxRAdGtmHsD-P-NX_8Z5Yj-4wuZjIdh23Zsfs2nVjTO6mwERh9yDweIN1NQu4l6NXf3olDsIrUeJU5jSIxkVJ8SOM1cgjBEd6woTWPF9U5W-N0ldL_VmCIoV16a9zzRGeO5J9lIlEqRKqG0or3e2NmNyUSTh2xHijRkwC1kn_Vj816IFZbfBEQddiCV6SsVLl_iy_Lj8peRMo5zS1XiwAZrmU6ticK2PeYEVqWycvPuMlRLHDuxtq3BLcSS_GrDeGmdb30hEhiS-f2a262PMBMuAVCP58oGlLosm7wKYwK2jNIreFIneUym3hCYkwcp9d3cUM92Xsl10A9sHzRpdYoXti-02BGgQBB4RbVOr6CGIypt0BRkrZu09z70nMS1bELjoRBR41MII1YW0mthCyE3QFMHXgKSkFj6Ce9IWG2dJ6V-IOEMVA7Bn2dZORNm10lQHtSzoJfHHd0EQlQewO6C7c5rPaXMIUapmf3JUdbdwPxpk1tfmiclCrjQfT3ykfkwrKlQN8ZW2_PyLqeDycc2gEx4D2e-EDdVX9Owckc6aP66q9GyA5JKLsWlE3MxA3uiQUtln4uzVYe-Biau-LB1p6toXSVipPcwvDwcACJWwNK62Kfhw-vgcCZ9Cj0h_euPYqXmID7Sqr4T0Rwj_yejPFMdUvANbIIIfK9R3GTcW0WVsONgaxv-K48cxMEGy40Gn5A8BTiS4t3Qig1tBK7XhZ2NSm3Qefj9807hk4gXO_f7Nh12Flfb2QD5KKciMxiZR4a7hNiD0NywZkDEIJWWWNLcMXAlnBtoPnKDasHpQxSwzMpFuScCYQ1k7LWE3ToLQ7Eb2nxRgd0NnE_x5pBeTeTOPDwkZEiSHYOVM8LZmQwhMaCkUIXOvwi1qHmGFanFdwL-JPbkVe67D1NJzFaFwTYf-Oe_7gyszVWy-A5OK06dKjFZilsXzCQqpB-qXIY2_NxhUxo9e4wufAdkjyBZDi0tH90sfZAPPKNSWPY0WyUkezRiPtlfkjjEb368R9pH3MidSXpjf8N4wqRcywLLrjId1M3Wh0pvQziLtp_K0-PfKQjOjXU7l2kmUOay3I9Z8l20nlJ_VxU3kZyipoPEdW9-5Pk6QkVCiAMHr2bQ6WvOqKcLU1VBP7vEAM1pOacc7n9qY9UTrSUshHw6pzjbv_3oBTxFlOeVn6KqNpsKW902SAkal_eRkPC1LIFQORx1fZ2cGUUIAYYUIbbF07uiR2-e_vA0LFfKDjE_U46KykfgOggFjCUFGtWX26Hbj-e-Ki2u2UpK6p2nF_C855sQoktkptP7sAOcQxRJhiNrhFce78JnIdIop0-TWgjhQsWgJHyt_XHLMvcfwd-rPizPMilw3VovigTLLGxg78L9xG2Ulsj2qM6_M3t5blVDjCmVkPF8bIHixb6P_Ip4WU1kz4nYmrIJZoXBKgx9JY-TyE4RBuijUh0zuzxkrIWK5l_rxdoXiyKR34JC579ox914EN9jOQ_qu8WQqJvy4wzkQp9-GZqK_GR9a_iWFyHw3aW0VQQGlqDQFkcVngXaTgFExA0HJielH6JxOd2Y1iA_c4UqsDwarVJGvSPU4EZkiV4HlfAk6YNfQ-vtyQ84ZBgZ_0QIXy3bVcPepzzJPt-tFmLBf9jFXFPHUCaeAL5Dq9QvY9kTppq-m0vwfdeJISXVBngyl6HhdBkgY0c9UTRtM6wC1C5eZTx_vVE31JJFJQjGspgLnA31knQS1AaRPcv68q1-7jJk0x5InSn3f6zDJWM366J_BV_yCNNO20Lf3wMcOrmbn8gQccNsAMOoA3yuj4Yvi9Q7WqoCKUaIRlpoamKYkZGR6isZt2zmqNBr71LiXTS9TT2dYL39IlOhjaHYrofcymPjp5pNwKVmlntS9TV2ns1p1SeqARzmGdDbHofpNxDDBVuY19sU5A9TtkWmHVbPURn62m5iJkRfaDqtrXnrEA0f35CLrF2xh7QyVgCpOUAIk8runLLTJ0ZZp8qNurje1bb4iUCaBjlE7mEtYs6gZxZsOReQ40I8m2d5rOM7R2DRcWrnjUAWx4UzPyhr2usJvkEZXK6dYM5ZJCBE3t3aLhcFaHHPaZWwxI3P9ZT5bvQOChoHDES9YhX0GVJZRBr6G5fkWFj2da96NC8w8zF29aThFTkJHQGXbXNeY4RZiPoBDv4bilQuzKPsYpDTQjWMai09iwem7PMv-RBec1-wGrDdYu02uoAJhj0Tf_x7g4GcPv5ICFAyuMdy93BxSrOwfwLD4lPMgs_7EoJrMsyJB-LN85DJ3yQBT6b49SLdaxSW7dH2lthp4n9XCJ-SBIHFYqtBA2xIcmYZmHGlVrnM3rbMr1ZkpAex0TykPaf6fQy_8t42f8A322Jv3j2KMCRoZgr7PrXrwrkSLTOlObdhHjJZ_z5noROCXgJAKkhH7IguT40M2C7qIxaGJFcGv4odMG5thILpKe71lT0iXjmf7R_U4yW9HcyZ8NXeulQpXQshZ4nHibxOSB4jmr42gcWE9hyBc0c-rsAVo6J4zQ3SYn60TcSrHuOFB50d_D_aY_T8I7BoX__xQmPKn_uu2sIdtPs8GR4z0gE9CzV_SNC-qzpDYJo3TEjWtSb7Az6kT3k7M-9K_doFGIq1XJ_olbM7QdDhDDsHYhwtlrDyyPNcuDT99psnCJiRBv4-hAI1hGXFaKBRTvG0zuI1hh5HMZTkdtzH-qD1k2VV9al4ZeN7ZHnKZGjL9khNMbdR0e1Xjh8LsVtcuBm3uZFUOEknRAlivGFbrr4ezJ0BMOA4z6ulb6fy8xKb9054wtIiIRAMCSJyRuecBwYyTdHNhO5ef2-RnyedKUd26aUGw6Fnng5WMDw-w1WAA1kIxbjebCWvcdpqpipcjLNGcQ7O5h11qg-ltb6CTGnQuNxkyn_F-GXD_4Iv1rVltPELhm1U-XILt9ycXbQ94XTAq1ROjg_mZzs0Ph1GtVeNa7aE3yTB0BT2ZLvtM7Hoh-OC8uEgqVQPNDwLqY-YBbm9huAVshqXiexBYU5u6tG0FuE8ZpP8MNjm2sT6LMqPM2Ju0evSR_qrQOS6rG_ywR3131IDUONJxhoTNxU8scj17PkaMugDYXdpFBYNa1gAZBVXk_Rm5YArZ1iKeVd_H-oJojPmM7MASfx0UE6Np74Fi1zLjn8TwQ8oWwstJqjXPn4T0WTKjLvjLMBeqLFeTh0nOQLmKysllB2JYqeQBBnXUcmUSr2etGq5PZGykxL0un1UX0HQjMnWNLawDfaUPfYTig6q8LDi4xQ52IAhqqC8qvD7O9Lb_XtPO9jP6xDD3IWwZaIcXT06h_44oq_now4tguPjSCUVAtacsb6ej-kvBbM6kMNGris_itXyhNddsKu9XrVznI9yXDJcRsASa-7cILqp6KnuIQua_JEEwK5ClaFsyFpXq5WcW0ERXZ42FNK2GR_kFBvyh_G8ays6Becjw_QNas5df2R2QcmyJ_dlony-8mkgu4GSB_0N5Go89hYBRuvHTZxbPI5Mt8-DBounPxSOfWaXQwLWWCVF_JNxF5SB_BOT-veZlbuxX4aZXeW34pWFdxFOLwGuXm6xsC4aWabJ5qQch3Jb4sx7w14iARUQ7V4xcNwS0LBByIhFQ9bDz5rSM--iLOwJxweCFXEK30RAaQ9E2JSxdVsK2DMYAHUUQf5DHIg-YMxdnoUlYJQ13zgzxz0FETMynqtK_7CSpqhEy48Z3SqkJ4uQ4nmEgLEdCpezLQ7BfxzpJCaCji12MvVCjagqrWVcchRQAuJnZaeTpk0n_UQugoVrYe3dpih1iZRorg81OWcIRFbgFZvkT8qbNQQtedAoIKujR4IbmeZ08cHhQ0_g6mHY7ylrRj9XXLwL7CTaPK9KeXKuBKu5EnJMdoENl9jJQ9es8h8fLGdjHYdiAgJsX8MLQGbdv6frhqtobDPpz3ZswberNmbmSA5F1y8s8HYURn-56L_5KZ6b1fCHkCfuhwDjTETj8mAQGjXcVZeuzuPn9hH_dhQ5p7zC4YBivWixpVks6zXxZ3N1B4cAvNxbmIzYZkfrbyYHOb8nDByMKBDTDOW2MKfhoVLOyl88KGwsJQ3zc6NVkhTuoY7rMfn3xd4Mi_hevJzgm7P4GDHpJVcHFyM6ycldcoyj7zpOyrQUzfM0ur0vRiXtgW8s2fNF_aHdsa7HBqK1OXGdb7JhAOyodZBfU3BHFeOf4P-nCmYRq4nsGgu0VWDhRKPd7uJKbAR3pX-7wvCE374xjgjZJGASLhO_L8UXIRAK-VfBVX975NF_YA5ZWT_8zxyg09QyiJnyOdv4TKyCmYfFVXGnzFNxf3bx8KGA5K0TUQJ5qTME2h3UnIFOdmPWtJBaJ7Va_U72XGP0kyMOu7PsRN76lpyTHURA7_Jqv4yGwOJeU381K8lDyGhyrmDtjT1I6Cwg7MKKq_r3Z1oJXi4-UDLPwCBf_d1CHMl-7ufLTZR2yV2myjnRRV7B7uuEgohnRw8hatUslrHq95TJFtjoaviIICZ_1wTlwAlDED12dajbkWtBnznynnPOecPSzmB0nihsmpIn_S4wCOQZTJ-fUYH2RmhWSwkLq5ShTfcsI_1vuNLjRYXdmiQxmcgRkfLtLxjnPBhtpsChiXWblRHbEVIsUfnPgN8IbeRRQJx3PfOLRHO_JdMKzF1-XeqQrf5vhlL86KpuYSAZh1K2zsmXO7jkXt0gpPjTQsoRDd1TzOTaA8zVre2r787Gf7WGAXSl5dGLIqGetSrhBgxRoacfFBVl9aWKXUKuHW6eTbfjJTcpP5WL7dbKCtNBN-163crBAgYUdGe9czAY0QEg3FG8-jgC8iDLQFhNaQrU1QrkJqHxUY3LSNgx0vliiDtLkEbL0Oyg9tHnfVpvxg3N3fOaZ3pd_RYUb_KZk4w9g9Zu213Sw2x-NqR473dYjoIoqFyqfaAX5NlBKjWhWAEXs1VqJQWL0jfXeZLYA5jxmn3eRH5-Eb7B49a7ooNsSAc00_G1dnlxOQ2FRjFkNqxLA5S5BZq2uabJPshUIU-3q_pmvLLsgK_fX6Rr29wo1_1L_tjzdHxuM-NcpXDqh_Yw4ZCP-pbfUZmVwdAXXj3k00jUABDYKC4JtfDUbcEETw9o0Iq4qQT3H4buK1ew8Sa-AWKo7g6BIgevylsl5q86XgPmeI1gpVUlnC-OjDC8zuDrouk4C49Ii3JBMicA8FHgxmg0wVJN7JPWFqfeUYZnjRFR_-igLOo7wkJAguHAXc2Sbm-vISjQSAWB2DCgzsr2xbdaoyjeYf1pTuLF49V70MhxQ0pluGyCj40Lwex-vwGiE8586_pT_k_qTlS7q6ScJCLNnqPdtzBygocUW4IS330rY79k7RcPmSqoxPp9YnSH315756kvOyaNC1ZqY_b9JTqyrJ3DybXBJ4uB7IOmjWXzOjDPg9bqJNp8Vu1Dc5CT_7UX0pnvzIgKb378dw_6TJbVaIayIQ16Z0M2m4ayKpDhSVPnx6A1WgjxPnJ_uvanJZORoHjoaaLGoKKLM99IfDcvKFojJWZ0YTRkW-HDIrzl_3wnwcBIh3wwrEqQ5s15bYBMoCQxYdkNN50BfVJgdfH5jkJpW05BkwZUb7VKkFIkHaK9eRzMTB0k2oyVCuqWCAwZl3WK8GptlD86fy66uoBlb6wySAFssPaXDHr5cgoLWqHwJ99uy17t6sinyj2UwCKZkCQY2XtoATIuGgVjhLxINLujiNdORSi3dyj1OK61P_I5d-aSR0ocqa-fZ-AcRWYkt6sOxXqccJ5fXePwfVIXOU5lEvGfPloA29_U8pmsPCrG39B_9UV29I-85-hYcbfmOVV33C4ikW2RrO8TyV2rcPzriZe51PFpE5-ESM-0cN6IXdZXzeLDnsol-MPJiHg4gd0HF0uWlZefdkPp1l53f6R02PBNVMXzgkWYDo264IdmPF7MWpsN9ktayZAGeSv8WZAGpFF1jsYWxHoLhT2IX-3uSIFhdVy9LAYGxsTiEekL7mSZQ0EZC4HHZIgK8mbuj4ju2Z5K0NWH3nbr1kIQST0WE9CZU04fUYjLtLctfGukSI"}</script>
+<script id="tunnels-data" type="application/json">{"schema":"dela.tunnels_portal.v1","rev":"d2c4eae47d","exits":[{"id":"il-kamatera","name":"Израиль (il-kamatera)","country":"IL","country_name":"Израиль","flag":"🇮🇱","is_ru":false,"is_hop":true,"direct_allowed":true,"default_route":"direct","note":"ai_vendor","routes":[{"id":"direct","kind":"direct","label":"Прямой","country":"IL","flag":"🇮🇱","uri":"vless://c6e2b03b-634a-47e2-8656-2d95ab653ba8@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fil-edge&sni=www.bezalel.ac.il&pbk=BQvcmmLuMOQ7PYdo541TEVjbGN8EtvSFJkwBeglTui0&sid=f2275d06e7ccfe8c&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.bezalel.ac.il","dial":"194.36.89.140:443"},{"id":"electrical-ghost","kind":"hop_ru","label":"🇷🇺 через electrical-ghost","hop_name":"electrical-ghost","country":"RU","flag":"🇷🇺","is_ru_hop":true,"uri":"vless://c6e2b03b-634a-47e2-8656-2d95ab653ba8@51.250.10.25:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fil-edge&sni=www.bezalel.ac.il&pbk=BQvcmmLuMOQ7PYdo541TEVjbGN8EtvSFJkwBeglTui0&sid=f2275d06e7ccfe8c&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-il-kamatera-via-electrical-ghost","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.bezalel.ac.il","dial":"51.250.10.25:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"vless://c6e2b03b-634a-47e2-8656-2d95ab653ba8@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fil-edge&sni=www.bezalel.ac.il&pbk=BQvcmmLuMOQ7PYdo541TEVjbGN8EtvSFJkwBeglTui0&sid=f2275d06e7ccfe8c&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-il-kamatera-via-sgexit1","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.bezalel.ac.il","dial":"103.102.46.180:443"}]},{"id":"sgexit1","name":"Сингапур (sgexit1)","country":"SG","country_name":"Сингапур","flag":"🇸🇬","is_ru":false,"is_hop":true,"direct_allowed":true,"default_route":"direct","note":"ai_vendor","routes":[{"id":"direct","kind":"direct","label":"Прямой","country":"SG","flag":"🇸🇬","uri":"vless://565aa022-2920-42b6-a436-a0fedcfbbbd3@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fsg-edge&sni=www.smu.edu.sg&pbk=dpL0eZ1mkxvH-752PeDhUvefSqNRWryxEVdpIpFraBk&sid=1ce95e7e37fa101e&fp=firefox&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-sgexit1","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.smu.edu.sg","dial":"103.102.46.180:443"},{"id":"electrical-ghost","kind":"hop_ru","label":"🇷🇺 через electrical-ghost","hop_name":"electrical-ghost","country":"RU","flag":"🇷🇺","is_ru_hop":true,"uri":"vless://565aa022-2920-42b6-a436-a0fedcfbbbd3@51.250.10.25:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fsg-edge&sni=www.smu.edu.sg&pbk=dpL0eZ1mkxvH-752PeDhUvefSqNRWryxEVdpIpFraBk&sid=1ce95e7e37fa101e&fp=firefox&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-sgexit1-via-electrical-ghost","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.smu.edu.sg","dial":"51.250.10.25:443"},{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://565aa022-2920-42b6-a436-a0fedcfbbbd3@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fsg-edge&sni=www.smu.edu.sg&pbk=dpL0eZ1mkxvH-752PeDhUvefSqNRWryxEVdpIpFraBk&sid=1ce95e7e37fa101e&fp=firefox&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-sgexit1-via-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.smu.edu.sg","dial":"194.36.89.140:443"}]},{"id":"rozet.in.rs","name":"Сербия (rozet.in.rs)","country":"RS","country_name":"Сербия","flag":"🇷🇸","is_ru":false,"is_hop":true,"direct_allowed":false,"default_route":"il-kamatera","note":"ai_vendor","routes":[{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://8ac1c68b-83de-42fc-95ad-10a7559a8957@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Frs-edge&sni=www.matf.bg.ac.rs&pbk=pDC1Vo-IcEus7AhMZbiiuB1WMtb2WuEHwV-eXvG5HAY&sid=c649cc1da0f0fdb9&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-rozet.in.rs-via-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.matf.bg.ac.rs","dial":"194.36.89.140:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"vless://8ac1c68b-83de-42fc-95ad-10a7559a8957@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Frs-edge&sni=www.matf.bg.ac.rs&pbk=pDC1Vo-IcEus7AhMZbiiuB1WMtb2WuEHwV-eXvG5HAY&sid=c649cc1da0f0fdb9&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-rozet.in.rs-via-sgexit1","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.matf.bg.ac.rs","dial":"103.102.46.180:443"}]},{"id":"gotthard","name":"Швейцария (gotthard)","country":"CH","country_name":"Швейцария","flag":"🇨🇭","is_ru":false,"is_hop":false,"direct_allowed":false,"default_route":"sgexit1","note":"third_egress","routes":[{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"trojan://hOI%26Lgf4keuasdfhla4@194.36.89.140:443?security=tls&sni=ap.gotthardbasetunnel.eu&alpn=http%2F1.1&type=tcp#phone-gotthard-via-il-kamatera","protocol":"Trojan","transport":"Tls / Tcp","sni":"ap.gotthardbasetunnel.eu","dial":"194.36.89.140:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"trojan://hOI%26Lgf4keuasdfhla4@103.102.46.180:443?security=tls&sni=ap.gotthardbasetunnel.eu&alpn=http%2F1.1&type=tcp#phone-gotthard-via-sgexit1","protocol":"Trojan","transport":"Tls / Tcp","sni":"ap.gotthardbasetunnel.eu","dial":"103.102.46.180:443"}]},{"id":"vipass-stas","name":"Германия (vipass-stas)","country":"DE","country_name":"Германия","flag":"🇩🇪","is_ru":false,"is_hop":false,"direct_allowed":false,"default_route":"sgexit1","note":"third_egress","routes":[{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://9b238422-fe37-4bb6-95d7-ce933778e26e@194.36.89.140:443?security=reality&type=tcp&flow=xtls-rprx-vision&sni=max.ru&pbk=v04KQ6PGr3XjkrdmZRfUaYchjeF8dMAqRRqP9_2hSHc&sid=92131ed26f40c081&fp=chrome&spx=/&encryption=none#phone-vipass-stas-via-il-kamatera","protocol":"Vless + Reality","transport":"Tcp / Vision","sni":"max.ru","dial":"194.36.89.140:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"vless://9b238422-fe37-4bb6-95d7-ce933778e26e@103.102.46.180:443?security=reality&type=tcp&flow=xtls-rprx-vision&sni=max.ru&pbk=v04KQ6PGr3XjkrdmZRfUaYchjeF8dMAqRRqP9_2hSHc&sid=92131ed26f40c081&fp=chrome&spx=/&encryption=none#phone-vipass-stas-via-sgexit1","protocol":"Vless + Reality","transport":"Tcp / Vision","sni":"max.ru","dial":"103.102.46.180:443"}]},{"id":"electrical-ghost","name":"Россия (electrical-ghost)","country":"RU","country_name":"Россия","flag":"🇷🇺","is_ru":true,"is_hop":true,"direct_allowed":true,"default_route":"direct","note":"ru_exit","routes":[{"id":"direct","kind":"direct","label":"Прямой","country":"RU","flag":"🇷🇺","uri":"vless://5b3814a2-034c-413c-836e-7d3673a12812@51.250.10.25:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Feg-edge&sni=itmo.ru&pbk=1C0fby39MvCrfu7fdzyFRMX0bxPBAuxOeH9OrE3H-U4&sid=b26838c124a0a124&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-electrical-ghost","protocol":"Vless + Reality","transport":"Xhttp","sni":"itmo.ru","dial":"51.250.10.25:443"},{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://5b3814a2-034c-413c-836e-7d3673a12812@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Feg-edge&sni=itmo.ru&pbk=1C0fby39MvCrfu7fdzyFRMX0bxPBAuxOeH9OrE3H-U4&sid=b26838c124a0a124&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-electrical-ghost-via-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp","sni":"itmo.ru","dial":"194.36.89.140:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"vless://5b3814a2-034c-413c-836e-7d3673a12812@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Feg-edge&sni=itmo.ru&pbk=1C0fby39MvCrfu7fdzyFRMX0bxPBAuxOeH9OrE3H-U4&sid=b26838c124a0a124&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-electrical-ghost-via-sgexit1","protocol":"Vless + Reality","transport":"Xhttp","sni":"itmo.ru","dial":"103.102.46.180:443"}]},{"id":"ubnt-aiagent","name":"Россия (ubnt-aiagent)","country":"RU","country_name":"Россия","flag":"🇷🇺","is_ru":true,"is_hop":false,"direct_allowed":true,"default_route":"direct","note":"ru_exit","routes":[{"id":"direct","kind":"direct","label":"Прямой (портал electrical-ghost)","country":"RU","flag":"🇷🇺","uri":"vless://0419656f-6035-4b63-87f8-a6cc34234f84@51.250.10.25:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fru-edge&sni=spbu.ru&pbk=t_rIjfNaJRByGca_meVBIUUh8V_p6Qe3OLOeilnz8Xg&sid=d5946f2a895b305a&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-ubnt-aiagent","protocol":"Vless + Reality","transport":"Xhttp (reverse)","sni":"spbu.ru","dial":"51.250.10.25:443"},{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://0419656f-6035-4b63-87f8-a6cc34234f84@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fru-edge&sni=spbu.ru&pbk=t_rIjfNaJRByGca_meVBIUUh8V_p6Qe3OLOeilnz8Xg&sid=d5946f2a895b305a&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-ubnt-aiagent-via-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp (reverse)","sni":"spbu.ru","dial":"194.36.89.140:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"vless://0419656f-6035-4b63-87f8-a6cc34234f84@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fru-edge&sni=spbu.ru&pbk=t_rIjfNaJRByGca_meVBIUUh8V_p6Qe3OLOeilnz8Xg&sid=d5946f2a895b305a&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-ubnt-aiagent-via-sgexit1","protocol":"Vless + Reality","transport":"Xhttp (reverse)","sni":"spbu.ru","dial":"103.102.46.180:443"}]}],"hops":[{"name":"electrical-ghost","country":"RU","flag":"🇷🇺","is_ru":true},{"name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru":false},{"name":"rozet.in.rs","country":"RS","flag":"🇷🇸","is_ru":false},{"name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru":false}]}</script>
 <script src="/qrcode.js"></script>
 <script>
     (function () {
       "use strict";
-      var STORAGE_KEY = "dela_tunnels_portal_key_v1";
-      var THEME_KEY = "theme.v1";
-      var THEME_ATTR = "data-theme";
-      var DAY_VAL = "day";
-      var NIGHT_VAL = "night";
-      var envelope = JSON.parse(document.getElementById("tunnels-envelope").textContent);
-      var lockView = document.getElementById("lock-view");
-      var appView = document.getElementById("app-view");
-      var lockBtn = document.getElementById("lock-btn");
-      var lockErr = document.getElementById("lock-err");
-      var keyForm = document.getElementById("key-form");
-      var keyInput = document.getElementById("key-input");
-      var themeBtn = document.getElementById("theme-btn");
+      var STATES = ["auto", "day", "night"];
+      var GLYPHS = {"auto": "◐", "day": "☀", "night": "☾"};
+      var LABELS = {"auto": "Тема: авто (по солнцу)", "day": "Тема: дневная", "night": "Тема: ночная"};
+      var STORAGE_KEY = "theme.v1";
+      var MODE_VALUES = ["day", "night"];
+      var MODE_ATTR = "data-theme";
+      var SUFFIX = " — переключить";
+      var themeBtn = document.querySelector("[data-theme-toggle]");
+      if (themeBtn) {
+        var currentThemeState = function () {
+          var s = null;
+          try { s = localStorage.getItem(STORAGE_KEY); } catch (_e) {}
+          return MODE_VALUES.indexOf(s) !== -1 ? s : STATES[0];
+        };
+        var paintToggle = function (st) {
+          themeBtn.textContent = GLYPHS[st] || GLYPHS[STATES[0]];
+          themeBtn.setAttribute("aria-label", (LABELS[st] || LABELS[STATES[0]]) + SUFFIX);
+        };
+        paintToggle(currentThemeState());
+        themeBtn.addEventListener("click", function () {
+          var seen = null;
+          try { seen = document.documentElement.getAttribute(MODE_ATTR); } catch (_e) {}
+          var i = MODE_VALUES.indexOf(seen);
+          var next = MODE_VALUES[(i + 1) % MODE_VALUES.length];
+          try { localStorage.setItem(STORAGE_KEY, next); } catch (_e) {}
+          if (window.__applyTheme) window.__applyTheme(next);
+          paintToggle(next);
+        });
+      }
+
+      var model = JSON.parse(document.getElementById("tunnels-data").textContent);
       var exitTabs = document.getElementById("exit-tabs");
       var hopPills = document.getElementById("hop-pills");
       var qrFrame = document.getElementById("qr-frame");
@@ -499,51 +442,11 @@
       var copyBtn = document.getElementById("copy-btn");
       var copyStatus = document.getElementById("copy-status");
 
-      var state = { model: null, exitId: "", routeByExit: {} };
-
-      function __applyTheme(t) {
-        var val = (t === DAY_VAL || t === NIGHT_VAL)
-          ? t
-          : ((window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) ? DAY_VAL : NIGHT_VAL);
-        document.documentElement.setAttribute(THEME_ATTR, val);
-        return val;
-      }
-      window.__applyTheme = __applyTheme;
-      (function initTheme() {
-        var saved = "";
-        try { saved = localStorage.getItem(THEME_KEY) || ""; } catch (_e) {}
-        __applyTheme(saved);
-      })();
-      themeBtn.addEventListener("click", function () {
-        var cur = document.documentElement.getAttribute(THEME_ATTR);
-        var next = cur === NIGHT_VAL ? DAY_VAL : NIGHT_VAL;
-        __applyTheme(next);
-        try { localStorage.setItem(THEME_KEY, next); } catch (_e) {}
-      });
-
-      function b64uToBytes(str) {
-        var norm = String(str || "").trim().replace(/-/g, "+").replace(/_/g, "/");
-        while (norm.length % 4) norm += "=";
-        var bin = atob(norm);
-        var arr = new Uint8Array(bin.length);
-        for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
-        return arr;
-      }
-
-      async function decryptModel(keyStr) {
-        var keyBytes = b64uToBytes(keyStr);
-        if (keyBytes.length !== 32) throw new Error("Неверная длина ключа");
-        var cryptoKey = await crypto.subtle.importKey(
-          "raw", keyBytes, { name: "AES-GCM" }, false, ["decrypt"]
-        );
-        var iv = b64uToBytes(envelope.iv);
-        var ct = b64uToBytes(envelope.ct);
-        var aad = new TextEncoder().encode(envelope.aad || "dela-tunnels-portal-v1");
-        var pt = await crypto.subtle.decrypt(
-          { name: "AES-GCM", iv: iv, additionalData: aad }, cryptoKey, ct
-        );
-        return JSON.parse(new TextDecoder().decode(pt));
-      }
+      var state = {
+        model: model,
+        exitId: (model && model.exits && model.exits.length) ? model.exits[0].id : "",
+        routeByExit: {}
+      };
 
       function renderQr(uri) {
         qrFrame.innerHTML = "";
@@ -559,7 +462,7 @@
       }
 
       function currentExit() {
-        if (!state.model || !state.model.exits.length) return null;
+        if (!state.model || !state.model.exits || !state.model.exits.length) return null;
         for (var i = 0; i < state.model.exits.length; i++) {
           if (state.model.exits[i].id === state.exitId) return state.model.exits[i];
         }
@@ -567,7 +470,7 @@
       }
 
       function currentRoute(ex) {
-        if (!ex || !ex.routes.length) return null;
+        if (!ex || !ex.routes || !ex.routes.length) return null;
         var wanted = state.routeByExit[ex.id] || ex.default_route;
         for (var i = 0; i < ex.routes.length; i++) {
           if (ex.routes[i].id === wanted) return ex.routes[i];
@@ -596,7 +499,7 @@
 
           var sub = document.createElement("div");
           sub.className = "exit-tab-sub";
-          sub.textContent = ex.country_name + " · " + (ex.direct_allowed ? "прямой / хоп" : "только через хоп");
+          sub.textContent = ex.country_name + " · " + (ex.direct_allowed ? "прямой / хоп" : "только через хоп");
 
           btn.appendChild(head);
           btn.appendChild(sub);
@@ -633,14 +536,11 @@
         });
 
         if (!ex.direct_allowed) {
-          routeHint.className = "hint";
-          routeHint.textContent = "Прямой вход из РФ заблокирован — доступны только внешние хопы.";
+          routeHint.textContent = "Прямой вход из РФ заблокирован — доступны только внешние хопы.";
         } else if (rt.kind === "direct") {
-          routeHint.className = "hint hint-ok";
-          routeHint.textContent = "Прямой заход из РФ работает; при желании можно выбрать любой хоп.";
+          routeHint.textContent = "Прямой заход из РФ работает; при желании можно выбрать любой хоп.";
         } else {
-          routeHint.className = "hint hint-ok";
-          routeHint.textContent = "Соединение идёт через хоп " + (rt.hop_name || rt.id) + " (сквозное шифрование до выхода).";
+          routeHint.textContent = "Соединение идёт через хоп " + (rt.hop_name || rt.id) + " (сквозное шифрование до выхода).";
         }
 
         specDial.textContent = rt.dial || "—";
@@ -660,30 +560,6 @@
         renderStage();
       }
 
-      async function unlockWith(rawKey, persist) {
-        lockErr.textContent = "";
-        try {
-          var model = await decryptModel(rawKey);
-          state.model = model;
-          state.exitId = model.exits.length ? model.exits[0].id : "";
-          if (persist) {
-            try { localStorage.setItem(STORAGE_KEY, rawKey.trim()); } catch (_e) {}
-          }
-          document.getElementById("count-badge").textContent = model.exits.length + " выходов";
-          if (model.rev) {
-            document.getElementById("rev-badge").textContent = "rev " + model.rev;
-          }
-          lockView.classList.add("hidden");
-          appView.classList.remove("hidden");
-          lockBtn.classList.remove("hidden");
-          renderAll();
-          return true;
-        } catch (_err) {
-          lockErr.textContent = "Ключ не подошёл или повреждён.";
-          return false;
-        }
-      }
-
       copyBtn.addEventListener("click", function () {
         var ex = currentExit();
         var rt = currentRoute(ex);
@@ -692,52 +568,14 @@
           navigator.clipboard.writeText(rt.uri).then(function () {
             copyStatus.textContent = "Скопировано";
           }).catch(function () {
-            copyStatus.textContent = "Откройте URI ниже и скопируйте вручную";
+            copyStatus.textContent = "Откройте ссылку ниже и скопируйте вручную";
           });
         } else {
-          copyStatus.textContent = "Откройте URI ниже и скопируйте вручную";
+          copyStatus.textContent = "Откройте ссылку ниже и скопируйте вручную";
         }
       });
 
-      lockBtn.addEventListener("click", function () {
-        try { localStorage.removeItem(STORAGE_KEY); } catch (_e) {}
-        state.model = null;
-        keyInput.value = "";
-        lockErr.textContent = "";
-        appView.classList.add("hidden");
-        lockBtn.classList.add("hidden");
-        lockView.classList.remove("hidden");
-      });
-
-      keyForm.addEventListener("submit", function (ev) {
-        ev.preventDefault();
-        var k = keyInput.value.trim();
-        if (!k) {
-          lockErr.textContent = "Введите ключ.";
-          return;
-        }
-        unlockWith(k, true);
-      });
-
-      (async function boot() {
-        var hashKey = "";
-        if (window.location.hash && window.location.hash.length > 1) {
-          hashKey = decodeURIComponent(window.location.hash.slice(1)).trim();
-          if (hashKey.indexOf("k=") === 0) hashKey = hashKey.slice(2);
-          try {
-            window.history.replaceState(null, "", window.location.pathname + window.location.search);
-          } catch (_e) {}
-        }
-        if (hashKey) {
-          var ok = await unlockWith(hashKey, true);
-          if (ok) return;
-        }
-        var saved = "";
-        try { saved = localStorage.getItem(STORAGE_KEY) || ""; } catch (_e) {}
-        if (saved) {
-          await unlockWith(saved, false);
-        }
-      })();
+      renderAll();
     })();
   </script>
 </body>

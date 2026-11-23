@@ -5,21 +5,19 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="noindex,nofollow,noarchive" name="robots"/>
-<meta content="dark light" name="color-scheme"/>
+<meta content="light dark" name="color-scheme"/>
 <meta content="0; url=/tunnels/" http-equiv="refresh"/>
-<title>Тоннели Системы</title>
+<title>Тоннели</title>
+<link href="/_tokens.generated.css" rel="stylesheet"/>
 <style>
-    :root { --bg: #0f1216; --ink: #eef2f6; --accent: #66b3ff; }
-    @media (prefers-color-scheme: light) {
-      :root:not([data-theme="night"]) { --bg: #f4f6f9; --ink: #121821; --accent: #0b5ed7; }
+    @layer owner {
+      html, body {
+        margin: 0; padding: clamp(16px, 4vw, 32px);
+        background: var(--bg); color: var(--ink);
+        font-family: var(--sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+      }
+      a { color: var(--accent); }
     }
-    :root[data-theme="day"] { --bg: #f4f6f9; --ink: #121821; --accent: #0b5ed7; }
-    html, body {
-      margin: 0; padding: clamp(16px, 4vw, 32px);
-      background: var(--bg); color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-    a { color: var(--accent); }
   </style>
 <script>
     (function () {
@@ -29,12 +27,12 @@
       var NIGHT_VAL = "night";
       window.__applyTheme = function (t) {
         var v = (t === DAY_VAL || t === NIGHT_VAL) ? t
-          : ((window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) ? DAY_VAL : NIGHT_VAL);
+          : ((window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? NIGHT_VAL : DAY_VAL);
         document.documentElement.setAttribute(THEME_ATTR, v);
       };
       try { window.__applyTheme(localStorage.getItem(THEME_KEY) || ""); } catch (_e) { window.__applyTheme(""); }
-      var hash = window.location.hash || "";
-      var target = "/tunnels/" + hash;
+      var tail = (window.location.search || "") + (window.location.hash || "");
+      var target = "/tunnels/" + tail;
       if (window.location.pathname !== "/tunnels/") {
         window.location.replace(target);
       }
