@@ -72,6 +72,7 @@
   --sans: 'Inter', 'Inter Fallback', 'Noto Sans Symbols', 'Noto Sans Symbols 2', 'Noto Sans Math', 'Noto Sans Bamum', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;  /* font-stack · knowledge/system/specifications/text/typography.md */
   --sans-display: 'Inter Tight', 'Inter', 'Inter Fallback', 'Noto Sans Symbols', 'Noto Sans Symbols 2', 'Noto Sans Math', 'Noto Sans Bamum', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;  /* font-stack · knowledge/system/specifications/text/typography.md */
   --script: 'Bad Script', 'Marck Script', cursive;  /* font-stack · knowledge/system/specifications/text/typography.md */
+  --sheet-filter: none;  /* filter · knowledge/system/specifications/text/interface.md */
   --sp-1: 0.50rem;  /* length · knowledge/system/specifications/text/site.md */
   --sp-2: 0.75rem;  /* length · knowledge/system/specifications/text/site.md */
   --sp-3: 1.13rem;  /* length · knowledge/system/specifications/text/site.md */
@@ -114,6 +115,7 @@
   --ink: #e8e6e3;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
   --muted: #a09a92;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
   --rule: #2a2a2a;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
+  --sheet-filter: brightness(0.84) contrast(1.04);  /* filter · :root[data-theme="night"] · knowledge/system/specifications/text/interface.md */
 }
 :root[data-theme="night"][data-surface="editorial"] .article-wrapper {
   --accent: #a1bbe8;  /* color · :root[data-theme="night"][data-surface="editorial"] .article-wrapper · knowledge/system/specifications/text/site.md */
@@ -191,6 +193,9 @@
 @layer owner {
   [data-case="glyphs"] {
     letter-spacing: var(--tracking-caps-emphasis);  /* law · [data-case="glyphs"] · @owner · Inv-TYPO-consistent-tracking-caps */
+  }
+  [data-case="plain"] {
+    letter-spacing: var(--tracking-zero);  /* law · [data-case="plain"] · @owner · Inv-TYPO-consistent-tracking-caps */
   }
   [data-case="upper"] {
     letter-spacing: var(--tracking-caps);  /* law · [data-case="upper"] · @owner · Inv-TYPO-consistent-tracking-caps */
