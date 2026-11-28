@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ru">
+<html data-portal-view="ff62dcf59d91" lang="ru">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -108,7 +108,7 @@
       }
       .exit-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(204px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
         gap: 8px;
         margin-bottom: var(--portal-gap);
       }
@@ -149,7 +149,14 @@
         overflow-wrap: anywhere;
         line-height: 1.25;
       }
+      .nowrap {
+        white-space: nowrap;
+      }
       .exit-tab-sub {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 0.65em;
+        row-gap: 2px;
         font-size: var(--portal-fs-sm);
         color: var(--muted);
         text-wrap: pretty;
@@ -319,6 +326,23 @@
         resize: vertical;
         max-width: 100%;
       }
+      .update-notice {
+        position: fixed;
+        right: 0.9rem;
+        bottom: 0.9rem;
+        z-index: 20;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: var(--chip-bg);
+        color: var(--chip-ink);
+        border: 1px solid var(--accent);
+        font-size: var(--portal-fs-sm);
+        font-weight: 600;
+        max-width: calc(100vw - 1.8rem);
+      }
+      .update-notice[hidden] {
+        display: none;
+      }
       @media (prefers-reduced-motion: reduce) {
         .theme-toggle, .btn, .exit-tab, .hop-pill {
           transition: none;
@@ -328,7 +352,7 @@
   </style>
 <script>
     (function () {
-      var STORAGE_KEY = "dela.theme.v1";
+      var STORAGE_KEY = "theme.v1";
       var MODE_ATTR = "data-theme";
       var DAY_VAL = "day";
       var NIGHT_VAL = "night";
@@ -388,7 +412,8 @@
 </div>
 </section>
 </main>
-<script id="tunnels-data" type="application/json">{"schema":"dela.tunnels_portal.v1","rev":"de6d1a2a60","exits":[{"id":"il-kamatera","name":"Израиль (il-kamatera)","country":"IL","country_name":"Израиль","flag":"🇮🇱","is_ru":false,"is_hop":true,"direct_allowed":true,"default_route":"direct","note":"ai_vendor","routes":[{"id":"direct","kind":"direct","label":"Прямой","country":"IL","flag":"🇮🇱","uri":"vless://c6e2b03b-634a-47e2-8656-2d95ab653ba8@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fil-edge&sni=www.bezalel.ac.il&pbk=BQvcmmLuMOQ7PYdo541TEVjbGN8EtvSFJkwBeglTui0&sid=f2275d06e7ccfe8c&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.bezalel.ac.il","dial":"194.36.89.140:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"vless://c6e2b03b-634a-47e2-8656-2d95ab653ba8@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fil-edge&sni=www.bezalel.ac.il&pbk=BQvcmmLuMOQ7PYdo541TEVjbGN8EtvSFJkwBeglTui0&sid=f2275d06e7ccfe8c&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-il-kamatera-via-sgexit1","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.bezalel.ac.il","dial":"103.102.46.180:443"}]},{"id":"sgexit1","name":"Сингапур (sgexit1)","country":"SG","country_name":"Сингапур","flag":"🇸🇬","is_ru":false,"is_hop":true,"direct_allowed":true,"default_route":"direct","note":"ai_vendor","routes":[{"id":"direct","kind":"direct","label":"Прямой","country":"SG","flag":"🇸🇬","uri":"vless://565aa022-2920-42b6-a436-a0fedcfbbbd3@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fsg-edge&sni=www.smu.edu.sg&pbk=dpL0eZ1mkxvH-752PeDhUvefSqNRWryxEVdpIpFraBk&sid=1ce95e7e37fa101e&fp=firefox&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-sgexit1","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.smu.edu.sg","dial":"103.102.46.180:443"},{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://565aa022-2920-42b6-a436-a0fedcfbbbd3@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fsg-edge&sni=www.smu.edu.sg&pbk=dpL0eZ1mkxvH-752PeDhUvefSqNRWryxEVdpIpFraBk&sid=1ce95e7e37fa101e&fp=firefox&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-sgexit1-via-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.smu.edu.sg","dial":"194.36.89.140:443"}]},{"id":"rozet.in.rs","name":"Сербия (rozet.in.rs)","country":"RS","country_name":"Сербия","flag":"🇷🇸","is_ru":false,"is_hop":true,"direct_allowed":false,"default_route":"il-kamatera","note":"ai_vendor","routes":[{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://8ac1c68b-83de-42fc-95ad-10a7559a8957@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Frs-edge&sni=www.matf.bg.ac.rs&pbk=pDC1Vo-IcEus7AhMZbiiuB1WMtb2WuEHwV-eXvG5HAY&sid=c649cc1da0f0fdb9&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-rozet.in.rs-via-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.matf.bg.ac.rs","dial":"194.36.89.140:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"vless://8ac1c68b-83de-42fc-95ad-10a7559a8957@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Frs-edge&sni=www.matf.bg.ac.rs&pbk=pDC1Vo-IcEus7AhMZbiiuB1WMtb2WuEHwV-eXvG5HAY&sid=c649cc1da0f0fdb9&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-rozet.in.rs-via-sgexit1","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.matf.bg.ac.rs","dial":"103.102.46.180:443"}]},{"id":"gotthard","name":"Швейцария (gotthard)","country":"CH","country_name":"Швейцария","flag":"🇨🇭","is_ru":false,"is_hop":false,"direct_allowed":false,"default_route":"sgexit1","note":"third_egress","routes":[{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://85bb1e60-b22c-42a3-ae81-d6edd3a1bdb7@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fconnection-7f3a92&sni=google.com&pbk=3ukv1HhodRdwG4EYoAuYBJn-5QQvPsXLLvhoNQVmFxk&sid=8a4aa8836bf524b7&fp=firefox&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-gotthard-via-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp","sni":"google.com","dial":"194.36.89.140:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"vless://85bb1e60-b22c-42a3-ae81-d6edd3a1bdb7@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fconnection-7f3a92&sni=google.com&pbk=3ukv1HhodRdwG4EYoAuYBJn-5QQvPsXLLvhoNQVmFxk&sid=8a4aa8836bf524b7&fp=firefox&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-gotthard-via-sgexit1","protocol":"Vless + Reality","transport":"Xhttp","sni":"google.com","dial":"103.102.46.180:443"}]},{"id":"vipass-stas","name":"Германия (vipass-stas)","country":"DE","country_name":"Германия","flag":"🇩🇪","is_ru":false,"is_hop":false,"direct_allowed":false,"default_route":"sgexit1","note":"third_egress","routes":[{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://9b238422-fe37-4bb6-95d7-ce933778e26e@194.36.89.140:443?security=reality&type=tcp&flow=xtls-rprx-vision&sni=max.ru&pbk=v04KQ6PGr3XjkrdmZRfUaYchjeF8dMAqRRqP9_2hSHc&sid=92131ed26f40c081&fp=chrome&spx=/&encryption=none#phone-vipass-stas-via-il-kamatera","protocol":"Vless + Reality","transport":"Tcp / Vision","sni":"max.ru","dial":"194.36.89.140:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"vless://9b238422-fe37-4bb6-95d7-ce933778e26e@103.102.46.180:443?security=reality&type=tcp&flow=xtls-rprx-vision&sni=max.ru&pbk=v04KQ6PGr3XjkrdmZRfUaYchjeF8dMAqRRqP9_2hSHc&sid=92131ed26f40c081&fp=chrome&spx=/&encryption=none#phone-vipass-stas-via-sgexit1","protocol":"Vless + Reality","transport":"Tcp / Vision","sni":"max.ru","dial":"103.102.46.180:443"}]},{"id":"ubnt-aiagent","name":"Россия / Монитор (ubnt-aiagent)","country":"RU","country_name":"Россия","flag":"🇷🇺","is_ru":true,"is_hop":false,"direct_allowed":true,"default_route":"direct","note":"ru_exit","routes":[{"id":"direct","kind":"direct","label":"Прямой (портал sgexit1)","country":"RU","flag":"🇷🇺","uri":"vless://0419656f-6035-4b63-87f8-a6cc34234f84@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fru-edge&sni=spbu.ru&pbk=t_rIjfNaJRByGca_meVBIUUh8V_p6Qe3OLOeilnz8Xg&sid=d5946f2a895b305a&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-ubnt-aiagent","protocol":"Vless + Reality","transport":"Xhttp (reverse)","sni":"spbu.ru","dial":"103.102.46.180:443"},{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://0419656f-6035-4b63-87f8-a6cc34234f84@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fru-edge&sni=spbu.ru&pbk=t_rIjfNaJRByGca_meVBIUUh8V_p6Qe3OLOeilnz8Xg&sid=d5946f2a895b305a&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-ubnt-aiagent-via-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp (reverse)","sni":"spbu.ru","dial":"194.36.89.140:443"}]}],"hops":[{"name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru":false},{"name":"rozet.in.rs","country":"RS","flag":"🇷🇸","is_ru":false},{"name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru":false}]}</script>
+<div aria-live="polite" class="update-notice" hidden="" id="update-notice" role="status"></div>
+<script id="tunnels-data" type="application/json">{"schema":"dela.tunnels_portal.v1","rev":"01ececc169","exits":[{"id":"il-kamatera","name":"Израиль (il-kamatera)","tab_label":"il-kamatera","services":[],"country":"IL","country_name":"Израиль","flag":"🇮🇱","is_ru":false,"is_hop":true,"direct_allowed":true,"default_route":"direct","note":"ai_vendor","routes":[{"id":"direct","kind":"direct","label":"Прямой","country":"IL","flag":"🇮🇱","uri":"vless://c6e2b03b-634a-47e2-8656-2d95ab653ba8@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fil-edge&sni=www.bezalel.ac.il&pbk=BQvcmmLuMOQ7PYdo541TEVjbGN8EtvSFJkwBeglTui0&sid=f2275d06e7ccfe8c&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.bezalel.ac.il","dial":"194.36.89.140:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"vless://c6e2b03b-634a-47e2-8656-2d95ab653ba8@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fil-edge&sni=www.bezalel.ac.il&pbk=BQvcmmLuMOQ7PYdo541TEVjbGN8EtvSFJkwBeglTui0&sid=f2275d06e7ccfe8c&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-il-kamatera-via-sgexit1","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.bezalel.ac.il","dial":"103.102.46.180:443"}]},{"id":"sgexit1","name":"Сингапур (sgexit1)","tab_label":"sgexit1","services":[],"country":"SG","country_name":"Сингапур","flag":"🇸🇬","is_ru":false,"is_hop":true,"direct_allowed":true,"default_route":"direct","note":"ai_vendor","routes":[{"id":"direct","kind":"direct","label":"Прямой","country":"SG","flag":"🇸🇬","uri":"vless://565aa022-2920-42b6-a436-a0fedcfbbbd3@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fsg-edge&sni=www.smu.edu.sg&pbk=dpL0eZ1mkxvH-752PeDhUvefSqNRWryxEVdpIpFraBk&sid=1ce95e7e37fa101e&fp=firefox&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-sgexit1","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.smu.edu.sg","dial":"103.102.46.180:443"},{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://565aa022-2920-42b6-a436-a0fedcfbbbd3@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fsg-edge&sni=www.smu.edu.sg&pbk=dpL0eZ1mkxvH-752PeDhUvefSqNRWryxEVdpIpFraBk&sid=1ce95e7e37fa101e&fp=firefox&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-sgexit1-via-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.smu.edu.sg","dial":"194.36.89.140:443"}]},{"id":"gotthard","name":"Швейцария (gotthard)","tab_label":"gotthard","services":[],"country":"CH","country_name":"Швейцария","flag":"🇨🇭","is_ru":false,"is_hop":false,"direct_allowed":true,"default_route":"direct","note":"third_egress","routes":[{"id":"direct","kind":"direct","label":"Прямой","country":"CH","flag":"🇨🇭","uri":"vless://85bb1e60-b22c-42a3-ae81-d6edd3a1bdb7@ap.gotthardbasetunnel.eu:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fconnection-7f3a92&sni=google.com&pbk=3ukv1HhodRdwG4EYoAuYBJn-5QQvPsXLLvhoNQVmFxk&sid=8a4aa8836bf524b7&fp=firefox&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-gotthard","protocol":"Vless + Reality","transport":"Xhttp","sni":"google.com","dial":"ap.gotthardbasetunnel.eu:443"},{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://85bb1e60-b22c-42a3-ae81-d6edd3a1bdb7@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fconnection-7f3a92&sni=google.com&pbk=3ukv1HhodRdwG4EYoAuYBJn-5QQvPsXLLvhoNQVmFxk&sid=8a4aa8836bf524b7&fp=firefox&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-gotthard-via-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp","sni":"google.com","dial":"194.36.89.140:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"vless://85bb1e60-b22c-42a3-ae81-d6edd3a1bdb7@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fconnection-7f3a92&sni=google.com&pbk=3ukv1HhodRdwG4EYoAuYBJn-5QQvPsXLLvhoNQVmFxk&sid=8a4aa8836bf524b7&fp=firefox&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-gotthard-via-sgexit1","protocol":"Vless + Reality","transport":"Xhttp","sni":"google.com","dial":"103.102.46.180:443"}]},{"id":"rozet.in.rs","name":"Сербия (rozet.in.rs)","tab_label":"rozet.in.rs","services":[],"country":"RS","country_name":"Сербия","flag":"🇷🇸","is_ru":false,"is_hop":true,"direct_allowed":false,"default_route":"il-kamatera","note":"ai_vendor","routes":[{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://8ac1c68b-83de-42fc-95ad-10a7559a8957@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Frs-edge&sni=www.matf.bg.ac.rs&pbk=pDC1Vo-IcEus7AhMZbiiuB1WMtb2WuEHwV-eXvG5HAY&sid=c649cc1da0f0fdb9&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-rozet.in.rs-via-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.matf.bg.ac.rs","dial":"194.36.89.140:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"vless://8ac1c68b-83de-42fc-95ad-10a7559a8957@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Frs-edge&sni=www.matf.bg.ac.rs&pbk=pDC1Vo-IcEus7AhMZbiiuB1WMtb2WuEHwV-eXvG5HAY&sid=c649cc1da0f0fdb9&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-rozet.in.rs-via-sgexit1","protocol":"Vless + Reality","transport":"Xhttp","sni":"www.matf.bg.ac.rs","dial":"103.102.46.180:443"}]},{"id":"vipass-stas","name":"Германия (vipass-stas)","tab_label":"vipass-stas","services":[],"country":"DE","country_name":"Германия","flag":"🇩🇪","is_ru":false,"is_hop":false,"direct_allowed":false,"default_route":"sgexit1","note":"third_egress","routes":[{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://9b238422-fe37-4bb6-95d7-ce933778e26e@194.36.89.140:443?security=reality&type=tcp&flow=xtls-rprx-vision&sni=max.ru&pbk=v04KQ6PGr3XjkrdmZRfUaYchjeF8dMAqRRqP9_2hSHc&sid=92131ed26f40c081&fp=chrome&spx=/&encryption=none#phone-vipass-stas-via-il-kamatera","protocol":"Vless + Reality","transport":"Tcp / Vision","sni":"max.ru","dial":"194.36.89.140:443"},{"id":"sgexit1","kind":"hop_ext","label":"🇸🇬 через sgexit1","hop_name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru_hop":false,"uri":"vless://9b238422-fe37-4bb6-95d7-ce933778e26e@103.102.46.180:443?security=reality&type=tcp&flow=xtls-rprx-vision&sni=max.ru&pbk=v04KQ6PGr3XjkrdmZRfUaYchjeF8dMAqRRqP9_2hSHc&sid=92131ed26f40c081&fp=chrome&spx=/&encryption=none#phone-vipass-stas-via-sgexit1","protocol":"Vless + Reality","transport":"Tcp / Vision","sni":"max.ru","dial":"103.102.46.180:443"}]},{"id":"ubnt-aiagent","name":"Россия / Монитор (ubnt-aiagent)","tab_label":"Россия / Монитор (ubnt-aiagent)","services":[{"id":"vigil","label":"Монитор"}],"country":"RU","country_name":"Россия","flag":"🇷🇺","is_ru":true,"is_hop":false,"direct_allowed":true,"default_route":"direct","note":"ru_exit","routes":[{"id":"direct","kind":"direct","label":"Прямой (портал sgexit1)","country":"RU","flag":"🇷🇺","uri":"vless://0419656f-6035-4b63-87f8-a6cc34234f84@103.102.46.180:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fru-edge&sni=spbu.ru&pbk=t_rIjfNaJRByGca_meVBIUUh8V_p6Qe3OLOeilnz8Xg&sid=d5946f2a895b305a&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-ubnt-aiagent","protocol":"Vless + Reality","transport":"Xhttp (reverse)","sni":"spbu.ru","dial":"103.102.46.180:443"},{"id":"il-kamatera","kind":"hop_ext","label":"🇮🇱 через il-kamatera","hop_name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru_hop":false,"uri":"vless://0419656f-6035-4b63-87f8-a6cc34234f84@194.36.89.140:443?security=reality&encryption=none&type=xhttp&mode=packet-up&path=%2Fru-edge&sni=spbu.ru&pbk=t_rIjfNaJRByGca_meVBIUUh8V_p6Qe3OLOeilnz8Xg&sid=d5946f2a895b305a&fp=firefox&spx=%2F&extra=%7B%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22100-1000%22%2C%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A64%2C%22hMaxRequestTimes%22%3A%22600-900%22%2C%22hMaxReusableSecs%22%3A%221800-3000%22%2C%22maxConnections%22%3A2%7D%7D#phone-ubnt-aiagent-via-il-kamatera","protocol":"Vless + Reality","transport":"Xhttp (reverse)","sni":"spbu.ru","dial":"194.36.89.140:443"}]}],"hops":[{"name":"il-kamatera","country":"IL","flag":"🇮🇱","is_ru":false},{"name":"rozet.in.rs","country":"RS","flag":"🇷🇸","is_ru":false},{"name":"sgexit1","country":"SG","flag":"🇸🇬","is_ru":false}]}</script>
 <script src="/qrcode.js"></script>
 <script>
     (function () {
@@ -396,7 +421,7 @@
       var STATES = ["auto", "day", "night"];
       var GLYPHS = {"auto": "◐", "day": "☀", "night": "☾"};
       var LABELS = {"auto": "Тема: авто (по солнцу)", "day": "Тема: дневная", "night": "Тема: ночная"};
-      var STORAGE_KEY = "dela.theme.v1";
+      var STORAGE_KEY = "theme.v1";
       var MODE_VALUES = ["day", "night"];
       var MODE_ATTR = "data-theme";
       var SUFFIX = " — переключить";
@@ -423,7 +448,9 @@
         });
       }
 
-      var model = JSON.parse(document.getElementById("tunnels-data").textContent);
+      var REFRESH_CFG = {"interval_ms": 30000, "max_backoff_ms": 300000, "min_gap_ms": 5000, "notice_ms": 6000, "data_script_id": "tunnels-data", "view_attr": "data-portal-view"};
+      var dataScript = document.getElementById(REFRESH_CFG.data_script_id);
+      var model = JSON.parse(dataScript.textContent);
       var exitTabs = document.getElementById("exit-tabs");
       var hopPills = document.getElementById("hop-pills");
       var qrFrame = document.getElementById("qr-frame");
@@ -441,9 +468,18 @@
       var openHiddifyLink = document.getElementById("open-hiddify-link");
       var copyBtn = document.getElementById("copy-btn");
       var copyStatus = document.getElementById("copy-status");
+      var updateNotice = document.getElementById("update-notice");
+
+      function modelContentKey(m) {
+        return JSON.stringify({
+          exits: (m && Array.isArray(m.exits)) ? m.exits : [],
+          hops: (m && Array.isArray(m.hops)) ? m.hops : []
+        });
+      }
 
       var state = {
         model: model,
+        contentKey: modelContentKey(model),
         exitId: (model && model.exits && model.exits.length) ? model.exits[0].id : "",
         routeByExit: {}
       };
@@ -478,6 +514,20 @@
         return ex.routes[0];
       }
 
+      function appendTextKeepParens(el, text) {
+        String(text || "").split(/(\([^)]+\))/).forEach(function (part) {
+          if (!part) return;
+          if (part.charAt(0) === "(" && part.charAt(part.length - 1) === ")") {
+            var sp = document.createElement("span");
+            sp.className = "nowrap";
+            sp.textContent = part;
+            el.appendChild(sp);
+          } else {
+            el.appendChild(document.createTextNode(part));
+          }
+        });
+      }
+
       function renderExitTabs() {
         exitTabs.innerHTML = "";
         state.model.exits.forEach(function (ex) {
@@ -493,13 +543,18 @@
           flag.textContent = ex.flag;
           var name = document.createElement("span");
           name.className = "exit-tab-name";
-          name.textContent = ex.id;
+          appendTextKeepParens(name, ex.tab_label || ex.id);
           head.appendChild(flag);
           head.appendChild(name);
 
           var sub = document.createElement("div");
           sub.className = "exit-tab-sub";
-          sub.textContent = ex.country_name + " · " + (ex.direct_allowed ? "прямой / хоп" : "только через хоп");
+          var subCountry = document.createElement("span");
+          subCountry.textContent = ex.country_name;
+          var subMode = document.createElement("span");
+          subMode.textContent = ex.direct_allowed ? "прямой / хоп" : "только через хоп";
+          sub.appendChild(subCountry);
+          sub.appendChild(subMode);
 
           btn.appendChild(head);
           btn.appendChild(sub);
@@ -518,7 +573,10 @@
         if (!rt) return;
 
         exitTitle.textContent = ex.flag + " " + ex.name;
-        exitRoleBadge.textContent = ex.is_hop ? "Выход + хоп" : "Выход";
+        var baseRole = ex.is_hop ? "Выход + хоп" : "Выход";
+        exitRoleBadge.textContent = (ex.services && ex.services.length)
+          ? ex.services.map(function (s) { return s.label; }).join(" · ") + " · " + baseRole
+          : baseRole;
         routeBadge.textContent = rt.label;
 
         hopPills.innerHTML = "";
@@ -575,7 +633,145 @@
         }
       });
 
+      var noticeTimer = null;
+      function showUpdateNotice(rev) {
+        if (!updateNotice) return;
+        updateNotice.textContent = rev ? ("Обновлено · " + rev) : "Конфигурация обновлена";
+        updateNotice.hidden = false;
+        if (noticeTimer) window.clearTimeout(noticeTimer);
+        noticeTimer = window.setTimeout(function () {
+          updateNotice.hidden = true;
+          noticeTimer = null;
+        }, REFRESH_CFG.notice_ms);
+      }
+
+      function reconcileSelection(nextModel) {
+        var exits = (nextModel && Array.isArray(nextModel.exits)) ? nextModel.exits : [];
+        var byId = {};
+        exits.forEach(function (ex) { byId[ex.id] = ex; });
+        if (!byId[state.exitId]) {
+          state.exitId = exits.length ? exits[0].id : "";
+        }
+        Object.keys(state.routeByExit).forEach(function (eid) {
+          var ex = byId[eid];
+          if (!ex || !Array.isArray(ex.routes)) {
+            delete state.routeByExit[eid];
+            return;
+          }
+          var wanted = state.routeByExit[eid];
+          var exists = ex.routes.some(function (r) { return r.id === wanted; });
+          if (!exists) delete state.routeByExit[eid];
+        });
+      }
+
+      function startLiveRefresh() {
+        if (typeof window.fetch !== "function" || typeof window.DOMParser !== "function") return;
+        if (window.location.protocol !== "http:" && window.location.protocol !== "https:") return;
+        var curViewSig = document.documentElement.getAttribute(REFRESH_CFG.view_attr) || "";
+        var lastEtag = "";
+        var lastCheckAt = 0;
+        var delayMs = REFRESH_CFG.interval_ms;
+        var inFlight = false;
+        var timerId = null;
+
+        function clearTimer() {
+          if (timerId !== null) {
+            window.clearTimeout(timerId);
+            timerId = null;
+          }
+        }
+
+        function schedule(ms) {
+          clearTimer();
+          if (document.visibilityState !== "visible") return;
+          timerId = window.setTimeout(checkNow, ms);
+        }
+
+        function checkNow() {
+          if (inFlight || document.visibilityState !== "visible") return;
+          if (navigator.onLine === false) {
+            schedule(REFRESH_CFG.interval_ms);
+            return;
+          }
+          clearTimer();
+          inFlight = true;
+          lastCheckAt = Date.now();
+          window.fetch(window.location.pathname, {
+            method: "GET",
+            cache: "no-cache",
+            credentials: "same-origin"
+          }).then(function (res) {
+            if (!res.ok) throw new Error("HTTP " + res.status);
+            delayMs = REFRESH_CFG.interval_ms;
+            var etag = res.headers.get("etag") || res.headers.get("last-modified") || "";
+            if (etag && lastEtag && etag === lastEtag) return null;
+            return res.text().then(function (htmlText) {
+              return { etag: etag, htmlText: htmlText };
+            });
+          }).then(function (payload) {
+            if (!payload) return;
+            var doc = new window.DOMParser().parseFromString(payload.htmlText, "text/html");
+            var nextViewSig = doc.documentElement ? (doc.documentElement.getAttribute(REFRESH_CFG.view_attr) || "") : "";
+            if (nextViewSig && curViewSig && nextViewSig !== curViewSig) {
+              window.location.reload();
+              return;
+            }
+            var nextDataEl = doc.getElementById(REFRESH_CFG.data_script_id);
+            if (nextDataEl && nextDataEl.textContent) {
+              var nextModel = JSON.parse(nextDataEl.textContent);
+              if (nextModel && Array.isArray(nextModel.exits) && nextModel.exits.length) {
+                if (state.model && nextModel.schema && state.model.schema && nextModel.schema !== state.model.schema) {
+                  window.location.reload();
+                  return;
+                }
+                var nextKey = modelContentKey(nextModel);
+                if (nextKey !== state.contentKey) {
+                  state.contentKey = nextKey;
+                  state.model = nextModel;
+                  if (dataScript) dataScript.textContent = nextDataEl.textContent;
+                  reconcileSelection(nextModel);
+                  renderAll();
+                  showUpdateNotice(nextModel.rev || "");
+                } else {
+                  state.model = nextModel;
+                }
+              }
+            }
+            if (payload.etag) lastEtag = payload.etag;
+          }).catch(function () {
+            delayMs = Math.min(delayMs * 2, REFRESH_CFG.max_backoff_ms);
+          }).finally(function () {
+            inFlight = false;
+            schedule(delayMs);
+          });
+        }
+
+        document.addEventListener("visibilitychange", function () {
+          if (document.visibilityState === "visible") {
+            var elapsed = Date.now() - lastCheckAt;
+            if (elapsed >= REFRESH_CFG.min_gap_ms) checkNow();
+            else schedule(REFRESH_CFG.min_gap_ms - elapsed);
+          } else {
+            clearTimer();
+          }
+        });
+
+        window.addEventListener("focus", function () {
+          if (document.visibilityState === "visible" && (Date.now() - lastCheckAt) >= REFRESH_CFG.min_gap_ms) {
+            checkNow();
+          }
+        });
+
+        window.addEventListener("online", function () {
+          delayMs = REFRESH_CFG.interval_ms;
+          if (document.visibilityState === "visible") checkNow();
+        });
+
+        schedule(REFRESH_CFG.interval_ms);
+      }
+
       renderAll();
+      startLiveRefresh();
     })();
   </script>
 </body>

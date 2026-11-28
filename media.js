@@ -1294,15 +1294,26 @@
     });
     return best ? best.id : (currentId || '');
   }/*/fn:pickActiveSection*/
+  /*fn:pickSectionByTop*/function pickSectionByTop(items, thresholdY) {
+    var chosen = '';
+    (items || []).forEach(function (it) {
+      if (!it || !it.id) return;
+      if (it.top <= thresholdY) chosen = it.id;
+    });
+    return chosen;
+  }/*/fn:pickSectionByTop*/
   function armSectionTracking() {
-    // imperative: DOM+IO - track active section for WCAG aria-current="location" and micro-session resume
-    var links = Array.prototype.slice.call(document.querySelectorAll('nav a[href^="#"]'));
+    // imperative: DOM+scroll - track active section for WCAG aria-current="location", #buyer-bar label, and micro-session resume
+    var tocLinks = Array.prototype.slice.call(document.querySelectorAll('#doc-contents a[href^="#"]'));
+    var links = tocLinks.length
+      ? tocLinks
+      : Array.prototype.slice.call(document.querySelectorAll('nav:not(#buyer-bar) a[href^="#"]'));
     if (!links.length) return;
     var byId = {};
     var order = [];
     links.forEach(function (a) {
       var id = (a.getAttribute('href') || '').slice(1);
-      if (!id) return;
+      if (!id || id === 'player-wrapper') return;
       var target = document.getElementById(id);
       if (!target) return;
       if (!byId[id]) {
@@ -1313,25 +1324,31 @@
     });
     if (!order.length) return;
     var readKey = 'dela-read-section:' + location.pathname;
+    var barCh = document.getElementById('buyer-bar-chapter');
+    var defaultBarTitle = barCh ? (barCh.textContent || '').replace(/\s+/g, ' ').trim() : '';
     var activeId = '';
     function applyActive(id, persist) {
-      if (!id || id === activeId || !byId[id]) return;
-      activeId = id;
+      if (id === activeId) return;
+      if (id && !byId[id]) return;
+      activeId = id || '';
       order.forEach(function (k) {
         byId[k].links.forEach(function (a) {
-          if (k === id) a.setAttribute('aria-current', 'location');
+          if (k === activeId) a.setAttribute('aria-current', 'location');
           else a.removeAttribute('aria-current');
         });
       });
-      var barCh = document.getElementById('buyer-bar-chapter');
       var player = document.querySelector('[data-player]');
       if (barCh && (!player || player.paused)) {
-        var lnk = byId[id].links[0];
-        var tEl = (lnk && lnk.querySelector && lnk.querySelector('[data-role="title"]')) || lnk;
-        var txt = (tEl && tEl.textContent || '').replace(/\s+/g, ' ').trim();
-        if (txt) barCh.textContent = txt;
+        if (activeId && byId[activeId]) {
+          var lnk = byId[activeId].links[0];
+          var tEl = (lnk && lnk.querySelector && lnk.querySelector('[data-role="title"]')) || lnk;
+          var txt = (tEl && tEl.textContent || '').replace(/\s+/g, ' ').trim();
+          if (txt) barCh.textContent = txt;
+        } else if (defaultBarTitle) {
+          barCh.textContent = defaultBarTitle;
+        }
       }
-      if (persist && (window.scrollY || 0) > 120) store('set', readKey, id);
+      if (persist && activeId && (window.scrollY || 0) > 120) store('set', readKey, activeId);
     }
     var savedId = store('get', readKey);
     if (!location.hash && savedId && byId[savedId] && savedId !== order[0]) {
@@ -1365,27 +1382,52 @@
         navHost.parentNode.insertBefore(bar, navHost);
       }
     }
-    if (!('IntersectionObserver' in window)) {
-      applyActive(order[0], false);
-      return;
+    var ticking = false;
+    function readingThresholdY() {
+      var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      var nav = document.querySelector('.nav-fade');
+      var navBottom = 0;
+      if (nav) {
+        var cs = window.getComputedStyle ? window.getComputedStyle(nav) : null;
+        if (!cs || cs.position === 'fixed') {
+          navBottom = Math.max(0, nav.getBoundingClientRect().bottom);
+        }
+      }
+      return Math.max(navBottom + 32, vh * 0.25);
     }
-    var state = {};
-    var io = new IntersectionObserver(function (ioEntries) {
-      ioEntries.forEach(function (entry) {
-        var id = entry.target.id;
-        if (!id) return;
-        state[id] = {
-          id: id,
-          isIntersecting: entry.isIntersecting,
-          ratio: entry.intersectionRatio || 0,
-          top: entry.boundingClientRect ? entry.boundingClientRect.top : 0
-        };
+    function syncFromScroll(persist) {
+      ticking = false;
+      var threshold = readingThresholdY();
+      var items = order.map(function (id) {
+        return { id: id, top: byId[id].el.getBoundingClientRect().top };
       });
-      var snap = order.map(function (id) { return state[id]; }).filter(Boolean);
-      var nextId = pickActiveSection(snap, activeId);
-      if (nextId) applyActive(nextId, true);
-    }, { rootMargin: '-15% 0px -65% 0px', threshold: [0, 0.25, 0.5] });
-    order.forEach(function (id) { io.observe(byId[id].el); });
+      applyActive(pickSectionByTop(items, threshold), persist);
+    }
+    function scheduleSync() {
+      if (ticking) return;
+      ticking = true;
+      if (typeof requestAnimationFrame === 'function') requestAnimationFrame(function () { syncFromScroll(true); });
+      else syncFromScroll(true);
+    }
+    window.addEventListener('scroll', scheduleSync, { passive: true });
+    window.addEventListener('resize', scheduleSync, { passive: true });
+    syncFromScroll(false);
+  }
+  function armChapterWheelScroll() {
+    // imperative: DOM+wheel - translate vertical mouse wheel to horizontal scroll inside single-row .player-chapters ribbon
+    document.querySelectorAll('.player-chapters').forEach(function (strip) {
+      if (strip.dataset.wheelArmed) return;
+      strip.dataset.wheelArmed = '1';
+      strip.addEventListener('wheel', function (e) {
+        var maxScroll = strip.scrollWidth - strip.clientWidth;
+        if (maxScroll <= 1 || Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+        var atStart = strip.scrollLeft <= 1 && e.deltaY < 0;
+        var atEnd = strip.scrollLeft >= maxScroll - 1 && e.deltaY > 0;
+        if (atStart || atEnd) return;
+        e.preventDefault();
+        strip.scrollLeft += e.deltaY;
+      }, { passive: false });
+    });
   }
   /* ПОЛНЫЙ ЭКРАН ПРОИГРЫВАТЕЛЯ НА ТЕЛЕФОНЕ И ДЕСКТОПЕ: стандартный Fullscreen API +
      iOS Safari `webkitEnterFullscreen` + автоотключение на чисто-звуковой ступени (height=0). */
@@ -1618,7 +1660,7 @@
 
   function ready() {
     restore(); armWorksheets(); rateButtons(); armQuotes(); revealMetered(); armResumeLinks(); armSectionTracking();
-    armFullscreen(); armTocDrawer(); armReturnToReading(); armReadingProgress();
+    armChapterWheelScroll(); armFullscreen(); armTocDrawer(); armReturnToReading(); armReadingProgress();
     document.querySelectorAll('video[data-recover-backoff]').forEach(recoverable);
     if (document.readyState === 'complete') armLazyAudioMeta();
     else window.addEventListener('load', armLazyAudioMeta, { once: true });
