@@ -10,6 +10,10 @@
 :root {
   --accent: #8a4b12;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --atom-min: 15rem;  /* length · knowledge/system/specifications/text/site.md */
+  --badge-border-w: 1px;  /* length · knowledge/system/specifications/text/interface.md */
+  --badge-gap: 0.3em;  /* length · knowledge/system/specifications/text/interface.md */
+  --badge-glyph-w: 1em;  /* length · knowledge/system/specifications/text/interface.md */
+  --badge-pad-x: 8px;  /* length · knowledge/system/specifications/text/interface.md */
   --band-apex-a-bot: 0%;  /* length · knowledge/system/specifications/text/site.md */
   --band-apex-a-top: 74%;  /* length · knowledge/system/specifications/text/site.md */
   --band-apex-b-bot: 26%;  /* length · knowledge/system/specifications/text/site.md */
@@ -21,6 +25,8 @@
   --breakpoint: 880px;  /* length · knowledge/system/specifications/text/site.md */
   --chip-bg: #efece7;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --chip-ink: #3d3a35;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
+  --disclose-gap: 0.35em;  /* length · knowledge/system/specifications/text/interface.md */
+  --disclose-glyph-w: 1em;  /* length · knowledge/system/specifications/text/interface.md */
   --doc-fs-aside: 0.88em;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
   --doc-fs-body: clamp(1.1875rem, 1.05rem + 0.6vw, 1.3125rem);  /* length · knowledge/people/azaryarozet/site/_design.yaml */
   --doc-fs-byline: 0.78em;  /* length · knowledge/people/azaryarozet/site/_design.yaml */
@@ -60,7 +66,7 @@
   --fw-bold: 700;  /* weight · knowledge/system/specifications/text/typography.md */
   --fw-medium: 500;  /* weight · knowledge/system/specifications/text/typography.md */
   --fw-regular: 400;  /* weight · knowledge/system/specifications/text/typography.md */
-  --fw-semibold: 600;  /* weight · knowledge/system/specifications/text/typography.md */
+  --fw-semibold: 700;  /* weight · knowledge/system/specifications/text/typography.md */
   --gutter: 2em;  /* length · knowledge/system/specifications/text/site.md */
   --ink: #1e1c1a;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --kern-pair-mild: -0.04em;  /* length · knowledge/system/specifications/text/typography.md */
@@ -76,6 +82,8 @@
   --link-underline-color: color-mix(in srgb, currentColor 52%, transparent);  /* color · knowledge/system/specifications/text/typography.md */
   --link-underline-offset: 0.22em;  /* length · knowledge/system/specifications/text/typography.md */
   --link-underline-thickness: 0.75px;  /* length · knowledge/system/specifications/text/typography.md */
+  --mark-bar-w: 3px;  /* length · knowledge/system/specifications/text/interface.md */
+  --mark-pad-x: 8px;  /* length · knowledge/system/specifications/text/interface.md */
   --max-width: min(50em, 90vw);  /* length · knowledge/system/specifications/text/site.md */
   --measure: 60ch;  /* length · knowledge/system/specifications/text/typography.md */
   --measure-max: 75ch;  /* length · knowledge/system/specifications/text/typography.md */
@@ -91,6 +99,8 @@
   --sans-display: 'Inter Tight', 'Inter', 'Inter Fallback', 'Noto Sans Symbols', 'Noto Sans Symbols 2', 'Noto Sans Math', 'Noto Sans Bamum', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;  /* font-stack · knowledge/system/specifications/text/typography.md */
   --script: 'Bad Script', 'Marck Script', cursive;  /* font-stack · knowledge/system/specifications/text/typography.md */
   --scroll-anchor-offset: calc(var(--chrome-clear, calc(var(--touch-min) + var(--sp-5))) + var(--sp-2));  /* length · knowledge/system/specifications/text/site.md */
+  --serif-quote: 'Cormorant Garamond', 'Inter', 'Inter Fallback', 'Noto Sans Symbols', 'Noto Sans Symbols 2', 'Noto Sans Math', Georgia, serif;  /* font-stack · knowledge/system/specifications/text/typography.md */
+  --sheet-filter: none;  /* filter · knowledge/system/specifications/text/interface.md */
   --sp-1: 0.50rem;  /* length · knowledge/system/specifications/text/site.md */
   --sp-2: 0.75rem;  /* length · knowledge/system/specifications/text/site.md */
   --sp-3: 1.13rem;  /* length · knowledge/system/specifications/text/site.md */
@@ -105,6 +115,8 @@
   --space-top: clamp(6rem, 4rem + 12vh, 20vh);  /* length · knowledge/system/specifications/text/site.md */
   --surface: #ffffff;  /* color · knowledge/system/specifications/text/site.md */
   --surface-band: #fdfbfb;  /* color · knowledge/system/specifications/text/site.md */
+  --target-coarse: 44px;  /* length · knowledge/system/specifications/text/interface.md */
+  --target-fine: 24px;  /* length · knowledge/system/specifications/text/interface.md */
   --touch-min: 44px;  /* length · knowledge/system/specifications/text/site.md */
   --tracking-caps: calc(1.6px + 0.02em);  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-caps-ceiling: calc(2.8px + 0.06em);  /* tracking · knowledge/system/specifications/text/typography.md */
@@ -137,6 +149,7 @@
   --ink: #e8e6e3;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
   --muted: #a09a92;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
   --rule: #2a2a2a;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
+  --sheet-filter: brightness(0.72) contrast(1.06);  /* filter · :root[data-theme="night"] · knowledge/system/specifications/text/interface.md */
   --surface: #000000;  /* color · :root[data-theme="night"] · knowledge/system/specifications/text/site.md */
   --surface-band: #131111;  /* color · :root[data-theme="night"] · knowledge/system/specifications/text/site.md */
 }
@@ -217,6 +230,12 @@
   }
 }
 @layer owner {
+  :root[data-theme="day"] {
+    color-scheme: light;  /* law · :root[data-theme="day"] · @owner · Inv-IFACE-day-night-mode */
+  }
+  :root[data-theme="night"] {
+    color-scheme: dark;  /* law · :root[data-theme="night"] · @owner · Inv-IFACE-day-night-mode */
+  }
   [data-case="glyphs"] {
     letter-spacing: var(--tracking-caps-emphasis);  /* law · [data-case="glyphs"] · @owner · Inv-TYPO-consistent-tracking-caps */
   }

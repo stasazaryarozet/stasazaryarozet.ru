@@ -1,5 +1,5 @@
 {
- "at": "2026-11-28T04:47:00+00:00",
+ "at": "2026-11-28T17:02:02+00:00",
  "domain": [
   ".state/engage/azaryarozet/slots.json",
   "config/code_dirs.txt",
@@ -11,8 +11,10 @@
   "knowledge/people/azaryarozet/texts",
   "knowledge/system/ai-slop-tells.yaml",
   "knowledge/system/anglicism-substitutions.yaml",
+  "knowledge/system/canonical-normalizers.yaml",
   "knowledge/system/domains.json",
   "knowledge/system/form-profiles.yaml",
+  "knowledge/system/fx-registry.yaml",
   "knowledge/system/historical-events.yaml",
   "knowledge/system/historical-figures.yaml",
   "knowledge/system/provider-registry.yaml",
@@ -646,6 +648,6 @@
   "scripts/typography.py",
   "scripts/utils/git_publish.py"
  ],
- "rev": "de6d1a2a6022b578ae253ff34228af5a790c3681",
- "src_oid": "813d92351725531e"
+ "rev": "a8fc9f0f9936d54a23b377ac11c8deda3ef5ff31",
+ "src_oid": "6dcf20f0652d9b2a"
 }
