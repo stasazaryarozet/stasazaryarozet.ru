@@ -8,6 +8,7 @@
 <title>Азарья Розет</title>
 <meta content="Азарья Розет" name="description"/>
 <link href="https://stasazaryarozet.ru" rel="canonical"/>
+<link href="https://stasazaryarozet.ru/feed.xml" rel="alternate" title="Азарья Розет" type="application/rss+xml"/>
 <meta content="website" property="og:type"/>
 <meta content="Азарья Розет" property="og:title"/>
 <meta content="Азарья Розет" property="og:description"/>
@@ -22,11 +23,11 @@
 <link href="/manifest.json" rel="manifest"/>
 <link as="font" crossorigin="" href="/fonts/inter-cyrillic-400-normal.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="" href="/fonts/inter-cyrillic-700-normal.woff2" rel="preload" type="font/woff2"/>
-<meta content="#ffffff" media="(prefers-color-scheme: light)" name="theme-color"/>
-<meta content="#111111" media="(prefers-color-scheme: dark)" name="theme-color"/>
+<meta content="#faf9f7" media="(prefers-color-scheme: light)" name="theme-color"/>
+<meta content="#121212" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <script>
 (function(){
-  var MODE_ATTR="data-theme", MODE_VALUES=["day", "night"], STORAGE_KEY="theme.v1";
+  var MODE_ATTR="data-theme", MODE_VALUES=["day", "night"], STORAGE_KEY="dela.theme.v1";
   function solarTheme(){
     var r=Math.PI/180, now=new Date();
     var J=now.valueOf()/86400000 + 2440587.5 - 2451545.0;
@@ -54,7 +55,7 @@
   setInterval(window.__applyTheme, 300000);
 })();
 </script>
-<style>@layer floor, owner, form; @import url("/_tokens.generated.css?v=200607bd59"); @import url("/styles.css?v=0cc8cc1348");</style>
+<style>@layer floor, owner, form; @import url("/_tokens.generated.css?v=6b33527997"); @import url("/styles.css?v=c84633cc34");</style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Азарья Розет", "url": "https://stasazaryarozet.ru", "image": "", "sameAs": []}</script>
 </head>
 <body>
@@ -65,7 +66,7 @@
 <footer>
 <div class="footer-content">
 </div>
-<a aria-label="Наверх" class="scroll-top" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" title="Наверх">
+<a aria-label="Наверх" class="scroll-top" data-action="scroll-top" href="#" title="Наверх">
 <svg fill="none" height="40" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24" width="40"><path d="M12 20V4M5 11l7-7 7 7"></path></svg>
 </a>
 </footer>
@@ -74,6 +75,19 @@ const footer = document.querySelector('.footer-content');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.1 });
+document.addEventListener('click', (ev) => {
+  const act = ev.target && ev.target.closest && ev.target.closest('[data-action]');
+  if (!act) return;
+  const kind = act.getAttribute('data-action');
+  if (kind === 'scroll-top') { ev.preventDefault(); window.scrollTo(0, 0); }
+  else if (kind === 'print') {
+    const waits = Array.from(document.querySelectorAll('img[loading="lazy"]')).map((img) => {
+      img.loading = 'eager';
+      return img.complete ? Promise.resolve() : new Promise((r) => { img.addEventListener('load', r, { once: true }); img.addEventListener('error', r, { once: true }); });
+    });
+    Promise.race([Promise.all(waits), new Promise((r) => setTimeout(r, 3500))]).then(() => window.print());
+  }
+});
 observer.observe(footer);
 </script>
 <script>

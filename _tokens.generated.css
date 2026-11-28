@@ -10,6 +10,12 @@
 :root {
   --accent: #8a4b12;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --atom-min: 15rem;  /* length · knowledge/system/specifications/text/site.md */
+  --band-apex-a-bot: 0%;  /* length · knowledge/system/specifications/text/site.md */
+  --band-apex-a-top: 74%;  /* length · knowledge/system/specifications/text/site.md */
+  --band-apex-b-bot: 26%;  /* length · knowledge/system/specifications/text/site.md */
+  --band-apex-b-top: 100%;  /* length · knowledge/system/specifications/text/site.md */
+  --band-cut-lg: clamp(1.9rem, 1.1rem + 2.2vw, 3.6rem);  /* length · knowledge/system/specifications/text/site.md */
+  --band-cut-sm: clamp(1.0rem, 0.6rem + 1.1vw, 2.0rem);  /* length · knowledge/system/specifications/text/site.md */
   --baseline: 1.6925rem;  /* length · knowledge/system/specifications/text/typography.md */
   --bg: #faf9f7;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
   --breakpoint: 880px;  /* length · knowledge/system/specifications/text/site.md */
@@ -43,21 +49,33 @@
   --fs-2xs: max(0.640rem, var(--fs-caps-min));  /* length · knowledge/system/specifications/text/site.md */
   --fs-3xl: 3.052rem;  /* length · knowledge/system/specifications/text/site.md */
   --fs-body-min: 0.875rem;  /* length · knowledge/system/specifications/text/site.md */
-  --fs-caps-min: 0.719rem;  /* length · knowledge/system/specifications/text/site.md */
+  --fs-caps-min: 0.78125rem;  /* length · knowledge/system/specifications/text/site.md */
   --fs-l: 1.563rem;  /* length · knowledge/system/specifications/text/site.md */
   --fs-m: 1.250rem;  /* length · knowledge/system/specifications/text/site.md */
   --fs-ratio: 1.250;  /* ratio · knowledge/system/specifications/text/typography.md */
+  --fs-reading: clamp(1rem, 0.92rem + 0.25vw, 1.125rem);  /* length · knowledge/system/specifications/text/site.md */
   --fs-s: 1.0625rem;  /* length · knowledge/system/specifications/text/typography.md */
   --fs-xl: 1.953rem;  /* length · knowledge/system/specifications/text/site.md */
   --fs-xs: max(0.800rem, var(--fs-body-min));  /* length · knowledge/system/specifications/text/site.md */
+  --fw-bold: 700;  /* weight · knowledge/system/specifications/text/typography.md */
+  --fw-medium: 500;  /* weight · knowledge/system/specifications/text/typography.md */
+  --fw-regular: 400;  /* weight · knowledge/system/specifications/text/typography.md */
+  --fw-semibold: 600;  /* weight · knowledge/system/specifications/text/typography.md */
   --gutter: 2em;  /* length · knowledge/system/specifications/text/site.md */
   --ink: #1e1c1a;  /* color · knowledge/people/azaryarozet/site/_design.yaml */
+  --kern-pair-mild: -0.04em;  /* length · knowledge/system/specifications/text/typography.md */
+  --kern-pair-tight: -0.065em;  /* length · knowledge/system/specifications/text/typography.md */
   --lh-body: 1.55;  /* ratio · knowledge/system/specifications/text/typography.md */
+  --lh-caps: 1.45;  /* ratio · knowledge/system/specifications/text/typography.md */
   --lh-display: 0.95;  /* ratio · knowledge/system/specifications/text/typography.md */
   --lh-flush: 1.0;  /* ratio · knowledge/system/specifications/text/typography.md */
+  --lh-heading: 1.25;  /* ratio · knowledge/system/specifications/text/site.md */
   --lh-loose: 1.5;  /* ratio · knowledge/system/specifications/text/typography.md */
   --lh-solid: 1;  /* ratio · knowledge/system/specifications/text/typography.md */
   --lh-tight: 1.2;  /* ratio · knowledge/system/specifications/text/typography.md */
+  --link-underline-color: color-mix(in srgb, currentColor 52%, transparent);  /* color · knowledge/system/specifications/text/typography.md */
+  --link-underline-offset: 0.22em;  /* length · knowledge/system/specifications/text/typography.md */
+  --link-underline-thickness: 0.75px;  /* length · knowledge/system/specifications/text/typography.md */
   --max-width: min(50em, 90vw);  /* length · knowledge/system/specifications/text/site.md */
   --measure: 60ch;  /* length · knowledge/system/specifications/text/typography.md */
   --measure-max: 75ch;  /* length · knowledge/system/specifications/text/typography.md */
@@ -72,7 +90,7 @@
   --sans: 'Inter', 'Inter Fallback', 'Noto Sans Symbols', 'Noto Sans Symbols 2', 'Noto Sans Math', 'Noto Sans Bamum', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;  /* font-stack · knowledge/system/specifications/text/typography.md */
   --sans-display: 'Inter Tight', 'Inter', 'Inter Fallback', 'Noto Sans Symbols', 'Noto Sans Symbols 2', 'Noto Sans Math', 'Noto Sans Bamum', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;  /* font-stack · knowledge/system/specifications/text/typography.md */
   --script: 'Bad Script', 'Marck Script', cursive;  /* font-stack · knowledge/system/specifications/text/typography.md */
-  --sheet-filter: none;  /* filter · knowledge/system/specifications/text/interface.md */
+  --scroll-anchor-offset: calc(var(--chrome-clear, calc(var(--touch-min) + var(--sp-5))) + var(--sp-2));  /* length · knowledge/system/specifications/text/site.md */
   --sp-1: 0.50rem;  /* length · knowledge/system/specifications/text/site.md */
   --sp-2: 0.75rem;  /* length · knowledge/system/specifications/text/site.md */
   --sp-3: 1.13rem;  /* length · knowledge/system/specifications/text/site.md */
@@ -81,12 +99,16 @@
   --sp-6: 3.80rem;  /* length · knowledge/system/specifications/text/site.md */
   --sp-7: 5.70rem;  /* length · knowledge/system/specifications/text/site.md */
   --sp-8: 8.54rem;  /* length · knowledge/system/specifications/text/site.md */
+  --space-band-air: var(--sp-5);  /* length · knowledge/system/specifications/text/site.md */
   --space-padding: clamp(1.2rem, 1rem + 2vw, 3rem);  /* length · knowledge/system/specifications/text/site.md */
   --space-section: clamp(3rem, 2rem + 4vw, 6rem);  /* length · knowledge/system/specifications/text/site.md */
   --space-top: clamp(6rem, 4rem + 12vh, 20vh);  /* length · knowledge/system/specifications/text/site.md */
+  --surface: #ffffff;  /* color · knowledge/system/specifications/text/site.md */
+  --surface-band: #fdfbfb;  /* color · knowledge/system/specifications/text/site.md */
   --touch-min: 44px;  /* length · knowledge/system/specifications/text/site.md */
   --tracking-caps: calc(1.6px + 0.02em);  /* tracking · knowledge/system/specifications/text/typography.md */
-  --tracking-caps-ceiling: calc(2.8px + 0.02em);  /* tracking · knowledge/system/specifications/text/typography.md */
+  --tracking-caps-ceiling: calc(2.8px + 0.06em);  /* tracking · knowledge/system/specifications/text/typography.md */
+  --tracking-caps-display: calc(2.8px + 0.05em);  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-caps-emphasis: 0.08em;  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-caps-floor: min(var(--tracking-caps-mid), var(--tracking-caps));  /* tracking · knowledge/system/specifications/text/typography.md */
   --tracking-caps-mid: 0.05em;  /* tracking · knowledge/system/specifications/text/typography.md */
@@ -115,7 +137,8 @@
   --ink: #e8e6e3;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
   --muted: #a09a92;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
   --rule: #2a2a2a;  /* color · :root[data-theme="night"] · knowledge/people/azaryarozet/site/_design.yaml */
-  --sheet-filter: brightness(0.72) contrast(1.06);  /* filter · :root[data-theme="night"] · knowledge/system/specifications/text/interface.md */
+  --surface: #000000;  /* color · :root[data-theme="night"] · knowledge/system/specifications/text/site.md */
+  --surface-band: #131111;  /* color · :root[data-theme="night"] · knowledge/system/specifications/text/site.md */
 }
 :root[data-theme="night"][data-surface="editorial"] .article-wrapper {
   --accent: #a1bbe8;  /* color · :root[data-theme="night"][data-surface="editorial"] .article-wrapper · knowledge/system/specifications/text/site.md */
@@ -161,9 +184,9 @@
     -webkit-hyphens: manual;  /* law · :root .value th · @floor · Inv-TYPO-hyphenation-per-language */
     hyphens: manual;  /* law · :root .value th · @floor · Inv-TYPO-hyphenation-per-language */
   }
-  :root :is(#doc > header, [data-role='strophe']) {
-    -webkit-hyphens: manual;  /* law · :root :is(#doc > header, [data-role='strophe']) · @floor · Inv-TYPO-hyphenation-per-language */
-    hyphens: manual;  /* law · :root :is(#doc > header, [data-role='strophe']) · @floor · Inv-TYPO-hyphenation-per-language */
+  :root :is(#doc > header, #doc > header :is(h1, h2), #doc-contents, [data-role='strophe']) {
+    -webkit-hyphens: manual;  /* law · :root :is(#doc > header, #doc > header :is(h1, h2), #doc-contents, [data-role='strophe']) · @floor · Inv-TYPO-hyphenation-per-language */
+    hyphens: manual;  /* law · :root :is(#doc > header, #doc > header :is(h1, h2), #doc-contents, [data-role='strophe']) · @floor · Inv-TYPO-hyphenation-per-language */
   }
   :root :is(.checkout-launch, .checkout-line, .checkout-rules, .checkout--closed .checkout-state) {
     -webkit-hyphens: manual;  /* law · :root :is(.checkout-launch, .checkout-line, .checkout-rules, .checkout--closed .checkout-state) · @floor · Inv-TYPO-hyphenation-per-language */
@@ -177,9 +200,12 @@
     -webkit-hyphens: manual;  /* law · :root :is(a[href], button, summary, label, [role=button], [role=link], [role=tab], [role=menuitem], input, textarea, select) · @floor · Inv-TYPO-hyphenation-per-language */
     hyphens: manual;  /* law · :root :is(a[href], button, summary, label, [role=button], [role=link], [role=tab], [role=menuitem], input, textarea, select) · @floor · Inv-TYPO-hyphenation-per-language */
   }
+  :root :is(button.moment-seek, .player-stamp, #player-resume-time, .worksheet-progress, #doc .mc-num, #doc [data-role="stamp"], .closed-num, .closed-extent) {
+    font-variant-numeric: lining-nums tabular-nums;  /* law · :root :is(button.moment-seek, .player-stamp, #player-resume-time, .worksheet-progress, #doc .mc-num, #doc [data-role="stamp"], .closed-num, .closed-extent) · @floor · Inv-TYPO-figures-context-aware */
+  }
   :root :is(h1,h2,h3,h4,h5,h6) {
     -webkit-hyphens: auto;  /* law · :root :is(h1,h2,h3,h4,h5,h6) · @floor · Inv-TYPO-hyphenation-per-language */
-    hyphenate-limit-chars: 10 4 4;  /* law · :root :is(h1,h2,h3,h4,h5,h6) · @floor · Inv-TYPO-hyphenation-per-language */
+    hyphenate-limit-chars: 15 5 5;  /* law · :root :is(h1,h2,h3,h4,h5,h6) · @floor · Inv-TYPO-hyphenation-per-language */
     hyphens: auto;  /* law · :root :is(h1,h2,h3,h4,h5,h6) · @floor · Inv-TYPO-hyphenation-per-language */
   }
   :root :is(p, li) > .l {
@@ -194,21 +220,32 @@
   [data-case="glyphs"] {
     letter-spacing: var(--tracking-caps-emphasis);  /* law · [data-case="glyphs"] · @owner · Inv-TYPO-consistent-tracking-caps */
   }
-  [data-case="plain"] {
-    letter-spacing: var(--tracking-zero);  /* law · [data-case="plain"] · @owner · Inv-TYPO-consistent-tracking-caps */
-  }
   [data-case="upper"] {
     letter-spacing: var(--tracking-caps);  /* law · [data-case="upper"] · @owner · Inv-TYPO-consistent-tracking-caps */
+  }
+  button:not([data-case="plain"]), [role="button"]:not(blockquote):not([data-case="plain"]), input:is([type="button"], [type="submit"], [type="reset"]):not([data-case="plain"]), details > summary:not([data-case="plain"]), :is(a, button).cta:not([data-case="plain"]), a.button:not([data-case="plain"]) {
+    letter-spacing: var(--tracking-caps-mid);  /* law · button:not([data-case="plain"]), [role="button"]:not(blockquote):not([data-case="plain"]), input:is([type="button"], [type="submit"], [type="reset"]):not([data-case="plain"]), details > summary:not([data-case="plain"]), :is(a, button).cta:not([data-case="plain"]), a.button:not([data-case="plain"]) · @owner · Inv-TYPO-consistent-tracking-caps */
   }
 }
 @layer form {
   :root {
     hanging-punctuation: first allow-end last;  /* law · @form · Inv-TYPO-hanging-punctuation */
   }
+  .hang-q {
+    display: inline-flex;  /* law · .hang-q · @form · Inv-TYPO-hanging-punctuation */
+    justify-content: flex-end;  /* law · .hang-q · @form · Inv-TYPO-hanging-punctuation */
+    overflow: visible;  /* law · .hang-q · @form · Inv-TYPO-hanging-punctuation */
+    white-space: nowrap;  /* law · .hang-q · @form · Inv-TYPO-hanging-punctuation */
+    width: 0;  /* law · .hang-q · @form · Inv-TYPO-hanging-punctuation */
+  }
   [data-case="plain"] {
+    letter-spacing: var(--tracking-zero);  /* law · [data-case="plain"] · @form · Inv-TYPO-consistent-tracking-caps */
     text-transform: none;  /* law · [data-case="plain"] · @form · Inv-TYPO-heading-case-by-depth */
   }
   [data-case="upper"] {
     text-transform: uppercase;  /* law · [data-case="upper"] · @form · Inv-TYPO-heading-case-by-depth */
+  }
+  button:not([data-case="plain"]), [role="button"]:not(blockquote):not([data-case="plain"]), input:is([type="button"], [type="submit"], [type="reset"]):not([data-case="plain"]), details > summary:not([data-case="plain"]), :is(a, button).cta:not([data-case="plain"]), a.button:not([data-case="plain"]) {
+    text-transform: uppercase;  /* law · button:not([data-case="plain"]), [role="button"]:not(blockquote):not([data-case="plain"]), input:is([type="button"], [type="submit"], [type="reset"]):not([data-case="plain"]), details > summary:not([data-case="plain"]), :is(a, button).cta:not([data-case="plain"]), a.button:not([data-case="plain"]) · @form · Inv-TYPO-control-buttons-upper */
   }
 }

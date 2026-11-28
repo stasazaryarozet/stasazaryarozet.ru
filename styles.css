@@ -63,10 +63,7 @@
 
    Комментарий стоит СНАРУЖИ блока: внутри него парсер аудита терял следующее за ним
    объявление (--mono читался как dangling). Отдельная находка, не замаскирована. */
-:root {
-  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-}
-
+/* --mono now compiles from text/typography.md::design_tokens into _tokens.generated.css (single home). */
 html { -webkit-text-size-adjust: 100%; }
 
 body {
